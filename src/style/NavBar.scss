@@ -1,6 +1,7 @@
 @import 'constants/colors';
 @import 'constants/breaks';
 
+
 .NavBar {
     position: absolute;
     margin-bottom: 2rem;
@@ -25,17 +26,25 @@
     margin-top: 1rem;
     text-align: center;
     a{
+        position: relative;
         display: block;
         text-transform: uppercase;
         text-decoration: none;
         text-align: left;
         color: #4e4e4e;
-        padding: 6px 0px 6px 12px;
+        padding: 12px 0px 12px 12px;
         font-size: 14px;
+        span{
+            position: relative;
+            padding-left: 38px;
+        }
         i {
+            position: absolute;
+            left: 0px;
             font-size: 24px;
             border-radius: 50%;
             border: 2px solid;
+            color: #4e4e4e;
         }
     }
 }

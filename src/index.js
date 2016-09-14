@@ -10,14 +10,15 @@ import Contenido from './components/contenido'
 
 if (process.env.BROWSER) {
     require("style/Root.scss");
+
 }
 render((
-    <div>
-        <Router history={hashHistory}>
+    <Router history={hashHistory}>
         <Route path='/' component={App}>
+            <IndexRoute component={Inicio}/>
             <Route path="/inicio" component={Inicio}/>
             <Route path="/contenido" component={Contenido}/>
         </Route>
     </Router>
-</div>
+
 ), document.getElementById('app'))
