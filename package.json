@@ -2,21 +2,34 @@
   "name": "algo",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "web": "webpack-dev-server",
-    "start": "npm run web "
+    "serv": "babel-node server.js",
+    "dev": "nodemon . --exec \"ENV=dev npm run serv\"",
+    "start": "npm run dev && npm run web",
+
+    "build": "webpack -p --config webpack.prod.config.js"
+  },
+  "babel": {
+    "presets": [
+      "node6"
+    ]
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "autoprefixer-loader": "^3.2.0",
+    "babel-cli": "^6.14.0",
+    "babel-preset-node6": "^11.0.0",
     "css-loader": "^0.25.0",
-    "express": "^4.13.4",
+    "express": "^4.14.0",
     "file-loader": "^0.9.0",
     "image-loader": "0.0.1",
     "image-webpack-loader": "^2.0.0",
     "node-sass": "^3.9.3",
+    "nodemon": "^1.10.2",
+    "npm": "^3.10.7",
     "react": "^15.0.1",
     "react-dom": "^15.0.1",
     "react-router": "^2.8.0",

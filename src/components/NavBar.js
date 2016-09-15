@@ -29,6 +29,9 @@ export default class NavBar extends Component {
                     }
 
                 </div>
+                <div className="NavBar-footer">
+                    <img src="../src/img/logoAep.png"/>
+                </div>
             </div>
         );
     }

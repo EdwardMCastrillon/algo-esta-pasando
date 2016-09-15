@@ -1,23 +1,11 @@
-
-var webpack = require('webpack');
-var path = require('path');
+var path = require('path')
 
 module.exports = {
-    devtool: 'inline-source-map',
-    entry: [
-
-        'webpack-dev-server/client?http://127.0.0.1:8080/',
-        'webpack/hot/only-dev-server',
-        './src'
-
-    ],
+    devtool: 'source-map',
+    entry: './src',
     output: {
-        filename: "bundle.js",
-        sourceMapFilename: "bundle.map"
-    },
-    resolve: {
-        modulesDirectories: ['node_modules', 'src'],
-        extensions: ['', '.js']
+        path: path.join(__dirname, 'public'),
+        filename: 'bundle.js'
     },
     module: {
         loaders: [
@@ -45,15 +33,5 @@ module.exports = {
                 ]
             }
         ]
-    },
-    plugins: [
-        new webpack.DefinePlugin({
-            "process.env": {
-                NODE_ENV: JSON.stringify("development"),
-                BROWSER: JSON.stringify(true)
-            }
-        }),
-        new webpack.HotModuleReplacementPlugin(),
-        new webpack.NoErrorsPlugin()
-    ]
-};
+    }
+}

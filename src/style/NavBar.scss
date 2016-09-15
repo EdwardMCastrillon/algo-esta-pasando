@@ -4,7 +4,6 @@
 
 .NavBar {
     position: absolute;
-    margin-bottom: 2rem;
     width: $nav-collapsed;
     height: 100%;
     box-shadow: 0 0px 6px rgba(0, 0, 0, 0.36);
@@ -22,9 +21,21 @@
 }
 
 .NavBar-links {
-    overflow: auto;
+    position: relative;
     margin-top: 1rem;
     text-align: center;
+    &:after {
+        content: "";
+        border-bottom: 1px solid #e7e5e5;
+        width: 90%;
+        height: 1px;
+        position: absolute;
+        z-index: 1;
+        left: 0;
+        margin: auto;
+        right: 0;
+        bottom: -9px;
+    }
     a{
         position: relative;
         display: block;
@@ -34,6 +45,25 @@
         color: #4e4e4e;
         padding: 12px 0px 12px 12px;
         font-size: 14px;
+        &:nth-child(1) i{ color:#00d6ba; }
+        &:nth-child(2) i{ color:#08d9ec; }
+        &:nth-child(3) i{ color:#039cdd; }
+        &:nth-child(4) i{ color:#0985c1; }
+        &:nth-child(5) i{ color:#247aaa; }
+        &:nth-child(6) i{ color:#3f4f9f; }
+        &:nth-child(7) i{ color:#4c439e; }
+        &:nth-child(8) i{ color:#4c3499; }
+        &:nth-child(9) i{ color:#2a267a; }
+
+        &:nth-child(1):hover{ color:#00d6ba; }
+        &:nth-child(2):hover{ color:#08d9ec; }
+        &:nth-child(3):hover{ color:#039cdd; }
+        &:nth-child(4):hover{ color:#0985c1; }
+        &:nth-child(5):hover{ color:#247aaa; }
+        &:nth-child(6):hover{ color:#3f4f9f; }
+        &:nth-child(7):hover{ color:#4c439e; }
+        &:nth-child(8):hover{ color:#4c3499; }
+        &:nth-child(9):hover{ color:#2a267a; }
         span{
             position: relative;
             padding-left: 38px;
@@ -100,4 +130,11 @@
     position: absolute;
     right: 0;
     top: 0;
+}
+.NavBar-footer{
+    img{
+        margin: auto;
+        display: block;
+        margin-top: 30px;
+    }
 }

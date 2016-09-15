@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from 'react-dom'
-import { Router, Route, hashHistory, IndexRoute } from 'react-router'
+import { Router, Route, hashHistory, IndexRoute, browserHistory } from 'react-router'
 
 import App from './app'
 
@@ -13,12 +13,22 @@ if (process.env.BROWSER) {
 
 }
 render((
-    <Router history={hashHistory}>
-        <Route path='/' component={App}>
-            <IndexRoute component={Inicio}/>
+
+
+    <Router history={browserHistory}>
+        <Route component={App}>
+            <Route path="/" component={Inicio} />
             <Route path="/inicio" component={Inicio}/>
             <Route path="/contenido" component={Contenido}/>
+
         </Route>
     </Router>
 
 ), document.getElementById('app'))
+/*<Router history={hashHistory}>
+<Route path='/' component={App}>
+<IndexRoute component={Inicio}/>
+<Route path="/inicio" component={Inicio}/>
+<Route path="/contenido" component={Contenido}/>
+</Route>
+</Router>*/
