@@ -1,5 +1,6 @@
 import React, { PropTypes, Component } from "react";
-import { Link } from 'react-router'
+import { Link, Router } from 'react-router'
+
 import Menus from "../constants/menus";
 
 
@@ -9,8 +10,6 @@ if (process.env.BROWSER) {
     require("../style/icomoon/style.scss");
 }
 export default class NavBar extends Component {
-
-
     render() {
 
         return (
@@ -24,10 +23,11 @@ export default class NavBar extends Component {
                             let url = `/${item}`
                             let icom = `i-${item}`
                             return (
-                                <Link key={ item }  to={url}><span className="flex align-center"><i className={icom}></i>{item}</span></Link>
+                              <Link key={ item }  to={url}><span className="flex align-center"><i className={icom}></i>{item}</span></Link>
                             );
                         })
                     }
+
                 </div>
             </div>
         );
