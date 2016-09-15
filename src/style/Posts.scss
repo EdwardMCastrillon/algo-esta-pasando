@@ -1,0 +1,39 @@
+.P-B-Post {
+    padding-left: 35px;
+    column-width: 320px;
+    column-gap: 2px;
+    margin: 15px auto;
+    figure {
+        position: relative;
+        overflow: hidden;
+        float: left;
+        background: #fefefe;
+        // box-shadow: 0 1px 1px rgba(34, 25, 25, 0.4);
+        margin: 0 2px 5px;
+        display: inline-block;
+        column-break-inside: avoid;
+        position: relative;
+        &:hover span{
+
+        }
+        >:nth-child(2){
+            position: absolute;
+            font-family: "MonopolSemiBold";
+            z-index: 1;
+            bottom: 0;
+            width: calc(100% - 20px);
+            left: 0;
+            background: rgba(0, 48, 113, 0.8);
+            text-align: center;
+            color: #fff;
+            padding: 16px 10px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        img {
+            width: 100%;
+            height: auto;
+            // min-height: 220px;
+        }
+    }
+}
