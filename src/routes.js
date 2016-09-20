@@ -1,29 +1,21 @@
-
-import InitActions from "./containers/InitActions";
-
-import features from "./constants/features";
-
-import HomePage from "./containers/HomePage";
-import PhotoPage from "./containers/PhotoPage";
-import FeaturedPage from "./containers/FeaturedPage";
+import Inicio from './components/inicio'
+import Contenido from './components/contenido'
 
 export default {
 
     home: {
         path: "/",
         method: "get",
-        handler: HomePage
+        handler: Inicio
     },
-
-    featured: {
-        path: `/iniio/:feature(${features.join("|")})`,
+    contenido: {
+        path: "/contenido",
         method: "get",
-        handler: FeaturedPage,
-    },
-
-    photo: {
-        path: "/photo/:id",
-        method: "get",
-        handler: PhotoPage,
+        handler: Contenido,
     },
 };
+// featured: {
+//     path: `/iniio/:feature(${features.join("|")})`,
+//     method: "get",
+//     handler: FeaturedPage,
+// },

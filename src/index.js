@@ -1,34 +1,30 @@
 import React from 'react'
 import { render } from 'react-dom'
-import { Router, Route, hashHistory, IndexRoute, browserHistory } from 'react-router'
+import { Router,Route, browserHistory } from 'react-router'
 
-import App from './app'
-
+import App from './containers/app'
 import Inicio from './components/inicio'
 import Contenido from './components/contenido'
 
+import RouterApp from './routes'
+
+console.log(RouterApp.home.path);
 
 if (process.env.BROWSER) {
     require("style/Root.scss");
 
 }
+function prueba(){
+    // console.log(Inicio.updateprueba())
+}
 render((
-
 
     <Router history={browserHistory}>
         <Route component={App}>
-            <Route path="/" component={Inicio} />
-            <Route path="/inicio" component={Inicio}/>
-            <Route path="/contenido" component={Contenido}/>
-
+            <Route path={RouterApp.home.path} component={RouterApp.home.handler} onEnter={prueba}/>
+            <Route path={RouterApp.home.path} component={RouterApp.home.handler} onEnter={prueba}/>
+            <Route path={RouterApp.contenido.path} component={RouterApp.contenido.handler} onEnter={prueba}/>
         </Route>
     </Router>
 
 ), document.getElementById('app'))
-/*<Router history={hashHistory}>
-<Route path='/' component={App}>
-<IndexRoute component={Inicio}/>
-<Route path="/inicio" component={Inicio}/>
-<Route path="/contenido" component={Contenido}/>
-</Route>
-</Router>*/
