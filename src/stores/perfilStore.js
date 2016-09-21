@@ -1,27 +1,25 @@
-const API = 'https://tupale.co/milfs/api.php?tipo=simple&id='
+const API = 'https://tupale.co/milfs/api.php?tipo=simple&id=183'
 let _posts = {}
 let _initCalled = false
 let _changeListeners = []
 
-const ContactStore = {
+const perfilStore = {
 
-    init: function (id) {
+    init: function () {
         if (_initCalled)
         return
 
         _initCalled = true
-        getJSON(API+id, function (err, res) {
+        getJSON(API, function (err, res) {
             res.forEach(function (item) {
                 _posts[item.id] = item
             })
-            ContactStore.notifyChange()
+            perfilStore.notifyChange()
         })
     },
 
     notifyChange: function () {
-        console.log("notifyChange");
         _changeListeners.forEach(function (listener) {
-            console.log("notifyChange forEach  ");
             listener()
         })
     },
@@ -39,9 +37,7 @@ const ContactStore = {
     },
 
     addChangeListener: function (listener) {
-        console.log("addChangeListener");
         _changeListeners.push(listener)
-        console.log(_changeListeners);
     },
     removeChangeListener: function (listener) {
         _changeListeners = []
@@ -56,7 +52,6 @@ const ContactStore = {
 function getJSON(url, cb) {
     const req = new XMLHttpRequest()
     req.onload = function () {
-        console.log("llama")
         if (req.status === 404) {
             cb(new Error('not found'))
         } else {
@@ -69,4 +64,4 @@ function getJSON(url, cb) {
 }
 
 
-export default ContactStore
+export default perfilStore

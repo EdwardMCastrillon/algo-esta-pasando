@@ -9,10 +9,7 @@ if (process.env.BROWSER) {
     require("../style/icomoon/style.scss");
 }
 export default class NavBar extends Component {
-
-
     render() {
-
         return (
             <div className="NavBar">
                 <div className="NavBar-title">
@@ -25,7 +22,7 @@ export default class NavBar extends Component {
                             let url = (item == "inicio")?"/":`/${item}`;
                             let icom = `i-${item}`
                             return (
-                                <Link key={ item }  to={url}><span className="flex align-center"><i className={icom}></i>{item}</span></Link>
+                                <Link key={ item } to={url}><span className="flex align-center"><i className={icom}></i>{item}</span></Link>
                             );
                         })
                     }
@@ -36,5 +33,4 @@ export default class NavBar extends Component {
             </div>
         );
     }
-
 }

@@ -1,10 +1,7 @@
 import React from 'react'
 import { render } from 'react-dom'
 import { Router,Route, browserHistory } from 'react-router'
-
 import App from './containers/app'
-import Inicio from './components/inicio'
-import Contenido from './components/contenido'
 
 import RouterApp from './routes'
 
@@ -14,16 +11,16 @@ if (process.env.BROWSER) {
     require("style/Root.scss");
 
 }
-function prueba(){
-    // console.log(Inicio.updateprueba())
-}
+
 render((
 
     <Router history={browserHistory}>
         <Route component={App}>
-            <Route path={RouterApp.home.path} component={RouterApp.home.handler} onEnter={prueba}/>
-            <Route path={RouterApp.home.path} component={RouterApp.home.handler} onEnter={prueba}/>
-            <Route path={RouterApp.contenido.path} component={RouterApp.contenido.handler} onEnter={prueba}/>
+            <Route id={RouterApp.home.id} path={RouterApp.home.path} component={RouterApp.home.handler}/>
+            <Route id={RouterApp.home.id} path={RouterApp.home.path} component={RouterApp.home.handler}/>
+            <Route id={RouterApp.contenido.id} path={RouterApp.contenido.path} component={RouterApp.contenido.handler}/>
+            <Route id={RouterApp.recursos.id} path={RouterApp.recursos.path} component={RouterApp.recursos.handler}/>
+            <Route id={RouterApp.perfiles.id} path={RouterApp.perfiles.path} component={RouterApp.perfiles.handler}/>
         </Route>
     </Router>
 

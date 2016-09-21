@@ -1,9 +1,9 @@
 import React from 'react'
 import { hashHistory } from 'react-router'
 // import request from 'superagent'
-import Post from './posts'
+import Post from '../components/posts'
 
-import ContactStore from '../stored'
+import InitStore from '../stores/initStore'
 
 if (process.env.BROWSER) {
     require("../style/Posts.scss");
@@ -12,11 +12,8 @@ export default class Inicio extends React.Component {
     constructor (props) {
         super(props)
         this.state = ({
-            posts: ContactStore.getPosts()
+            posts: InitStore.getPosts()
         })
-    }
-    updateprueba(){
-        console.log("updateprueba");
     }
     // getData(){
     //     let selt = this
@@ -31,27 +28,29 @@ export default class Inicio extends React.Component {
     // }
 
     componentWillUnmount() {
-        console.log("cuando se desmonta ")
-        ContactStore.removeChangeListener(this.updateData.bind(this))
+        InitStore.removeChangeListener(this.updateData.bind(this))
     }
 
     componentWillMount(){
-        ContactStore.init(111)
+        InitStore.init()
         // console.log("componentWillMount")
     }
 
     updateData() {
         this.setState({
-            posts:ContactStore.getPosts()
+            posts:InitStore.getPosts()
         })
     }
     componentDidMount(){
-        console.log("componentDidMount")
-        ContactStore.addChangeListener(this.updateData.bind(this))
+        InitStore.addChangeListener(this.updateData.bind(this))
         // this.getData()
     }
     render () {
+        var divStyle = {
+            height: window.innerHeight - 50
+        };
         return (
+            <div className="P-B-ContentPost" style={divStyle}>
             <section className="P-B-Post">
                 {
                     this.state.posts.map(item => {
@@ -61,6 +60,7 @@ export default class Inicio extends React.Component {
                     })
                 }
             </section>
+        </div>
         )
     }
 }
