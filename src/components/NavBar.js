@@ -11,7 +11,6 @@ if (process.env.BROWSER) {
 }
 export default class NavBar extends Component {
     render() {
-
         return (
             <div className="NavBar">
                 <div className="NavBar-title">
@@ -20,10 +19,11 @@ export default class NavBar extends Component {
                 <div className="NavBar-links">
                     {
                         Menus.map(item => {
-                            let url = `/${item}`
+                            // let url = `/${item}`
+                            let url = (item == "inicio")?"/":`/${item}`;
                             let icom = `i-${item}`
                             return (
-                              <Link key={ item }  to={url}><span className="flex align-center"><i className={icom}></i>{item}</span></Link>
+                                <Link key={ item } to={url}><span className="flex align-center"><i className={icom}></i>{item}</span></Link>
                             );
                         })
                     }
@@ -35,5 +35,4 @@ export default class NavBar extends Component {
             </div>
         );
     }
-
 }

@@ -1,34 +1,27 @@
 import React from 'react'
 import { render } from 'react-dom'
-import { Router, Route, hashHistory, IndexRoute, browserHistory } from 'react-router'
+import { Router,Route, browserHistory } from 'react-router'
+import App from './containers/app'
 
-import App from './app'
+import RouterApp from './routes'
 
-import Inicio from './components/inicio'
-import Contenido from './components/contenido'
-
+console.log(RouterApp.home.path);
 
 if (process.env.BROWSER) {
     require("style/Root.scss");
 
 }
-render((
 
+render((
 
     <Router history={browserHistory}>
         <Route component={App}>
-            <Route path="/" component={Inicio} />
-            <Route path="/inicio" component={Inicio}/>
-            <Route path="/contenido" component={Contenido}/>
-
+            <Route id={RouterApp.home.id} path={RouterApp.home.path} component={RouterApp.home.handler}/>
+            <Route id={RouterApp.home.id} path={RouterApp.home.path} component={RouterApp.home.handler}/>
+            <Route id={RouterApp.contenido.id} path={RouterApp.contenido.path} component={RouterApp.contenido.handler}/>
+            <Route id={RouterApp.recursos.id} path={RouterApp.recursos.path} component={RouterApp.recursos.handler}/>
+            <Route id={RouterApp.perfiles.id} path={RouterApp.perfiles.path} component={RouterApp.perfiles.handler}/>
         </Route>
     </Router>
 
 ), document.getElementById('app'))
-/*<Router history={hashHistory}>
-<Route path='/' component={App}>
-<IndexRoute component={Inicio}/>
-<Route path="/inicio" component={Inicio}/>
-<Route path="/contenido" component={Contenido}/>
-</Route>
-</Router>*/

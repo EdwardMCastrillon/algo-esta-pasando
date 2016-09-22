@@ -1,29 +1,34 @@
+//toca cambiar el handler para que sea un solo componente
 
-import InitActions from "./containers/InitActions";
-
-import features from "./constants/features";
-
-import HomePage from "./containers/HomePage";
-import PhotoPage from "./containers/PhotoPage";
-import FeaturedPage from "./containers/FeaturedPage";
+import Inicio from './containers/inicio'
+import Contenido from './containers/contenido'
+import Recursos from './containers/recursos'
+import Perfiles from './containers/perfiles'
 
 export default {
 
     home: {
         path: "/",
         method: "get",
-        handler: HomePage
+        handler: Inicio,
+        id:111
     },
-
-    featured: {
-        path: `/iniio/:feature(${features.join("|")})`,
+    contenido: {
+        path: "/contenido",
         method: "get",
-        handler: FeaturedPage,
+        handler: Contenido,
+        id:118
     },
-
-    photo: {
-        path: "/photo/:id",
+    recursos:{
+        path : "/centro_de_recursos",
+        method:"get",
+        handler: Recursos,
+        id:211
+    },
+    perfiles:{
+        path: "/autores",
         method: "get",
-        handler: PhotoPage,
-    },
+        handler: Perfiles,
+        id:183
+    }
 };
