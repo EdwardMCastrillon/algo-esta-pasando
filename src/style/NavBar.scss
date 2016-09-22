@@ -138,3 +138,19 @@
         margin-top: 30px;
     }
 }
+
+.drawSearch {
+    background: #2e2d7b;
+    right: 25px;
+    width: 45px;
+    height: 85px;
+    position: absolute;
+    i {
+        color: #FFE;
+        font-size: 22px;
+        padding-top: 50px;
+        display: block;
+        text-align: center;
+        cursor: pointer;
+    }
+}

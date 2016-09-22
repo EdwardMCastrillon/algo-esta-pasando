@@ -1,3 +1,6 @@
+import request from 'superagent'
+
+
 const API = 'https://tupale.co/milfs/api.php?tipo=simple&id=183'
 let _posts = {}
 let _initCalled = false
@@ -50,17 +53,17 @@ const perfilStore = {
 // localStorage.token = localStorage.token || (Date.now()*Math.random())
 
 function getJSON(url, cb) {
-    const req = new XMLHttpRequest()
-    req.onload = function () {
-        if (req.status === 404) {
+    request
+    .get(url)
+    // .set('Content-Type', 'application/json;charset=UTF-8')
+    .set('Accept', 'application/json')
+    .end(function(err, res){
+        if (res.status === 404) {
             cb(new Error('not found'))
         } else {
-            cb(null, JSON.parse(req.response))
+            cb(null, (res.body))
         }
-    }
-    req.open('GET', url)
-    // req.setRequestHeader('authorization', localStorage.token)
-    req.send()
+    });
 }
 
 

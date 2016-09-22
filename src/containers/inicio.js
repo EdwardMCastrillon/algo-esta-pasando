@@ -1,6 +1,5 @@
 import React from 'react'
 import { hashHistory } from 'react-router'
-// import request from 'superagent'
 import Post from '../components/posts'
 
 import InitStore from '../stores/initStore'

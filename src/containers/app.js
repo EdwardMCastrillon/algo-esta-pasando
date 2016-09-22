@@ -1,6 +1,7 @@
 import React from 'react'
 import { hashHistory } from 'react-router'
 import Nav from '../components/NavBar'
+import Buscar from '../components/buscar'
 
 if (process.env.BROWSER) {
     require("../style/font.scss");
@@ -13,7 +14,9 @@ export default class App extends React.Component {
             <div className="Page">
                 <Nav/>
                 <div className="Page-body">
-                    <div className="Page-body-top"></div>
+                    <div className="Page-body-top">
+                        <Buscar/>
+                    </div>
                     {this.props.children}
                 </div>
                 <article className="SidebarLeadership">
