@@ -34,7 +34,7 @@ export default class Perfiles extends React.Component {
         };
         return (
             <div className="P-B-ContentPost" style={divStyle}>
-                <section className="P-B-Post">
+                <section className="P-B-Post flex-container wrap">
                     {
                         this.state.perfiles.map(item => {
                             return(

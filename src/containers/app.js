@@ -10,6 +10,11 @@ if (process.env.BROWSER) {
 export default class App extends React.Component {
 
     render () {
+        // window.onresize = function(event) {
+        //     let content = document.getElementsByClassName("P-B-Post")[0];
+        //     let nav = document.getElementById("NavBar");
+        //     content.style.width = (window.innerWidth - nav.offsetWidth)+"px";
+        // };
         return (
             <div className="Page">
                 <Nav/>

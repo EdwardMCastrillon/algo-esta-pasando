@@ -3,20 +3,19 @@
     height: 100%;
     background-size: cover !important;
 }
-.P-B-Post {
+.P-B-Post.post {
     padding-left: 35px;
     column-width: 320px;
     column-gap: 2px;
     margin: 15px auto;
+}
+.P-B-Post {
+
     figure {
         position: relative;
         overflow: hidden;
-        float: left;
         background: #fefefe;
-        // box-shadow: 0 1px 1px rgba(34, 25, 25, 0.4);
         margin: 0 2px 5px;
-        display: inline-block;
-        column-break-inside: avoid;
         position: relative;
         &:hover span{
 
@@ -42,7 +41,8 @@
         }
     }
     .perfil {
-
+        margin: auto;
+        width: 320px;
         background: transparent;
         float: inherit;
         height: 380px;
@@ -115,7 +115,7 @@
             color: #fff;
         }
         >:nth-child(4) {
-            width: 80%;
+            // width: 80%;
             margin: auto;
             display: block;
             font-size: 14px;

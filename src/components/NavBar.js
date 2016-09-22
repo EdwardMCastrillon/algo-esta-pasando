@@ -12,7 +12,7 @@ if (process.env.BROWSER) {
 export default class NavBar extends Component {
     render() {
         return (
-            <div className="NavBar">
+            <div id="NavBar" className="NavBar">
                 <div className="NavBar-title">
                     <img src="../src/img/edicion.jpg"/>
                 </div>
