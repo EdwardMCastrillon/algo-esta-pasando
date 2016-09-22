@@ -6,7 +6,7 @@ export default class Post extends React.Component {
     constructor (props) {
         super(props)
     }
-
+    
     render () {
         let img = this.props.data['Agrega una Imagen']
         let name = utf.accentDecode(this.props.data['Nombre de la actividad']);
@@ -15,7 +15,7 @@ export default class Post extends React.Component {
             background: this.props.data,
         };
         return (
-            <figure  style={divStyle}>
+            <figure  style={divStyle} >
                 <img src={`https://tupale.co/milfs/images/secure/?file=600/${img}`}/>
                 <span>{name}</span>
             </figure>

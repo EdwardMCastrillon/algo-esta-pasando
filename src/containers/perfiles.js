@@ -11,7 +11,6 @@ export default class Perfiles extends React.Component {
             perfiles: PerfilStore.getPosts()
         })
     }
-
     componentWillUnmount() {
         PerfilStore.removeChangeListener(this.updateData.bind(this))
     }

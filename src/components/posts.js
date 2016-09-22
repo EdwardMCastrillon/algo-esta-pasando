@@ -6,7 +6,9 @@ export default class Post extends React.Component {
     constructor (props) {
         super(props)
     }
-
+    openPost(){
+        console.log("openPost")
+    }
     render () {
         let img = this.props.data['Agrega una Imagen']
         let name = '';
@@ -31,7 +33,7 @@ export default class Post extends React.Component {
         //     background: this.props.data,
         // };
         return (
-            <figure>
+            <figure onClick={this.openPost.bind(this)}>
                 <img src={`https://tupale.co/milfs/images/secure/?file=600/${img}`}/>
                 <span>{name}</span>
             </figure>
