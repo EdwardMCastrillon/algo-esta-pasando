@@ -35,7 +35,8 @@ export default class Perfil extends React.Component {
         let twitter = (t)?t.replace("https://twitter.com/","@"):'';
         console.log(perfil)
         var divStyle = {
-            background: `url(https://tupale.co/milfs/images/secure/?file=600/${img}) center center`
+            background: `url(https://tupale.co/milfs/images/secure/?file=600/${img}) center center`,
+            'background-size': 'cover'
         };
         return (
             <figure  className="perfil">
