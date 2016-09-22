@@ -1,5 +1,6 @@
 import React from 'react'
-import InfiniteGrid from '../grid/grid';
+import utf from '../utils/accentDecode'
+
 
 export default class Post extends React.Component {
     constructor (props) {
@@ -8,8 +9,8 @@ export default class Post extends React.Component {
 
     render () {
         let img = this.props.data['Agrega una Imagen']
-        let name = this.props.data['Nombre de la actividad']
-        let description = this.props.data['Descripción de la actividad']
+        let name = utf.accentDecode(this.props.data['Nombre de la actividad']);
+        let description = utf.accentDecode(this.props.data['Descripción de la actividad']);
         var divStyle = {
             background: this.props.data,
         };

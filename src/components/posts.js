@@ -1,4 +1,6 @@
 import React from 'react'
+import utf from '../utils/accentDecode'
+
 
 export default class Post extends React.Component {
     constructor (props) {
@@ -11,16 +13,16 @@ export default class Post extends React.Component {
         let description = '';
         switch (parseInt(this.props.tipo)) {
             case 0:
-            name = this.props.data['Nombre de la actividad'];
-            description = this.props.data['Descripción de la actividad'];
+            name = utf.accentDecode(this.props.data['Nombre de la actividad'])
+            description = utf.accentDecode(this.props.data['Descripción de la actividad'])
             break;
             case 1:
-            name = this.props.data['Título'];
-            description = this.props.data['Resumen'];
+            name = utf.accentDecode(this.props.data['Título']);
+            description = utf.accentDecode(this.props.data['Resumen']);
             break;
             case 2:
-            name = this.props.data['Nombres'];
-            description = this.props.data['Resumen'];
+            name = utf.accentDecode(this.props.data['Nombres']);
+            description = utf.accentDecode(this.props.data['Resumen']);
             break;
         }
 

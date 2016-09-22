@@ -1,5 +1,6 @@
 import React, { PropTypes, Component } from "react";
-import { Link } from 'react-router'
+import { Link, Router } from 'react-router'
+
 import Menus from "../constants/menus";
 
 
@@ -26,6 +27,7 @@ export default class NavBar extends Component {
                             );
                         })
                     }
+
                 </div>
                 <div className="NavBar-footer">
                     <img src="../src/img/logoAep.png"/>
