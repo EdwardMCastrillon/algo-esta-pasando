@@ -13,7 +13,9 @@ render((
 
     <Router history={browserHistory}>
         <Route component={App}>
-            <Route id={RouterApp.home.id} path={RouterApp.home.path} component={RouterApp.home.handler}/>
+            <Route id={RouterApp.home.id} path={RouterApp.home.path} component={RouterApp.home.handler}>
+                <Route path=":id" component={RouterApp.perfiles.handler}/>
+            </Route>
             <Route id={RouterApp.home.id} path={RouterApp.home.path} component={RouterApp.home.handler}/>
             <Route id={RouterApp.contenido.id} path={RouterApp.contenido.path} component={RouterApp.contenido.handler}/>
             <Route id={RouterApp.recursos.id} path={RouterApp.recursos.path} component={RouterApp.recursos.handler}/>

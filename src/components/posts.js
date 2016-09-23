@@ -1,6 +1,6 @@
 import React from 'react'
 import utf from '../utils/accentDecode'
-
+import { Link } from 'react-router'
 
 export default class Post extends React.Component {
     constructor (props) {
@@ -10,6 +10,7 @@ export default class Post extends React.Component {
         console.log("openPost")
     }
     render () {
+        let url = `/${this.props.data['identificador']}`
         let img = this.props.data['Agrega una Imagen']
         let name = '';
         let description = '';
@@ -31,12 +32,16 @@ export default class Post extends React.Component {
 
         // var divStyle = {
         //     background: this.props.data,
-        // };
+        // };onClick={this.openPost.bind(this)}
         return (
-            <figure onClick={this.openPost.bind(this)}>
-                <img src={`https://tupale.co/milfs/images/secure/?file=600/${img}`}/>
-                <span>{name}</span>
-            </figure>
+            <div>
+                <Link to={url}>
+                    <figure >
+                        <img src={`https://tupale.co/milfs/images/secure/?file=600/${img}`}/>
+                        <span>{name}</span>
+                    </figure>
+                </Link>
+            </div>
         )
     }
 }

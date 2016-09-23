@@ -15,7 +15,6 @@ export default class Perfil extends React.Component {
         let perfil = utf.accentDecode(this.props.data['Perfil'].substring(0,60));
         let t = this.props.data['Cuenta de Twitter'];
         let twitter = (t)?t.replace("https://twitter.com/","@"):'';
-        console.log(perfil)
         var divStyle = {
             background: `rgb(234, 234, 234) url(https://tupale.co/milfs/images/secure/?file=600/${img}) center center`
         };

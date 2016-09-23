@@ -1,7 +1,7 @@
 import React from 'react'
 import { hashHistory } from 'react-router'
 import Post from '../components/posts'
-import ContactStore from '../stores/initStore'
+// import ContactStore from '../stores/initStore'
 
 export default class Contenido extends React.Component {
     constructor (props) {
@@ -45,15 +45,16 @@ export default class Contenido extends React.Component {
         return (
             <div className="P-B-ContentPost" style={divStyle}>
                 <section className="P-B-Post">
-                    {
-                        this.state.posts.map(item => {
-                            return(
-                                <Post key={ item.identificador } data={item} tipo="1"/>
-                            )
-                        })
-                    }
+                    hola mundo
                 </section>
             </div>
         )
     }
 }
+// {
+//     this.state.posts.map(item => {
+//         return(
+//             <Post key={ item.identificador } data={item} tipo="1"/>
+//         )
+//     })
+// }
