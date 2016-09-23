@@ -2,10 +2,7 @@ import React from 'react'
 import { render } from 'react-dom'
 import { Router,Route, browserHistory } from 'react-router'
 import App from './containers/app'
-
 import RouterApp from './routes'
-
-console.log(RouterApp.home.path);
 
 if (process.env.BROWSER) {
     require("style/Root.scss");

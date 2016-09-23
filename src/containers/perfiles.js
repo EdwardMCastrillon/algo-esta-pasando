@@ -11,7 +11,6 @@ export default class Perfiles extends React.Component {
             perfiles: PerfilStore.getPosts()
         })
     }
-
     componentWillUnmount() {
         PerfilStore.removeChangeListener(this.updateData.bind(this))
     }
@@ -27,21 +26,23 @@ export default class Perfiles extends React.Component {
         PerfilStore.addChangeListener(this.updateData.bind(this))
     }
     render () {
+
         var divStyle = {
-            height: window.innerHeight - 50
+            height: window.innerHeight - 46,
+            background: "url(../src/img/backgroung.jpg) no-repeat center center fixed"
         };
         return (
             <div className="P-B-ContentPost" style={divStyle}>
-            <section className="P-B-Post">
-                {
-                    this.state.perfiles.map(item => {
-                        return(
-                            <Perfil key = { item.identificador } data={item} tipo="2"/>
-                        )
-                    })
-                }
-            </section>
-        </div>
+                <section className="P-B-Post flex-container wrap">
+                    {
+                        this.state.perfiles.map(item => {
+                            return(
+                                <Perfil key = { item.identificador } data={item} tipo="2"/>
+                            )
+                        })
+                    }
+                </section>
+            </div>
         )
     }
 }

@@ -1,26 +1,36 @@
 import React from 'react'
+import utf from '../utils/accentDecode'
+
 
 export default class Post extends React.Component {
     constructor (props) {
         super(props)
+        this.state = ({ putos: '' })
+    }
+    openPost(){
+        console.log("openPost")
+        this.setState({'putos': 'teppppasdas asdkkasdl'})
     }
 
     render () {
+      // console.log(this.props.data);
         let img = this.props.data['Agrega una Imagen']
         let name = '';
+        let data = this.props.data
+        let id = this.props.data.id
         let description = '';
         switch (parseInt(this.props.tipo)) {
             case 0:
-            name = this.props.data['Nombre de la actividad'];
-            description = this.props.data['Descripción de la actividad'];
+            name = utf.accentDecode(this.props.data['Nombre de la actividad'])
+            description = utf.accentDecode(this.props.data['Descripción de la actividad'])
             break;
             case 1:
-            name = this.props.data['Título'];
-            description = this.props.data['Resumen'];
+            name = utf.accentDecode(this.props.data['Título']);
+            description = utf.accentDecode(this.props.data['Resumen']);
             break;
             case 2:
-            name = this.props.data['Nombres'];
-            description = this.props.data['Resumen'];
+            name = utf.accentDecode(this.props.data['Nombres']);
+            description = utf.accentDecode(this.props.data['Resumen']);
             break;
         }
 
@@ -29,10 +39,13 @@ export default class Post extends React.Component {
         //     background: this.props.data,
         // };
         return (
-            <figure>
+            <figure onClick={this.props.image.bind(this, data)} id={id}>
                 <img src={`https://tupale.co/milfs/images/secure/?file=600/${img}`}/>
                 <span>{name}</span>
             </figure>
         )
     }
+}
+Post.propTypes = {
+  image: React.PropTypes.func
 }

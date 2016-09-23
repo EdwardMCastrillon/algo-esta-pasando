@@ -51,6 +51,7 @@ const initStore = {
 
 function getJSON(url, cb) {
     const req = new XMLHttpRequest()
+
     req.onload = function () {
         if (req.status === 404) {
             cb(new Error('not found'))
@@ -59,9 +60,9 @@ function getJSON(url, cb) {
         }
     }
     req.open('GET', url)
+    req.getResponseHeader("Content-Type", "application/json;charset=UTF-8");
     // req.setRequestHeader('authorization', localStorage.token)
     req.send()
 }
-
 
 export default initStore
