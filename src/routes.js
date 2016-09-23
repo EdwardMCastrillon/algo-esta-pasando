@@ -4,6 +4,7 @@ import Inicio from './containers/inicio'
 import Contenido from './containers/contenido'
 import Recursos from './containers/recursos'
 import Perfiles from './containers/perfiles'
+import Post from './components/post'
 
 export default {
 
@@ -11,6 +12,7 @@ export default {
         path: "/",
         method: "get",
         handler: Inicio,
+        handlerid: Post,
         id:111
     },
     contenido: {

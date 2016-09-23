@@ -5,14 +5,21 @@ import { Link } from 'react-router'
 export default class Post extends React.Component {
     constructor (props) {
         super(props)
+        this.state = ({ putos: '' })
     }
     openPost(){
         console.log("openPost")
+        this.setState({'putos': 'teppppasdas asdkkasdl'})
     }
+
     render () {
-        let url = `/${this.props.data['identificador']}`
+
+        let url = `/p/${this.props.data['id']}`
+
         let img = this.props.data['Agrega una Imagen']
         let name = '';
+        let data = this.props.data
+        let id = this.props.data.id
         let description = '';
         switch (parseInt(this.props.tipo)) {
             case 0:
@@ -28,15 +35,10 @@ export default class Post extends React.Component {
             description = utf.accentDecode(this.props.data['Resumen']);
             break;
         }
-
-
-        // var divStyle = {
-        //     background: this.props.data,
-        // };onClick={this.openPost.bind(this)}
         return (
             <div>
                 <Link to={url}>
-                    <figure >
+                    <figure>
                         <img src={`https://tupale.co/milfs/images/secure/?file=600/${img}`}/>
                         <span>{name}</span>
                     </figure>
@@ -45,3 +47,6 @@ export default class Post extends React.Component {
         )
     }
 }
+// Post.propTypes = {
+//   image: React.PropTypes.func
+// }

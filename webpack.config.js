@@ -6,11 +6,15 @@ module.exports = {
     devtool: 'inline-source-map',
     entry: [
 
-        'webpack-dev-server/client?http://127.0.0.1:8080/',
+        'webpack-dev-server/client?http://127.0.0.1:3000/',
         'webpack/hot/only-dev-server',
         './src'
 
     ],
+    devServer: { // opciones para el servidor de desarrollo
+        inline: true, // para que se recargue automáticamente cuando cambie un archivo
+        port: 3000 // puerto donde funcionará el servidor
+    },
     output: {
         filename: "bundle.js",
         sourceMapFilename: "bundle.map"
@@ -27,7 +31,7 @@ module.exports = {
                 loaders: ['react-hot', 'babel?presets[]=react,presets[]=es2015']
             },
             { test: /\.scss$/, loaders: ["style", "css", "autoprefixer?browsers=last 2 version!sass?outputStyle=expanded&sourceMap=true&sourceMapContents=true"] },
-            
+
             {
                 test: /\.(eot|otf|ttf|woff|woff2)$/,
                 loader: 'file'

@@ -12,16 +12,6 @@ export default class Contenido extends React.Component {
         })
 
     }
-    // getData(){
-    //     let selt = this
-    //     request
-    //     .post('https://tupale.co/milfs/api.php?id=118&tipo=simple')
-    //     .end(function(err, res){
-    //         selt.setState({
-    //             data:res.body
-    //         })
-    //     });
-    // }
     componentWillUnmount() {
         ContactStore.removeChangeListener(this.updateData.bind(this))
     }
@@ -45,16 +35,15 @@ export default class Contenido extends React.Component {
         return (
             <div className="P-B-ContentPost" style={divStyle}>
                 <section className="P-B-Post">
-                    hola mundo
+                    {
+                        this.state.posts.map(item => {
+                            return(
+                                <Post key={ item.identificador } data={item} tipo="1"/>
+                            )
+                        })
+                    }
                 </section>
             </div>
         )
     }
 }
-// {
-//     this.state.posts.map(item => {
-//         return(
-//             <Post key={ item.identificador } data={item} tipo="1"/>
-//         )
-//     })
-// }

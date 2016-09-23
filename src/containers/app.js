@@ -6,6 +6,7 @@ import Buscar from '../components/buscar'
 if (process.env.BROWSER) {
     require("../style/font.scss");
     require("../style/Page.scss");
+    require("../style/Animate.scss");
 }
 export default class App extends React.Component {
 

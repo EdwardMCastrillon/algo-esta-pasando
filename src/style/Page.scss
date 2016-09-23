@@ -9,6 +9,7 @@
     min-height: 100%;
     margin: 0 auto;
     // padding: 1rem;
+
 }
 
 .Page-body {
@@ -27,3 +28,20 @@
 //         padding: 2rem;
 //     }
 // }
+.slide{
+  display: block;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  display: block;
+  top: 0;
+  position: relative;
+  height: 400px;
+  width: 100%;
+  border:solid 1px red;
+  background: red;
+}
+.hiden{
+  background: red;
+  visibility:hidden;
+}
