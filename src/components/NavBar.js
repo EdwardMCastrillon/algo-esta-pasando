@@ -21,8 +21,9 @@ export default class NavBar extends Component {
                         Menus.map(item => {
                             let url = (item == "inicio")?"/":`/${item}`;
                             let icom = `i-${item}`
+                            let option = item.replace(/_/g, ' ')
                             return (
-                                <Link key={ item } to={url}><span className="flex align-center"><i className={icom}></i>{item}</span></Link>
+                                <Link key={ item } to={url}><span className="flex align-center"><i className={icom}></i>{option}</span></Link>
                             );
                         })
                     }

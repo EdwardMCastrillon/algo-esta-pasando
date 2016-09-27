@@ -1,16 +1,12 @@
 import React from 'react'
 import { render } from 'react-dom'
 import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'react-router'
-// import withExampleBasename from './withExampleBasename'
+
 
 import App from './containers/app'
 import RouterApp from './routes'
+require("./style/Root.scss");
 
-if (process.env.BROWSER) {
-    require("style/Root.scss");
-
-}
-//<Router history={withExampleBasename(browserHistory, __dirname)}>
 render((
 
     <Router history={browserHistory}>
