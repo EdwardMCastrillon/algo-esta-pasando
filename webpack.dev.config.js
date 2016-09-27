@@ -6,9 +6,10 @@ module.exports = {
     entry: [
         'webpack-dev-server/client?http://127.0.0.1:3000/',
         'webpack/hot/only-dev-server',
-        './src'
+        './src/client'
     ],
     devServer: { // opciones para el servidor de desarrollo
+        contentBase: './public',
         inline: true, // para que se recargue automáticamente cuando cambie un archivo
         port: 3000 // puerto donde funcionará el servidor
     },

@@ -51,23 +51,3 @@ export default class Inicio extends React.Component {
         )
     }
 }
-
-//className={this.state.classNamePost}
-//<Post key={ item.identificador } data={item} tipo="0" image={this.imageClick.bind(this)}/>
-//
-// articleClick (event, id){
-//     this.setState({
-//         'info': 'hello new info asdasdasd',
-//         classNameArticle: 'hiden',
-//         classNamePost: 'animated  bounceInDown P-B-Post post'
-//     })
-// }
-// imageClick (data, event) {
-//     console.log(data,event)
-//     this.setState({
-//         'info': 'hello new info asdasdasd',
-//         classNameArticle: 'slide  animated slideInRight',
-//         classNamePost: 'hiden  animated bounceOutLeft'
-//     })
-//
-// }

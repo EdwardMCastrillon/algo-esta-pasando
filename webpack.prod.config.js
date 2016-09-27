@@ -2,9 +2,9 @@ var webpack = require('webpack');
 var path = require('path');
 
 module.exports = {
-    devtool: 'source-map',
+    devtool: 'eval',
     entry: [
-        './src'
+        './src/client'
     ],
     output: {
         path: path.join(__dirname, 'public'),

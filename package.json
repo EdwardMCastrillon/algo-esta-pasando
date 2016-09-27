@@ -4,11 +4,12 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    "serve-api": "babel-node src/server/",
     "dev-server": "webpack-dev-server --config webpack.dev.config.js",
     "dev": "npm run build-dev && npm run dev-server",
     "start": "",
-    "build-prod": "webpack -p --config webpack.prod.config.js",
-    "build-dev": "webpack -p --config webpack.dev.config.js"
+    "build-prod": "rm -rf public/ && webpack -p --config webpack.prod.config.js && cp src/client/index.html public/",
+    "build-dev": "rm -rf public/ && webpack -p --config webpack.dev.config.js && cp src/client/index.html public/"
   },
   "babel": {
     "presets": [
@@ -34,7 +35,8 @@
     "react-router": "^2.8.0",
     "sass-loader": "^4.0.2",
     "style-loader": "^0.13.1",
-    "superagent": "^2.2.0",
+    "superagent": "^2.3.0",
+    "superagent-no-cache": "^0.1.0",
     "url-loader": "^0.5.7",
     "utf8": "^2.1.1"
   },

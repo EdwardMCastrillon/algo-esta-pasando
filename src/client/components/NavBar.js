@@ -1,20 +1,20 @@
 import React, { PropTypes, Component } from "react";
 import { Link, Router } from 'react-router'
 
-import Menus from "../constants/menus";
+import Menus from '../constants/menus';
+import Logo from "../img/logoAep.png"
+import Edicion from '../img/edicion.jpg'
 
-if (process.env.BROWSER) {
-    require("../style/NavBar.scss");
-    require("../style/flex.scss");
-    require("../style/icomoon/style.scss");
-}
+require("../style/NavBar.scss");
+require("../style/flex.scss");
+require("../style/icomoon/style.scss");
 
 export default class NavBar extends Component {
     render() {
         return (
             <div id="NavBar" className="NavBar">
                 <div className="NavBar-title">
-                    <img src="../src/img/edicion.jpg"/>
+                    <img src={ Edicion } />
                 </div>
                 <div className="NavBar-links">
                     {
@@ -34,7 +34,7 @@ export default class NavBar extends Component {
                     }
                 </div>
                 <div className="NavBar-footer">
-                    <img src="../src/img/logoAep.png"/>
+                    <img src={ Logo } />
                 </div>
             </div>
         );
