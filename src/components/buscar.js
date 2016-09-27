@@ -8,11 +8,11 @@ export default class Buscar extends React.Component {
     render () {
 
         return (
-        <div>
-            <div className="drawSearch">
-                <i className="i-lupa_icon"></i>
-            </div>
-        </div>
+          <div>
+              <div className="drawSearch">
+                  <i className="i-lupa_icon"></i>
+              </div>
+          </div>
         )
     }
 }
