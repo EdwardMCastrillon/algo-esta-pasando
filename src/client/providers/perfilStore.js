@@ -1,7 +1,10 @@
 import request from 'superagent'
+// Importamos los endpoints de el servidor propio
+import apiEndpoints from '../utils/apiEndpoints'
+// Direccion url del server
+const server = 'http://localhost:8082/api'
 
-
-const API = 'https://tupale.co/milfs/api.php?tipo=simple&id=183'
+// const API = 'https://tupale.co/milfs/api.php?tipo=simple&id=183'
 let _posts = {}
 let _initCalled = false
 let _changeListeners = []
@@ -13,7 +16,7 @@ const perfilStore = {
         return
 
         _initCalled = true
-        getJSON(API, function (err, res) {
+        getJSON(`${server}${apiEndpoints.perfiles}`, function (err, res) {
             res.forEach(function (item) {
                 _posts[item.id] = item
             })
@@ -26,7 +29,7 @@ const perfilStore = {
             listener()
         })
     },
-    getPosts: function () {
+    getPerfiles: function () {
         const array = []
 
         for (const id in _posts)
@@ -35,7 +38,7 @@ const perfilStore = {
         return array
     },
 
-    getContact: function (id) {
+    getPerfil: function (id) {
         return _posts[id]
     },
 
@@ -55,7 +58,6 @@ const perfilStore = {
 function getJSON(url, cb) {
     request
     .get(url)
-    // .set('Content-Type', 'application/json;charset=UTF-8')
     .set('Accept', 'application/json')
     .end(function(err, res){
         if (res.status === 404) {

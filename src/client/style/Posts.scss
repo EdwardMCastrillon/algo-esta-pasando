@@ -6,7 +6,7 @@
 }
 
 .Autores {
-  background: url(../img/backgroung.jpg) no-repeat center center fixed;
+    background: url(../img/backgroung.jpg) no-repeat center center fixed;
 }
 
 .P-B-Post.post {
@@ -16,9 +16,9 @@
     margin: 1em auto;
 }
 .P-B-Post {
-    div {
-      height: 18em;
-    }
+    // div {
+    //     height: 18em;
+    // }
     figure {
         position: relative;
         overflow: hidden;
@@ -138,35 +138,90 @@
 
 // Estilos de la vista /post/id (Post Individual)
 
-.Post {
-  margin-top: 3em;
-  .Figure {
-    margin: .5em;
-    padding: 0;
-    width: 99%;
-    height: 36rem;
+.showContent.Post {
+    margin-top: 3em;
+    overflow: auto;
+    left: 101%;
+    position: relative;
+    transition: 1s left;
+    .Figure {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 36rem;
 
-    img {
-      width: 99%;
-      height: 100%;
+        img {
+            width: 100%;
+            height: 100%;
+        }
     }
-  }
 
-  .AutorFoto {
-    margin-left: .5em;
-  }
+    .AutorFoto {
+        margin-left: .5em;
+    }
 
-  .Detalle {
-    margin-left: .5em;
-    text-align: center;
-    .Titulo {
-      font-family: 'MonopolSemiBold';
-      color: rgb(91, 91, 91);
-      font-size: 5em;
-      margin-top: .2em !important;
+    .Detalle {
+        margin-left: .5em;
+        text-align: center;
+        .Titulo {
+            font-family: 'MonopolSemiBold';
+            color: rgb(91, 91, 91);
+            font-size: 5em;
+            margin-top: .2em !important;
+        }
+        .Subtitulo {
+            text-align: center;
+        }
     }
-    .Subtitulo {
-      text-align: center;
+}
+.showContent.autor{
+    margin-top: 3em;
+    overflow: auto;
+    left: 101%;
+    position: relative;
+    transition: 1s left;
+
+    .contentAutor{
+        padding: 100px 20px 50px 20px;
+        max-width: 1200px;
+        margin: auto;
+        border-bottom: 1px solid #dedede;
+        .figure {
+            width: 30%;
+            border-radius: 100%;
+        }
+        .descriptionAutor{
+            width: calc(66% - 20px);
+            padding-right: 20px;
+            .nameAutor{
+                margin-bottom: 10px;
+                color: #4e489c;
+                font-size: 24px;
+                display: block;
+            }
+        }
     }
-  }
+
+}
+.relatedPosts {
+    border-top: 1px solid #dedede;
+    margin-top: 50px;
+    position: relative;
+    padding-top: 10px 10px 0px 10px;
+    >:first-child {
+        position: absolute;
+        top: -24px;
+    }
+    .postsRelated {
+        width: 200px;
+        height: 200px;
+        background: #e4e4e4;
+        margin: 0px 5px;
+    }
+    >:last-child{
+        margin-right: 0;
+    }
+    >:nth-child(2){
+        margin-left: 0;
+    }
 }

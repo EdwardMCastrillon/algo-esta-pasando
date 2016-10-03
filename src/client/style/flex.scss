@@ -18,10 +18,20 @@
     -ms-flex-direction: column;
     flex-direction: column;
 }
+.align-content-center {
+    -webkit-align-content: center;
+    -ms-flex-line-pack: center;
+    align-content: center;
+}
 .flex.justify-space-between {
     -webkit-justify-content: space-between;
     -ms-flex-pack: space-between;
     justify-content: space-between;
+}
+.flex.justify-space-around {
+    -webkit-justify-content: space-around;
+    -ms-flex-pack: justify;
+    justify-content: space-around;
 }
 .flex.wrap {
     -webkit-flex-wrap: wrap;

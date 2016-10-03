@@ -4,6 +4,7 @@ import Inicio from './containers/inicio'
 import Contenido from './containers/contenido'
 import Recursos from './containers/recursos'
 import Perfiles from './containers/perfiles'
+import Perfil from './components/perfil'
 import Post from './components/post'
 
 export default {
@@ -13,6 +14,7 @@ export default {
         method: "get",
         handler: Inicio,
         handlerid: Post,
+        pathId: "/post/:id",
         id:111
     },
     contenido: {
@@ -32,5 +34,11 @@ export default {
         method: "get",
         handler: Perfiles,
         id:183
+    },
+    perfil:{
+        path: "/autor/:id",
+        method: "get",
+        handler: Perfil,
+        id:"183A"
     }
 };

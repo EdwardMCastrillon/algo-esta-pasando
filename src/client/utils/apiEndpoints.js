@@ -1,6 +1,7 @@
 
 const endpoints = {
-  posts: '/posts'
+  posts: '/posts',
+  perfiles: '/perfiles'
 }
 
 export default endpoints
