@@ -2,7 +2,7 @@ import React from 'react'
 import { hashHistory } from 'react-router'
 
 import Perfil from '../components/widgetPerfil'
-import PerfilStore from '../stores/perfilStore'
+//import PerfilStore from '../stores/perfilStore'
 
 export default class Perfiles extends React.Component {
     constructor (props) {
@@ -27,12 +27,12 @@ export default class Perfiles extends React.Component {
     }
     render () {
 
-        var divStyle = {
-            height: window.innerHeight - 46,
-            background: "url(../src/img/backgroung.jpg) no-repeat center center fixed"
-        };
+        let divStyle = {
+            height: window.innerHeight - 46
+        }
+
         return (
-            <div className="P-B-ContentPost" style={divStyle}>
+            <div className="P-B-ContentPost Autores" style={divStyle}>
                 <section className="P-B-Post flex-container wrap">
                     {
                         this.state.perfiles.map(item => {

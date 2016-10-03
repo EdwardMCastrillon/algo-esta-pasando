@@ -1,3 +1,6 @@
+/*
+* Module dependencies
+*/
 import React from 'react'
 import utf from '../utils/accentDecode'
 import { Link } from 'react-router'
@@ -5,16 +8,12 @@ import { Link } from 'react-router'
 export default class Post extends React.Component {
     constructor (props) {
         super(props)
-        this.state = ({ putos: '' })
-    }
-    openPost(){
-        console.log("openPost")
-        this.setState({'putos': 'teppppasdas asdkkasdl'})
+        this.state = {}
     }
 
     render () {
 
-        let url = `/p/${this.props.data['id']}`
+        let url = `/post/${this.props.data.id}`
 
         let img = this.props.data['Agrega una Imagen']
         let name = '';
@@ -47,6 +46,3 @@ export default class Post extends React.Component {
         )
     }
 }
-// Post.propTypes = {
-//   image: React.PropTypes.func
-// }

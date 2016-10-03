@@ -1,13 +1,16 @@
+/*
+* Module dependencies
+*/
 import React from 'react'
 import { hashHistory } from 'react-router'
 import Nav from '../components/NavBar'
 import Buscar from '../components/buscar'
 
-if (process.env.BROWSER) {
-    require("../style/font.scss");
-    require("../style/Page.scss");
-    require("../style/Animate.scss");
-}
+// Estilos
+import "../style/font.scss"
+import "../style/Page.scss"
+import "../style/Animate.scss"
+
 export default class App extends React.Component {
 
     render () {
@@ -20,9 +23,6 @@ export default class App extends React.Component {
                     </div>
                     {this.props.children}
                 </div>
-                <article className="SidebarLeadership">
-
-                </article>
             </div>
         )
     }

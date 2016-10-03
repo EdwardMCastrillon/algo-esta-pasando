@@ -3,7 +3,7 @@
 
 
 .NavBar {
-    position: absolute;
+    position: fixed;
     width: $nav-collapsed;
     height: 100%;
     box-shadow: 0 0px 6px rgba(0, 0, 0, 0.36);
@@ -12,6 +12,11 @@
 
 .NavBar-title {
     text-align: left;
+
+    img {
+      height: 270px;
+      width: 210px;
+    }
 }
 
 @media screen and (min-device-width: 481px) {
@@ -43,7 +48,7 @@
         text-decoration: none;
         text-align: left;
         color: #4e4e4e;
-        padding: 12px 0px 12px 12px;
+        padding: 8px 0px 12px 12px;
         font-size: 14px;
         &:nth-child(1) i{ color:#00d6ba; }
         &:nth-child(2) i{ color:#08d9ec; }
@@ -148,6 +153,7 @@
     i {
         color: #FFE;
         font-size: 22px;
+        font-weight: bold;
         padding-top: 50px;
         display: block;
         text-align: center;

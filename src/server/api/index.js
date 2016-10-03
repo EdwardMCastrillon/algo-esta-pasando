@@ -1,6 +1,6 @@
 import express from 'express'
 // Se importa el cliente para realizar las peticiones al servidor de Tupale
-import client from '../utils'
+import client from '../utils/tupaleClient.js'
 
 const Router = express.Router()
 

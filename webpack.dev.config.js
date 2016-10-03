@@ -11,7 +11,7 @@ module.exports = {
     devServer: { // opciones para el servidor de desarrollo
         contentBase: './public',
         inline: true, // para que se recargue automáticamente cuando cambie un archivo
-        port: 3000 // puerto donde funcionará el servidor
+        port: 3000
     },
     output: {
         path: path.join(__dirname, 'public'),

@@ -2,7 +2,7 @@ import React from 'react'
 import { hashHistory } from 'react-router'
 
 import Post from '../components/posts'
-import ContactStore from '../stores/initStore'
+
 
 export default class Recursos extends React.Component {
     constructor (props) {

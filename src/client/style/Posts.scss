@@ -1,22 +1,31 @@
 .P-B-ContentPost {
+    margin-top: 3em;
     overflow: auto;
     height: 100%;
     background-size: cover !important;
 }
+
+.Autores {
+  background: url(../img/backgroung.jpg) no-repeat center center fixed;
+}
+
 .P-B-Post.post {
     padding-left: 35px;
     column-width: 320px;
     column-gap: 2px;
-    margin: 15px auto;
+    margin: 1em auto;
 }
 .P-B-Post {
-
+    div {
+      height: 18em;
+    }
     figure {
         position: relative;
         overflow: hidden;
         background: #fefefe;
         margin: 0 2px 5px;
         position: relative;
+        height: 100%;
         &:hover span{
 
         }
@@ -27,12 +36,12 @@
             bottom: 0;
             width: calc(100% - 20px);
             left: 0;
-            background: rgba(0, 48, 113, 0.8);
+            background: rgba(0, 48, 113, 0.9);
             text-align: center;
             color: #fff;
-            padding: 16px 10px;
-            font-size: 18px;
-            letter-spacing: 0.5px;
+            padding: 17px 10px;
+            font-size: 30px;
+            letter-spacing: 0.8px;
         }
         img {
             width: 100%;
@@ -125,4 +134,39 @@
 
 
     }
+}
+
+// Estilos de la vista /post/id (Post Individual)
+
+.Post {
+  margin-top: 3em;
+  .Figure {
+    margin: .5em;
+    padding: 0;
+    width: 99%;
+    height: 36rem;
+
+    img {
+      width: 99%;
+      height: 100%;
+    }
+  }
+
+  .AutorFoto {
+    margin-left: .5em;
+  }
+
+  .Detalle {
+    margin-left: .5em;
+    text-align: center;
+    .Titulo {
+      font-family: 'MonopolSemiBold';
+      color: rgb(91, 91, 91);
+      font-size: 5em;
+      margin-top: .2em !important;
+    }
+    .Subtitulo {
+      text-align: center;
+    }
+  }
 }
