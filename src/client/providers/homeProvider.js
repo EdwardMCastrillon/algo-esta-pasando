@@ -50,7 +50,7 @@ function getJSONHome(url, cb) {
     .get(url)
     .set('Accept', 'application/json')
     .end(function(err, res){
-        console.log(res.body);
+
         if (res.status === 404) {
             cb(new Error('not found'))
         } else {

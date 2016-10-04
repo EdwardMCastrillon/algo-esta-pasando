@@ -8,18 +8,18 @@ let _recurso = {}
 let _initCalled = false
 let _changeListeners = []
 
-const recursoStore = {
+const RecursoStore = {
 
     init: function () {
         if (_initCalled)
         return
 
         _initCalled = true
-        getJSONRecurso(`${server}${apiEndpoints.recurso}`, function (err, res) {
+        getJSONRecurso(`${server}${apiEndpoints.recursos}`, function (err, res) {
             res.forEach(function (item) {
                 _recurso[item.id] = item
             })
-            perfilStore.notifyChange()
+            RecursoStore.notifyChange()
         })
     },
     notifyChange: function () {
@@ -27,7 +27,7 @@ const recursoStore = {
             listener()
         })
     },
-    getRecurso: function () {
+    getRecursos: function () {
         const array = []
         for (const id in _recurso)
         array.push(_recurso[id])
@@ -46,6 +46,7 @@ const recursoStore = {
 }
 
 function getJSONRecurso(url, cb) {
+
     request
     .get(url)
     .set('Accept', 'application/json')
@@ -60,4 +61,4 @@ function getJSONRecurso(url, cb) {
 }
 
 
-export default recursoStore
+export default RecursoStore
