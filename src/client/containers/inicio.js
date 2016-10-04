@@ -9,33 +9,27 @@ export default class Inicio extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            posts: []
+            posts: HomeProvider.getHomes()
         }
     }
-
-    componentWillMount() {
-        HomeProvider.getAllPosts((err, posts) => {
-            if (err) console.error(`Error al obtener los posts desde el servidor: ${err}`)
-            localStorage.setItem('posts', JSON.stringify(posts))
-            this.setState({ posts: posts })
+    componentWillUnmount() {
+        HomeProvider.removeChangeListener(this.updateData.bind(this))
+    }
+    componentWillMount(){
+        HomeProvider.init()
+    }
+    updateData() {
+        this.setState({
+            posts:HomeProvider.getHomes()
         })
     }
-
-    componentDidMount() {
-
+    componentDidMount(){
+        HomeProvider.addChangeListener(this.updateData.bind(this))
     }
-
-    // updateData() {
-    //     this.setState({
-    //         posts: provider.getPosts()
-    //     })
-    // }
-
     render () {
         let divStyle = {
             height: window.innerHeight - 50
         };
-
         if (this.state.posts.length > 0) {
             return(
                 <div className="P-B-ContentPost" style={divStyle}>

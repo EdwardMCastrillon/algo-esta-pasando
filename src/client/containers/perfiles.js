@@ -16,9 +16,6 @@ export default class Perfiles extends React.Component {
         PerfilStore.removeChangeListener(this.updateData.bind(this))
     }
     componentWillMount(){
-        // if(document.querySelector(".showContent")){
-        //     document.querySelector(".showContent").style.left = "100%";
-        // }
         PerfilStore.init()
     }
     updateData() {

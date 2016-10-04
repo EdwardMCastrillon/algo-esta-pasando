@@ -1,29 +1,63 @@
-/*
-* Module dependencies
-*/
 import request from 'superagent'
 // Importamos los endpoints de el servidor propio
 import apiEndpoints from '../utils/apiEndpoints'
 // Direccion url del server
 const server = 'http://localhost:8082/api'
 
-// Este objeto sirve como cliente para comunicacion con el servidor
-const Provider = {
+let _home = {}
+let _initCalled = false
+let _changeListeners = []
 
-    getAllPosts: (callback) => {
-        let URI = `${server}${apiEndpoints.posts}`
-        request
-        .get(URI)
-        .set('Accept', 'application/json')
-        .end((err, res) => {
-            if (! err ) {
-                callback(null, res.body)
-            } else {
-                callback(err)
-            }
+const HomeStore = {
+
+    init: function () {
+        if (_initCalled)
+        return
+
+        _initCalled = true
+        getJSONHome(`${server}${apiEndpoints.posts}`, function (err, res) {
+            res.forEach(function (item) {
+                _home[item.id] = item
+            })
+            HomeStore.notifyChange()
         })
     },
+    notifyChange: function () {
+        _changeListeners.forEach(function (listener) {
+            listener()
+        })
+    },
+    getHomes: function () {
+        const array = []
+        for (const id in _home)
+        array.push(_home[id])
 
+        return array
+    },
+    getHome: function (id) {
+        return _home[id]
+    },
+    addChangeListener: function (listener) {
+        _changeListeners.push(listener)
+    },
+    removeChangeListener: function (listener) {
+        _changeListeners = []
+    }
 }
 
-export default Provider
+function getJSONHome(url, cb) {
+    request
+    .get(url)
+    .set('Accept', 'application/json')
+    .end(function(err, res){
+        console.log(res.body);
+        if (res.status === 404) {
+            cb(new Error('not found'))
+        } else {
+            cb(null, (res.body))
+        }
+    });
+}
+
+
+export default HomeStore
