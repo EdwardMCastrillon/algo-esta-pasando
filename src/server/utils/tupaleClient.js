@@ -43,6 +43,20 @@ module.exports = {
                 callback(null, body)
             }
         })
+    },
 
+    getAllResources: (callback) => {
+      // Obtener el endpoint correspondiente a los recursos
+      let endpoint = endpoints.recursos
+
+      // Hacer el request al endpoint de tupale para obtener todos los recursos
+      request({
+        url: endpoint,
+        method: 'GET',
+        json: true
+      }, (error, response, body) => {
+        if (error) callback(error)
+        callback(null, body)
+      })
     }
 }
