@@ -11,7 +11,8 @@ Router.get('/posts', (req, res) => {
     if (error) {
       res.sendStatus(500).json(error)
     }
-    res.json(posts)
+    let data = orderedKeys(posts)
+    res.json(data)
   })
 })
 
@@ -20,7 +21,8 @@ Router.get('/perfiles', (req, res) => {
     if (error) {
       res.sendStatus(500).json(error)
     }
-    res.json(perfiles)
+    let data = orderedKeys(perfiles)
+    res.json(data)
   })
 })
 
