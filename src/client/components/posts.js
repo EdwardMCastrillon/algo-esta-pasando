@@ -22,8 +22,8 @@ export default class Post extends React.Component {
         let description = '';
         switch (parseInt(this.props.tipo)) {
             case 0:
-            name = utf.accentDecode(this.props.data['Nombre de la actividad'])
-            description = utf.accentDecode(this.props.data['Descripción de la actividad'])
+            name = utf.accentDecode(this.props.data['Nombredelaactividad'])
+            description = utf.accentDecode(this.props.data['Descripcióndelaactividad'])
             break;
             case 1:
             name = utf.accentDecode(this.props.data['Título']);

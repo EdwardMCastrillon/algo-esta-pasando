@@ -25,7 +25,7 @@ export default class Perfil extends React.Component {
         let perfil = PerfilStore.getPerfil(this.props.params.id);
         this.setState({
             name: utf.accentDecode(perfil['Nombres']+ " "+perfil['Apellidos']),
-            img: perfil['Agrega una Imagen'],
+            img: perfil['AgregaunaImagen'],
             description: utf.accentDecode(perfil['Perfil'])
         })
     }

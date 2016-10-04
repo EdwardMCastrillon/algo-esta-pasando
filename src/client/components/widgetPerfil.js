@@ -9,7 +9,7 @@ export default class Perfil extends React.Component {
     }
 
     render () {
-        let img = this.props.data['Agrega una Imagen'];
+        let img = this.props.data['AgregaunaImagen'];
         let name = (this.props.data['Nombres']);
         let url = `/autor/${this.props.data.id}`
 
