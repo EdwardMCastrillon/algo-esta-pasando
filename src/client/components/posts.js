@@ -15,7 +15,7 @@ export default class Post extends React.Component {
 
         let url = `/post/${this.props.data.id}`
 
-        let img = this.props.data['Agrega una Imagen']
+        let img = this.props.data['AgregaunaImagen']
         let name = '';
         let data = this.props.data
         let id = this.props.data.id

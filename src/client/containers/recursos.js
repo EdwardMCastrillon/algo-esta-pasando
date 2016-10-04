@@ -2,7 +2,7 @@ import React from 'react'
 import { hashHistory } from 'react-router'
 import Post from '../components/posts'
 import RecursoStore from '../providers/recursoStore'
-
+import '../style/Posts.scss'
 export default class Recursos extends React.Component {
     constructor (props) {
         super(props)
@@ -30,7 +30,7 @@ export default class Recursos extends React.Component {
         };
         return (
             <div className="P-B-ContentPost" style={divStyle}>
-                <section className="P-B-Post">
+                <section className="P-B-Post post">
                     {
                         this.state.posts.map(item => {
                             return(
