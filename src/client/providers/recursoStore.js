@@ -4,42 +4,39 @@ import apiEndpoints from '../utils/apiEndpoints'
 // Direccion url del server
 const server = 'http://localhost:8082/api'
 
-let _posts = {}
+let _recurso = {}
 let _initCalled = false
 let _changeListeners = []
 
-const perfilStore = {
+const recursoStore = {
 
     init: function () {
         if (_initCalled)
         return
 
         _initCalled = true
-        getJSONPerfil(`${server}${apiEndpoints.perfiles}`, function (err, res) {
+        getJSONRecurso(`${server}${apiEndpoints.recurso}`, function (err, res) {
             res.forEach(function (item) {
-                _posts[item.id] = item
+                _recurso[item.id] = item
             })
             perfilStore.notifyChange()
         })
     },
-
     notifyChange: function () {
         _changeListeners.forEach(function (listener) {
             listener()
         })
     },
-    getPerfiles: function () {
+    getRecurso: function () {
         const array = []
-        for (const id in _posts)
-        array.push(_posts[id])
+        for (const id in _recurso)
+        array.push(_recurso[id])
 
         return array
     },
-
-    getPerfil: function (id) {
-        return _posts[id]
+    getRecurso: function (id) {
+        return _recurso[id]
     },
-
     addChangeListener: function (listener) {
         _changeListeners.push(listener)
     },
@@ -48,11 +45,12 @@ const perfilStore = {
     }
 }
 
-function getJSONPerfil(url, cb) {
+function getJSONRecurso(url, cb) {
     request
     .get(url)
     .set('Accept', 'application/json')
     .end(function(err, res){
+        console.log(res.body);
         if (res.status === 404) {
             cb(new Error('not found'))
         } else {
@@ -62,4 +60,4 @@ function getJSONPerfil(url, cb) {
 }
 
 
-export default perfilStore
+export default recursoStore

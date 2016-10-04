@@ -1,30 +1,28 @@
 import React from 'react'
 import { hashHistory } from 'react-router'
-
 import Post from '../components/posts'
-
+import PerfilStore from '../providers/recursoStore'
 
 export default class Recursos extends React.Component {
     constructor (props) {
         super(props)
         this.state = ({
-            posts:[]
+            posts: PerfilStore.getRecurso()
         })
-
     }
     componentWillUnmount() {
-        ContactStore.removeChangeListener(this.updateData.bind(this))
+        PerfilStore.removeChangeListener(this.updateData.bind(this))
     }
     componentWillMount(){
-        ContactStore.init(211)
+        PerfilStore.init(211)
     }
     updateData() {
         this.setState({
-            posts:ContactStore.getPosts()
+            posts:PerfilStore.getRecurso()
         })
     }
     componentDidMount(){
-        ContactStore.addChangeListener(this.updateData.bind(this))
+        PerfilStore.addChangeListener(this.updateData.bind(this))
         // this.getData()
     }
     render () {

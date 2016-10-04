@@ -2,6 +2,7 @@ import React from 'react'
 import utf from '../utils/accentDecode'
 import PerfilStore from '../providers/perfilStore'
 
+
 export default class Perfil extends React.Component {
     constructor (props) {
         super(props)
@@ -22,21 +23,11 @@ export default class Perfil extends React.Component {
     }
     componentWillMount() {
         let perfil = PerfilStore.getPerfil(this.props.params.id);
-
         this.setState({
-            name: perfil['Nombres']+ " "+perfil['Apellidos'],
+            name: utf.accentDecode(perfil['Nombres']+ " "+perfil['Apellidos']),
             img: perfil['Agrega una Imagen'],
-            description: perfil['Perfil']
+            description: utf.accentDecode(perfil['Perfil'])
         })
-        // // Se captura el id del post que llega como parametro en la ruta
-        // let id = this.props.params.id,
-        //     posts = JSON.parse(localStorage.getItem('posts'));
-        // // Obtenemos el post correspondiente para actualizar los datos del state.
-        // let post = posts.filter(post => post.id === id)
-        // this.setState({
-        //   image:
-        // })
-
     }
     componentDidMount(){
         this.setState({
