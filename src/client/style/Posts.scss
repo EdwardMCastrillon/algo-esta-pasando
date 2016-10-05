@@ -147,7 +147,9 @@
     }
 }
 // Estilos de la vista /post/id (Post Individual)
-
+.contentInfoAutor{
+    width: calc(100% - 160px);
+}
 .showContent.Post {
     margin-top: 3em;
     overflow: auto;
@@ -190,7 +192,27 @@
     left: 101%;
     position: relative;
     transition: 1s left;
-
+    .arrow_left{
+        text-shadow: 2px 1px 6px rgba(0, 0, 0, 0.4);
+        i{
+            margin-left: -35px;
+        }
+    }
+    .arrow_right{
+        text-shadow: -2px 1px 6px rgba(0, 0, 0, 0.4);
+    }
+    .arrow_left, .arrow_right {
+        width: 60px;
+        color: #fff;
+        font-size: 101px;
+        font-weight: 900;
+        margin: auto;
+        height: 25%;
+        cursor: pointer;
+        i{
+            color: #fff;
+        }
+    }
     .contentAutor{
         position: relative;
         padding: 100px 20px 50px 20px;
@@ -198,7 +220,7 @@
         margin: auto;
         border-bottom: 1px solid #dedede;
         .rS{
-            right: 0;
+            right: 15px;
             left: inherit;
             bottom: -28px;
             i{
@@ -225,16 +247,16 @@
 }
 .relatedPosts {
     border-top: 1px solid #dedede;
-    margin-top: 50px;
+    margin-top: 65px;
     position: relative;
-    padding-top: 10px 10px 0px 10px;
+    padding: 10px 10px 0px 10px;
     >:first-child {
         position: absolute;
         top: -24px;
     }
     .postsRelated {
-        width: 200px;
-        height: 200px;
+        width: 250px;
+        height: 250px;
         background: #e4e4e4;
         margin: 0px 5px;
     }

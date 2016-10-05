@@ -26,17 +26,27 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.i-arrow_right {
+  &:before {
+    content: $i-arrow_right;
+  }
+}
+.i-arrow_left {
+  &:before {
+    content: $i-arrow_left;
+  }
+}
 .i-google {
   &:before {
     content: $i-google_icon;
   }
 }
-.i-mail {
+.i-mail{
   &:before {
     content: $i-mail_icon;
   }
 }
-.i-twitter {
+.i-twitter{
   &:before {
     content: $i-twitter_icon;
   }

@@ -9,10 +9,11 @@ export default class Perfil extends React.Component {
     }
 
     render () {
+
         let img = this.props.data['AgregaunaImagen'];
         let name = FunctExtra.accentDecode(this.props.data['Nombres']+" "+this.props.data['Apellidos']);
-        let url = `/autor/${this.props.data.id}`
-
+        let url = `/autor/${this.props.data.keyId}`
+        
         let description = this.props.data['Resumen'];
         let perfil = FunctExtra.accentDecode(this.props.data['Perfil'].substring(0,60));
 
