@@ -16,8 +16,10 @@ const perfilStore = {
 
         _initCalled = true
         getJSONPerfil(`${server}${apiEndpoints.perfiles}`, function (err, res) {
-            res.forEach(function (item) {
-                _posts[item.id] = item
+            res.forEach(function (item, key) {
+                _posts[key+1] = item
+                _posts[key+1].keyId = key+1
+                _posts[key+1].maxId = res.length;
             })
             perfilStore.notifyChange()
         })

@@ -9,29 +9,43 @@ export default class Perfil extends React.Component {
     }
 
     render () {
-        let img = this.props.data['AgregaunaImagen'];
-        let name = (this.props.data['Nombres']);
-        let url = `/autor/${this.props.data.id}`
 
+        let img = this.props.data['AgregaunaImagen'];
+        let name = FunctExtra.accentDecode(this.props.data['Nombres']+" "+this.props.data['Apellidos']);
+        let url = `/autor/${this.props.data.keyId}`
+        
         let description = this.props.data['Resumen'];
         let perfil = FunctExtra.accentDecode(this.props.data['Perfil'].substring(0,60));
 
-        let t = this.props.data['Cuenta de Twitter'];
+        let t = this.props.data['CuentadeTwitter'];
+
         let twitter = (t)?t.replace("https://twitter.com/","@"):'';
+        twitter = (t)?t.replace("@",""):'';
+
+        twitter = `https://twitter.com/${twitter}`
+
 
         var divStyle = {
             background: `rgb(234, 234, 234) url(https://tupale.co/milfs/images/secure/?file=600/${img}) center center`,
             'backgroundSize': 'cover'
         };
         return (
-            <Link to={url}>
-                <figure className="perfil">
-                    <div style={divStyle}> </div>
-                    <span>{name}</span>
+
+            <figure className="perfil">
+                <Link to={url}>
+                    <div className="pfot" style={divStyle}> </div>
+                    <span className="name">{name}</span>
                     <span></span>
-                    <span>{perfil}...</span>
-                </figure>
-            </Link>
+                    <span className="descPer">{perfil}...</span>
+                </Link>
+                <div className="rS">
+                    <a href={twitter}  target="_blank">
+                        <i className="i-twitter"></i>
+                    </a>
+                    <i className="i-mail"></i>
+                </div>
+            </figure>
+
         )
     }
 }

@@ -37,7 +37,7 @@ export default class Post extends React.Component {
         return (
             <div>
                 <Link to={url}>
-                    <figure>
+                    <figure className="targetPost">
                         <img src={`https://tupale.co/milfs/images/secure/?file=600/${img}`}/>
                         <span>{name}</span>
                     </figure>
