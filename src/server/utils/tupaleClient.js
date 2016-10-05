@@ -3,8 +3,7 @@
 */
 import http from 'http'
 import request from 'request'
-import endpoints from '../utils/endpoints.js'
-
+import endpoints from '../utils/endpoints'
 // Funciones para consultar la API de tupale.
 
 module.exports = {
@@ -27,6 +26,7 @@ module.exports = {
             }
         })
     },
+
     getAllPerfiles: (callback) => {
         // Obtener el endpoint correspondiente a los posts
         let endpoint = endpoints.perfiles
@@ -60,38 +60,61 @@ module.exports = {
         })
     },
 
-    getAutorRelations: (callback) => {
+    getAllData: (callback) => {
         /*
-        * Recursos, Contenidos, Manifiestos, Bitacoras, comentarioRedaccion
+        * Recursos, Contenidos, Bitacoras, comentarioRedaccion
         */
 
         let recursosPromise = new Promise((resolve, reject) => {
+          let endpoint = endpoints.recursos
           request({
               url: endpoint,
               method: 'GET',
               json: true
           }, (error, response, body) => {
-              if (error) callback(error)
-              callback(null, body)
+              if (error) reject(error)
+              resolve(body)
           })
         })
 
         let contenidosPromise = new Promise((resolve, reject) => {
+          let endpoint = endpoints.contenidos
           request({
               url: endpoint,
               method: 'GET',
               json: true
           }, (error, response, body) => {
-              if (error) callback(error)
-              callback(null, body)
+              if (error) reject(error)
+              resolve(body)
           })
         })
 
+        let comentarioRedaccionPromise = new Promise((resolve, reject) => {
+          let endpoint = endpoints.comentariosRedaccion
+          request({
+              url: endpoint,
+              method: 'GET',
+              json: true
+          }, (error, response, body) => {
+              if (error) reject(error)
+              resolve(body)
+          })
+        })
+
+        const Promises = [
+          recursosPromise,
+          contenidosPromise,
+          comentarioRedaccionPromise
+        ]
+
+        Promise
+              .all(Promises)
+              .then((jsons) => {
+                callback(null, jsons)
+              })
+              .catch((error) => {
+                callback(error)
+              })
+
     }
-
-
-
-
-
-
 }

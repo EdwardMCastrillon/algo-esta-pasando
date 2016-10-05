@@ -1,7 +1,7 @@
 import express from 'express'
 // Se importa el cliente para realizar las peticiones al servidor de Tupale
 import client from '../utils/tupaleClient'
-import { orderedKeys } from '../utils/extraFunctions'
+import { orderedKeys, normalizeNames, filterByAutor } from '../utils/extraFunctions'
 
 const Router = express.Router()
 
@@ -34,6 +34,21 @@ Router.get('/recursos', (req, res) => {
     }
     let data = orderedKeys(recursos)
     res.json(data)
+  })
+})
+
+/* POST /relaciones/:autor
+* Esta ruta permite encontrar toda la información relacionada a un Autor
+* @param autor -> String (Nombre del autor)
+*/
+
+Router.post('/relaciones', (req, res) => {
+  let autor = req.body.autor
+  client.getAllData((error, jsons) => {
+    if (error) res.sendStatus(500).json(error)
+    let data = normalizeNames(jsons)
+    let filterData = filterByAutor(autor, data)
+    res.json(filterData)
   })
 })
 

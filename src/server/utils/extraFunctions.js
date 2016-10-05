@@ -18,5 +18,33 @@ module.exports = {
             i++
         })
         return result
+    },
+
+    normalizeNames: (data) => {
+        data.forEach((array, index) => {
+          array.forEach((object, idx) => {
+            let nombre = object['Autor'].replace(/&aacute;/g, 'á')
+                                        .replace(/&eacute;/g, 'é')
+                                        .replace(/&iacute;/g, 'í')
+                                        .replace(/&oacute;/g, 'ó')
+                                        .replace(/&uacute;/g, 'ú')
+                                        .replace(/&ntilde;/g, 'ñ')
+                                        .replace(/&uuml;/g, 'ü')
+                                        .replace(/  /g, ' ')
+                                        .trim()
+            object['Autor'] = nombre
+          })
+        })
+        return data
+    },
+
+    filterByAutor: (autor, data) => {
+        let result = []
+        data.forEach((array, index) => {
+          array.forEach((object, idx) => {
+            if (object.Autor === autor) result.push(object)
+          })
+        })
+        return result
     }
 }
