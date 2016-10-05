@@ -23,10 +23,17 @@ export default class Perfil extends React.Component {
     }
     componentWillMount() {
         let perfil = PerfilStore.getPerfil(this.props.params.id);
+
+        let t = perfil['CuentadeTwitter'];
+        let twitter = (t)?t.replace("https://twitter.com/","@"):'';
+        twitter = (t)?t.replace("@",""):'';
+        twitter = `https://twitter.com/${twitter}`
+
         this.setState({
             name: FunctExtra.accentDecode(perfil['Nombres']+ " "+perfil['Apellidos']),
             img: perfil['AgregaunaImagen'],
-            description: FunctExtra.accentDecode(perfil['Perfil'])
+            description: FunctExtra.accentDecode(perfil['Perfil']),
+            twitter:twitter
         })
     }
     componentDidMount(){
@@ -44,7 +51,7 @@ export default class Perfil extends React.Component {
             height:this.state.height,
             background: `url("https://tupale.co/milfs/images/secure/?file=600/${this.state.img}") center center / cover rgb(234, 234, 234)`,
         };
-        let id = this.props.params.id
+
         return (
             <section className="showContent autor"  style={heightStyle}>
                 <div className="contentAutor flex justify-space-between">
@@ -52,6 +59,12 @@ export default class Perfil extends React.Component {
                     <div className="descriptionAutor flex wrap align-content-center">
                         <span className="nameAutor">{this.state.name}</span>
                         {this.state.description}
+                    </div>
+                    <div className="rS">
+                        <a href={this.state.twitter}  target="_blank">
+                            <i className="i-twitter"></i>
+                        </a>
+                        <i className="i-mail"></i>
                     </div>
                 </div>
                 <div className="relatedPosts flex">
