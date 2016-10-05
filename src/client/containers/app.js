@@ -10,6 +10,7 @@ import Buscar from '../components/buscar'
 import "../style/font.scss"
 import "../style/Page.scss"
 import "../style/Animate.scss"
+import "../style/flex.scss"
 
 export default class App extends React.Component {
 

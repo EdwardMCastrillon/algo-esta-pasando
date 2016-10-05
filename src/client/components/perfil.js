@@ -1,5 +1,5 @@
 import React from 'react'
-import utf from '../utils/accentDecode'
+import FunctExtra from '../utils/functExtra'
 import PerfilStore from '../providers/perfilStore'
 
 
@@ -24,9 +24,9 @@ export default class Perfil extends React.Component {
     componentWillMount() {
         let perfil = PerfilStore.getPerfil(this.props.params.id);
         this.setState({
-            name: utf.accentDecode(perfil['Nombres']+ " "+perfil['Apellidos']),
+            name: FunctExtra.accentDecode(perfil['Nombres']+ " "+perfil['Apellidos']),
             img: perfil['AgregaunaImagen'],
-            description: utf.accentDecode(perfil['Perfil'])
+            description: FunctExtra.accentDecode(perfil['Perfil'])
         })
     }
     componentDidMount(){
@@ -36,8 +36,6 @@ export default class Perfil extends React.Component {
         document.querySelector(".showContent").style.left = "0px"
         this.heightImgResize()
     }
-
-
     render () {
         let heightStyle = {
             height: window.innerHeight - 50,

@@ -1,5 +1,5 @@
 import React from 'react'
-import utf from '../utils/accentDecode'
+import FunctExtra from '../utils/functExtra'
 import { Link } from 'react-router'
 
 export default class Perfil extends React.Component {
@@ -14,7 +14,7 @@ export default class Perfil extends React.Component {
         let url = `/autor/${this.props.data.id}`
 
         let description = this.props.data['Resumen'];
-        let perfil = utf.accentDecode(this.props.data['Perfil'].substring(0,60));
+        let perfil = FunctExtra.accentDecode(this.props.data['Perfil'].substring(0,60));
 
         let t = this.props.data['Cuenta de Twitter'];
         let twitter = (t)?t.replace("https://twitter.com/","@"):'';
