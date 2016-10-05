@@ -14,8 +14,8 @@
     text-align: left;
 
     img {
-      height: 270px;
-      width: 210px;
+        height: 270px;
+        width: 210px;
     }
 }
 
@@ -158,5 +158,36 @@
         display: block;
         text-align: center;
         cursor: pointer;
+    }
+}
+.NavBar-links a span > span{
+    padding: 0
+}
+.closed {
+    .Page-body-top {
+        width: calc(100% - 110px);
+    }
+    .Page-body {
+        margin-left: 110px;
+    }
+    .NavBar{
+        width: 110px;
+
+
+        .NavBar-title img {
+            width: 96px;
+            height: auto;
+        }
+        .NavBar-links {
+            a {
+                text-align: center;
+                display: table;
+                margin: auto;
+                padding: 26px 0px 12px 12px;
+                span > span{
+                    display: none;
+                }
+            }
+        }
     }
 }

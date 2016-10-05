@@ -1,5 +1,5 @@
 import React from 'react'
-import utf from '../utils/accentDecode'
+import FunctExtra from '../utils/functExtra'
 
 
 export default class Post extends React.Component {

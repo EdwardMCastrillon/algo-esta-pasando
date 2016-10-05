@@ -1,4 +1,4 @@
-const AccentDecode = {
+const FunctExtra = {
 
     accentDecode(tx) {
         var rp = String(tx)
@@ -18,8 +18,10 @@ const AccentDecode = {
         rp = rp.replace(/&Ñtilde;/g, 'Ñ')
         rp = rp.replace(/&Üuml;/g, 'Ü')
         return rp
+    },
+    closedNav(){
+        document.querySelector('#app').className = 'closed';
     }
-
 };
 
-export default AccentDecode;
+export default FunctExtra;

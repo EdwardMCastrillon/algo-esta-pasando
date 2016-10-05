@@ -2,7 +2,7 @@
 * Module dependencies
 */
 import React from 'react'
-import utf from '../utils/accentDecode'
+import FunctExtra from '../utils/functExtra'
 import { Link } from 'react-router'
 
 export default class Post extends React.Component {
@@ -22,16 +22,16 @@ export default class Post extends React.Component {
         let description = '';
         switch (parseInt(this.props.tipo)) {
             case 0:
-            name = utf.accentDecode(this.props.data['Nombredelaactividad'])
-            description = utf.accentDecode(this.props.data['Descripcióndelaactividad'])
+            name = FunctExtra.accentDecode(this.props.data['Nombredelaactividad'])
+            description = FunctExtra.accentDecode(this.props.data['Descripcióndelaactividad'])
             break;
             case 1:
-            name = utf.accentDecode(this.props.data['Título']);
-            description = utf.accentDecode(this.props.data['Resumen']);
+            name = FunctExtra.accentDecode(this.props.data['Título']);
+            description = FunctExtra.accentDecode(this.props.data['Resumen']);
             break;
             case 2:
-            name = utf.accentDecode(this.props.data['Nombres']);
-            description = utf.accentDecode(this.props.data['Resumen']);
+            name = FunctExtra.accentDecode(this.props.data['Nombres']);
+            description = FunctExtra.accentDecode(this.props.data['Resumen']);
             break;
         }
         return (
