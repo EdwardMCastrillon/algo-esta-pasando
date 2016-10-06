@@ -32,7 +32,7 @@ export default class Contenido extends React.Component {
         };
         return (
             <div className="P-B-ContentPost" style={divStyle}>
-                <section className="P-B-Post">
+                <section className="P-B-Post post">
                     {
                         this.state.posts.map(item => {
                             return(
