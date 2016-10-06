@@ -2,7 +2,8 @@
 const endpoints = {
   posts: '/posts',
   perfiles: '/perfiles',
-  recursos: '/recursos'
+  recursos: '/recursos',
+  relaciones: '/relaciones'
 }
 
 export default endpoints
