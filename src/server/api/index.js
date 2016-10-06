@@ -37,7 +37,7 @@ Router.get('/recursos', (req, res) => {
   })
 })
 
-/* POST /relaciones/:autor
+/* POST /relaciones/
 * Esta ruta permite encontrar toda la información relacionada a un Autor
 * @param autor -> String (Nombre del autor)
 */

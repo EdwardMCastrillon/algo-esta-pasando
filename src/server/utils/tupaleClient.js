@@ -13,7 +13,7 @@ module.exports = {
     */
     getAllPosts: (callback) => {
         // Obtener el endpoint correspondiente a los posts
-        let endpoint = endpoints.posts
+        let endpoint = endpoints.agenda
         // Hacer el request al endpoint de tupale para obtener todos los posts
         request({
             url: endpoint,
@@ -29,9 +29,9 @@ module.exports = {
     },
 
     getAllPerfiles: (callback) => {
-        // Obtener el endpoint correspondiente a los posts
+        // Obtener el endpoint correspondiente a los perfiles
         let endpoint = endpoints.perfiles
-        // Hacer el request al endpoint de tupale para obtener todos los posts
+        // Hacer el request al endpoint de tupale para obtener todos los perfiles
 
         request({
             url: endpoint,
