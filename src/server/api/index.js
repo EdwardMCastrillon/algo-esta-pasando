@@ -52,4 +52,22 @@ Router.post('/relaciones', (req, res) => {
   })
 })
 
+/*
+* GET /contenidos
+*/
+
+Router.get('/contenidos', (req, res) => {
+  client.getAllContenidos((error, contenidos) => {
+    if (error) res.sendStatus(500).json(error)
+    let data = orderedKeys(contenidos)
+    res.json(data)
+  })
+})
+
+
+
+
+
+
+
 export default Router
