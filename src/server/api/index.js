@@ -48,7 +48,8 @@ Router.post('/relaciones', (req, res) => {
     if (error) res.sendStatus(500).json(error)
     let data = normalizeNames(jsons)
     let filterData = filterByAutor(autor, data)
-    res.json(filterData)
+    let result = orderedKeys(filterData)
+    res.json(result)
   })
 })
 
