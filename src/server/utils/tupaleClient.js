@@ -4,8 +4,9 @@
 import http from 'http'
 import request from 'request'
 import endpoints from '../utils/endpoints'
-// Funciones para consultar la API de tupale.
 
+
+// Funciones para consultar la API de tupale.
 module.exports = {
     /*
     * @param callback() recibe los datos o el error
