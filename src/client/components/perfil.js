@@ -139,10 +139,6 @@ export default class Perfil extends React.Component {
 
                             })
                         }
-                        <div className="postsRelated"></div>
-                        <div className="postsRelated"></div>
-                        <div className="postsRelated"></div>
-                        <div className="postsRelated"></div>
                     </div>
 
                 </div>

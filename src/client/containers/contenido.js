@@ -1,31 +1,29 @@
 import React from 'react'
 import { hashHistory } from 'react-router'
 import Post from '../components/posts'
-// import ContactStore from '../stores/initStore'
+import contenidoStore from '../providers/contenidoStore'
 
 export default class Contenido extends React.Component {
     constructor (props) {
         super(props)
         this.state = ({
-            // posts: ContactStore.getPosts()
-            posts:[]
+            posts:contenidoStore.getContenidoss()
         })
 
     }
     componentWillUnmount() {
-        ContactStore.removeChangeListener(this.updateData.bind(this))
+        contenidoStore.removeChangeListener(this.updateData.bind(this))
     }
     componentWillMount(){
-        console.log(this.props.route.id);
-        ContactStore.init(118)
+        contenidoStore.init(118)
     }
     updateData() {
         this.setState({
-            posts:ContactStore.getPosts()
+            posts:contenidoStore.getContenidoss()
         })
     }
     componentDidMount(){
-        ContactStore.addChangeListener(this.updateData.bind(this))
+        contenidoStore.addChangeListener(this.updateData.bind(this))
         // this.getData()
     }
     render () {
