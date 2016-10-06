@@ -1,7 +1,6 @@
 /*
 * Module dependencies
 */
-import http from 'http'
 import request from 'request'
 import endpoints from '../utils/endpoints'
 
