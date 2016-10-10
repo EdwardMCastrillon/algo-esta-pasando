@@ -16,8 +16,20 @@ const ContenidosStore = {
 
         _initCalled = true
         getJSONContenidos(`${server}${apiEndpoints.contenidos}`, function (err, res) {
-            res.forEach(function (item) {
-                _Contenidos[item.id] = item
+            let r,l,init;
+            res.forEach(function (item,k) {
+                _Contenidos[item.id] = item;
+                if(res[k+1]){
+                    r = (res[k+1].id);
+                }else{
+                    r = (r)? r: init;
+                }
+                if (k == 0) {
+                    init = item.id;
+                }
+                _Contenidos[item.id].next = r;
+                _Contenidos[item.id].prev = l;
+                l = item.id;
             })
             ContenidosStore.notifyChange()
         })
@@ -27,14 +39,14 @@ const ContenidosStore = {
             listener()
         })
     },
-    getContenidoss: function () {
+    getContenidos: function () {
         const array = []
         for (const id in _Contenidos)
         array.push(_Contenidos[id])
 
         return array
     },
-    getContenidos: function (id) {
+    getContenido: function (id) {
         return _Contenidos[id]
     },
     addChangeListener: function (listener) {

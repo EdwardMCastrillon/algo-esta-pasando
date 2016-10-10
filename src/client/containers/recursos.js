@@ -34,7 +34,7 @@ export default class Recursos extends React.Component {
                     {
                         this.state.posts.map(item => {
                             return(
-                                <Post key={ item.identificador } data={item} tipo="1"/>
+                                <Post key={ item.identificador } url="centro_de_recursos/" data={item} tipo="1"/>
                             )
                         })
                     }

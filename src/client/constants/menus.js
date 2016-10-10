@@ -5,8 +5,8 @@ export default [
     "mapa",
     "ediciones_anteriores",
     "centro_de_recursos",
-    "algo_esta_pasando",
     "autores",
     "agenda",
     "editorial"
 ];
+// "algo_esta_pasando",

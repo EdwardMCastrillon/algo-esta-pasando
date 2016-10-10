@@ -4,22 +4,22 @@ import apiEndpoints from '../utils/apiEndpoints'
 // Direccion url del server
 const server = 'http://localhost:8082/api'
 
-let _recurso = {}
+let _agenda = {}
 let _initCalled = false
 let _changeListeners = []
 
-const RecursoStore = {
+const AgendaStore = {
 
     init: function () {
         if (_initCalled)
         return
 
         _initCalled = true
-        getJSONRecurso(`${server}${apiEndpoints.recursos}`, function (err, res) {
+        getJSONAgenda(`${server}${apiEndpoints.agenda}`, function (err, res) {
             res.forEach(function (item) {
-                _recurso[item.id] = item
+                _agenda[item.id] = item
             })
-            RecursoStore.notifyChange()
+            AgendaStore.notifyChange()
         })
     },
     notifyChange: function () {
@@ -27,15 +27,15 @@ const RecursoStore = {
             listener()
         })
     },
-    getRecursos: function () {
+    getAgendas: function () {
         const array = []
-        for (const id in _recurso)
-        array.push(_recurso[id])
+        for (const id in _agenda)
+        array.push(_agenda[id])
 
         return array
     },
-    getRecurso: function (id) {
-        return _recurso[id]
+    getAgenda: function (id) {
+        return _agenda[id]
     },
     addChangeListener: function (listener) {
         _changeListeners.push(listener)
@@ -45,7 +45,7 @@ const RecursoStore = {
     }
 }
 
-function getJSONRecurso(url, cb) {
+function getJSONAgenda(url, cb) {
 
     request
     .get(url)
@@ -60,4 +60,4 @@ function getJSONRecurso(url, cb) {
 }
 
 
-export default RecursoStore
+export default AgendaStore

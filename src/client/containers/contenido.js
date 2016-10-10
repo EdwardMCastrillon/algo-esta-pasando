@@ -7,7 +7,7 @@ export default class Contenido extends React.Component {
     constructor (props) {
         super(props)
         this.state = ({
-            posts:contenidoStore.getContenidoss()
+            posts:contenidoStore.getContenidos()
         })
 
     }
@@ -19,7 +19,7 @@ export default class Contenido extends React.Component {
     }
     updateData() {
         this.setState({
-            posts:contenidoStore.getContenidoss()
+            posts:contenidoStore.getContenidos()
         })
     }
     componentDidMount(){
@@ -36,7 +36,7 @@ export default class Contenido extends React.Component {
                     {
                         this.state.posts.map(item => {
                             return(
-                                <Post key={ item.identificador } data={item} tipo="1"/>
+                                <Post key={ item.identificador } data={item} url="contenido/" tipo="1"/>
                             )
                         })
                     }

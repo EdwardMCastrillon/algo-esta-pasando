@@ -16,10 +16,24 @@ const HomeStore = {
 
         _initCalled = true
         getJSONHome(`${server}${apiEndpoints.posts}`, function (err, res) {
-            res.forEach(function (item) {
-                _home[item.id] = item
+            let r,l,init;
+            res.forEach(function (item,k) {
+                _home[item.id] = item;
+                if(res[k+1]){
+                    r = (res[k+1].id);
+                }else{
+                    r = (r)? r: init;
+                }
+                if (k == 0) {
+                    init = item.id;
+                }
+                _home[item.id].next = r;
+                _home[item.id].prev = l;
+                l = item.id;
+
             })
-            HomeStore.notifyChange()
+            res[0].prev = init
+            HomeStore.notifyChange();
         })
     },
     notifyChange: function () {
