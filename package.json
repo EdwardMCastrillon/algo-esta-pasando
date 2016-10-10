@@ -5,8 +5,7 @@
     "main": "server.js",
     "scripts": {
         "serve-api": "nodemon --exec babel-node src/server/",
-        "dev-server": "webpack-dev-server --config webpack.dev.config.js --history-api-fallback",
-        "dev": "npm run build-dev && npm run dev-server",
+        "dev": "npm run build-dev && npm run serve-api",
         "start": "",
         "build-prod": "rm -rf public/ && webpack -p --config webpack.prod.config.js && cp src/client/index.html public/",
         "build-dev": "rm -rf public/ && webpack -p --config webpack.dev.config.js && cp src/client/index.html public/"

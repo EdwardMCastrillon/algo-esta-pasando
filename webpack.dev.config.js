@@ -4,15 +4,8 @@ var path = require('path');
 module.exports = {
     devtool: 'source-map',
     entry: [
-        'webpack-dev-server/client?http://127.0.0.1:3000/',
-        'webpack/hot/only-dev-server',
         './src/client'
     ],
-    devServer: { // opciones para el servidor de desarrollo
-        contentBase: './public',
-        inline: true, // para que se recargue automáticamente cuando cambie un archivo
-        port: 3000
-    },
     output: {
         path: path.join(__dirname, 'public'),
         filename: 'bundle.js'

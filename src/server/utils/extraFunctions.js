@@ -38,6 +38,32 @@ module.exports = {
         return data
     },
 
+    normalizeHtml: (data) => {
+        data.forEach((data, index) => {
+            if (data.Descripcióndelaactividad) {
+                data.Descripcióndelaactividad = this.replace(data.Descripcióndelaactividad)
+            }
+
+            if (data['Número(Edición)deAlgoestápasando']) {
+                data['Número(Edición)deAlgoestápasando'] = this.replace(data['Número(Edición)deAlgoestápasando'])
+            }
+
+            if (data['EDITOR(Recurso)']) {
+                data['EDITOR(Recurso)'] = this.replace(data['EDITOR(Recurso)'])
+            }
+        })
+        return data
+    },
+
+    replace: (str) => {
+        return str.replace(/&lt;/g, '<')
+                  .replace(/&gt;/g, '>')
+                  .replace(/&quot;/g, '"')
+                  .replace(/&amp;/g, '&')
+                  .replace(/&nbsp;/g, ' ')
+                  .replace(/&apos;/g, "'")
+    },
+
     filterByAutor: (autor, data) => {
         let result = []
         data.forEach((array, index) => {
