@@ -50,11 +50,15 @@ export default class Post extends React.Component {
         let divStyle = {
             height: window.innerHeight - 50
         };
+        var background = {
+            background: `rgb(234, 234, 234) url(${this.state.image}) center center`,
+            'backgroundSize': 'cover'
+        };
         let id = this.props.params.id
         return (
             <section className="showContent Post"  style={divStyle}>
-                <figure className="Figure">
-                    <img src={this.state.image} alt="" />
+                <figure className="Figure" style={background}>
+
                 </figure>
                 <div className="FlechaIzquierda"></div>
                 <div className="FlechaDerecha"></div>

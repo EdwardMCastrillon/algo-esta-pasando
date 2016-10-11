@@ -13,6 +13,8 @@
 .Page-body {
     flex: 1;
     margin-left: $nav-collapsed;
+    position: relative;
+    z-index: 1;
 }
 
 .Page-body-top {

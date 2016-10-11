@@ -4,33 +4,79 @@ import FunctExtra from '../utils/functExtra'
 
 import Menus from '../constants/menus'
 import Logo from "../img/logoAep.png"
-import Edicion from '../img/edicion.jpg'
-import EdicionClosed from '../img/edicion_colaps.jpg'
+// import Edicion from '../img/edicion.jpg'
+// import EdicionClosed from '../img/edicion_colaps.jpg'
 
 require("../style/NavBar.scss");
 require("../style/icomoon/style.scss");
-
 
 
 export default class NavBar extends Component {
     constructor (props) {
         super(props)
         this.state = {
-            logo: Edicion
+            // logo: logoAep,
+            // width: "96px",
+            hideName:"hideName",
+            hidepad:"hidepad",
+            // hover:"NavBar"
         }
     }
     logoClosed(){
-        FunctExtra.closedNav()
-        this.setState({
-            logo: EdicionClosed
+        let self = this;
+
+        self.setState({
+            // logo: EdicionClosed,
+            hideName:"hideName",
+            hidepad:"hidepad"
         })
+
+        // setTimeout(function(){
+        //     console.log(document.getElementById("NavBar").offsetWidth);
+        //
+        //     if(document.getElementById("NavBar").offsetWidth < 230){
+        //         console.log("logoClosed");
+        //
+        //         setTimeout(function(){
+        //             self.setState({
+        //                 logo: EdicionClosed,
+        //                 width: "96px",
+        //
+        //             })
+        //         },800)
+        //         setTimeout(function(){
+        //             self.setState({
+        //                 hideName:"hideName",
+        //                 hidepad:"hidepad",
+        //                 hover:"NavBar"
+        //             })
+        //         },400)
+        //     }
+        // },100)
+
     }
+    transitionComplete(){
+        console.log("transitionComplete");
+    }
+    logoOpen(){
+        console.log("logoOpen");
+        this.setState({
+            // logo: Edicion,
+            // width: "210px",
+            hideName:'',
+            hidepad:'',
+            // hover:"NavBar hover"
+        })
+
+    }
+
     render() {
+        var background = {
+            'backgroundSize': 'cover',
+        };
         return (
-            <div id="NavBar" className="NavBar" onClick={this.logoClosed.bind(this)}>
-                <div className="NavBar-title">
-                    <img src={ this.state.logo } />
-                </div>
+            <div id="NavBar" className="NavBar"  onMouseEnter={this.logoOpen.bind(this)} onMouseOut={this.logoClosed.bind(this)} >
+                <div className="NavBar-title" style={background}> </div>
                 <div className="NavBar-links">
                     {
                         Menus.map(item => {
@@ -38,10 +84,10 @@ export default class NavBar extends Component {
                             let icon = `i-${item}`
                             let option = item.replace(/_/g, ' ')
                             return (
-                                <Link key={ item } to={ url }>
+                                <Link key={ item } to={ url } className={this.state.hidepad}>
                                     <span className="flex align-center">
                                         <i className={ icon }></i>
-                                        <span>{ option }</span>
+                                        <span className={this.state.hideName}>{ option }</span>
                                     </span>
                                 </Link>
                             );
@@ -55,3 +101,4 @@ export default class NavBar extends Component {
         );
     }
 }
+// <img src={ Logo } />
