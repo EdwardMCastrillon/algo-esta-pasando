@@ -13,7 +13,7 @@ export default class Inicio extends React.Component {
         this.state = {
             posts: AgendaStore.getAgendas(),
             mes: Calendar.meses()[new Date().getMonth()],
-            calendar: Calendar.init(new Date().getMonth())
+            calendar: Calendar.init(new Date().getMonth()+1)
         }
     }
     componentWillUnmount() {
