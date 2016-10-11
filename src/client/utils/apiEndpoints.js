@@ -1,6 +1,7 @@
 
 const endpoints = {
   posts: '/posts',
+  agenda: '/posts',
   perfiles: '/perfiles',
   recursos: '/recursos',
   relaciones: '/relaciones',

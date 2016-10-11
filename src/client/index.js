@@ -20,8 +20,13 @@ render((
             <Route path={RouterApp.home.pathId} component={ RouterApp.home.handlerid } />
 
             <Route path={RouterApp.contenido.path} component={RouterApp.contenido.handler}/>
+            <Route path={RouterApp.posContenido.path} component={RouterApp.posContenido.handler}/>
+
 
             <Route path={RouterApp.recursos.path} component={RouterApp.recursos.handler}/>
+            <Route path={RouterApp.posRecursos.path} component={RouterApp.posRecursos.handler}/>
+
+            <Route path={RouterApp.agenda.path} component={RouterApp.agenda.handler}/>
 
             <Route path={RouterApp.perfiles.path} component={RouterApp.perfiles.handler}/>
             <Route path={RouterApp.perfil.path} component={RouterApp.perfil.handler}/>

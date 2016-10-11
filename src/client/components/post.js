@@ -1,6 +1,6 @@
 import React from 'react'
 import FunctExtra from '../utils/functExtra'
-
+import HomeProvider from '../providers/homeProvider'
 
 export default class Post extends React.Component {
     constructor (props) {
@@ -11,9 +11,15 @@ export default class Post extends React.Component {
         }
     }
 
-    componentWillMount() {
+    componentWillMount(id) {
         // // Se captura el id del post que llega como parametro en la ruta
-        // let id = this.props.params.id,
+        let p;
+        if(id){
+            p = id
+        }else{
+            p = this.props.params.id;
+        }
+        let evento = HomeProvider.getHome(p);
         //     posts = JSON.parse(localStorage.getItem('posts'));
         // // Obtenemos el post correspondiente para actualizar los datos del state.
         // let post = posts.filter(post => post.id === id)
