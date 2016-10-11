@@ -23,7 +23,8 @@ module.exports = {
     normalizeNames: (data) => {
         data.forEach((array, index) => {
           array.forEach((object, idx) => {
-            let nombre = object['Autor'].replace(/&aacute;/g, 'á')
+            if (object['Autor']) {
+                let nombre = object['Autor'].replace(/&aacute;/g, 'á')
                                         .replace(/&eacute;/g, 'é')
                                         .replace(/&iacute;/g, 'í')
                                         .replace(/&oacute;/g, 'ó')
@@ -32,10 +33,37 @@ module.exports = {
                                         .replace(/&uuml;/g, 'ü')
                                         .replace(/  /g, ' ')
                                         .trim()
-            object['Autor'] = nombre
+                object['Autor'] = nombre
+            }
           })
         })
         return data
+    },
+
+    normalizeHtml: (data) => {
+        data.forEach((data, index) => {
+            if (data.Descripcióndelaactividad) {
+                data.Descripcióndelaactividad = this.replace(data.Descripcióndelaactividad)
+            }
+
+            if (data['Número(Edición)deAlgoestápasando']) {
+                data['Número(Edición)deAlgoestápasando'] = this.replace(data['Número(Edición)deAlgoestápasando'])
+            }
+
+            if (data['EDITOR(Recurso)']) {
+                data['EDITOR(Recurso)'] = this.replace(data['EDITOR(Recurso)'])
+            }
+        })
+        return data
+    },
+
+    replace: (str) => {
+        return str.replace(/&lt;/g, '<')
+                  .replace(/&gt;/g, '>')
+                  .replace(/&quot;/g, '"')
+                  .replace(/&amp;/g, '&')
+                  .replace(/&nbsp;/g, ' ')
+                  .replace(/&apos;/g, "'")
     },
 
     filterByAutor: (autor, data) => {

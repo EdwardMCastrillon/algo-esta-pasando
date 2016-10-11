@@ -1,4 +1,7 @@
 node_modules/
 public/
 *.log
+.log.*
+npm-debug.log.*
 .DS_Store
+.vscode
