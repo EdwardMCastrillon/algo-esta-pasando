@@ -36,7 +36,7 @@ export default class Inicio extends React.Component {
                     <section className="P-B-Post post" >
                         {
                             this.state.posts.map((post) => {
-                                return <Post key={ post.identificador } data={ post } tipo={0} />
+                                return <Post key={ post.identificador } data={ post } url='post/' tipo={0} />
                             })
                         }
                     </section>
