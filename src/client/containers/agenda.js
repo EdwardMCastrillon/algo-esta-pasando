@@ -13,7 +13,7 @@ export default class Inicio extends React.Component {
         this.state = {
             posts: AgendaStore.getAgendas(),
             mes: Calendar.meses()[new Date().getMonth()],
-            daymes: Calendar.init(new Date().getMonth()+1)
+            calendar: Calendar.init(new Date().getMonth())
         }
     }
     componentWillUnmount() {
@@ -39,8 +39,11 @@ export default class Inicio extends React.Component {
         let mesKey = Calendar.meses().indexOf(mes);
         this.setState({
             mes: mes,
-            daymes: Calendar.init(mesKey+1)
+            calendar: Calendar.init(mesKey+1)
         })
+    }
+    createMarkup(e,text){
+        return {__html: text};
     }
     render () {
         let divStyle = {
@@ -66,16 +69,8 @@ export default class Inicio extends React.Component {
                                 </ul>
                             </div>
                         </div>
-                        <div className="days flex wrap">
-                            {
-                                [...Array(this.state.daymes)].map(function(item, i){
-                                    return(
-                                        <span>
-                                            {i+1}
-                                        </span>
-                                    )
-                                })
-                            }
+                        <div className="days flex wrap" dangerouslySetInnerHTML={this.createMarkup(this,this.state.calendar)}>
+
                         </div>
                     </section>
                 </div>
