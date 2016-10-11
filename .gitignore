@@ -3,3 +3,4 @@ public/
 *.log
 .log.*
 .DS_Store
+.vscode

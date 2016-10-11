@@ -5,9 +5,15 @@ import { orderedKeys, normalizeNames, filterByAutor } from '../utils/extraFuncti
 
 const Router = express.Router()
 
+//GET / => Carga de datos inicial
+Router.get('/', (req, res) => {
+    client.getAllData()
+    res.end()
+})
+
 // GET /posts => Esta ruta permite obtener todos los posts disponibles
 Router.get('/posts', (req, res) => {
-    client.getAllPosts((error, posts) => {
+    client.getDataByParam('Agenda', (error, posts) => {
         if (error) {
             res.sendStatus(500).json(error)
         }
@@ -17,7 +23,7 @@ Router.get('/posts', (req, res) => {
 })
 
 Router.get('/perfiles', (req, res) => {
-    client.getAllPerfiles((error, perfiles) => {
+    client.getDataByParam('Perfiles', (error, perfiles) => {
         if (error) {
             res.sendStatus(500).json(error)
         }
@@ -28,13 +34,25 @@ Router.get('/perfiles', (req, res) => {
 
 // GET /recursos => Esta ruta permite obtener todos los recursos disponibles
 Router.get('/recursos', (req, res) => {
-    client.getAllResources((error, recursos) => {
+    client.getDataByParam('Recursos', (error, recursos) => {
         if (error) {
             res.sendStatus(500).json(error)
         }
         let data = orderedKeys(recursos)
         res.json(data)
     })
+})
+
+
+/*
+* GET /contenidos
+*/
+Router.get('/contenidos', (req, res) => {
+  client.getDataByParam('Contenidos', (error, contenidos) => {
+    if (error) res.sendStatus(500).json(error)
+    let data = orderedKeys(contenidos)
+    res.json(data)
+  })
 })
 
 /* POST /relaciones/
@@ -52,25 +70,6 @@ Router.post('/relaciones', (req, res) => {
     let result = orderedKeys(filterData)
     res.json(result)
   })
-
 })
-
-/*
-* GET /contenidos
-*/
-
-Router.get('/contenidos', (req, res) => {
-  client.getAllContenidos((error, contenidos) => {
-    if (error) res.sendStatus(500).json(error)
-    let data = orderedKeys(contenidos)
-    res.json(data)
-  })
-})
-
-
-
-
-
-
 
 export default Router

@@ -23,7 +23,8 @@ module.exports = {
     normalizeNames: (data) => {
         data.forEach((array, index) => {
           array.forEach((object, idx) => {
-            let nombre = object['Autor'].replace(/&aacute;/g, 'á')
+            if (object['Autor']) {
+                let nombre = object['Autor'].replace(/&aacute;/g, 'á')
                                         .replace(/&eacute;/g, 'é')
                                         .replace(/&iacute;/g, 'í')
                                         .replace(/&oacute;/g, 'ó')
@@ -32,7 +33,8 @@ module.exports = {
                                         .replace(/&uuml;/g, 'ü')
                                         .replace(/  /g, ' ')
                                         .trim()
-            object['Autor'] = nombre
+                object['Autor'] = nombre
+            }
           })
         })
         return data

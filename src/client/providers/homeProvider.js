@@ -2,7 +2,7 @@ import request from 'superagent'
 // Importamos los endpoints de el servidor propio
 import apiEndpoints from '../utils/apiEndpoints'
 // Direccion url del server
-const server = `/api`
+const server = '/api'
 
 let _home = {}
 let _initCalled = false
@@ -15,6 +15,7 @@ const HomeStore = {
         return
 
         _initCalled = true
+        getInitialData()
         getJSONHome(`${server}${apiEndpoints.posts}`, function (err, res) {
             res.forEach(function (item) {
                 _home[item.id] = item
@@ -59,5 +60,10 @@ function getJSONHome(url, cb) {
     });
 }
 
+function getInitialData() {
+    request
+    .get('/api/')
+    .end()
+}
 
 export default HomeStore

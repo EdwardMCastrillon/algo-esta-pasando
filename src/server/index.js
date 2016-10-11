@@ -7,7 +7,7 @@ import express from 'express'
 import cors from 'cors'
 import bodyParser from 'body-parser'
 import api from './api'
-
+import Client from './utils/tupaleClient'
 
 const app = express()
 const port = process.env.PORT || 8082
@@ -18,10 +18,10 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use('/api', api)
 
+// Redireccionar todas las peticiones al front
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../../public/index.html'))
 })
-
 
 const server = http.createServer(app)
 
