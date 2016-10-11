@@ -16,7 +16,7 @@ const HomeStore = {
 
         _initCalled = true
         getInitialData()
-        getJSONHome(`${server}${apiEndpoints.posts}`, function (err, res) {
+        getJSONHome(`${server}${apiEndpoints.agenda}`, function (err, res) {
             let r,l,init;
             res.forEach(function (item,k) {
                 _home[item.id] = item;
@@ -69,6 +69,7 @@ function getJSONHome(url, cb) {
         if (res.status === 404) {
             cb(new Error('not found'))
         } else {
+            console.log(res.body)
             cb(null, (res.body))
         }
     });

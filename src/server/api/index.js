@@ -12,13 +12,12 @@ Router.get('/', (req, res) => {
 })
 
 // GET /posts => Esta ruta permite obtener todos los posts disponibles
-Router.get('/posts', (req, res) => {
-    client.getDataByParam('Agenda', (error, posts) => {
+Router.get('/agenda', (req, res) => {
+    client.getDataByParam('Agenda', (error, agenda) => {
         if (error) {
             res.sendStatus(500).json(error)
         }
-        let data = orderedKeys(posts)
-        res.json(data)
+        res.json(agenda)
     })
 })
 
@@ -27,8 +26,7 @@ Router.get('/perfiles', (req, res) => {
         if (error) {
             res.sendStatus(500).json(error)
         }
-        let data = orderedKeys(perfiles)
-        res.json(data)
+        res.json(perfiles)
     })
 })
 
@@ -38,8 +36,7 @@ Router.get('/recursos', (req, res) => {
         if (error) {
             res.sendStatus(500).json(error)
         }
-        let data = orderedKeys(recursos)
-        res.json(data)
+        res.json(recursos)
     })
 })
 
@@ -50,8 +47,7 @@ Router.get('/recursos', (req, res) => {
 Router.get('/contenidos', (req, res) => {
   client.getDataByParam('Contenidos', (error, contenidos) => {
     if (error) res.sendStatus(500).json(error)
-    let data = orderedKeys(contenidos)
-    res.json(data)
+    res.json(contenidos)
   })
 })
 
@@ -61,15 +57,9 @@ Router.get('/contenidos', (req, res) => {
 */
 
 Router.post('/relaciones', (req, res) => {
-
   let autor = req.body.autor
-  client.getAllData((error, jsons) => {
-    if (error) res.sendStatus(500).json(error)
-    let data = normalizeNames(jsons)
-    let filterData = filterByAutor(autor, data)
-    let result = orderedKeys(filterData)
-    res.json(result)
-  })
+  let relaciones = client.getRelations(autor)
+  res.json(relaciones)
 })
 
 export default Router

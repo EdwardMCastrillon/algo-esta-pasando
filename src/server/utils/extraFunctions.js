@@ -21,8 +21,7 @@ module.exports = {
     },
 
     normalizeNames: (data) => {
-        data.forEach((array, index) => {
-          array.forEach((object, idx) => {
+        data.forEach((object, idx) => {
             if (object['Autor']) {
                 let nombre = object['Autor'].replace(/&aacute;/g, 'á')
                                         .replace(/&eacute;/g, 'é')
@@ -35,42 +34,57 @@ module.exports = {
                                         .trim()
                 object['Autor'] = nombre
             }
-          })
         })
         return data
     },
 
     normalizeHtml: (data) => {
+        let self = this
         data.forEach((data, index) => {
-            if (data.Descripcióndelaactividad) {
-                data.Descripcióndelaactividad = this.replace(data.Descripcióndelaactividad)
+            if (data['Descripcióndelaactividad']) {
+                data['Descripcióndelaactividad'] = data['Descripcióndelaactividad'].replace(/&lt;/g, '<')
+                                                                                    .replace(/&gt;/g, '>')
+                                                                                    .replace(/&quot;/g, '"')
+                                                                                    .replace(/&amp;/g, '&')
+                                                                                    .replace(/&nbsp;/g, ' ')
+                                                                                    .replace(/&apos;/g, "'")
             }
 
             if (data['Número(Edición)deAlgoestápasando']) {
-                data['Número(Edición)deAlgoestápasando'] = this.replace(data['Número(Edición)deAlgoestápasando'])
+                data['Número(Edición)deAlgoestápasando'] = data['Número(Edición)deAlgoestápasando'].replace(/&lt;/g, '<')
+                                                                                                   .replace(/&gt;/g, '>')
+                                                                                                   .replace(/&quot;/g, '"')
+                                                                                                   .replace(/&amp;/g, '&')
+                                                                                                   .replace(/&nbsp;/g, ' ')
+                                                                                                   .replace(/&apos;/g, "'")
             }
 
             if (data['EDITOR(Recurso)']) {
-                data['EDITOR(Recurso)'] = this.replace(data['EDITOR(Recurso)'])
+                data['EDITOR(Recurso)'] = data['EDITOR(Recurso)'].replace(/&lt;/g, '<')
+                                                                 .replace(/&gt;/g, '>')
+                                                                 .replace(/&quot;/g, '"')
+                                                                 .replace(/&amp;/g, '&')
+                                                                 .replace(/&nbsp;/g, ' ')
+                                                                 .replace(/&apos;/g, "'")
+            }
+
+            if (data['Escribir/Párrafos/Texto']) {
+                data['Escribir/Párrafos/Texto'] = data['Escribir/Párrafos/Texto'].replace(/&lt;/g, '<')
+                                                                                 .replace(/&gt;/g, '>')
+                                                                                 .replace(/&quot;/g, '"')
+                                                                                 .replace(/&amp;/g, '&')
+                                                                                 .replace(/&nbsp;/g, ' ')
+                                                                                 .replace(/&apos;/g, "'")
             }
         })
         return data
-    },
-
-    replace: (str) => {
-        return str.replace(/&lt;/g, '<')
-                  .replace(/&gt;/g, '>')
-                  .replace(/&quot;/g, '"')
-                  .replace(/&amp;/g, '&')
-                  .replace(/&nbsp;/g, ' ')
-                  .replace(/&apos;/g, "'")
     },
 
     filterByAutor: (autor, data) => {
         let result = []
         data.forEach((array, index) => {
           array.forEach((object, idx) => {
-            if (object.Autor === autor) result.push(object)
+            if (object.Autor && object.Autor === autor) result.push(object)
           })
         })
         return result
