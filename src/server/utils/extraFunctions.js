@@ -2,9 +2,9 @@
 * Module dependencies
 */
 
-module.exports = {
+export default class Extras {
     // Funcion para quitar los espacios de las claves de un objeto
-    orderedKeys: (data) => {
+    orderedKeys (data) {
         let result = [],
         orderObject = {},
         i = 0
@@ -18,9 +18,9 @@ module.exports = {
             i++
         })
         return result
-    },
+    }
 
-    normalizeNames: (data) => {
+    normalizeNames (data) {
         data.forEach((object, idx) => {
             if (object['Autor']) {
                 let nombre = object['Autor'].replace(/&aacute;/g, 'á')
@@ -36,9 +36,9 @@ module.exports = {
             }
         })
         return data
-    },
+    }
 
-    normalizeHtml: (data) => {
+    normalizeHtml (data) {
         let self = this
         data.forEach((data, index) => {
             if (data['Descripcióndelaactividad']) {
@@ -78,9 +78,9 @@ module.exports = {
             }
         })
         return data
-    },
+    }
 
-    filterByAutor: (autor, data) => {
+    filterByAutor (autor, data) {
         let result = []
         data.forEach((array, index) => {
           array.forEach((object, idx) => {
@@ -89,4 +89,10 @@ module.exports = {
         })
         return result
     }
+
+    customSearch(...query) {
+        let [ edicion, autor, destacados ] = query 
+
+    }
+
 }

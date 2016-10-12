@@ -3,7 +3,9 @@
 */
 import request from 'request'
 import endpoints from '../utils/endpoints'
-import { orderedKeys, normalizeNames, filterByAutor, normalizeHtml } from '../utils/extraFunctions'
+import Extras from '../utils/extraFunctions'
+import levelup from 'level'
+
 
 let tempData = {
   Contenidos: [],
@@ -15,6 +17,9 @@ let tempData = {
   All: [] // 0 = perfiles, 1 = agenda, 2 = recursos, 3 = contenidos, 4 = comentarios
 }
 
+
+const extras = new Extras()
+const db = levelup('../temp/aep.db')
 
 // Funciones para consultar la API de tupale.
 module.exports = {
@@ -56,7 +61,7 @@ module.exports = {
                 json: true
             }, (error, response, body) => {
                 if (error) callback(error)
-                let orderData = orderedKeys(body)
+                let orderData = extras.orderedKeys(body)
                 callback(null, orderData)
             })   
         }
@@ -66,110 +71,123 @@ module.exports = {
         /*
         * Este metodo consume todas las API´s y almacena la información de manera temporal
         */
-        if (tempData.All.length > 0) return tempData.All
-        let perfilesPromise = new Promise((resolve, reject) => {
-            let endpoint = endpoints.perfiles
-            request({
-                url: endpoint,
-                method: 'GET',
-                json: true
-            }, (error, response, body) => {
-                if (error) reject(error)
-                resolve(body)
-            })
-        }).then((perfiles) => {
-            let result = normalizeNames(perfiles)
-            let orderData = orderedKeys(result)
-            let inHtml = normalizeHtml(orderData)
-            tempData.All[0] = inHtml
-            tempData.Perfiles = inHtml
-        }).catch((error) => {
-            console.error(error)
-        })
+        db.get('All', (error, data) => {
+            if (error) console.error(error)
+            let result = JSON.parse(data)
+            let All = []
+            if (result.length > 0) {
+                callback(null, result)
+            } else {
+                let perfilesPromise = new Promise((resolve, reject) => {
+                    let endpoint = endpoints.perfiles
+                    request({
+                        url: endpoint,
+                        method: 'GET',
+                        json: true
+                    }, (error, response, body) => {
+                        if (error) reject(error)
+                        resolve(body)
+                    })
+                }).then((perfiles) => {
+                    let result = extras.normalizeNames(perfiles)
+                    let orderData = extras.orderedKeys(result)
+                    let inHtml = extras.normalizeHtml(orderData)
+                    db.put('Perfiles', inHtml)
+                    All[0] = inHtml
+                    db.put('All', JSON.stringify(All))
+                }).catch((error) => {
+                    console.error(error)
+                })
 
-        let agendaPromise = new Promise((resolve, reject) => {
-            let endpoint = endpoints.agenda
-            request({
-                url: endpoint,
-                method: 'GET',
-                json: true
-            }, (error, response, body) => {
-                if (error) reject(error)
-                resolve(body)
-            })
-        }).then((agenda) => {
-            let orderData = orderedKeys(agenda)
-            let result = normalizeNames(orderData)
-            let inHtml = normalizeHtml(result)
-            tempData.All[1] = inHtml
-            tempData.Agenda = inHtml
-        }).catch((error) => {
-            console.error(error)
-        })
-        
-        let recursosPromise = new Promise((resolve, reject) => {
-            let endpoint = endpoints.recursos
-            request({
-                url: endpoint,
-                method: 'GET',
-                json: true
-            }, (error, response, body) => {
-                if (error) reject(error)
-                resolve(body)
-            })
-        }).then((recursos) => {
-            let orderData = orderedKeys(recursos)
-            let result = normalizeNames(orderData)
-            let inHtml = normalizeHtml(result)
-            tempData.All[2] = inHtml
-            tempData.Recursos = inHtml
-        }).catch((error) => {
-            console.error(error)
-        })
+                let agendaPromise = new Promise((resolve, reject) => {
+                    let endpoint = endpoints.agenda
+                    request({
+                        url: endpoint,
+                        method: 'GET',
+                        json: true
+                    }, (error, response, body) => {
+                        if (error) reject(error)
+                        resolve(body)
+                    })
+                }).then((agenda) => {
+                    let orderData = extras.orderedKeys(agenda)
+                    let result = extras.normalizeNames(orderData)
+                    let inHtml = extras.normalizeHtml(result)
+                    db.put('Agenda', JSON.stringify(inHtml))
+                    All[1] = inHtml
+                    db.put('All', JSON.stringify(All))
+                }).catch((error) => {
+                    console.error(error)
+                })
+                
+                let recursosPromise = new Promise((resolve, reject) => {
+                    let endpoint = endpoints.recursos
+                    request({
+                        url: endpoint,
+                        method: 'GET',
+                        json: true
+                    }, (error, response, body) => {
+                        if (error) reject(error)
+                        resolve(body)
+                    })
+                }).then((recursos) => {
+                    let orderData = extras.orderedKeys(recursos)
+                    let result = extras.normalizeNames(orderData)
+                    let inHtml = extras.normalizeHtml(result)
+                    db.put('Recursos', JSON.stringify(inHtml))
+                    All[2] = inHtml
+                    db.put('All', JSON.stringify(All))
+                }).catch((error) => {
+                    console.error(error)
+                })
 
-        let contenidosPromise = new Promise((resolve, reject) => {
-            let endpoint = endpoints.contenidos
-            request({
-                url: endpoint,
-                method: 'GET',
-                json: true
-            }, (error, response, body) => {
-                if (error) reject(error)
-                resolve(body)
-            })
-        }).then((contenidos) => {
-            let orderData = orderedKeys(contenidos)
-            let result = normalizeNames(orderData)
-            let inHtml = normalizeHtml(result)
-            tempData.All[3] = inHtml
-            tempData.Contenidos = inHtml
-        }).catch((error) => {
-            console.error(error)
-        })
+                let contenidosPromise = new Promise((resolve, reject) => {
+                    let endpoint = endpoints.contenidos
+                    request({
+                        url: endpoint,
+                        method: 'GET',
+                        json: true
+                    }, (error, response, body) => {
+                        if (error) reject(error)
+                        resolve(body)
+                    })
+                }).then((contenidos) => {
+                    let orderData = extras.orderedKeys(contenidos)
+                    let result = extras.normalizeNames(orderData)
+                    let inHtml = extras.normalizeHtml(result)
+                    db.put('Contenidos', JSON.stringify(inHtml))
+                    All[3] = inHtml
+                    db.put('All', JSON.stringify(All))
+                }).catch((error) => {
+                    console.error(error)
+                })
 
-        let comentarioRedaccionPromise = new Promise((resolve, reject) => {
-            let endpoint = endpoints.comentariosRedaccion
-            request({
-                url: endpoint,
-                method: 'GET',
-                json: true
-            }, (error, response, body) => {
-                if (error) reject(error)
-                resolve(body)
-            })
-        }).then((comentarios) => {
-            let orderData = orderedKeys(comentarios)
-            let result = normalizeNames(orderData)
-            let inHtml = normalizeHtml(result)
-            tempData.All[4] = inHtml
-            tempData.Comentarios = inHtml
-        }).catch((error) => {
-            console.error(error)
+                let comentarioRedaccionPromise = new Promise((resolve, reject) => {
+                    let endpoint = endpoints.comentariosRedaccion
+                    request({
+                        url: endpoint,
+                        method: 'GET',
+                        json: true
+                    }, (error, response, body) => {
+                        if (error) reject(error)
+                        resolve(body)
+                    })
+                }).then((comentarios) => {
+                    let orderData = extras.orderedKeys(comentarios)
+                    let result = extras.normalizeNames(orderData)
+                    let inHtml = extras.normalizeHtml(result)
+                    db.put('Comentarios', JSON.stringify(inHtml))
+                    All[4] = inHtml
+                    db.put('All', JSON.parse(All))
+                }).catch((error) => {
+                    console.error(error)
+                })
+            }
         })
     },
 
     getRelations: (autor) => {
-        let result = filterByAutor(autor, tempData.All)
+        let result = extras.filterByAutor(autor, tempData.All)
         return result
     }
 }
