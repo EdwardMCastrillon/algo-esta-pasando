@@ -33,17 +33,17 @@ export default class App extends React.Component {
                     <div className="Page-body-top">
                         <Buscar/>
                     </div>
-                    <ReactCSSTransitionGroup
-                        component={component}
-                        transitionName={transitionName}
-                        transitionEnterTimeout={transitionEnterTimeout}
-                        transitionLeaveTimeout={transitionLeaveTimeout} >
-                        {React.cloneElement(this.props.children, { key: this.props.location.pathname })}
-
-                    </ReactCSSTransitionGroup>
+                    {this.props.children}
                 </div>
             </div>
         )
     }
 }
-// {React.cloneElement(this.props.children, { key: this.props.location.pathname })}
+// <ReactCSSTransitionGroup
+//     component={component}
+//     transitionName={transitionName}
+//     transitionEnterTimeout={transitionEnterTimeout}
+//     transitionLeaveTimeout={transitionLeaveTimeout} >
+//     {React.cloneElement(this.props.children, { key: this.props.location.pathname })}
+//
+// </ReactCSSTransitionGroup>
