@@ -26,7 +26,6 @@ export default class Perfiles extends React.Component {
     componentDidMount(){
         PerfilStore.addChangeListener(this.updateData.bind(this))
     }
-
     render () {
 
         let divStyle = {

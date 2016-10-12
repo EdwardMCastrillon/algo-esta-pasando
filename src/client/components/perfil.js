@@ -62,13 +62,13 @@ export default class Perfil extends React.Component {
         let twitter = (t)?t.replace("https://twitter.com/","@"):'';
         twitter = (t)?t.replace("@",""):'';
         twitter = `https://twitter.com/${twitter}`
-        let urlLeft = `/autor/${perfil.keyId - 1}`
+        let urlLeft = `/autores/${perfil.keyId - 1}`
         if(perfil.keyId - 1 == 0){
-            urlLeft = `/autor/${perfil.maxId}`
+            urlLeft = `/autores/${perfil.maxId}`
         }
-        let urlRight = `/autor/${perfil.keyId + 1}`
+        let urlRight = `/autores/${perfil.keyId + 1}`
         if(perfil.keyId + 1 > perfil.maxId){
-            urlRight = '/autor/1'
+            urlRight = '/autores/1'
         }
         this.setState({
             name: name,
@@ -87,9 +87,13 @@ export default class Perfil extends React.Component {
         this.setState({
             height: document.querySelector(".figure").offsetWidth
         })
-        document.querySelector(".showContent").style.left = "0px"
+        // document.querySelector(".showContent").style.left = "0px"
         this.heightImgResize()
         RelacionAutor.addChangeListener(this.updateData.bind(this))
+    }
+    componentWillUnmount() {
+        console.log("componentWillUnmount");
+        RelacionAutor.removeChangeListener(this.updateData.bind(this))
     }
     updateData() {
         this.setState({
@@ -97,9 +101,7 @@ export default class Perfil extends React.Component {
         })
         console.log(this.state.relacion)
     }
-    p(){
-        console.log("prueba click");
-    }
+
     render () {
         let heightStyle = {
             height: window.innerHeight - 50,
@@ -134,9 +136,8 @@ export default class Perfil extends React.Component {
                         {
                             this.state.relacion.map(item => {
                                 return(
-                                    <Post key={ item.identificador } data={ item } tipo={1} />
+                                    <Post key={ item.identificador } data={ item } url="post/" tipo={1} />
                                 )
-
                             })
                         }
                     </div>
@@ -149,13 +150,3 @@ export default class Perfil extends React.Component {
         )
     }
 }
-
-
-
-// Agrega una Imagen : "5677c158311b3e424336d684bd4c2ff3.jpg"
-// Autor : "Gloria Estrada"
-// Escribir / Párrafos / Texto : "Juliana, nos gusta que est&aacute;s haciendo varias piezas alrededor del tema. Cada una se sostiene por s&iacute; sola y ayuda en la construcci&oacute;n de las otras: ya tenemos los antecedentes de la experiencia y una especie de ensayo que deja ver una posici&oacute;n muy clara y un punto de vista personal y reflexivo sobre la programaci&oacute;n. Nos gustar&iacute;a que nos compartieras un poco de la estructura que tienes pensada y conocer c&oacute;mo piensas darle cierre al conjunto de piezas, de pronto una especie de panorama final, tipo conclusi&oacute;n, o quiz&aacute;s algo que redondee el contenido. Bueno, seguimos en contacto y va un saludo."
-// Etiquetas : "Ciudad, Encuentro con otros"
-// Georreferencia (mapa) : "-75.6101619 6.2613861 16"
-// Imaginarios de paz : "Igualdad"
-// Título :"Ingeniero Wannabe - Wannabe Programador "

@@ -93,3 +93,41 @@ h1 {
     -ms-flex-align: center;
     align-items: center;
 }
+
+
+
+
+
+
+
+.example-enter {
+    /*opacity: 0.01;
+    transition: opacity .5s ease-in;*/
+    left: 100%;
+    z-index: 1;
+}
+
+.example-enter.example-enter-active {
+    /*opacity: 1;*/
+    left: 0;
+    transition: 1s ease-in;
+}
+
+.example-leave {
+    /*opacity: 1;*/
+    /*left: 1;*/
+    position: absolute;
+    top: 0;
+    z-index: 0;
+    transition: 1s linear;
+}
+
+.example-leave.example-leave-active {
+    // opacity: 0;
+    // left: 0;
+}
+
+.link-active {
+    color: #bbbbbb;
+    text-decoration: none;
+}

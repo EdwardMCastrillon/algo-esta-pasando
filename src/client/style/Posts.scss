@@ -154,7 +154,7 @@
 .showContent.Post {
     margin-top: 3em;
     overflow: auto;
-    left: 101%;
+    // left: 101%;
     position: relative;
     transition: 1s left;
     .Figure {
@@ -191,7 +191,8 @@
 .showContent.autor{
     margin-top: 3em;
     overflow: auto;
-    left: 101%;
+    z-index: 1;
+    background: #fbfbfb;
     position: relative;
     transition: 1s left;
     .arrow_left{

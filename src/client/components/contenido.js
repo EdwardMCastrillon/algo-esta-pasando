@@ -42,7 +42,7 @@ export default class Post extends React.Component {
         return {__html: text};
     }
     componentDidMount(){
-        document.querySelector(".showContent").style.left = "0px"
+        // document.querySelector(".showContent").style.left = "0px"
         document.querySelector(".Descripcion").innerHTML = this.state.text
     }
 

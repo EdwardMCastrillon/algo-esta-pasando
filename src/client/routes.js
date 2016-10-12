@@ -56,7 +56,7 @@ export default {
         id:183
     },
     perfil:{
-        path: "/autor/:id",
+        path: "/autores/:id",
         method: "get",
         handler: Perfil,
         id:"183A"
