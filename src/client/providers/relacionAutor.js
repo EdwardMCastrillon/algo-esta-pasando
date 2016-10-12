@@ -21,6 +21,7 @@ const relacionAutor = {
                 _posts[key+1].keyId = key+1
                 _posts[key+1].maxId = res.length;
             })
+
             relacionAutor.notifyChange()
         })
     },
@@ -56,6 +57,7 @@ function getJSONRAutor(url,name, cb) {
     .send({ autor: name})
     .set('Accept', 'application/json')
     .end(function(err, res){
+        console.log(res);
         if (res.status === 404) {
             cb(new Error('not found'))
         } else {

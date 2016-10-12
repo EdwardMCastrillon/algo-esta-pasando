@@ -92,7 +92,6 @@ export default class Perfil extends React.Component {
         RelacionAutor.addChangeListener(this.updateData.bind(this))
     }
     componentWillUnmount() {
-        console.log("componentWillUnmount");
         RelacionAutor.removeChangeListener(this.updateData.bind(this))
     }
     updateData() {

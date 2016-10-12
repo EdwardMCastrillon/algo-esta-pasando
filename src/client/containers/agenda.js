@@ -11,7 +11,7 @@ export default class Inicio extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            posts: AgendaStore.getAgendas(),
+            idMes:new Date().getMonth()+1,
             mes: Calendar.meses()[new Date().getMonth()],
             calendar: Calendar.init(new Date().getMonth()+1)
         }
@@ -21,11 +21,21 @@ export default class Inicio extends React.Component {
     }
     componentWillMount(){
         AgendaStore.init()
-
     }
     updateData() {
+        const e = AgendaStore.getAgendas();
+        let Ameses = {1:[],2:[],3:[],4:[],5:[],6:[],7:[],8:[],9:[],10:[],11:[],12:[]}
+        for (var i = 0; i < e.length; i++) {
+            let mes = new Date(e[i].Fecha).getMonth()+1;
+            if(Ameses[mes]){
+                Ameses[mes].push(e[i])
+            }else{
+                Ameses[mes] = []
+                Ameses[mes].push(e[i])
+            }
+        }
         this.setState({
-            posts:AgendaStore.getAgendas()
+            posts:Ameses
         })
     }
     componentDidMount(){
@@ -38,6 +48,7 @@ export default class Inicio extends React.Component {
     selectChange(mes){
         let mesKey = Calendar.meses().indexOf(mes);
         this.setState({
+            idMes: mesKey+1,
             mes: mes,
             calendar: Calendar.init(mesKey+1)
         })
@@ -45,11 +56,16 @@ export default class Inicio extends React.Component {
     createMarkup(e,text){
         return {__html: text};
     }
+    renderEvento(item){
+        console.log("renderEvento  ",item["Nombredelaactividad"]);
+        return `<div>${item["Nombredelaactividad"]}</div>`
+    }
     render () {
         let divStyle = {
             height: window.innerHeight - 50
         };
-        if (this.state.posts.length > 0) {
+
+        if (this.state.posts) {
             return(
                 <div className="P-B-ContentPost" style={divStyle}>
                     <section className="P-B-Post agenda" >
@@ -70,7 +86,15 @@ export default class Inicio extends React.Component {
                             </div>
                         </div>
                         <div className="days flex wrap" dangerouslySetInnerHTML={this.createMarkup(this,this.state.calendar)}>
-
+                        </div>
+                        <div>
+                            {
+                                this.state.posts[this.state.idMes].map(item => {
+                                    return(
+                                        <div>{item["Nombredelaactividad"]}</div>
+                                    )
+                                })
+                            }
                         </div>
                     </section>
                 </div>
