@@ -1,9 +1,10 @@
 import express from 'express'
 // Se importa el cliente para realizar las peticiones al servidor de Tupale
 import client from '../utils/tupaleClient'
-import { orderedKeys, normalizeNames, filterByAutor } from '../utils/extraFunctions'
+import Extras from '../utils/extraFunctions'
 
 const Router = express.Router()
+const extras = new Extras()
 
 //GET / => Carga de datos inicial
 Router.get('/', (req, res) => {
@@ -58,8 +59,20 @@ Router.get('/contenidos', (req, res) => {
 
 Router.post('/relaciones', (req, res) => {
   let autor = req.body.autor
-  let relaciones = client.getRelations(autor)
-  res.json(relaciones)
+  client.getRelations(autor, (error, relaciones) => {
+      res.json(relaciones)
+  })
+})
+
+/*
+* GET /search?edicion=&autor=&destacados=
+* @param querystring
+*/
+
+Router.get('/search', (req, res) => {
+    let params = [req.query.edicion, req.query.autor, req.query.destacados]
+    // Spread the params interable collection
+    let result = extras.customSearch(...params)
 })
 
 export default Router
