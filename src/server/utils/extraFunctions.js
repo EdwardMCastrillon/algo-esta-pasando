@@ -39,7 +39,6 @@ export default class Extras {
     }
 
     normalizeHtml (data) {
-        let self = this
         data.forEach((data, index) => {
             if (data['Descripcióndelaactividad']) {
                 data['Descripcióndelaactividad'] = data['Descripcióndelaactividad'].replace(/&lt;/g, '<')
@@ -81,16 +80,44 @@ export default class Extras {
     }
 
     filterByAutor (autor, data) {
-        let result = []
+        // data [0] => perfiles, 
+        let result = {
+            perfiles: [],
+            agenda: [],
+            recursos: [],
+            contenidos: [],
+            comentarios: []
+        }
+
         data.forEach((array, index) => {
           array.forEach((object, idx) => {
-            if (object.Autor && object.Autor === autor) result.push(object)
+            if (object.Autor && object.Autor === autor) {
+                switch(index) {
+                    case 0:
+                        result.perfiles.push(object)
+                        break
+                    case 1:
+                        result.agenda.push(object)
+                        break
+                    case 2:
+                        result.recursos.push(object)
+                        break
+                    case 3:
+                        result.contenidos.push(object)
+                        break
+                    case 4:
+                        result.comentarios.push(object)
+                        break
+                    default:
+                        break;
+                }
+            }
           })
         })
         return result
     }
 
-    customSearch(...query) {
+    customSearch (...query) {
         let [ edicion, autor, destacados ] = query 
 
     }
