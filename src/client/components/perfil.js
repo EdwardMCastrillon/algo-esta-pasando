@@ -98,7 +98,6 @@ export default class Perfil extends React.Component {
         this.setState({
             relacion:RelacionAutor.getRAutores()
         })
-        console.log(this.state.relacion)
     }
 
     render () {

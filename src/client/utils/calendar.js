@@ -27,6 +27,7 @@ const Calendar = {
         return ["Dom","Lun","Mar","Mie","Jue","Vie","Sab"];
     },
     showCalendar(dias,mm){
+        console.log("showCalendar");
         let html = ''
         var yyyy = new Date().getFullYear();
         for (var i = 0; i < dias; i++) {

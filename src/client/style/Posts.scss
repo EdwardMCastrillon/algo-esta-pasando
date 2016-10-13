@@ -22,6 +22,7 @@
     margin: 0 2px 5px;
     position: relative;
     height: 100%;
+    min-height: 85px;
     &:hover span{
 
     }
@@ -177,6 +178,7 @@
     .Detalle {
         margin-left: .5em;
         text-align: center;
+        padding-bottom: 50px;
         .Titulo {
             font-family: 'MonopolSemiBold';
             color: rgb(91, 91, 91);
@@ -286,23 +288,5 @@
             overflow: hidden;
         }
 
-    }
-}
-.agenda{
-    padding: 0 1em;
-    h1 {
-        text-align: left;
-    }
-    .days{
-        >span {
-            cursor: pointer;
-            padding: 10px 5px;
-            margin: 4px 0px;
-            text-align: center;
-            border-color: #d5d5d5;
-            border-width: 0px 1px 0px 0px;
-            border-style: solid;
-            width: 40px;
-        }
     }
 }

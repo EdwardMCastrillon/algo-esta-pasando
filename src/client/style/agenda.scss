@@ -1,0 +1,21 @@
+.agenda{
+    padding: 0 1em;
+    h1 {
+        text-align: left;
+    }
+    .days{
+        >span {
+            cursor: pointer;
+            padding: 10px 5px;
+            margin: 4px 0px;
+            text-align: center;
+            border-color: #d5d5d5;
+            border-width: 0px 1px 0px 0px;
+            border-style: solid;
+            width: 40px;
+        }
+        .active{
+            color: red;
+        }
+    }
+}

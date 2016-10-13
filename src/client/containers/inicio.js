@@ -44,7 +44,9 @@ export default class Inicio extends React.Component {
             )
         } else {
             return(
-                <h1> Cargando Datos.. </h1>
+                <div className="P-B-ContentPost" style={divStyle}>
+                    <h1> Cargando Datos.. </h1>
+                </div>
             )
         }
     }

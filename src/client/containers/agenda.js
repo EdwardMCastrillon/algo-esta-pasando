@@ -4,7 +4,7 @@ import Post from '../components/posts'
 import Calendar from '../utils/calendar'
 
 import AgendaStore from '../providers/agendaStore'
-import '../style/Posts.scss'
+import '../style/agenda.scss'
 import '../style/select.scss'
 
 export default class Inicio extends React.Component {
@@ -37,6 +37,7 @@ export default class Inicio extends React.Component {
         this.setState({
             posts:Ameses
         })
+
     }
     componentDidMount(){
 
@@ -47,24 +48,33 @@ export default class Inicio extends React.Component {
     }
     selectChange(mes){
         let mesKey = Calendar.meses().indexOf(mes);
-        this.setState({
-            idMes: mesKey+1,
-            mes: mes,
-            calendar: Calendar.init(mesKey+1)
+        let self = this
+        self.setState({
+            calendar: Calendar.init(mesKey+1),
         })
+        //Debido a que ambos state se actualizan al mismo tiempo el set da tiempo que se
+        //actualize el calendar y luego select los dias de eventos.
+        setTimeout(function(){
+            self.setState({
+                idMes: mesKey+1,
+                mes: mes
+            })
+        },100)
+
     }
     createMarkup(e,text){
+
         return {__html: text};
     }
     renderEvento(item){
-        console.log("renderEvento  ",item["Nombredelaactividad"]);
-        return `<div>${item["Nombredelaactividad"]}</div>`
+        return(
+            <div>{item["Nombredelaactividad"]}</div>
+        )
     }
     render () {
         let divStyle = {
             height: window.innerHeight - 50
         };
-
         if (this.state.posts) {
             return(
                 <div className="P-B-ContentPost" style={divStyle}>
@@ -77,6 +87,7 @@ export default class Inicio extends React.Component {
                                     <li className="flag-france" data-option="" data-value="france"></li>
                                     {
                                         Calendar.meses().map(item => {
+
                                             return(
                                                 <span onClick={this.selectChange.bind(this,item)}>{item}</span>
                                             )
@@ -90,6 +101,10 @@ export default class Inicio extends React.Component {
                         <div>
                             {
                                 this.state.posts[this.state.idMes].map(item => {
+                                    if(item.Fecha){
+                                        document.getElementById(`${parseInt(item.Fecha.split("-")[2])}`)
+                                        .classList.add("active")
+                                    }
                                     return(
                                         <div>{item["Nombredelaactividad"]}</div>
                                     )
@@ -101,7 +116,7 @@ export default class Inicio extends React.Component {
             )
         } else{
             return(
-                <div>
+                <div className="P-B-ContentPost" style={divStyle}>
                     <h1> Cargando Datos.. </h1>
                 </div>
             )

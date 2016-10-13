@@ -52,12 +52,12 @@ const relacionAutor = {
 }
 
 function getJSONRAutor(url,name, cb) {
+    console.log(url,{ autor: name});
     request
     .post(url)
     .send({ autor: name})
     .set('Accept', 'application/json')
     .end(function(err, res){
-        console.log(res);
         if (res.status === 404) {
             cb(new Error('not found'))
         } else {
