@@ -96,7 +96,7 @@ export default class Inicio extends React.Component {
                                 </ul>
                             </div>
                         </div>
-                        <div className="days flex wrap" dangerouslySetInnerHTML={this.createMarkup(this,this.state.calendar)}>
+                        <div className="days flex wrap justify-center" dangerouslySetInnerHTML={this.createMarkup(this,this.state.calendar)}>
                         </div>
                         <div>
                             {

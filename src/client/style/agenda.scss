@@ -4,15 +4,19 @@
         text-align: left;
     }
     .days{
-        >span {
+        > span {
+            span{
+                font-size: 12px;
+            }
             cursor: pointer;
-            padding: 10px 5px;
-            margin: 4px 0px;
+            padding: 10px 1px;
+            margin: 4px 0;
             text-align: center;
             border-color: #d5d5d5;
-            border-width: 0px 1px 0px 0px;
+            border-width: 0 1px 0 0;
             border-style: solid;
-            width: 40px;
+            width: 36px;
+            font-size: 20px
         }
         .active{
             color: red;

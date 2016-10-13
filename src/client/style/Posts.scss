@@ -43,7 +43,7 @@
     img {
         width: 100%;
         height: auto;
-        // min-height: 220px;
+        //   min-height: 220px;
     }
 }
 .P-B-Post {
@@ -253,6 +253,7 @@
 }
 .Descripcion {
     word-break: break-all;
+    text-align: left;
 }
 .relatedPosts {
     border-top: 1px solid #dedede;
