@@ -81,32 +81,31 @@ export default class Extras {
 
     filterByAutor (autor, data) {
         // data [0] => perfiles, agenda, recursos, contenidos, comentarios
-        let result = {
-            perfiles: [],
-            agenda: [],
-            recursos: [],
-            contenidos: [],
-            comentarios: []
-        }
+        let result = []
 
         data.forEach((array, index) => {
           array.forEach((object, idx) => {
             if (object.Autor && object.Autor === autor) {
                 switch(index) {
                     case 0:
-                        result.perfiles.push(object)
+                        object.origen = 'Perfiles'
+                        result.push(object)
                         break
                     case 1:
-                        result.agenda.push(object)
+                        object.origen = 'Agenda'
+                        result.push(object)
                         break
                     case 2:
-                        result.recursos.push(object)
+                        object.origen = 'Recursos'
+                        result.push(object)
                         break
                     case 3:
-                        result.contenidos.push(object)
+                        object.origen = 'Contenidos'
+                        result.push(object)
                         break
                     case 4:
-                        result.comentarios.push(object)
+                        object.origen = 'Comentarios'
+                        result.push(object)
                         break
                     default:
                         break;
