@@ -80,7 +80,7 @@ export default class Extras {
     }
 
     filterByAutor (autor, data) {
-        // data [0] => perfiles, 
+        // data [0] => perfiles, agenda, recursos, contenidos, comentarios
         let result = {
             perfiles: [],
             agenda: [],

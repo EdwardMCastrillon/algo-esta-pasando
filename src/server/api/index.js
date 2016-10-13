@@ -71,7 +71,7 @@ Router.post('/relaciones', (req, res) => {
 
 Router.get('/search', (req, res) => {
     let params = [req.query.edicion, req.query.autor, req.query.destacados]
-    // Spread the params interable collection
+    // Spread the params iterable collection
     let result = extras.customSearch(...params)
 })
 

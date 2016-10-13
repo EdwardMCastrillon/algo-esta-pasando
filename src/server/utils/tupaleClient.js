@@ -2,9 +2,10 @@
 * Module dependencies
 */
 import request from 'request'
+import levelup from 'level'
 import endpoints from '../utils/endpoints'
 import Extras from '../utils/extraFunctions'
-import levelup from 'level'
+
 
 const extras = new Extras()
 const db = levelup('../temp')
