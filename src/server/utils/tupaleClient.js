@@ -3,19 +3,12 @@
 */
 import request from 'request'
 import endpoints from '../utils/endpoints'
-import { orderedKeys, normalizeNames, filterByAutor, normalizeHtml } from '../utils/extraFunctions'
+import Extras from '../utils/extraFunctions'
+import levelup from 'level'
 
-let tempData = {
-  Contenidos: [],
-  Agenda: [],
-  Bitacoras: [],
-  Perfiles: [],
-  Recursos: [],
-  Comentarios: [],
-  All: [] // 0 = perfiles, 1 = agenda, 2 = recursos, 3 = contenidos, 4 = comentarios
-}
-
-
+const extras = new Extras()
+const db = levelup('../temp')
+let All = []
 // Funciones para consultar la API de tupale.
 module.exports = {
     /*
@@ -23,9 +16,9 @@ module.exports = {
     * @param callback() recibe los datos o el error
     */
     getDataByParam: (type, callback) => {
-        if (tempData[type].length > 0) {
-            callback(null, tempData[type])
-        } else {
+        db.get(type, { fillCache: false }, (error, data) => {
+            if (! error) return callback(null, JSON.parse(data))
+            console.log('Consulta')
             let endpoint = ''
             switch(type) {
                 case 'Perfiles':
@@ -56,17 +49,15 @@ module.exports = {
                 json: true
             }, (error, response, body) => {
                 if (error) callback(error)
-                let orderData = orderedKeys(body)
+                let orderData = extras.orderedKeys(body)
                 callback(null, orderData)
-            })   
-        }
+            })
+        })   
     },
-
-    getAllData: (callback) => {
-        /*
-        * Este metodo consume todas las API´s y almacena la información de manera temporal
-        */
-        if (tempData.All.length > 0) return tempData.All
+    /*
+    * Este metodo consume todas las API´s y almacena la información de manera temporal
+    */
+    getAllData: () => {
         let perfilesPromise = new Promise((resolve, reject) => {
             let endpoint = endpoints.perfiles
             request({
@@ -78,11 +69,12 @@ module.exports = {
                 resolve(body)
             })
         }).then((perfiles) => {
-            let result = normalizeNames(perfiles)
-            let orderData = orderedKeys(result)
-            let inHtml = normalizeHtml(orderData)
-            tempData.All[0] = inHtml
-            tempData.Perfiles = inHtml
+            let result = extras.normalizeNames(perfiles)
+            let orderData = extras.orderedKeys(result)
+            let inHtml = extras.normalizeHtml(orderData)
+            db.put('Perfiles', JSON.stringify(inHtml))
+            All[0] = inHtml
+            db.put('All', JSON.stringify(All))
         }).catch((error) => {
             console.error(error)
         })
@@ -98,11 +90,12 @@ module.exports = {
                 resolve(body)
             })
         }).then((agenda) => {
-            let orderData = orderedKeys(agenda)
-            let result = normalizeNames(orderData)
-            let inHtml = normalizeHtml(result)
-            tempData.All[1] = inHtml
-            tempData.Agenda = inHtml
+            let orderData = extras.orderedKeys(agenda)
+            let result = extras.normalizeNames(orderData)
+            let inHtml = extras.normalizeHtml(result)
+            db.put('Agenda', JSON.stringify(inHtml))
+            All[1] = inHtml
+            db.put('All', JSON.stringify(All))
         }).catch((error) => {
             console.error(error)
         })
@@ -118,11 +111,12 @@ module.exports = {
                 resolve(body)
             })
         }).then((recursos) => {
-            let orderData = orderedKeys(recursos)
-            let result = normalizeNames(orderData)
-            let inHtml = normalizeHtml(result)
-            tempData.All[2] = inHtml
-            tempData.Recursos = inHtml
+            let orderData = extras.orderedKeys(recursos)
+            let result = extras.normalizeNames(orderData)
+            let inHtml = extras.normalizeHtml(result)
+            db.put('Recursos', JSON.stringify(inHtml))
+            All[2] = inHtml
+            db.put('All', JSON.stringify(All))
         }).catch((error) => {
             console.error(error)
         })
@@ -138,11 +132,12 @@ module.exports = {
                 resolve(body)
             })
         }).then((contenidos) => {
-            let orderData = orderedKeys(contenidos)
-            let result = normalizeNames(orderData)
-            let inHtml = normalizeHtml(result)
-            tempData.All[3] = inHtml
-            tempData.Contenidos = inHtml
+            let orderData = extras.orderedKeys(contenidos)
+            let result = extras.normalizeNames(orderData)
+            let inHtml = extras.normalizeHtml(result)
+            db.put('Contenidos', JSON.stringify(inHtml))
+            All[3] = inHtml
+            db.put('All', JSON.stringify(All))
         }).catch((error) => {
             console.error(error)
         })
@@ -158,18 +153,28 @@ module.exports = {
                 resolve(body)
             })
         }).then((comentarios) => {
-            let orderData = orderedKeys(comentarios)
-            let result = normalizeNames(orderData)
-            let inHtml = normalizeHtml(result)
-            tempData.All[4] = inHtml
-            tempData.Comentarios = inHtml
+            let orderData = extras.orderedKeys(comentarios)
+            let result = extras.normalizeNames(orderData)
+            let inHtml = extras.normalizeHtml(result)
+            db.put('Comentarios', JSON.stringify(inHtml))
+            All[4] = inHtml
+            db.put('All', JSON.stringify(All))
         }).catch((error) => {
             console.error(error)
         })
     },
 
-    getRelations: (autor) => {
-        let result = filterByAutor(autor, tempData.All)
-        return result
+    getRelations: (autor, callback) => {
+        db.get('All', { fillCache: false }, (error, data) => {
+            let result = []
+            if (! error) {
+                result = extras.filterByAutor(autor, JSON.parse(data))
+                callback(null, result) 
+            } else {
+                console.log('Entro en la vble ', All)
+                result = extras.filterByAutor(autor, All)
+                callback(null, result)
+            }
+        })
     }
 }
