@@ -15,33 +15,22 @@ export default {
     home: {
         path: "/",
         method: "get",
-        handler: Inicio,
-        handlerid: Post,
-        pathId: "/post/:id",
-        id:111
+        handler: Contenido,
     },
     agenda: {
         path: "/agenda",
         method: "get",
         handler: Agenda
     },
-    contenido: {
-        path: "/contenido",
-        method: "get",
-        handler: Contenido,
-        id:118
-    },
     posContenido: {
         path: "/contenido/:id",
         method: "get",
         handler: PosContenido,
-        id:118
     },
     recursos:{
         path : "/centro_de_recursos",
         method:"get",
         handler: Recursos,
-        id:211
     },
     posRecursos: {
         path: "/centro_de_recursos/:id",

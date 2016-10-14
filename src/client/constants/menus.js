@@ -1,7 +1,6 @@
 // 500px featured photos
 export default [
     "inicio",
-    "contenido",
     "mapa",
     "autores",
     "centro_de_recursos",

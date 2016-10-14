@@ -11,8 +11,8 @@ let _changeListeners = []
 const AgendaStore = {
 
     init: function () {
-        if (_initCalled)
-        return
+        // if (_initCalled)
+        // return
 
         _initCalled = true
         getJSONAgenda(`${server}${apiEndpoints.agenda}`, function (err, res) {

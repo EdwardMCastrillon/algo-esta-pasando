@@ -69,13 +69,15 @@ export default class NavBar extends Component {
         })
 
     }
-
+    classClosepMenu(){
+        document.querySelector("#app").classList.add("closed")
+    }
     render() {
         var background = {
             'backgroundSize': 'cover',
         };
         return (
-            <div id="NavBar" className="NavBar"  onMouseEnter={this.logoOpen.bind(this)} onMouseOut={this.logoClosed.bind(this)} >
+            <div id="NavBar" className="NavBar" onClick={this.classClosepMenu.bind()}  onMouseEnter={this.logoOpen.bind(this)} onMouseOut={this.logoClosed.bind(this)} >
                 <div className="NavBar-title" style={background}> </div>
                 <div className="NavBar-links">
                     {

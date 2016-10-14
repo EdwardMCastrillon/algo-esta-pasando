@@ -133,8 +133,24 @@ export default class Perfil extends React.Component {
                         <span>Artículos del autor</span>
                         {
                             this.state.relacion.map(item => {
+                                let url;
+                                switch (item.origen) {
+                                    case 'Agenda':
+                                        url="";
+                                    break;
+                                    case 'Recursos':
+                                        url="centro_de_recursos/";
+                                    break;
+                                    case 'Contenidos':
+                                        url="contenido/";
+                                    break;
+                                    case 'Comentarios':
+                                        url="";
+                                    break;
+
+                                }
                                 return(
-                                    <Post key={ item.identificador } data={ item } url="post/" tipo={1} />
+                                    <Post key={ item.identificador } data={ item } url={url} tipo={1} />
                                 )
                             })
                         }
