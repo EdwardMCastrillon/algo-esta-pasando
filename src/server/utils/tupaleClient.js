@@ -19,7 +19,6 @@ module.exports = {
     getDataByParam: (type, callback) => {
         db.get(type, { fillCache: false }, (error, data) => {
             if (! error) return callback(null, JSON.parse(data))
-            console.log('Consulta')
             let endpoint = ''
             switch(type) {
                 case 'Perfiles':
@@ -162,6 +161,25 @@ module.exports = {
             db.put('All', JSON.stringify(All))
         }).catch((error) => {
             console.error(error)
+        })
+    },
+
+    getEdition: (callback) => {
+        let endpoint = endpoints.parametrizacion
+        let edicionPromise = new Promise((resolve, reject) => {
+            request({
+                url: endpoint,
+                method: 'GET',
+                json: true
+            }, (error, response, body) => {
+                if (error) reject(error)
+                resolve(body)
+            })
+        }).then((ediciones) => {
+            let result = extras.getEdition(ediciones) 
+            callback(null, result)
+        }).catch((error) => {
+            callback(e)
         })
     },
 
