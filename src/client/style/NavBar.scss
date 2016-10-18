@@ -128,7 +128,7 @@
 }
 
 .drawSearch {
-    background: #2e2d7b;
+    top: 0;
     right: 25px;
     width: 45px;
     height: 85px;
@@ -193,6 +193,15 @@
                 }
             }
         }
+    }
+}
+#NavBarTop {
+    height: 46px;
+    .item {
+        font-size: 14px;
+        margin: 0 17px;
+        display: block;
+        color: #4e4e4e;
     }
 }
 a[href="/ediciones_anteriores"], a[href="/editorial"],a[href="/algo_esta_pasando"] {

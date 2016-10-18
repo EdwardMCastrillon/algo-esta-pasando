@@ -1,4 +1,5 @@
 import React from 'react'
+import FunctExtra from '../utils/functExtra'
 
 export default class TargetaAgenda extends React.Component {
     constructor (props) {
@@ -9,13 +10,6 @@ export default class TargetaAgenda extends React.Component {
         }
     }
 
-    componentWillMount() {
-    }
-    componentDidMount(){
-    }
-    createMarkup(e,text){
-        return {__html: text};
-    }
     render () {
 
         var divStyle = {
@@ -25,7 +19,7 @@ export default class TargetaAgenda extends React.Component {
         return (
             <section>
                 <article>
-                    <div className="diaEvent" dangerouslySetInnerHTML={this.createMarkup(this,document.getElementById(`event${this.props.data.dia}`).innerHTML)}></div>
+                    <div className="diaEvent" dangerouslySetInnerHTML={FunctExtra.createMarkup(this,document.getElementById(`event${this.props.data.dia}`).innerHTML)}></div>
                     <figure className="FigureEvent" style={divStyle}>
                     </figure>
                     <div className="nameEvent">

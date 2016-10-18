@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from "react";
 import { Link, Router } from 'react-router'
-import Aep from '../providers/aep'
+// import Aep from '../providers/aep'
 import FunctExtra from '../utils/functExtra'
 import Menus from '../constants/menus'
 import Logo from "../img/logoAep.png"
@@ -20,12 +20,6 @@ export default class NavBar extends Component {
             hideName:"hideName",
             hidepad:"hidepad"
         }
-    }
-    componentWillMount(){
-        console.log(Aep.getAePs());
-    }
-    transitionComplete(){
-        console.log("transitionComplete");
     }
     logoOpen(){
         if(document.querySelector(".NavBar:hover")){

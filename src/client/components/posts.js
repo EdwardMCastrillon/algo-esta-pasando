@@ -16,13 +16,11 @@ export default class Post extends React.Component {
             let colorgrid = Edicion.getEdicion()
             if(colorgrid[0]){
                 colorgrid = colorgrid[0].coloritemgrid;
-                console.log(colorgrid);
                 this.setState({
                     background:{
                         'background':`r${colorgrid}`,
                     }
                 })
-                console.log(this.state.background);
             }
         }
     }

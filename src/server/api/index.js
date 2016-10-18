@@ -89,18 +89,20 @@ Router.get('/ediciones', (req, res) => {
 */
 
 Router.get('/aeP', (req, res) => {
-    client.getEdiciones('AeP', (error, aep) => {
+    client.getDataByParam('AeP', (error, aep) => {
         if (error) res.sendStatus(500).json(error)
         res.json(aep)
     })
 })
 /*
-* GET /search?edicion=&autor=&destacados=
+* GET /search?edicion=0&autor=María Juliana Yepes Burgos&destacados=
 * @param querystring
 */
 
 Router.get('/search', (req, res) => {
+
     let params = [req.query.edicion, req.query.autor, req.query.destacados]
+    console.log("search  ",params);
     // Spread the params iterable collection
     let result = extras.customSearch(...params)
 })

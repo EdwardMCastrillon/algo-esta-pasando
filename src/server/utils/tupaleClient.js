@@ -41,7 +41,8 @@ module.exports = {
                 endpoint = endpoints.comentariosRedaccion
                 break;
                 case 'AeP':
-                endpoint = endpoints.aep
+                endpoint = endpoints.aeP
+                console.log(endpoint);
                 break;
                 default:
                 break;

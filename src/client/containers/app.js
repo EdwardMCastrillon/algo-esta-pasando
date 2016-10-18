@@ -6,7 +6,7 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import Nav from '../components/NavBar'
 import Buscar from '../components/buscar'
 import Edicion from '../constants/edicion'
-import Aep from '../providers/aep'
+// import Aep from '../providers/aep'
 // Estilos
 import "../style/font.scss"
 import "../style/Page.scss"
@@ -22,7 +22,7 @@ export default class App extends React.Component {
 
     }
     componentWillMount(){
-        Aep.init();
+        // Aep.init();
         Edicion.init()
     }
     updateData() {
