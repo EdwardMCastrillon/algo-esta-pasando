@@ -10,6 +10,11 @@ import Extras from '../utils/extraFunctions'
 const extras = new Extras()
 const db = levelup('../temp')
 let All = []
+db.del('Perfiles')
+db.del('Agenda')
+db.del('Contenidos')
+db.del('Comentarios')
+db.del('Recursos')
 // Funciones para consultar la API de tupale.
 module.exports = {
     /*
@@ -17,9 +22,10 @@ module.exports = {
     * @param callback() recibe los datos o el error
     */
     getDataByParam: (type, callback) => {
-        db.get(type, { fillCache: false }, (error, data) => {
+        db.get(type, (error, data) => {
             if (! error) return callback(null, JSON.parse(data))
             let endpoint = ''
+            console.log('Entro a consultar')
             switch(type) {
                 case 'Perfiles':
                 endpoint = endpoints.perfiles
