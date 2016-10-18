@@ -15,8 +15,8 @@ export default class Buscar extends React.Component {
         Aep.init()
         if(!this.state.background){
             let colorgrid = Edicion.getEdicion()
-            if(colorgrid[0]){
-                colorgrid = colorgrid[0].coloritemgrid;
+            if(colorgrid){
+                colorgrid = colorgrid.coloritemgrid;
                 this.setState({
                     background:{
                         'background':`${colorgrid}`,

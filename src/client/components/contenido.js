@@ -29,9 +29,7 @@ export default class Post extends React.Component {
             text = cp["Escribir/Párrafos/Texto"];
             break;
             case "comentarios":
-
             cp = Comentarios.getComentario(p);
-            console.log(cp);
             text = cp["Escribir/Párrafos/Texto"];
             break;
             case "centro_de_recursos":

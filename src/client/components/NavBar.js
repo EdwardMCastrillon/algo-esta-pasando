@@ -68,6 +68,7 @@ export default class NavBar extends Component {
                 logoClosed:this.props.edicion.logoClosed,
                 menu:this.props.edicion.menu
             })
+
             this.openNav()
         }
         return (

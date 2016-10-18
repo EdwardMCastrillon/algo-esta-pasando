@@ -7,7 +7,8 @@ const server = `/api`
 let _Edicion = []
 let _initCalled = false
 let _changeListeners = []
-
+// localStorage.setItem("edicion")
+// localStorage.getItem("edicion")
 const Edicion = {
 
     init: function () {
@@ -17,10 +18,10 @@ const Edicion = {
         _initCalled = true
         getJSONEdicion(`${server}${apiEndpoints.edicion}`, function (err, res) {
             let r,l,init;
-            // res.forEach(function (item,k) {
-            //     _Edicion = item;
-            // })
-            _Edicion = res
+            console.log(res);
+            res.forEach(function (item,k) {
+                _Edicion[item.EDNUMERO] = item;
+            })
             Edicion.notifyChange();
         })
     },
@@ -31,15 +32,18 @@ const Edicion = {
     },
     getEdicion: function () {
         const array = []
-        debugger
-        for (const id in _Edicion)
-        array.push(_Edicion[id])
+        if(localStorage.getItem("edicion") && parseInt(localStorage.getItem("edicion")) >= 0){
+            return _Edicion[localStorage.getItem("edicion")]
+        }else{
+            localStorage.setItem("edicion",_Edicion.length - 1);
+            return _Edicion[_Edicion.length - 1]
+        }
 
-        return array
     },
-    // getContenido: function (id) {
-    //     return _Edicion[id]
-    // },
+    getEdicionId: function (id) {
+        localStorage.setItem("edicion",id);
+        return _Edicion[id]
+    },
     addChangeListener: function (listener) {
         _changeListeners.push(listener)
     },

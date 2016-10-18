@@ -187,7 +187,7 @@ module.exports = {
                 resolve(body)
             })
         }).then((ediciones) => {
-            let result = extras.getEdition(ediciones) 
+            let result = extras.getEdition(ediciones)
             callback(null, result)
         }).catch((error) => {
             callback(e)
@@ -221,19 +221,22 @@ module.exports = {
     },
     formatEdicion(body){
         let menu = {}
-        for (var i = 1; i < 10; i++) {
-            if(body[0][`menu${i}name`]){
-                let name = body[0][`menu${i}name`].toLowerCase().replace(new RegExp(" ", 'g'), "_");
-                if(!menu[name]){
-                    menu[name] ={
-                        'color': body[0][`menu${i}color`],
-                        'path': body[0][`menu${i}path`],
-                        'name': body[0][`menu${i}name`]
+        for (var r = 0; r < body.length; r++) {
+            for (var i = 1; i < 10; i++) {
+                if(body[r][`menu${i}name`]){
+                    let name = body[r][`menu${i}name`].toLowerCase().replace(new RegExp(" ", 'g'), "_");
+                    if(!menu[name]){
+                        menu[name] ={
+                            'color': body[r][`menu${i}color`],
+                            'path': body[r][`menu${i}path`],
+                            'name': body[r][`menu${i}name`]
+                        }
                     }
                 }
             }
+            body[r].menu = menu;
         }
-        body[0].menu = menu;
+
         return body;
     }
 }

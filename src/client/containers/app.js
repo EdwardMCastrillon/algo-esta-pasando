@@ -22,26 +22,21 @@ export default class App extends React.Component {
 
     }
     componentWillMount(){
-        // Aep.init();
         Edicion.init()
     }
     updateData() {
-        console.log('update');
         this.setState({
             edicion:Edicion.getEdicion()
         })
     }
     componentDidMount(){
-        console.log("componentDidMount");
         Edicion.addChangeListener(this.updateData.bind(this))
     }
     createMarkup(e,text){
         return {__html: text};
     }
     render () {
-        console.log("render  ",this.state.edicion.length);
-
-        if(this.state.edicion.length > 0){
+        if(this.state.edicion){
             let component = "div",transitionName="",
             transitionEnterTimeout=10,transitionLeaveTimeout=10;
 
@@ -52,7 +47,7 @@ export default class App extends React.Component {
             }
             return (
                 <div className="Page">
-                    <Nav edicion={this.state.edicion[0]}/>
+                    <Nav edicion={this.state.edicion}/>
                     <div className="Page-body">
                         <div className="Page-body-top">
                             <Buscar/>
