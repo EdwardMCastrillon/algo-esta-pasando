@@ -34,6 +34,7 @@
     "npm": "^3.10.7",
     "react": "^15.0.1",
     "react-addons-css-transition-group": "^15.3.2",
+    "react-d3-map": "^0.8.3",
     "react-dom": "^15.0.1",
     "react-inline-style": "^0.1.0",
     "react-router": "^2.8.0",
@@ -42,6 +43,7 @@
     "style-loader": "^0.13.1",
     "superagent": "^2.3.0",
     "superagent-no-cache": "^0.1.0",
+    "topojson": "^1.6.27",
     "url-loader": "^0.5.7",
     "utf8": "^2.1.1"
   },

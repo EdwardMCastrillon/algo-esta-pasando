@@ -19,7 +19,7 @@ export default class Buscar extends React.Component {
                 colorgrid = colorgrid[0].coloritemgrid;
                 this.setState({
                     background:{
-                        'background':`r${colorgrid}`,
+                        'background':`${colorgrid}`,
                     }
                 })
             }
@@ -37,7 +37,7 @@ export default class Buscar extends React.Component {
 
         return (
             <div>
-                <div id="NavBarTop" className="flex  align-center">
+                <div id="NavBarTop" className="flex  align-center justify-center">
                     {
                         this.state.itemNavTop.map(item => {
                             return(

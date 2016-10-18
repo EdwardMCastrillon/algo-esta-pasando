@@ -52,7 +52,7 @@ export default class Post extends React.Component {
     }
     componentDidMount(){
         // document.querySelector(".showContent").style.left = "0px"
-        document.querySelector(".Descripcion").innerHTML = this.state.text
+        // document.querySelector(".Descripcion").innerHTML = this.state.text
     }
 
     render () {
@@ -78,7 +78,7 @@ export default class Post extends React.Component {
                     <div className="colum">
                         <h1 className="Titulo" dangerouslySetInnerHTML={this.createMarkup(this,this.state.titulo)}></h1>
 
-                        <div className="Descripcion" > </div>
+                        <div className="Descripcion"  dangerouslySetInnerHTML={this.createMarkup(this,this.state.text)}></div>
                     </div>
                     <div className="column">
 

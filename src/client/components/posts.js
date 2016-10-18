@@ -18,7 +18,7 @@ export default class Post extends React.Component {
                 colorgrid = colorgrid[0].coloritemgrid;
                 this.setState({
                     background:{
-                        'background':`r${colorgrid}`,
+                        'background':`${colorgrid}`,
                     }
                 })
             }
