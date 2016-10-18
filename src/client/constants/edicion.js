@@ -13,7 +13,7 @@ const Edicion = {
     init: function () {
         if (_initCalled)
         return
-
+        getInitialData()
         _initCalled = true
         getJSONEdicion(`${server}${apiEndpoints.edicion}`, function (err, res) {
             let r,l,init;
@@ -60,6 +60,10 @@ function getJSONEdicion(url, cb) {
         }
     });
 }
-
+function getInitialData() {
+    request
+    .get('/api/')
+    .end()
+}
 
 export default Edicion
