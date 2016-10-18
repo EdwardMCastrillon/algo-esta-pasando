@@ -6,7 +6,6 @@ import levelup from 'level'
 import endpoints from '../utils/endpoints'
 import Extras from '../utils/extraFunctions'
 
-
 const extras = new Extras()
 const db = levelup('../temp')
 let All = []
@@ -59,8 +58,10 @@ module.exports = {
                 json: true
             }, (error, response, body) => {
                 if (error) callback(error)
-                let orderData = extras.orderedKeys(body)
-                callback(null, orderData)
+                let result = extras.normalizeNames(body)
+                let orderData = extras.orderedKeys(result)
+                let inHtml = extras.normalizeHtml(orderData)
+                callback(null, inHtml)
             })
         })
     },
@@ -200,7 +201,6 @@ module.exports = {
                 result = extras.filterByAutor(autor, JSON.parse(data))
                 callback(null, result)
             } else {
-                console.log('Entro en la vble ', All)
                 result = extras.filterByAutor(autor, All)
                 callback(null, result)
             }
