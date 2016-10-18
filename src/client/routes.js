@@ -5,9 +5,9 @@ import Contenido from './containers/contenido'
 import Recursos from './containers/recursos'
 import Perfiles from './containers/perfiles'
 import Map from './containers/map'
+import Ediciones from './containers/ediciones'
 import Agenda from './containers/agenda'
 import Perfil from './components/perfil'
-// import Post from './components/post'
 import PosContenido from './components/contenido'
 
 
@@ -63,4 +63,9 @@ export default {
         handler: Map,
         id:183
     },
+    ediciones:{
+        path:"/ediciones_anteriores",
+        method: "get",
+        handler: Ediciones,
+    }
 };
