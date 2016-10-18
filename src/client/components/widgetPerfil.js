@@ -5,7 +5,6 @@ import { Link } from 'react-router'
 export default class Perfil extends React.Component {
     constructor (props) {
         super(props)
-
     }
 
     render () {
@@ -26,7 +25,7 @@ export default class Perfil extends React.Component {
 
 
         var divStyle = {
-            background: `rgb(234, 234, 234) url(https://tupale.co/milfs/images/secure/?file=600/${img}) center center`,
+            background: `rgb(234, 234, 234) url(https://tupale.co/milfs/images/secure/?file=300/${img}) center center`,
             'backgroundSize': 'cover'
         };
         return (

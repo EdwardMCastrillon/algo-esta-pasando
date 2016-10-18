@@ -1,4 +1,5 @@
 import React from 'react'
+import Comentarios from '../providers/comentarioStore'
 import FunctExtra from '../utils/functExtra'
 import PerfilStore from '../providers/perfilStore'
 import RelacionAutor from '../providers/relacionAutor'
@@ -82,6 +83,7 @@ export default class Perfil extends React.Component {
     }
     componentWillMount() {
         this.loadPerfile()
+        Comentarios.init()
     }
     componentDidMount(){
         this.setState({
@@ -98,7 +100,6 @@ export default class Perfil extends React.Component {
         this.setState({
             relacion:RelacionAutor.getRAutores()
         })
-        console.log(this.state.relacion)
     }
 
     render () {
@@ -134,8 +135,25 @@ export default class Perfil extends React.Component {
                         <span>Artículos del autor</span>
                         {
                             this.state.relacion.map(item => {
+                                let url;
+                                switch (item.origen) {
+                                    case 'Agenda':
+                                        url="";
+                                    break;
+                                    case 'Recursos':
+                                        url="centro_de_recursos/";
+                                    break;
+                                    case 'Contenidos':
+                                        url="contenido/";
+                                    break;
+                                    case 'Comentarios':
+                                        url="comentarios/";
+                                    break;
+
+                                }
+
                                 return(
-                                    <Post key={ item.identificador } data={ item } url="post/" tipo={1} />
+                                    <Post key={ item.identificador } data={ item } url={url} tipo={1} />
                                 )
                             })
                         }

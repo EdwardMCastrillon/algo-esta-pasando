@@ -1,6 +1,7 @@
 import React from 'react'
 import FunctExtra from '../utils/functExtra'
 import Contenido from '../providers/contenidoStore'
+import Comentarios from '../providers/comentarioStore'
 import Recursos from '../providers/recursoStore'
 
 export default class Post extends React.Component {
@@ -21,9 +22,16 @@ export default class Post extends React.Component {
             p = this.props.params.id;
         }
         let cp,text;
+        debugger
         switch (this.props.route.path.replace("/","").replace("/","").replace(":id","")) {
             case "contenido":
             cp = Contenido.getContenido(p);
+            text = cp["Escribir/Párrafos/Texto"];
+            break;
+            case "comentarios":
+
+            cp = Comentarios.getComentario(p);
+            console.log(cp);
             text = cp["Escribir/Párrafos/Texto"];
             break;
             case "centro_de_recursos":
@@ -31,6 +39,7 @@ export default class Post extends React.Component {
             text = cp["EDITOR(Recurso)"];
             break;
         }
+
         this.setState({
             image: `https://tupale.co/milfs/images/secure/?file=full/${cp.AgregaunaImagen}`,
             titulo: cp.Título,
@@ -51,7 +60,7 @@ export default class Post extends React.Component {
             height: window.innerHeight - 50
         };
         var background = {
-            background: `rgb(234, 234, 234) url(${this.state.image}) center center`,
+            background: `rgb(234, 234, 234) url(${this.state.image}) top center`,
             'backgroundSize': 'cover'
         };
         let id = this.props.params.id

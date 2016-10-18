@@ -16,11 +16,8 @@ render((
     <Router history={browserHistory}>
         <Route component={App}>
             <IndexRoute component={Inicio} />
-            <Route path={RouterApp.home.path} component={ Inicio } />
-            <Route path={RouterApp.home.pathId} component={ RouterApp.home.handlerid } />
-
-            <Route path={RouterApp.contenido.path} component={RouterApp.contenido.handler}/>
-            <Route path={RouterApp.posContenido.path} component={RouterApp.posContenido.handler}/>
+            <Route path={RouterApp.home.path} component={ RouterApp.home.handler } />
+            <Route path={RouterApp.posContenido.path} component={ RouterApp.posContenido.handler } />
 
 
             <Route path={RouterApp.recursos.path} component={RouterApp.recursos.handler}/>
@@ -30,6 +27,8 @@ render((
 
             <Route path={RouterApp.perfiles.path} component={RouterApp.perfiles.handler}/>
             <Route path={RouterApp.perfil.path} component={RouterApp.perfil.handler}/>
+            <Route path={RouterApp.posComentarios.path} component={RouterApp.posComentarios.handler}/>
+            <Route path={RouterApp.map.path} component={RouterApp.map.handler}/>
         </Route>
     </Router>
 

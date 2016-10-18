@@ -1,4 +1,7 @@
 const FunctExtra = {
+    createMarkup(e,html){
+        return {__html: html};
+    },
     accentDecode(tx) {
         var rp = String(tx)
         rp = rp.replace(/&aacute;/g, 'á')

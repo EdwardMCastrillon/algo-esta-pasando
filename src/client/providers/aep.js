@@ -1,48 +1,40 @@
 import request from 'superagent'
 // Importamos los endpoints de el servidor propio
 import apiEndpoints from '../utils/apiEndpoints'
+// Direccion url del server
+const server = '/api'
 
-let _posts = {}
+let _AeP = {}
 let _initCalled = false
 let _changeListeners = []
 
-const server = '/api'
+const Aep = {
 
-const relacionAutor = {
+    init: function () {
+        if (_initCalled)
+        return
 
-    init: function (name) {
-        // if (_initCalled)
-        // return
-        _posts = {};
         _initCalled = true
-        getJSONRAutor(`${server}${apiEndpoints.relaciones}`,name, function (err, res) {
-            res.forEach(function (item, key) {
-                _posts[key+1] = item
-                _posts[key+1].keyId = key+1
-                _posts[key+1].maxId = res.length;
-            })
-
-            relacionAutor.notifyChange()
+        getJSONAeP(`${server}${apiEndpoints.aep}`, function (err, res) {
+            _AeP = res;
+            Aep.notifyChange()
         })
     },
-
     notifyChange: function () {
         _changeListeners.forEach(function (listener) {
             listener()
         })
     },
-    getRAutores: function () {
+    getAePs: function () {
         const array = []
-        for (const id in _posts)
-        array.push(_posts[id])
+        for (const id in _AeP)
+        array.push(_AeP[id])
 
         return array
     },
-
-    getRAutor: function (id) {
-        return _posts[id]
+    getAeP: function (id) {
+        return _AeP[id]
     },
-
     addChangeListener: function (listener) {
         _changeListeners.push(listener)
     },
@@ -51,11 +43,10 @@ const relacionAutor = {
     }
 }
 
-function getJSONRAutor(url,name, cb) {
-    console.log(url,{ autor: name});
+function getJSONAeP(url, cb) {
+
     request
-    .post(url)
-    .send({ autor: name})
+    .get(url)
     .set('Accept', 'application/json')
     .end(function(err, res){
         if (res.status === 404) {
@@ -67,4 +58,4 @@ function getJSONRAutor(url,name, cb) {
 }
 
 
-export default relacionAutor
+export default Aep

@@ -1,0 +1,79 @@
+.agenda{
+    padding: 0 1em;
+    h1 {
+        text-align: left;
+    }
+    .days{
+        > span {
+            span{
+                font-size: 12px;
+            }
+            cursor: pointer;
+            padding: 10px 1px;
+            margin: 4px 0;
+            text-align: center;
+            border-color: #d5d5d5;
+            border-width: 0 1px 0 0;
+            border-style: solid;
+            width: 36px;
+            font-size: 20px
+        }
+        .active{
+            color: red;
+        }
+    }
+    .event{
+        section {
+            position: relative;
+            margin: auto;
+            width: 260px;
+            background: transparent;
+            float: inherit;
+            height: 380px;
+            margin-bottom: 20px;
+            padding-top: 5px;
+            margin-top: 15px;
+            border-top: 1px solid #dedede;
+            .diaEvent {
+                position: absolute;
+                font-size: 22px;
+                span {
+                    display: block;
+                    font-size: 12px;
+                }
+            }
+            .nameEvent{
+                border-bottom: 1px solid #dedede;
+                padding-bottom: 5px;
+                margin-bottom: 15px;
+            }
+            .FigureEvent {
+                width: 210px;
+                height: 210px;
+                border-radius: 100%;
+                background-color: #efefef;
+                margin: 12px auto;
+            }
+
+            .organizador, .hora {
+                display: block;
+                font-size: 12px;
+            }
+            .hora {
+                font-size: 14px;
+            }
+            .contenIcon {
+                padding: 10px 0px;
+                i {
+                    cursor: pointer;
+                    position: relative;
+                    left: 0;
+                    font-size: 24px;
+                    border-radius: 50%;
+                    border: 2px solid;
+                    color: #5b5b5b;
+                }
+            }
+        }
+    }
+}

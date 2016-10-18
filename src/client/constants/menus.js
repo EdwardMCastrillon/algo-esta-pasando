@@ -1,12 +1,10 @@
 // 500px featured photos
 export default [
     "inicio",
-    "contenido",
     "mapa",
-    "ediciones_anteriores",
-    "centro_de_recursos",
     "autores",
+    "centro_de_recursos",
+    "ediciones_anteriores",
     "agenda",
-    "editorial"
 ];
 // "algo_esta_pasando",

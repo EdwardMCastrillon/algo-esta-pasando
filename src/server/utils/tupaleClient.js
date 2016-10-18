@@ -22,27 +22,31 @@ module.exports = {
             let endpoint = ''
             switch(type) {
                 case 'Perfiles':
-                    endpoint = endpoints.perfiles
-                    break;
+                endpoint = endpoints.perfiles
+                break;
 
                 case 'Agenda':
-                    endpoint = endpoints.agenda
-                    break;
+                endpoint = endpoints.agenda
+                break;
 
                 case 'Recursos':
-                    endpoint = endpoints.recursos
-                    break;
+                endpoint = endpoints.recursos
+                break;
 
                 case 'Contenidos':
-                    endpoint = endpoints.contenidos
-                    break;
+                endpoint = endpoints.contenidos
+                break;
                 case 'Comentarios':
-                    endpoint = endpoints.comentariosRedaccion
-                    break;
+                endpoint = endpoints.comentariosRedaccion
+                break;
+                case 'AeP':
+                endpoint = endpoints.aeP
+                console.log(endpoint);
+                break;
                 default:
-                    break; 
+                break;
             }
-            
+
             request({
                 url: endpoint,
                 method: 'GET',
@@ -52,7 +56,7 @@ module.exports = {
                 let orderData = extras.orderedKeys(body)
                 callback(null, orderData)
             })
-        })   
+        })
     },
     /*
     * Este metodo consume todas las API´s y almacena la información de manera temporal
@@ -99,7 +103,7 @@ module.exports = {
         }).catch((error) => {
             console.error(error)
         })
-        
+
         let recursosPromise = new Promise((resolve, reject) => {
             let endpoint = endpoints.recursos
             request({
@@ -188,12 +192,51 @@ module.exports = {
             let result = []
             if (! error) {
                 result = extras.filterByAutor(autor, JSON.parse(data))
-                callback(null, result) 
+                callback(null, result)
             } else {
                 console.log('Entro en la vble ', All)
                 result = extras.filterByAutor(autor, All)
                 callback(null, result)
             }
         })
+    },
+    getEdiciones(e,callback){
+
+        request({
+            url: endpoints.ediciones,
+            method: 'GET',
+            json: true
+        }, (error, response, body) => {
+            if (error) callback(error)
+
+            body = this.formatEdicion(body)
+            callback(null, body)
+        })
+    },
+    formatEdicion(body){
+        let menu = {}
+        for (var i = 1; i < 10; i++) {
+            if(body[0][`menu${i}name`]){
+                let name = body[0][`menu${i}name`].toLowerCase().replace(new RegExp(" ", 'g'), "_");
+                if(!menu[name]){
+                    menu[name] ={
+                        'color': body[0][`menu${i}color`],
+                        'path': body[0][`menu${i}path`],
+                        'name': body[0][`menu${i}name`]
+                    }
+                }
+            }
+        }
+        body[0].menu = menu;
+        return body;
     }
 }
+
+/*
+menu[body[0][`menu${i}name`] = {
+'color': body[0][`menu${i}color`],
+'path': body[0][`menu${i}path`],
+'name': body[0][`menu${i}name`]
+}
+
+*/

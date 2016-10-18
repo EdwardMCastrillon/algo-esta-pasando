@@ -1,48 +1,45 @@
 import request from 'superagent'
 // Importamos los endpoints de el servidor propio
 import apiEndpoints from '../utils/apiEndpoints'
+// Direccion url del server
+const server = `/api`
 
-let _posts = {}
+let _Edicion = []
 let _initCalled = false
 let _changeListeners = []
 
-const server = '/api'
+const Edicion = {
 
-const relacionAutor = {
+    init: function () {
+        if (_initCalled)
+        return
 
-    init: function (name) {
-        // if (_initCalled)
-        // return
-        _posts = {};
         _initCalled = true
-        getJSONRAutor(`${server}${apiEndpoints.relaciones}`,name, function (err, res) {
-            res.forEach(function (item, key) {
-                _posts[key+1] = item
-                _posts[key+1].keyId = key+1
-                _posts[key+1].maxId = res.length;
-            })
-
-            relacionAutor.notifyChange()
+        getJSONEdicion(`${server}${apiEndpoints.edicion}`, function (err, res) {
+            let r,l,init;
+            // res.forEach(function (item,k) {
+            //     _Edicion = item;
+            // })
+            _Edicion = res
+            Edicion.notifyChange();
         })
     },
-
     notifyChange: function () {
         _changeListeners.forEach(function (listener) {
             listener()
         })
     },
-    getRAutores: function () {
+    getEdicion: function () {
         const array = []
-        for (const id in _posts)
-        array.push(_posts[id])
+        debugger
+        for (const id in _Edicion)
+        array.push(_Edicion[id])
 
         return array
     },
-
-    getRAutor: function (id) {
-        return _posts[id]
-    },
-
+    // getContenido: function (id) {
+    //     return _Edicion[id]
+    // },
     addChangeListener: function (listener) {
         _changeListeners.push(listener)
     },
@@ -51,11 +48,9 @@ const relacionAutor = {
     }
 }
 
-function getJSONRAutor(url,name, cb) {
-    console.log(url,{ autor: name});
+function getJSONEdicion(url, cb) {
     request
-    .post(url)
-    .send({ autor: name})
+    .get(url)
     .set('Accept', 'application/json')
     .end(function(err, res){
         if (res.status === 404) {
@@ -67,4 +62,4 @@ function getJSONRAutor(url,name, cb) {
 }
 
 
-export default relacionAutor
+export default Edicion

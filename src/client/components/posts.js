@@ -4,13 +4,26 @@
 import React from 'react'
 import FunctExtra from '../utils/functExtra'
 import { Link } from 'react-router'
+import Edicion from '../constants/edicion'
 
 export default class Post extends React.Component {
     constructor (props) {
         super(props)
         this.state = {}
     }
-
+    componentWillMount(){
+        if(!this.state.background){
+            let colorgrid = Edicion.getEdicion()
+            if(colorgrid[0]){
+                colorgrid = colorgrid[0].coloritemgrid;
+                this.setState({
+                    background:{
+                        'background':`r${colorgrid}`,
+                    }
+                })
+            }
+        }
+    }
     render () {
 
         let url = `/${this.props.url}${this.props.data.id}`
@@ -34,12 +47,13 @@ export default class Post extends React.Component {
             description = FunctExtra.accentDecode(this.props.data['Resumen']);
             break;
         }
+
         return (
             <div>
                 <Link to={url}>
                     <figure className="targetPost">
                         <img src={`https://tupale.co/milfs/images/secure/?file=600/${img}`}/>
-                        <span>{name}</span>
+                        <span style={this.state.background}>{name}</span>
                     </figure>
                 </Link>
             </div>
