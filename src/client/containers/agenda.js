@@ -1,6 +1,7 @@
 import React from 'react'
 import { hashHistory } from 'react-router'
 import Post from '../components/posts'
+import TargetaAgenda from '../components/targetaAgenda'
 import Calendar from '../utils/calendar'
 
 import AgendaStore from '../providers/agendaStore'
@@ -63,14 +64,9 @@ export default class Inicio extends React.Component {
 
     }
     createMarkup(e,text){
-
         return {__html: text};
     }
-    renderEvento(item){
-        return(
-            <div>{item["Nombredelaactividad"]}</div>
-        )
-    }
+
     render () {
         let divStyle = {
             height: window.innerHeight - 50
@@ -98,15 +94,16 @@ export default class Inicio extends React.Component {
                         </div>
                         <div className="days flex wrap justify-center" dangerouslySetInnerHTML={this.createMarkup(this,this.state.calendar)}>
                         </div>
-                        <div>
+                        <div className="event flex justify-space-around wrap">
                             {
                                 this.state.posts[this.state.idMes].map(item => {
                                     if(item.Fecha){
-                                        document.getElementById(`${parseInt(item.Fecha.split("-")[2])}`)
+                                        document.getElementById(`event${parseInt(item.Fecha.split("-")[2])}`)
                                         .classList.add("active")
+                                        item.dia = `${parseInt(item.Fecha.split("-")[2])}`;
                                     }
                                     return(
-                                        <div>{item["Nombredelaactividad"]}</div>
+                                        <TargetaAgenda data={item}></TargetaAgenda>
                                     )
                                 })
                             }

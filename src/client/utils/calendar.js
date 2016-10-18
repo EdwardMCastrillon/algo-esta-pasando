@@ -31,7 +31,7 @@ const Calendar = {
         let html = ''
         var yyyy = new Date().getFullYear();
         for (var i = 0; i < dias; i++) {
-            html += `<span id="${i+1}" class="flex column"><span>${this.dia()[this.primerDia(`${i+1}/${mm-1}/${yyyy}`)]}</span>${i+1}</span>`;
+            html += `<span id="event${i+1}" class="flex column"><span>${this.dia()[this.primerDia(`${i+1}/${mm-1}/${yyyy}`)]}</span>${i+1}</span>`;
         }
 
         return html

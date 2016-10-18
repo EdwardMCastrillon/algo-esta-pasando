@@ -1,0 +1,48 @@
+[
+    {
+        "identificador": "d27ec88b5dd0d11fbeb1e67ebab2c2f7",
+        "EDNUMERO": 0,
+        "timestamp": 1471844126,
+        "proceso": "",
+        "id": 85943,
+        "orden": 0,
+        "FONT H1": "Times",
+        "FONT H2": "Courier",
+        "Título": "Imaginarios de paz",
+        "Resumen": "El observatorio en Red se desarrolla en una plataforma de comunicaci&oacute;n comunitaria llamada Algo est&aacute; pasando. Le posibilita a organizaciones, comunidades, colectivos y personas el intercambio, gesti&oacute;n y apropiaci&oacute;n del conocimiento. Es una plataforma virtual de c&oacute;digo abierto que dispone herramientas de creaci&oacute;n, investigaci&oacute;n y publicaci&oacute;n de contenidos relacionados a los temas que se proponen desde los Imaginarios de Paz, bajo una de las secciones espec&iacute;ficas del sitio.",
+        "logoOpen":"http://vignette1.wikia.nocookie.net/doblaje/images/c/cf/Jerry.png/revision/latest?cb=20140802202724&path-prefix=es",
+        "logoClosed":"https://bower.io/img/bower-logo.png",
+        "menu":{
+            inicio:{
+                name:"Inicio",
+                color:"#00d6ba",
+                path:""//esto seria la url del ese menu aun no implementado
+            },
+            mapa:{
+                name:"Mapa",
+                color:"#08d9ec",
+                path:""
+            },
+            autores:{
+                name:"Autores",
+                color:"#039cdd",
+                path:""
+            },
+            centro_de_recursos:{
+                name:"Centro de recursos",
+                color:"#0985c1",
+                path:""
+            },
+            ediciones_anteriores:{
+                name:"Ediciones anteriores",
+                color:"#247aaa",
+                path:""
+            },
+            agenda:{
+                name:"Agenda",
+                color:"#3f4f9f",
+                path:""
+            }
+        }
+    }
+]

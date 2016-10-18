@@ -6,7 +6,9 @@ const endpoints = {
     contenidos: 'https://tupale.co/milfs/api.php?id=118&tipo=simple',
     manifiestos: 'https://tupale.co/milfs/api.php?id=219&tipo=simple',
     bitacoras: 'https://tupale.co/milfs/api.php?id=208&tipo=simple',
-    comentariosRedaccion: 'https://tupale.co/milfs/api.php?id=213&tipo=simple'
+    comentariosRedaccion: 'https://tupale.co/milfs/api.php?id=213&tipo=simple',
+    ediciones:"https://tupale.co//milfs/api.php?id=207&tipo=simple",
+    aeP:"https://tupale.co//milfs/api.php?id=206&tipo=simple"
 }
 
 export default endpoints

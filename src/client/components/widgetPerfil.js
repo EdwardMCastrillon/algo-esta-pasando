@@ -5,7 +5,6 @@ import { Link } from 'react-router'
 export default class Perfil extends React.Component {
     constructor (props) {
         super(props)
-
     }
 
     render () {

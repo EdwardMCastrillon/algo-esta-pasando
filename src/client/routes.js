@@ -4,9 +4,10 @@ import Inicio from './containers/inicio'
 import Contenido from './containers/contenido'
 import Recursos from './containers/recursos'
 import Perfiles from './containers/perfiles'
+import Map from './containers/map'
 import Agenda from './containers/agenda'
 import Perfil from './components/perfil'
-import Post from './components/post'
+// import Post from './components/post'
 import PosContenido from './components/contenido'
 
 
@@ -38,6 +39,12 @@ export default {
         handler: PosContenido,
         id:118
     },
+    posComentarios: {
+        path: "/comentarios/:id",
+        method: "get",
+        handler: PosContenido,
+        id:118
+    },
     perfiles:{
         path: "/autores",
         method: "get",
@@ -49,5 +56,11 @@ export default {
         method: "get",
         handler: Perfil,
         id:"183A"
-    }
+    },
+    map:{
+        path: "/mapa",
+        method: "get",
+        handler: Map,
+        id:183
+    },
 };

@@ -27,6 +27,8 @@ render((
 
             <Route path={RouterApp.perfiles.path} component={RouterApp.perfiles.handler}/>
             <Route path={RouterApp.perfil.path} component={RouterApp.perfil.handler}/>
+            <Route path={RouterApp.posComentarios.path} component={RouterApp.posComentarios.handler}/>
+            <Route path={RouterApp.map.path} component={RouterApp.map.handler}/>
         </Route>
     </Router>
 

@@ -1,4 +1,5 @@
 import React from 'react'
+import Comentarios from '../providers/comentarioStore'
 import FunctExtra from '../utils/functExtra'
 import PerfilStore from '../providers/perfilStore'
 import RelacionAutor from '../providers/relacionAutor'
@@ -82,6 +83,7 @@ export default class Perfil extends React.Component {
     }
     componentWillMount() {
         this.loadPerfile()
+        Comentarios.init()
     }
     componentDidMount(){
         this.setState({
@@ -145,10 +147,11 @@ export default class Perfil extends React.Component {
                                         url="contenido/";
                                     break;
                                     case 'Comentarios':
-                                        url="";
+                                        url="comentarios/";
                                     break;
 
                                 }
+
                                 return(
                                     <Post key={ item.identificador } data={ item } url={url} tipo={1} />
                                 )
