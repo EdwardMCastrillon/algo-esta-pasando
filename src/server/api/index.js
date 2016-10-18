@@ -8,8 +8,10 @@ const extras = new Extras()
 
 //GET / => Carga de datos inicial
 Router.get('/', (req, res) => {
-    client.getAllData()
-    res.end()
+    client.getEdition((error, edicion) => {
+        client.getAllData()
+        res.json(edicion)
+    })
 })
 
 // GET /posts => Esta ruta permite obtener todos los posts disponibles

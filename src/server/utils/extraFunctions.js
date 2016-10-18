@@ -115,10 +115,23 @@ export default class Extras {
         })
         return result
     }
+    
+    getEdition (data) {
+        let mayor = 0
+        data.forEach((value, index) => {
+            if (parseInt(value['EDNUMERO']) > mayor) {
+                mayor = value['EDNUMERO']
+            }
+        })
+        return mayor
+    }
+
+
     replaceAll(search, replacement) {
         var target = this;
         return target.replace(new RegExp(search, 'g'), replacement);
     };
+
     customSearch (...query) {
         let [ edicion, autor, destacados ] = query
 
