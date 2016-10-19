@@ -28,7 +28,7 @@ export default class CustomComponent extends Component {
             lat: 51.505,
             lng: -0.09,
             zoom: 13,
-
+            markers:LocationMap.getLocations()
         }
     }
     componentWillUnmount() {
@@ -36,9 +36,9 @@ export default class CustomComponent extends Component {
     }
 
     updateData() {
-        // this.setState({
-        //     markers:LocationMap.getLocations()
-        // })
+        this.setState({
+            markers:LocationMap.getLocations()
+        })
     }
     componentDidMount(){
         LocationMap.addChangeListener(this.updateData.bind(this))
@@ -46,7 +46,8 @@ export default class CustomComponent extends Component {
         document.querySelector(".leaflet-container").style.height = `${window.innerHeight - 50}px`
     }
     componentWillMount(){
-        // LocationMap.init()
+        
+        LocationMap.init()
     }
     render () {
         const center = [this.state.lat, this.state.lng]

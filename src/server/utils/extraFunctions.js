@@ -150,20 +150,20 @@ export default class Extras {
                     }
                     switch(index) {
                         case 0:
-                            partial.type = 'Perfil'
-                            break
+                        partial.type = 'Perfil'
+                        break
                         case 1:
-                            partial.type = 'Agenda'
-                            break
+                        partial.type = 'Agenda'
+                        break
                         case 2:
-                            partial.type = 'Recurso'
-                            break
+                        partial.type = 'Recurso'
+                        break
                         case 3:
-                            partial.type = 'Contenido'
-                            break
+                        partial.type = 'Contenido'
+                        break
                         case 4:
-                            partial.type = 'Comentario'
-                            break
+                        partial.type = 'Comentario'
+                        break
                     }
                     result.push(partial)
                 }
@@ -181,7 +181,7 @@ export default class Extras {
         })
         return result
     }
-    
+
     getEdition (data) {
         let mayor = 0
         data.forEach((value, index) => {

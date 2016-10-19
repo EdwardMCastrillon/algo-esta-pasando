@@ -70,7 +70,9 @@ function getJSONEdicion(url, cb) {
 function getInitialData() {
     request
     .get('/api/')
-    .end()
+    .end(function(err, res){
+        console.log(res);
+    })
 }
 
 export default Edicion
