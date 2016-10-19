@@ -7,7 +7,8 @@ const endpoints = {
     contenidos:"/contenidos",
     edicion:"/ediciones",
     comentarios:"/comentarios",
-    aep:"/aeP"
+    aep:"/aeP",
+    infoMapa:"/infoMapa"
 }
 
 export default endpoints

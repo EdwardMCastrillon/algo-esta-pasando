@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { Map, TileLayer, Marker, Popup, PropTypes as MapPropTypes } from 'react-leaflet';
+import LocationMap from '../providers/infoMapa'
 
 const MyPopupMarker = ({ children, position }) => (
     <Marker position={position}><Popup><span>{children}</span></Popup></Marker>
@@ -27,9 +28,25 @@ export default class CustomComponent extends Component {
             lat: 51.505,
             lng: -0.09,
             zoom: 13,
+            markers:LocationMap.getLocations()
         }
     }
+    componentWillUnmount() {
+        LocationMap.removeChangeListener(this.updateData.bind(this))
+    }
 
+    updateData() {
+        this.setState({
+            markers:LocationMap.getLocations()
+        })
+    }
+    componentDidMount(){
+        LocationMap.addChangeListener(this.updateData.bind(this))
+        // this.getData()
+    }
+    componentWillMount(){
+        LocationMap.init()
+    }
     render () {
         const center = [this.state.lat, this.state.lng]
 
@@ -50,10 +67,9 @@ export default class CustomComponent extends Component {
                 <Map center={center} zoom={this.state.zoom}>
                     <TileLayer
                         attribution='&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                        url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
-                        />
+                        url='http://{s}.tile.osm.org/{z}/{x}/{y}.png' />
                     {
-                        markers.map(item => {
+                        this.state.markers.map(item => {
                             return(
                                 <Marker position={item.position} icon={baseballIcon}>
                                     <Popup>
