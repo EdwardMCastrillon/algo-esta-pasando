@@ -138,35 +138,34 @@ export default class Extras {
     }
 
     filterCoords (data) {
-        let result = {
-            'Perfiles': [],
-            'Agenda': [],
-            'Recursos': [],
-            'Contenidos': [],
-            'Comentarios': []
-        }
+        let result = []
         data.forEach((array, index) => {
-            console.log(array[0])
             array.forEach((obj, idx) => {
                 if (obj['Georreferencia(mapa)']) {
                     let [ latitud, longitud, num ] = obj['Georreferencia(mapa)'].split(' ')
+                    let partial = {
+                        latitud: latitud,
+                        longitud: longitud,
+                        type: ''
+                    }
                     switch(index) {
                         case 0:
-                            result.Perfiles.push({ latitud: latitud, longitud: longitud })
+                            partial.type = 'Perfil'
                             break
                         case 1:
-                            result.Agenda.push({ latitud: latitud, longitud: longitud })
+                            partial.type = 'Agenda'
                             break
                         case 2:
-                            result.Recursos.push({ latitud: latitud, longitud: longitud })
+                            partial.type = 'Recurso'
                             break
                         case 3:
-                            result.Contenidos.push({ latitud: latitud, longitud: longitud })
+                            partial.type = 'Contenido'
                             break
-                        case 1:
-                            result.Comentarios.push({ latitud: latitud, longitud: longitud })
+                        case 4:
+                            partial.type = 'Comentario'
                             break
                     }
+                    result.push(partial)
                 }
             })
         })
@@ -201,6 +200,9 @@ export default class Extras {
 
     customSearch (...query) {
         let [ edicion, autor, destacados ] = query
+        if (edicion != "" && autor != "" && destacados != "") {
+
+        }
 
     }
 
