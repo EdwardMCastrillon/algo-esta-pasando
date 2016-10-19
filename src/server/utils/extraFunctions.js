@@ -144,8 +144,8 @@ export default class Extras {
                 if (obj['Georreferencia(mapa)']) {
                     let [ latitud, longitud, num ] = obj['Georreferencia(mapa)'].split(' ')
                     let partial = {
-                        latitud: latitud,
-                        longitud: longitud,
+                        lat: latitud,
+                        lng: longitud,
                         type: ''
                     }
                     switch(index) {

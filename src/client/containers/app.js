@@ -34,11 +34,9 @@ export default class App extends React.Component {
         })
     }
     init(){
-        console.log("entraa a init");
         this.setState({
             load:Init.getInit()
         })
-        console.log(this.state.load);
     }
     componentDidMount(){
         Init.addChangeListener(this.init.bind(this))
