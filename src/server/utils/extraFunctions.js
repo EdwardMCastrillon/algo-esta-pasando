@@ -142,7 +142,7 @@ export default class Extras {
         data.forEach((array, index) => {
             array.forEach((obj, idx) => {
                 if (obj['Georreferencia(mapa)']) {
-                    let [ latitud, longitud, num ] = obj['Georreferencia(mapa)'].split(' ')
+                    let [ longitud, latitud, num ] = obj['Georreferencia(mapa)'].split(' ')
                     let partial = {
                         lat: latitud,
                         lng: longitud,
