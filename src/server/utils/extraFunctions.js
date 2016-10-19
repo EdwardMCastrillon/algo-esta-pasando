@@ -115,6 +115,63 @@ export default class Extras {
         })
         return result
     }
+
+    formatEdicion(body){
+        let menu = {}
+        for (var r = 0; r < body.length; r++) {
+            for (var i = 1; i < 10; i++) {
+                if(body[r][`menu${i}name`]){
+                    let name = body[r][`menu${i}name`].toLowerCase().replace(new RegExp(" ", 'g'), "_");
+                    if(!menu[name]){
+                        menu[name] ={
+                            'color': body[r][`menu${i}color`],
+                            'path': body[r][`menu${i}path`],
+                            'name': body[r][`menu${i}name`]
+                        }
+                    }
+                }
+            }
+            body[r].menu = menu;
+        }
+
+        return body;
+    }
+
+    filterCoords (data) {
+        let result = {
+            'Perfiles': [],
+            'Agenda': [],
+            'Recursos': [],
+            'Contenidos': [],
+            'Comentarios': []
+        }
+        data.forEach((array, index) => {
+            console.log(array[0])
+            array.forEach((obj, idx) => {
+                if (obj['Georreferencia(mapa)']) {
+                    let [ latitud, longitud, num ] = obj['Georreferencia(mapa)'].split(' ')
+                    switch(index) {
+                        case 0:
+                            result.Perfiles.push({ latitud: latitud, longitud: longitud })
+                            break
+                        case 1:
+                            result.Agenda.push({ latitud: latitud, longitud: longitud })
+                            break
+                        case 2:
+                            result.Recursos.push({ latitud: latitud, longitud: longitud })
+                            break
+                        case 3:
+                            result.Contenidos.push({ latitud: latitud, longitud: longitud })
+                            break
+                        case 1:
+                            result.Comentarios.push({ latitud: latitud, longitud: longitud })
+                            break
+                    }
+                }
+            })
+        })
+        return result
+    }
     
     getEdition (data) {
         let mayor = 0
