@@ -3,17 +3,21 @@
 */
 import request from 'request'
 import levelup from 'level'
+import events from 'events'
 import endpoints from '../utils/endpoints'
 import Extras from '../utils/extraFunctions'
 
 const extras = new Extras()
 const db = levelup('../temp')
+const EventEmitter = new events.EventEmitter
 let All = []
 db.del('Perfiles')
 db.del('Agenda')
 db.del('Contenidos')
 db.del('Comentarios')
 db.del('Recursos')
+
+
 // Funciones para consultar la API de tupale.
 module.exports = {
     /*
@@ -64,7 +68,15 @@ module.exports = {
     /*
     * Este metodo consume todas las API´s y almacena la información de manera temporal
     */
-    getAllData: () => {
+    getAllData: (callback) => {
+        EventEmitter.removeListener('finish', () => {})
+        let total = 0
+        EventEmitter.on('finish', (type) => {
+            total = total + 1
+            if (total === 5) {
+                callback(null, 'ok')
+            }
+        })
         let perfilesPromise = new Promise((resolve, reject) => {
             let endpoint = endpoints.perfiles
             request({
@@ -82,6 +94,7 @@ module.exports = {
             db.put('Perfiles', JSON.stringify(inHtml))
             All[0] = inHtml
             db.put('All', JSON.stringify(All))
+            EventEmitter.emit('finish', 'Perfiles')
         }).catch((error) => {
             console.error(error)
         })
@@ -103,6 +116,7 @@ module.exports = {
             db.put('Agenda', JSON.stringify(inHtml))
             All[1] = inHtml
             db.put('All', JSON.stringify(All))
+            EventEmitter.emit('finish', 'Agenda')
         }).catch((error) => {
             console.error(error)
         })
@@ -124,6 +138,7 @@ module.exports = {
             db.put('Recursos', JSON.stringify(inHtml))
             All[2] = inHtml
             db.put('All', JSON.stringify(All))
+            EventEmitter.emit('finish', 'Recursos')
         }).catch((error) => {
             console.error(error)
         })
@@ -145,6 +160,7 @@ module.exports = {
             db.put('Contenidos', JSON.stringify(inHtml))
             All[3] = inHtml
             db.put('All', JSON.stringify(All))
+            EventEmitter.emit('finish', 'Contenidos')
         }).catch((error) => {
             console.error(error)
         })
@@ -166,6 +182,7 @@ module.exports = {
             db.put('Comentarios', JSON.stringify(inHtml))
             All[4] = inHtml
             db.put('All', JSON.stringify(All))
+            EventEmitter.emit('finish', 'Comentarios')
         }).catch((error) => {
             console.error(error)
         })

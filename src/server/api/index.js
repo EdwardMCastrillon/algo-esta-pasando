@@ -8,9 +8,9 @@ const extras = new Extras()
 
 //GET / => Carga de datos inicial
 Router.get('/', (req, res) => {
-    client.getEdition((error, edicion) => {
-        client.getAllData()
-        res.json(edicion)
+    client.getAllData((error, response) => {
+        if (error) res.sendStatus(500).json(error)
+        res.json(response)
     })
 })
 
