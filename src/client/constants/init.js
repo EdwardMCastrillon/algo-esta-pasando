@@ -4,14 +4,14 @@ import apiEndpoints from '../utils/apiEndpoints'
 // Direccion url del server
 const server = `/api`
 
-let _Init = []
+let _Init = false
 let _initCalled = false
 let _changeListeners = []
 // localStorage.setItem("edicion")
 // localStorage.getItem("edicion")
 const Init = {
     init: function () {
-        getJSONInit(`${server}${apiEndpoints.edicion}`, function (err, res) {
+        getJSONInit(`${server}`, function (err, res) {
             _Init = res;
             Init.notifyChange();
         })
@@ -35,7 +35,7 @@ const Init = {
 
 function getJSONInit(url, cb) {
     request
-    .get('/api')
+    .get(url)
     // .set('Accept', 'application/json')
     .end(function(err, res){
         console.log(res);
