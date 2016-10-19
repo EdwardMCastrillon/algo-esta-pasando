@@ -3,13 +3,12 @@ import { hashHistory } from 'react-router'
 import Post from '../components/posts'
 import Edicion from '../constants/edicion'
 
-export default class Contenido extends React.Component {
+export default class Ediciones extends React.Component {
     constructor (props) {
         super(props)
         this.state = ({
             posts:Edicion.getEdiciones()
         })
-
     }
     componentWillUnmount() {
         Edicion.removeChangeListener(this.updateData.bind(this))

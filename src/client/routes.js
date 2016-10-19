@@ -4,7 +4,7 @@ import Inicio from './containers/inicio'
 import Contenido from './containers/contenido'
 import Recursos from './containers/recursos'
 import Perfiles from './containers/perfiles'
-import Map from './containers/map'
+import Mapa from './containers/map'
 import Ediciones from './containers/ediciones'
 import Agenda from './containers/agenda'
 import Perfil from './components/perfil'
@@ -60,7 +60,7 @@ export default {
     map:{
         path: "/mapa",
         method: "get",
-        handler: Map,
+        handler: Mapa,
         id:183
     },
     ediciones:{

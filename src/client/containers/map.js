@@ -1,54 +1,89 @@
-import React from 'react'
-import { hashHistory } from 'react-router'
-import { Map, MarkerGroup } from 'react-d3-map'
-var topojson = require('topojson');
+import React, { Component, PropTypes } from 'react'
+import { Map, TileLayer, Marker, Popup, PropTypes as MapPropTypes } from 'react-leaflet';
+import LocationMap from '../providers/infoMapa'
 
-export default class Contenido extends React.Component {
-    constructor (props) {
-        super(props)
+const MyPopupMarker = ({ children, position }) => (
+    <Marker position={position}><Popup><span>{children}</span></Popup></Marker>
+)
+MyPopupMarker.propTypes = {
+    children: MapPropTypes.children,
+    position: MapPropTypes.latlng,
+}
+
+const MyMarkersList = ({ markers }) => {
+    console.log(markers);
+    const items = markers.map(({ key, props }) => (
+        <MyPopupMarker key={key}>{props}</MyPopupMarker>
+    ))
+    return <div style={{display: 'none'}}>{items}</div>
+}
+MyMarkersList.propTypes = {
+    markers: PropTypes.array.isRequired,
+}
+// markers:LocationMap.getLocations()
+export default class CustomComponent extends Component {
+    constructor () {
+        super()
+        this.state = {
+            lat: 51.505,
+            lng: -0.09,
+            zoom: 13,
+            markers:LocationMap.getLocations()
+        }
     }
-    componentWillMount(){
+    componentWillUnmount() {
+        LocationMap.removeChangeListener(this.updateData.bind(this))
+    }
 
+    updateData() {
+        this.setState({
+            markers:LocationMap.getLocations()
+        })
     }
     componentDidMount(){
-
+        LocationMap.addChangeListener(this.updateData.bind(this))
+        // this.getData()
+        document.querySelector(".leaflet-container").style.height = `${window.innerHeight - 50}px`
     }
-    popupContent(d) { return d.properties.text; }
+    componentWillMount(){
+        
+        LocationMap.init()
+    }
     render () {
-        var data = {
-            "type": "Feature",
-            "properties": {
-                "text": "this is a Point!!!"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [122, 23.5]
-            }
-        }
+        const center = [this.state.lat, this.state.lng]
 
-        var width = 700;
-        var height = 700;
-        // set your zoom scale
-        var scale = 1200 * 5;
-        // min and max of your zoom scale
-        var scaleExtent = [1 << 12, 1 << 13]
-        // set your center point
-        var center = [122, 23.5];
-        // set your popupContent
-
-
-        return(
+        const markers = [
+            {key: 'marker1', position: {lat:51.5, lng:-0.1}, children: 'My first popup'},
+            {key: 'marker2', position: {lat:51.51, lng:-0.1}, children: 'My second popup'},
+            {key: 'marker3', position: {lat:51.49, lng:-0.05}, children: 'My third popup'},
+        ]
+        var baseballIcon = L.icon({
+            iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-icon-2x.png',
+            iconSize: [32, 37],
+            iconAnchor: [16, 37],
+            popupAnchor: [0, -28]
+        });
+        return (
             <div className="P-B-ContentPost">
-
+                <Map center={center} zoom={this.state.zoom}>
+                    <TileLayer
+                        attribution='&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                        url='http://{s}.tile.osm.org/{z}/{x}/{y}.png' />
+                    {
+                        markers.map(item => {
+                            return(
+                                <Marker position={item.position} icon={baseballIcon}>
+                                    <Popup>
+                                        <div>
+                                            {item.children}
+                                        </div>
+                                    </Popup>
+                                </Marker>
+                            )
+                        })
+                    }
+                </Map>
             </div>
         )
     }
 }
-/*
-<Map width= {width} height= {height} scale= {scale} scaleExtent= {scaleExtent} center= {center} >
-    <MarkerGroup key= {"polygon-test"}
-        data= {data}
-        popupContent= {this.popupContent.bind(this)}
-        markerClass= {"your-marker-css-class"} />
-</Map>
-*/

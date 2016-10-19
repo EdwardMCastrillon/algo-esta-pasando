@@ -4,7 +4,7 @@ import Contenido from '../providers/contenidoStore'
 import Comentarios from '../providers/comentarioStore'
 import Recursos from '../providers/recursoStore'
 
-export default class Post extends React.Component {
+export default class PostContenido extends React.Component {
     constructor (props) {
         super(props)
         this.state = {

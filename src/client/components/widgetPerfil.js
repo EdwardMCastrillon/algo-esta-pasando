@@ -2,7 +2,7 @@ import React from 'react'
 import FunctExtra from '../utils/functExtra'
 import { Link } from 'react-router'
 
-export default class Perfil extends React.Component {
+export default class WPerfil extends React.Component {
     constructor (props) {
         super(props)
     }

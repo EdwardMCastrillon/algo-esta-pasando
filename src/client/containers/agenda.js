@@ -8,7 +8,7 @@ import AgendaStore from '../providers/agendaStore'
 import '../style/agenda.scss'
 import '../style/select.scss'
 
-export default class Inicio extends React.Component {
+export default class Agenda extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
