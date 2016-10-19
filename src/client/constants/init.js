@@ -11,10 +11,8 @@ let _changeListeners = []
 // localStorage.getItem("edicion")
 const Init = {
     init: function () {
-        if (_initCalled)
-        return
-        _initCalled = true
         getJSONInit(`${server}${apiEndpoints.edicion}`, function (err, res) {
+            _Init = res;
             Init.notifyChange();
         })
     },
@@ -24,6 +22,7 @@ const Init = {
         })
     },
     getInit:function(){
+        console.log(_Init);
         return _Init;
     },
     addChangeListener: function (listener) {
@@ -36,9 +35,10 @@ const Init = {
 
 function getJSONInit(url, cb) {
     request
-    .get('/api/')
-    .set('Accept', 'application/json')
+    .get('/api')
+    // .set('Accept', 'application/json')
     .end(function(err, res){
+        console.log(res);
         if (res.status === 404) {
             cb(new Error('not found'))
         } else {
@@ -46,12 +46,4 @@ function getJSONInit(url, cb) {
         }
     });
 }
-// function getInitialData() {
-//     request
-//     .get('/api/')
-//     .end(function(err, res){
-//         console.log(res);
-//     })
-// }
-
 export default Init

@@ -34,7 +34,7 @@ export default class App extends React.Component {
         })
     }
     init(){
-        console.log("init");
+        console.log("entraa a init");
         this.setState({
             load:Init.getInit()
         })
@@ -48,7 +48,7 @@ export default class App extends React.Component {
         return {__html: text};
     }
     render () {
-        if(this.state.edicion){
+        if(this.state.edicion && this.state.load){
             let component = "div",transitionName="",
             transitionEnterTimeout=10,transitionLeaveTimeout=10;
 
