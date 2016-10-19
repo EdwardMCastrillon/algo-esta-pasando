@@ -198,7 +198,7 @@ export default class Extras {
         return target.replace(new RegExp(search, 'g'), replacement);
     };
 
-    customSearch (data, ...query) {
+    customSearch (data, query) {
         let [ edicion, autor, destacados ] = query
         let result = []
         data.forEach((array, index) => {
@@ -233,7 +233,8 @@ export default class Extras {
                     }
 
                     // Seccion Recursos
-                    if (obj['Otrosautores'] && obj['Otrosautores'].trim() == autor) {
+                    if (obj['Otrosautores']) {
+                        let autores = obj['Otrosautores'].split(' ')
                         result.push(obj)
                     }
                 }
@@ -241,7 +242,7 @@ export default class Extras {
 
             })
         })
-
+        return result
     }
 
 }

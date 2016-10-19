@@ -131,7 +131,10 @@ Router.get('/search', (req, res) => {
     let params = [req.query.edicion, req.query.autor, req.query.destacados]
     console.log("search  ",params);
     // Spread the params iterable collection
-    let result = client.customSearch(...params)
+    client.customSearch(params, (error, data) => {
+        if (error) res.sendStatus(500).json(error)
+        res.json(data)
+    })
 })
 
 export default Router
