@@ -225,6 +225,17 @@ module.exports = {
                 callback(new Error('No hay datos para encontrar coordenadas, por favor ingrese nuevamente a la página'))
             }
         })
+    },
+
+    getDataByEdition: (edicion, callback) => {
+        db.get('Contenidos', { fillCache: false }, (error, data) => {
+            if (! error) {
+                let result = extras.filterByEdition(edicion, JSON.parse(data))
+                callback(null, result)
+            } else {
+                callback(error)
+            }
+        })
     }
     
 }

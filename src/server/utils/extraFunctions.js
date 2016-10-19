@@ -172,6 +172,16 @@ export default class Extras {
         })
         return result
     }
+
+    filterByEdition (edicion, data) {
+        let result = []
+        data.forEach((obj, index) => {
+            if (obj['Número(Edición)deAlgoestápasando'] && obj['Número(Edición)deAlgoestápasando'].trim() === edicion) {
+                result.push(obj)
+            }
+        })
+        return result
+    }
     
     getEdition (data) {
         let mayor = 0
