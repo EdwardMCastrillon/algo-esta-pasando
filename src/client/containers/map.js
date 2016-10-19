@@ -39,6 +39,7 @@ export default class CustomComponent extends Component {
         this.setState({
             markers:LocationMap.getLocations()
         })
+        console.log(this.state.markers);
     }
     componentDidMount(){
         LocationMap.addChangeListener(this.updateData.bind(this))
@@ -46,7 +47,7 @@ export default class CustomComponent extends Component {
         document.querySelector(".leaflet-container").style.height = `${window.innerHeight - 50}px`
     }
     componentWillMount(){
-        
+
         LocationMap.init()
     }
     render () {
@@ -63,6 +64,7 @@ export default class CustomComponent extends Component {
             iconAnchor: [16, 37],
             popupAnchor: [0, -28]
         });
+        console.log(markers[0].position);
         return (
             <div className="P-B-ContentPost">
                 <Map center={center} zoom={this.state.zoom}>
@@ -70,12 +72,13 @@ export default class CustomComponent extends Component {
                         attribution='&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                         url='http://{s}.tile.osm.org/{z}/{x}/{y}.png' />
                     {
-                        markers.map(item => {
+                        this.state.markers.map(item => {
+                            console.log(item);
                             return(
-                                <Marker position={item.position} icon={baseballIcon}>
+                                <Marker position={item} icon={baseballIcon}>
                                     <Popup>
                                         <div>
-                                            {item.children}
+                                            pruebaaa
                                         </div>
                                     </Popup>
                                 </Marker>
@@ -87,3 +90,10 @@ export default class CustomComponent extends Component {
         )
     }
 }
+
+
+/*
+
+
+
+*/

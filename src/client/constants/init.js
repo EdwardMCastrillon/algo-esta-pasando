@@ -7,8 +7,6 @@ const server = `/api`
 let _Init = false
 let _initCalled = false
 let _changeListeners = []
-// localStorage.setItem("edicion")
-// localStorage.getItem("edicion")
 const Init = {
     init: function () {
         getJSONInit(`${server}`, function (err, res) {
@@ -22,7 +20,6 @@ const Init = {
         })
     },
     getInit:function(){
-        console.log(_Init);
         return _Init;
     },
     addChangeListener: function (listener) {
@@ -36,9 +33,7 @@ const Init = {
 function getJSONInit(url, cb) {
     request
     .get(url)
-    // .set('Accept', 'application/json')
     .end(function(err, res){
-        console.log(res);
         if (res.status === 404) {
             cb(new Error('not found'))
         } else {
