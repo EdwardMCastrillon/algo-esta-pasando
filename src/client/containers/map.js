@@ -20,7 +20,7 @@ const MyMarkersList = ({ markers }) => {
 MyMarkersList.propTypes = {
     markers: PropTypes.array.isRequired,
 }
-
+// markers:LocationMap.getLocations()
 export default class CustomComponent extends Component {
     constructor () {
         super()
@@ -28,7 +28,7 @@ export default class CustomComponent extends Component {
             lat: 51.505,
             lng: -0.09,
             zoom: 13,
-            markers:LocationMap.getLocations()
+
         }
     }
     componentWillUnmount() {
@@ -36,16 +36,17 @@ export default class CustomComponent extends Component {
     }
 
     updateData() {
-        this.setState({
-            markers:LocationMap.getLocations()
-        })
+        // this.setState({
+        //     markers:LocationMap.getLocations()
+        // })
     }
     componentDidMount(){
         LocationMap.addChangeListener(this.updateData.bind(this))
         // this.getData()
+        document.querySelector(".leaflet-container").style.height = `${window.innerHeight - 50}px`
     }
     componentWillMount(){
-        LocationMap.init()
+        // LocationMap.init()
     }
     render () {
         const center = [this.state.lat, this.state.lng]
@@ -61,7 +62,6 @@ export default class CustomComponent extends Component {
             iconAnchor: [16, 37],
             popupAnchor: [0, -28]
         });
-
         return (
             <div className="P-B-ContentPost">
                 <Map center={center} zoom={this.state.zoom}>
@@ -69,7 +69,7 @@ export default class CustomComponent extends Component {
                         attribution='&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                         url='http://{s}.tile.osm.org/{z}/{x}/{y}.png' />
                     {
-                        this.state.markers.map(item => {
+                        markers.map(item => {
                             return(
                                 <Marker position={item.position} icon={baseballIcon}>
                                     <Popup>
