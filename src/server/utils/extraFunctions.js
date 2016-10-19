@@ -199,13 +199,46 @@ export default class Extras {
     };
 
     customSearch (data, ...query) {
-        let result = []
         let [ edicion, autor, destacados ] = query
+        let result = []
         data.forEach((array, index) => {
             array.forEach((obj, idx) => {
+                // Si llegaron los 3 parametros
                 if (edicion != "" && autor != "" && destacados != "") {
-                    
+                    // Seccion Agenda 
+
+
+                    // Seccion Contenidos
+                    if (obj['Autor'] && obj['Autor'].trim() == autor) {
+                        result.push(obj)
+                    }
+                    if (obj['Número(Edición)deAlgoestápasando'] && obj['Número(Edición)deAlgoestápasando'].trim() == edicion) {
+                        result.push(obj)
+                    }
+
+                    // Seccion Recursos
+                    if (obj['Otrosautores'] && obj['Otrosautores'].trim() == autor) {
+                        result.push(obj)
+                    }
+                // Si llegaron edicion y autor.
+                } else if (edicion != "" && autor != "" && destacados == "") {
+                    // Seccion Agenda
+
+                    // Seccion Contenidos
+                    if (obj['Autor'] && obj['Autor'].trim() == autor) {
+                        result.push(obj)
+                    }
+                    if (obj['Número(Edición)deAlgoestápasando'] && obj['Número(Edición)deAlgoestápasando'].trim() == edicion) {
+                        result.push(obj)
+                    }
+
+                    // Seccion Recursos
+                    if (obj['Otrosautores'] && obj['Otrosautores'].trim() == autor) {
+                        result.push(obj)
+                    }
                 }
+
+
             })
         })
 
