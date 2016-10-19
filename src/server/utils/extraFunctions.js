@@ -198,11 +198,16 @@ export default class Extras {
         return target.replace(new RegExp(search, 'g'), replacement);
     };
 
-    customSearch (...query) {
+    customSearch (data, ...query) {
+        let result = []
         let [ edicion, autor, destacados ] = query
-        if (edicion != "" && autor != "" && destacados != "") {
-
-        }
+        data.forEach((array, index) => {
+            array.forEach((obj, idx) => {
+                if (edicion != "" && autor != "" && destacados != "") {
+                    
+                }
+            })
+        })
 
     }
 

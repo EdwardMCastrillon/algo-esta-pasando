@@ -16,7 +16,7 @@ db.del('Agenda')
 db.del('Contenidos')
 db.del('Comentarios')
 db.del('Recursos')
-
+db.del('All')
 
 // Funciones para consultar la API de tupale.
 module.exports = {
@@ -258,7 +258,7 @@ module.exports = {
     customSearch: (query, callback) => {
         db.get('All', { fillCache: false }, (error, data) => {
             if (! error) {
-                let result = extras.customSearch(query, JSON.parse(data))
+                let result = extras.customSearch(JSON.parse(data), query)
                 callback(null, result)
             } else {
                 callback(error)
