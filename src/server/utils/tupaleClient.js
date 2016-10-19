@@ -27,29 +27,25 @@ module.exports = {
             console.log('Entro a consultar')
             switch(type) {
                 case 'Perfiles':
-                endpoint = endpoints.perfiles
-                break;
-
+                    endpoint = endpoints.perfiles
+                    break;
                 case 'Agenda':
-                endpoint = endpoints.agenda
-                break;
-
+                    endpoint = endpoints.agenda
+                    break;
                 case 'Recursos':
-                endpoint = endpoints.recursos
-                break;
-
+                    endpoint = endpoints.recursos
+                    break;
                 case 'Contenidos':
-                endpoint = endpoints.contenidos
-                break;
+                    endpoint = endpoints.contenidos
+                    break;
                 case 'Comentarios':
-                endpoint = endpoints.comentariosRedaccion
-                break;
+                    endpoint = endpoints.comentariosRedaccion
+                    break;
                 case 'AeP':
-                endpoint = endpoints.aeP
-                console.log(endpoint);
-                break;
+                    endpoint = endpoints.aeP
+                    break;
                 default:
-                break;
+                    break;
             }
 
             request({
@@ -206,8 +202,8 @@ module.exports = {
             }
         })
     },
-    getEdiciones(e,callback){
 
+    getEdiciones(e,callback){
         request({
             url: endpoints.ediciones,
             method: 'GET',
@@ -215,37 +211,31 @@ module.exports = {
         }, (error, response, body) => {
             if (error) callback(error)
 
-            body = this.formatEdicion(body)
+            body = extras.formatEdicion(body)
             callback(null, body)
         })
     },
-    formatEdicion(body){
-        let menu = {}
-        for (var r = 0; r < body.length; r++) {
-            for (var i = 1; i < 10; i++) {
-                if(body[r][`menu${i}name`]){
-                    let name = body[r][`menu${i}name`].toLowerCase().replace(new RegExp(" ", 'g'), "_");
-                    if(!menu[name]){
-                        menu[name] ={
-                            'color': body[r][`menu${i}color`],
-                            'path': body[r][`menu${i}path`],
-                            'name': body[r][`menu${i}name`]
-                        }
-                    }
-                }
+
+    getMapCoords: (callback) => {
+        db.get('All', { fillCache: false }, (error, data) => {
+            if (! error) {
+                let result = extras.filterCoords(JSON.parse(data))
+                callback(null, result)
+            } else {
+                callback(new Error('No hay datos para encontrar coordenadas, por favor ingrese nuevamente a la página'))
             }
-            body[r].menu = menu;
-        }
+        })
+    },
 
-        return body;
+    getDataByEdition: (edicion, callback) => {
+        db.get('Contenidos', { fillCache: false }, (error, data) => {
+            if (! error) {
+                let result = extras.filterByEdition(edicion, JSON.parse(data))
+                callback(null, result)
+            } else {
+                callback(error)
+            }
+        })
     }
+    
 }
-
-/*
-menu[body[0][`menu${i}name`] = {
-'color': body[0][`menu${i}color`],
-'path': body[0][`menu${i}path`],
-'name': body[0][`menu${i}name`]
-}
-
-*/
