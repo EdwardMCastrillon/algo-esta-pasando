@@ -5,7 +5,7 @@ import Comentarios from '../providers/comentarioStore'
 import Recursos from '../providers/recursoStore'
 import Aep from '../providers/aep'
 
-export default class PostContenido extends React.Component {
+export default class PostContenido1 extends React.Component {
     constructor (props) {
         super(props)
         this.state = {
@@ -13,9 +13,7 @@ export default class PostContenido extends React.Component {
             titulo: ''
         }
     }
-
     componentWillMount(id) {
-
         // // Se captura el id del post que llega como parametro en la ruta
         let p;
         if(id){
@@ -46,6 +44,7 @@ export default class PostContenido extends React.Component {
             }
             break;
             case "aep":
+            case "aep_":
             cp = Aep.getAeP(p);
             text = cp["EDITOR(Recurso)"];
             break;

@@ -60,7 +60,7 @@ export default class App extends React.Component {
                     <Nav edicion={this.state.edicion}/>
                     <div className="Page-body">
                         <div className="Page-body-top">
-                            <Buscar/>
+                            <Buscar route={this.props}/>
                         </div>
                         {this.props.children}
                     </div>

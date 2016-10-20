@@ -1,35 +1,21 @@
 import React, { Component, PropTypes } from 'react'
-import { Map, TileLayer, Marker, Popup, PropTypes as MapPropTypes } from 'react-leaflet';
+import {  Map, TileLayer, Marker, Popup  } from 'react-leaflet';
 import LocationMap from '../providers/infoMapa'
 import IconPerfil from '../img/perfil.png'
 import IconEvent from '../img/wikicuidad.png'
 import IconContebido from '../img/los_objetos.png'
 // import IconContebido from '../img/rayemos.png'
-
-
-
-const MyPopupMarker = ({ children, position }) => (
-    <Marker position={position}><Popup><span>{children}</span></Popup></Marker>
-)
-MyPopupMarker.propTypes = {
-    children: MapPropTypes.children,
-    position: MapPropTypes.latlng,
-}
-
-const MyMarkersList = ({ markers }) => {
-    console.log(markers);
-    const items = markers.map(({ key, props }) => (
-        <MyPopupMarker key={key}>{props}</MyPopupMarker>
-    ))
-    return <div style={{display: 'none'}}>{items}</div>
-}
-MyMarkersList.propTypes = {
-    markers: PropTypes.array.isRequired,
-}
+const MyMarker = ({ map, position, icon }) => (
+    <Marker map={map} position={position} icon={icon}>
+        <Popup>
+            <span>A pretty CSS3 popup.<br/>Easily customizable.</span>
+        </Popup>
+    </Marker>
+);
 // markers:LocationMap.getLocations()
 export default class CustomComponent extends Component {
-    constructor () {
-        super()
+    constructor (props) {
+        super(props)
         this.state = {
             lat: 7.2700951,
             lng: -75.5835595,
@@ -87,6 +73,7 @@ export default class CustomComponent extends Component {
         // Recurso
         // Contenido
         // Comentario
+
         return (
             <div className="P-B-ContentPost">
                 <Map center={center} zoom={this.state.zoom}>
@@ -105,20 +92,13 @@ export default class CustomComponent extends Component {
                                 case "Contenido":
                                 case "Comentario":
                                 case "Recurso":
-                                    icon = IconCont;
-                                    break;
+                                icon = IconCont;
+                                break;
                                 default:
                                 icon = baseballIcon;
                             }
-
                             return(
-                                <Marker position={item} icon={icon}>
-                                    <Popup>
-                                        <div>
-                                            {item.type}
-                                        </div>
-                                    </Popup>
-                                </Marker>
+                                <MyMarker icon={icon} position={item} />
                             )
                         })
                     }
@@ -132,5 +112,20 @@ export default class CustomComponent extends Component {
 /*
 
 
+<div>
+<a href="#">
+<figure class="targetPost">
+<img src="https://tupale.co/milfs/images/secure/?file=600/ccd6152ef2a9dd1b04433efc709ad272.jpg"/>
+<span>Morocho</span>
+</figure>
+</a>
+</div>
 
+
+
+<Marker position={item} icon={icon}>
+    <Popup>
+        <span>A pretty CSS3 popup.<br/>Easily customizable.</span>
+    </Popup>
+</Marker>
 */
