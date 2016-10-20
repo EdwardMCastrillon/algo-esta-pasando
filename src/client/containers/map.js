@@ -1,6 +1,12 @@
 import React, { Component, PropTypes } from 'react'
 import { Map, TileLayer, Marker, Popup, PropTypes as MapPropTypes } from 'react-leaflet';
 import LocationMap from '../providers/infoMapa'
+import IconPerfil from '../img/perfil.png'
+import IconEvent from '../img/wikicuidad.png'
+import IconContebido from '../img/los_objetos.png'
+import IconContebido from '../img/rayemos.png'
+
+
 
 const MyPopupMarker = ({ children, position }) => (
     <Marker position={position}><Popup><span>{children}</span></Popup></Marker>
@@ -25,9 +31,9 @@ export default class CustomComponent extends Component {
     constructor () {
         super()
         this.state = {
-            lat: 51.505,
-            lng: -0.09,
-            zoom: 13,
+            lat: 7.2700951,
+            lng: -75.5835595,
+            zoom: 8.85,
             markers:LocationMap.getLocations()
         }
     }
@@ -39,7 +45,6 @@ export default class CustomComponent extends Component {
         this.setState({
             markers:LocationMap.getLocations()
         })
-        console.log(this.state.markers);
     }
     componentDidMount(){
         LocationMap.addChangeListener(this.updateData.bind(this))
@@ -52,19 +57,36 @@ export default class CustomComponent extends Component {
     }
     render () {
         const center = [this.state.lat, this.state.lng]
-
-        const markers = [
-            {key: 'marker1', position: {lat:51.5, lng:-0.1}, children: 'My first popup'},
-            {key: 'marker2', position: {lat:51.51, lng:-0.1}, children: 'My second popup'},
-            {key: 'marker3', position: {lat:51.49, lng:-0.05}, children: 'My third popup'},
-        ]
+        let icon;
+        const IconP = L.icon({
+            iconUrl: IconPerfil,
+            iconSize: [32, 39],
+            iconAnchor: [16, 37],
+            popupAnchor: [0, -28]
+        });
+        const IconE = L.icon({
+            iconUrl: IconEvent,
+            iconSize: [32, 39],
+            iconAnchor: [16, 37],
+            popupAnchor: [0, -28]
+        });
+        const IconCont = L.icon({
+            iconUrl: IconContebido,
+            iconSize: [32, 39],
+            iconAnchor: [16, 37],
+            popupAnchor: [0, -28]
+        });
         var baseballIcon = L.icon({
             iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-icon-2x.png',
             iconSize: [32, 37],
             iconAnchor: [16, 37],
             popupAnchor: [0, -28]
         });
-        console.log(markers[0].position);
+        // Perfil
+        // Agenda
+        // Recurso
+        // Contenido
+        // Comentario
         return (
             <div className="P-B-ContentPost">
                 <Map center={center} zoom={this.state.zoom}>
@@ -73,12 +95,27 @@ export default class CustomComponent extends Component {
                         url='http://{s}.tile.osm.org/{z}/{x}/{y}.png' />
                     {
                         this.state.markers.map(item => {
-                            console.log(item);
+                            switch (item.type) {
+                                case "Perfil":
+                                icon = IconP;
+                                break;
+                                case "Agenda":
+                                icon = IconE;
+                                break;
+                                case "Contenido":
+                                case "Comentario":
+                                case "Recurso":
+                                    icon = IconCont;
+                                    break;
+                                default:
+                                icon = baseballIcon;
+                            }
+
                             return(
-                                <Marker position={item} icon={baseballIcon}>
+                                <Marker position={item} icon={icon}>
                                     <Popup>
                                         <div>
-                                            pruebaaa
+                                            {item.type}
                                         </div>
                                     </Popup>
                                 </Marker>
