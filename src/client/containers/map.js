@@ -4,7 +4,7 @@ import LocationMap from '../providers/infoMapa'
 import IconPerfil from '../img/perfil.png'
 import IconEvent from '../img/wikicuidad.png'
 import IconContebido from '../img/los_objetos.png'
-import IconContebido from '../img/rayemos.png'
+// import IconContebido from '../img/rayemos.png'
 
 
 
