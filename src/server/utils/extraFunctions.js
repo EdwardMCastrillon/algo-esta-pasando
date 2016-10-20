@@ -142,10 +142,11 @@ export default class Extras {
         data.forEach((array, index) => {
             array.forEach((obj, idx) => {
                 if (obj['Georreferencia(mapa)']) {
-                    let [ longitud, latitud, num ] = obj['Georreferencia(mapa)'].split(' ')
+                    let [ longitud, latitud, scala ] = obj['Georreferencia(mapa)'].split(' ')
                     let partial = {
                         lat: latitud,
                         lng: longitud,
+                        scala: scala,
                         type: ''
                     }
                     switch(index) {
@@ -235,10 +236,13 @@ export default class Extras {
                     // Seccion Recursos
                     if (obj['Otrosautores']) {
                         let autores = obj['Otrosautores'].split(' ')
-                        result.push(obj)
+                        for (let name in autores) {
+                            if (name.trim() == autor) {
+                                result.push(obj)
+                            }
+                        }
                     }
                 }
-
 
             })
         })
