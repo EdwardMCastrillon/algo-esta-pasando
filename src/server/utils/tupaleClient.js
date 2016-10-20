@@ -264,6 +264,24 @@ module.exports = {
                 callback(error)
             }
         })
-    }
+    },
+
+    getBitacorasByPost: (fecha, callback) => {
+        let endpoint = endpoints.bitacoras
+        let BitacorasPromise = new Promise((resolve, reject) => {
+            request({
+                url: endpoint,
+                method: 'GET',
+                json: true
+            }, (error, response, body) => {
+                if (error) reject(error)
+                resolve(body)
+            })
+        }).then((bitacoras) => {
+            let result = extras.filterByDate(fecha, bitacoras)
+        }).catch((error) => {
+            callback(error)
+        })
+    } 
     
 }
