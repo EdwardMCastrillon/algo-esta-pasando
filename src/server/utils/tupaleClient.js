@@ -28,7 +28,7 @@ module.exports = {
         db.get(type, (error, data) => {
             if (! error) return callback(null, JSON.parse(data))
             let endpoint = ''
-            console.log('Entro a consultar')
+            console.log('Entro a consultar: '+type)
             switch(type) {
                 case 'Perfiles':
                     endpoint = endpoints.perfiles
