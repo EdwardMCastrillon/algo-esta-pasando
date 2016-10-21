@@ -22,7 +22,6 @@ module.exports = {
         db.get(type, (error, data) => {
             if (! error) return callback(null, JSON.parse(data))
             let endpoint = ''
-            console.log('Entro a consultar: '+type)
             switch(type) {
                 case 'Perfiles':
                     endpoint = endpoints.perfiles
@@ -67,7 +66,7 @@ module.exports = {
         let total = 0
         EventEmitter.on('finish', (type) => {
             total = total + 1
-            if (total === 6) {
+            if (total === 7) {
                 callback(null, 'ok')
             }
         })
@@ -202,6 +201,28 @@ module.exports = {
         }).catch((error) => {
             callback(error)
         })
+
+        let ManifiestoPromise = new Promise((resolve, reject) => {
+            let endpoint = endpoints.manifiestos
+            request({
+                url: endpoint,
+                method: 'GET',
+                json: true
+            }, (error, response, body) => {
+                if (error) reject(error)
+                resolve(body)
+            })
+        }).then((manifiestos) => {
+            let orderData = extras.orderedKeys(manifiestos)
+            let result = extras.normalizeNames(orderData)
+            let inHtml = extras.normalizeHtml(result)
+            db.put('Manifiestos', JSON.stringify(inHtml))
+            All[6] = inHtml
+            db.put('All', JSON.stringify(All))
+            EventEmitter.emit('finish', 'Manifiestos')
+        }).catch((error) => {
+            callback(error)
+        })
     },
 
     getEdition: (callback) => {
@@ -288,6 +309,27 @@ module.exports = {
                 let result = extras.filterBitacoras(fecha, JSON.parse(data))
                 callback(null, result)
             } else {
+                callback(error)
+            }
+        })
+    },
+
+    getLastContenidos: (callback) => {
+        db.get('Contenidos', { fillCache: false }, (error, data) => {
+            if (! error) {
+                callback(null, data)
+            } else {
+                callback(error)
+            }
+        })
+    },
+
+    getManifiestos: (callback) => {
+        db.get('Manifiestos', { fillCache: false }, (error, data) => {
+            if (! error) {
+                callback(null, data)
+            } else {
+                console.log('Error')
                 callback(error)
             }
         })

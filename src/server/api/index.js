@@ -145,4 +145,15 @@ Router.post('/bitacoras', (req, res) => {
     })
 })
 
+/*
+* GET /manifiesto
+* Obtiene el manifiesto de AEP
+*/
+Router.get('/manifiesto', (req, res) => {
+    client.getManifiestos((error, manifiestos) => {
+        if (error) res.sendStatus(500).json(error)
+        res.json(manifiestos)
+    })
+})
+
 export default Router
