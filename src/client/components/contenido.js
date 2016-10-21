@@ -61,7 +61,6 @@ export default class PostContenido extends React.Component {
             break;
         }
         let img = false;
-        console.log(cp);
         if(cp.AgregaunaImagen){
             img = `https://tupale.co/milfs/images/secure/?file=full/${cp.AgregaunaImagen}`
         }

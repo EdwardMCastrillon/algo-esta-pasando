@@ -64,6 +64,12 @@
             }
             .contenIcon {
                 padding: 10px 0px;
+                .i-plus {
+                    font-size: 17px !important;
+                    padding: 4px;
+                    top: -3px;
+                    position: relative;
+                }
                 i {
                     cursor: pointer;
                     position: relative;
@@ -76,5 +82,120 @@
                 }
             }
         }
+    }
+    .popupConten.open{
+        opacity: 1
+    }
+    .popupConten {
+        position: absolute;
+        text-align: center;
+        opacity: 0;
+        -webkit-transition: opacity 0.2s linear;
+        -moz-transition: opacity 0.2s linear;
+        -o-transition: opacity 0.2s linear;
+        transition: opacity 0.2s linear;
+        bottom: 85px;
+        left: 51px;
+        width: 330px;
+        height: 400px;
+
+        .popup-content-wrapper {
+            height: 390px;
+            padding-top: 14px;
+            padding: 1px;
+            text-align: left;
+            border-radius: 10px 10px 10px 0px;
+        }
+        .popup-content-name {
+            font-size: 14px;
+            padding: 12px 0px;
+        }
+        .popup-content {
+            margin: 13px 19px;
+            line-height: 1.4;
+            padding-top: 6px;
+        }
+        .popup-content p {
+            margin: 18px 0;
+        }
+        .popup-tip-container {
+            position: relative;
+            top: -1px;
+            left: 1px;
+        }
+        .popup-tip {
+            background: transparent !important;
+            width: 0;
+            height: 0;
+            border-top: 0px solid transparent !important;
+            border-left: 31px solid #fff !important;
+            border-bottom: 29px solid transparent!important;
+            z-index: 1;
+            position: relative;
+            border-right: 0px !important;
+        }
+        .popup-tiptar {
+            background: transparent !important;
+            width: 0;
+            height: 0;
+            border-top: 0px solid transparent !important;
+            border-left: 34px solid #ddd !important;
+            border-bottom: 31px solid transparent!important;
+            position: absolute;
+            top: 0;
+            left: -1px;
+            z-index: 0;
+        }
+        .popup-content-wrapper,
+        .popup-tip {
+            background: white;
+            border: 1px solid #ddd;
+        }
+        .popup-close-button {
+            position: absolute;
+            top: -6px;
+            cursor: pointer;
+            right: 0;
+            padding: 4px 4px 0 0;
+            text-align: center;
+            width: 18px;
+            height: 14px;
+            font-size: 24px;
+            color: #c3c3c3;
+            text-decoration: none;
+            font-weight: 700;
+            background: transparent
+        }
+        .popup-close-button:hover {
+            color: #999;
+        }
+        .popup-scrolled {
+            overflow: auto;
+            border-bottom: 1px solid #ddd;
+            border-top: 1px solid #ddd;
+        }
+
+        .oldie .popup-content-wrapper {
+            zoom: 1;
+        }
+        .oldie .popup-tip {
+            width: 24px;
+            margin: 0 auto;
+
+            -ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=0.70710678, M12=0.70710678, M21=-0.70710678, M22=0.70710678)";
+            filter: progid:DXImageTransform.Microsoft.Matrix(M11=0.70710678, M12=0.70710678, M21=-0.70710678, M22=0.70710678);
+        }
+        .oldie .popup-tip-container {
+            margin-top: -1px;
+        }
+
+        .oldie .control-zoom,
+        .oldie .control-layers,
+        .oldie .popup-content-wrapper,
+        .oldie .popup-tip {
+            border: 1px solid #999;
+        }
+
+
     }
 }

@@ -31,7 +31,6 @@ const ComentarioStore = {
                 _Comentarios[item.id].prev = l;
                 l = item.id;
             })
-
             ComentarioStore.notifyChange()
         })
     },
