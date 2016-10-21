@@ -26,6 +26,11 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.i-plus {
+  &:before {
+    content: $i-plus;
+  }
+}
 .i-arrow_right {
   &:before {
     content: $i-arrow_right;
@@ -41,12 +46,12 @@
     content: $i-google_icon;
   }
 }
-.i-mail{
+.i-mail {
   &:before {
     content: $i-mail_icon;
   }
 }
-.i-twitter{
+.i-twitter {
   &:before {
     content: $i-twitter_icon;
   }

@@ -1,6 +1,6 @@
 import React from 'react'
 import FunctExtra from '../utils/functExtra'
-
+import { Link } from 'react-router'
 export default class TargetaAgenda extends React.Component {
     constructor (props) {
         super(props)
@@ -34,6 +34,9 @@ export default class TargetaAgenda extends React.Component {
                         </span>
                     </div>
                     <div className="contenIcon">
+                        <Link to={`agenda/${this.props.data.id}`}>
+                            <i className="i-plus"></i>
+                        </Link>
                         <i className="i-mapa "></i>
                     </div>
                 </article>

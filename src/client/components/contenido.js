@@ -4,6 +4,7 @@ import Contenido from '../providers/contenidoStore'
 import Comentarios from '../providers/comentarioStore'
 import Recursos from '../providers/recursoStore'
 import Aep from '../providers/aep'
+import AgendaStore from '../providers/agendaStore'
 
 export default class PostContenido extends React.Component {
     constructor (props) {
@@ -23,7 +24,7 @@ export default class PostContenido extends React.Component {
         }else{
             p = this.props.params.id;
         }
-        let cp,text;
+        let cp,text,titulo;
         switch (this.props.route.path.replace("/","").replace("/","").replace(":id","")) {
             case "contenido":
             cp = Contenido.getContenido(p);
@@ -32,10 +33,17 @@ export default class PostContenido extends React.Component {
             }else{
                 text = cp["Resumen"];
             }
+            titulo =  cp.Nombredelaactividad
+            break;
+            case "agenda":
+            cp = AgendaStore.getAgenda(p);
+            text = cp["Descripcióndelaactividad"];
+            titulo =  cp.Nombredelaactividad
             break;
             case "comentarios":
             cp = Comentarios.getComentario(p);
             text = cp["Escribir/Párrafos/Texto"];
+            titulo =  cp.Título
             break;
             case "centro_de_recursos":
             cp = Recursos.getRecurso(p);
@@ -44,19 +52,22 @@ export default class PostContenido extends React.Component {
             }else{
                 text = cp["Resumen"];
             }
+            titulo =  cp.Título
             break;
             case "aep":
             cp = Aep.getAeP(p);
             text = cp["EDITOR(Recurso)"];
+            titulo =  cp.Título
             break;
         }
         let img = false;
+        console.log(cp);
         if(cp.AgregaunaImagen){
             img = `https://tupale.co/milfs/images/secure/?file=full/${cp.AgregaunaImagen}`
         }
         this.setState({
             image: img,
-            titulo: cp.Título,
+            titulo: titulo,
             autor: cp.Autor,
             text: text
         })

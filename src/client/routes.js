@@ -24,6 +24,11 @@ export default {
         method: "get",
         handler: Agenda
     },
+    postAgenda: {
+        path: "/agenda/:id",
+        method: "get",
+        handler: PosContenido
+    },
     posContenido: {
         path: "/contenido/:id",
         method: "get",

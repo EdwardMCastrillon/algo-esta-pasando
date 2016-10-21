@@ -41,6 +41,7 @@ export default class Buscar extends React.Component {
             case "comentarios":
             case "centro_de_recursos":
             case "aep":
+            case "agenda":
             urlAux = "aep_"
             break;
             case "aep_":
@@ -54,7 +55,7 @@ export default class Buscar extends React.Component {
                         this.state.itemNavTop.map(item => {
                             let url = `/${urlAux}/${item.id}`
                             return(
-                                <Link to={url} onClick={this.prueba.bind(this)}>
+                                <Link to={url}>
                                     <div className="item" dangerouslySetInnerHTML={FunctExtra.createMarkup(this,item.Título)}></div>
                                 </Link>
 
