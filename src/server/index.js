@@ -32,7 +32,7 @@ Client.getAllData((error, response) => {
     console.log('Datos iniciales cargados correctamente')
 })
 
-setTimeout(() => {
+setInterval(() => {
   Client.getAllData((error, response) => {
     console.log('Se actualizaron los datos correctamente a las: ' + new Date().getHours())
   })  

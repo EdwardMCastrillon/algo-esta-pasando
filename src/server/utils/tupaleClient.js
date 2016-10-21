@@ -314,10 +314,11 @@ module.exports = {
         })
     },
 
-    getLastContenidos: (callback) => {
+    getLastContenidos: (edicion, callback) => {
         db.get('Contenidos', { fillCache: false }, (error, data) => {
             if (! error) {
-                callback(null, data)
+                let result = extras.filterLastContenidos(edicion, JSON.parse(data))
+                callback(null, result)
             } else {
                 callback(error)
             }

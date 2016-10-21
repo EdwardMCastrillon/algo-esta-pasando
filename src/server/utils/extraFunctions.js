@@ -284,4 +284,23 @@ export default class Extras {
         return result
     }
 
+    filterLastContenidos (edicion, data) {
+        let result = data.filter(obj => obj['Número(Edición)deAlgoestápasando'].trim() == edicion)
+        for(let i = 0; i < result.length; i++) {
+            if (result[i + 1] && Number(result[i].timestamp) < Number(result[i + 1].timestamp)) {
+                let aux = result[i]
+                result[i] = result[i + 1]
+                result[i + 1] = aux
+            }
+        }
+        switch (result.length) {
+            case 1:
+                return result
+            case 2:
+                return [result[0], result[1]]
+            default:
+                return [result[0], result[1], result[2]]
+        }
+    }
+
 }

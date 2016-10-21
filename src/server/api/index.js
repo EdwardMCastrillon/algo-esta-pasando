@@ -156,4 +156,16 @@ Router.get('/manifiesto', (req, res) => {
     })
 })
 
+/*
+* GET /ultimosPosts?edicion=Imanarios de paz
+* @param Nombre de la edicion
+*/
+Router.get('/ultimosPosts', (req, res) => {
+    let edicion = req.query.edicion
+    client.getLastContenidos(edicion, (error, posts) => {
+        if (error) res.sendStatus(500).json(error)
+        res.json(posts)
+    })
+})
+
 export default Router
