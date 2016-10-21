@@ -25,8 +25,16 @@ app.get('*', (req, res) => {
 
 const server = http.createServer(app)
 
-server.listen(port, () => console.log(`API Running on port: ${port}`))
+server.listen(port, () => console.log(`API Running on port: ${port} \nCargando Datos...`))
+
 
 Client.getAllData((error, response) => {
-    console.log('Datos cargados correctamente...')
+    console.log('Datos iniciales cargados correctamente')
 })
+
+setTimeout(() => {
+  Client.getAllData((error, response) => {
+    console.log('Se actualizaron los datos correctamente a las: ' + new Date().getHours())
+  })  
+}, 3600000)
+

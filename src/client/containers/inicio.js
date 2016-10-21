@@ -11,6 +11,7 @@ export default class Inicio extends React.Component {
         this.state = {
             posts: HomeProvider.getHomes()
         }
+        this.search = this.search.bind(this)
     }
     componentWillUnmount() {
         HomeProvider.removeChangeListener(this.updateData.bind(this))
@@ -23,6 +24,11 @@ export default class Inicio extends React.Component {
             posts:HomeProvider.getHomes()
         })
     }
+
+    search() {
+
+    }
+
     componentDidMount(){
         HomeProvider.addChangeListener(this.updateData.bind(this))
     }

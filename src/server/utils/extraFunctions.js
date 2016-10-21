@@ -147,24 +147,58 @@ export default class Extras {
                         lat: latitud,
                         lng: longitud,
                         scala: scala,
-                        type: ''
+                        id: '',
+                        type: '',
+                        image: '',
+                        text: '',
                     }
                     switch(index) {
                         case 0:
-                        partial.type = 'Perfil'
-                        break
+                            partial.type = 'Perfil'
+                            partial.id = obj['id']
+                            if (obj['AgregaunaImagen']) partial.image = obj['AgregaunaImagen']
+                            partial.text = obj['Perfil']
+                            break
                         case 1:
-                        partial.type = 'Agenda'
-                        break
+                            partial.type = 'Agenda'
+                            partial.id = obj['id']
+                            if (obj['AgregaunaImagen']) partial.image = obj['AgregaunaImagen']
+                            partial.text = obj['Descripcióndelaactividad']
+                            break
                         case 2:
-                        partial.type = 'Recurso'
-                        break
+                            partial.type = 'Recurso'
+                            partial.id = obj['id']
+                            if (obj['AgregaunaImagen']) partial.image = obj['AgregaunaImagen']
+                            if (obj['Resumen']) {
+                                if (obj['Resumen'] == "Falta resumen" || obj['Resumen'] == "Falta Resumen") {
+                                    let text = obj['Escribir/Párrafos/Texto'].substr(0, 200) + '...'
+                                    partial.text = text    
+                                }
+                            } else {
+                                let text = obj['Escribir/Párrafos/Texto'].substr(0, 200) + '...'
+                                partial.text = text
+                            }
+                            break
                         case 3:
-                        partial.type = 'Contenido'
-                        break
+                            partial.type = 'Contenido'
+                            partial.id = obj['id']
+                            if (obj['Resumen']) {
+                                if (obj['Resumen'] == "Falta resumen" || obj['Resumen'] == "Falta Resumen") {
+                                    let text = obj['Escribir/Párrafos/Texto'].substr(0, 200) + '...'
+                                    partial.text = text    
+                                }
+                            } else {
+                                let text = obj['Escribir/Párrafos/Texto'].substr(0, 200) + '...'
+                                partial.text = text
+                            }
+                            if (obj['AgregaunaImagen']) partial.image = obj['AgregaunaImagen']
+                            break
                         case 4:
-                        partial.type = 'Comentario'
-                        break
+                            partial.type = 'Comentario'
+                            partial.id = obj['id']
+                            if (obj['AgregaunaImagen']) partial.image = obj['AgregaunaImagen']
+                            partial.text = obj['Escribir/Párrafos/Texto'].substr(0, 200) + '...'
+                            break
                     }
                     result.push(partial)
                 }
@@ -200,14 +234,13 @@ export default class Extras {
     };
 
     customSearch (data, query) {
-        let [ edicion, autor, destacados ] = query
+        let [ edicion, autor ] = query
         let result = []
         data.forEach((array, index) => {
             array.forEach((obj, idx) => {
                 // Si llegaron los 3 parametros
-                if (edicion != "" && autor != "" && destacados != "") {
+                if (edicion != "" && autor != "") {
                     // Seccion Agenda 
-
 
                     // Seccion Contenidos
                     if (obj['Autor'] && obj['Autor'].trim() == autor) {
@@ -221,19 +254,6 @@ export default class Extras {
                     if (obj['Otrosautores'] && obj['Otrosautores'].trim() == autor) {
                         result.push(obj)
                     }
-                // Si llegaron edicion y autor.
-                } else if (edicion != "" && autor != "" && destacados == "") {
-                    // Seccion Agenda
-
-                    // Seccion Contenidos
-                    if (obj['Autor'] && obj['Autor'].trim() == autor) {
-                        result.push(obj)
-                    }
-                    if (obj['Número(Edición)deAlgoestápasando'] && obj['Número(Edición)deAlgoestápasando'].trim() == edicion) {
-                        result.push(obj)
-                    }
-
-                    // Seccion Recursos
                     if (obj['Otrosautores']) {
                         let autores = obj['Otrosautores'].split(' ')
                         for (let name in autores) {
@@ -242,9 +262,24 @@ export default class Extras {
                             }
                         }
                     }
+                // Si llegaron edicion y autor.
+                } else if (edicion != "" && autor == "") {
+                    // Seccion Agenda
+
+                    // Seccion Contenidos
+                    if (obj['Número(Edición)deAlgoestápasando'] && obj['Número(Edición)deAlgoestápasando'].trim() == edicion) {
+                        result.push(obj)
+                    }
                 }
 
             })
+        })
+        return result
+    }
+
+    filterBitacoras (fecha, data) {
+        let result = data.filter((obj) => {
+            if (obj.timestamp && obj.timestamp < fecha) return obj
         })
         return result
     }
