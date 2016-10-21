@@ -147,24 +147,58 @@ export default class Extras {
                         lat: latitud,
                         lng: longitud,
                         scala: scala,
-                        type: ''
+                        id: '',
+                        type: '',
+                        image: '',
+                        text: '',
                     }
                     switch(index) {
                         case 0:
-                        partial.type = 'Perfil'
-                        break
+                            partial.type = 'Perfil'
+                            partial.id = obj['id']
+                            if (obj['AgregaunaImagen']) partial.image = obj['AgregaunaImagen']
+                            partial.text = obj['Perfil']
+                            break
                         case 1:
-                        partial.type = 'Agenda'
-                        break
+                            partial.type = 'Agenda'
+                            partial.id = obj['id']
+                            if (obj['AgregaunaImagen']) partial.image = obj['AgregaunaImagen']
+                            partial.text = obj['Descripcióndelaactividad']
+                            break
                         case 2:
-                        partial.type = 'Recurso'
-                        break
+                            partial.type = 'Recurso'
+                            partial.id = obj['id']
+                            if (obj['AgregaunaImagen']) partial.image = obj['AgregaunaImagen']
+                            if (obj['Resumen']) {
+                                if (obj['Resumen'] == "Falta resumen" || obj['Resumen'] == "Falta Resumen") {
+                                    let text = obj['Escribir/Párrafos/Texto'].substr(0, 200) + '...'
+                                    partial.text = text    
+                                }
+                            } else {
+                                let text = obj['Escribir/Párrafos/Texto'].substr(0, 200) + '...'
+                                partial.text = text
+                            }
+                            break
                         case 3:
-                        partial.type = 'Contenido'
-                        break
+                            partial.type = 'Contenido'
+                            partial.id = obj['id']
+                            if (obj['Resumen']) {
+                                if (obj['Resumen'] == "Falta resumen" || obj['Resumen'] == "Falta Resumen") {
+                                    let text = obj['Escribir/Párrafos/Texto'].substr(0, 200) + '...'
+                                    partial.text = text    
+                                }
+                            } else {
+                                let text = obj['Escribir/Párrafos/Texto'].substr(0, 200) + '...'
+                                partial.text = text
+                            }
+                            if (obj['AgregaunaImagen']) partial.image = obj['AgregaunaImagen']
+                            break
                         case 4:
-                        partial.type = 'Comentario'
-                        break
+                            partial.type = 'Comentario'
+                            partial.id = obj['id']
+                            if (obj['AgregaunaImagen']) partial.image = obj['AgregaunaImagen']
+                            partial.text = obj['Escribir/Párrafos/Texto'].substr(0, 200) + '...'
+                            break
                     }
                     result.push(partial)
                 }
