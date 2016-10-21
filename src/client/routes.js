@@ -9,6 +9,7 @@ import Ediciones from './containers/ediciones'
 import Agenda from './containers/agenda'
 import Perfil from './components/perfil'
 import PosContenido from './components/contenido'
+import PosContenido1 from './components/contenido1'
 
 
 export default {
@@ -27,6 +28,13 @@ export default {
         path: "/contenido/:id",
         method: "get",
         handler: PosContenido,
+    },
+    posAeP: {
+        path: "/aep/:id",
+        path1: "/aep_/:id",
+        method: "get",
+        handler: PosContenido,
+        handler1: PosContenido1,
     },
     recursos:{
         path : "/centro_de_recursos",

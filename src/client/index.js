@@ -18,6 +18,8 @@ render((
             <IndexRoute component={Inicio} />
             <Route path={RouterApp.home.path} component={ RouterApp.home.handler } />
             <Route path={RouterApp.posContenido.path} component={ RouterApp.posContenido.handler } />
+            <Route path={RouterApp.posAeP.path1} component={ RouterApp.posAeP.handler1 } />
+            <Route path={RouterApp.posAeP.path} component={ RouterApp.posAeP.handler } />
 
 
             <Route path={RouterApp.recursos.path} component={RouterApp.recursos.handler}/>

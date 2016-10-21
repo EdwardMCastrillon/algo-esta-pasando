@@ -59,8 +59,8 @@ const ContenidosStore = {
 
 function getJSONContenidos(url, cb) {
     request
-    .get(url)
-    .set('Accept', 'application/json')
+    .post(url)
+    .send({ edicion: localStorage.getItem("nameEdicion")})
     .end(function(err, res){
 
         if (res.status === 404) {

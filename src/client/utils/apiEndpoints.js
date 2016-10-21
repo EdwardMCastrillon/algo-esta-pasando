@@ -4,7 +4,7 @@ const endpoints = {
     perfiles: '/perfiles',
     recursos: '/recursos',
     relaciones: '/relaciones',
-    contenidos:"/contenidos",
+    contenidos:"/contenidoEdicion",
     edicion:"/ediciones",
     comentarios:"/comentarios",
     aep:"/aeP",

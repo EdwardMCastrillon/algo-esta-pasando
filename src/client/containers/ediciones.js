@@ -25,8 +25,9 @@ export default class Ediciones extends React.Component {
         Edicion.addChangeListener(this.updateData.bind(this))
         // this.getData()
     }
-    changeEdition(id){
+    changeEdition(id,name){
         localStorage.setItem("edicion",id)
+        localStorage.setItem("nameEdicion",name)
         location.reload();
     }
     render () {
@@ -40,7 +41,7 @@ export default class Ediciones extends React.Component {
                         {
                             this.state.posts.map(item => {
                                 return(
-                                    <div onClick={this.changeEdition.bind(this,item.EDNUMERO)}>{item.Título}</div>
+                                    <div onClick={this.changeEdition.bind(this,item.EDNUMERO,item.Título)}>{item.Título}</div>
                                 )
                             })
                         }

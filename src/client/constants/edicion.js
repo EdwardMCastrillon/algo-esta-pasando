@@ -37,8 +37,12 @@ const Edicion = {
         if(localStorage.getItem("edicion") && parseInt(localStorage.getItem("edicion")) >= 0){
             return _Edicion[localStorage.getItem("edicion")]
         }else{
-            localStorage.setItem("edicion",_Edicion.length - 1);
-            return _Edicion[_Edicion.length - 1]
+            debugger
+            if(_Edicion[_Edicion.length - 1]){
+                localStorage.setItem("edicion",_Edicion.length - 1);
+                localStorage.setItem("nameEdicion",_Edicion[_Edicion.length - 1].Título);
+                return _Edicion[_Edicion.length - 1]
+            }
         }
 
     },

@@ -16,7 +16,9 @@ const Aep = {
 
         _initCalled = true
         getJSONAeP(`${server}${apiEndpoints.aep}`, function (err, res) {
-            _AeP = res;
+            res.forEach(function (item,k) {
+                _AeP[item.id] = item;
+            })
             Aep.notifyChange()
         })
     },
