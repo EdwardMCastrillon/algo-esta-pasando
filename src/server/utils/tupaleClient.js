@@ -11,12 +11,6 @@ const extras = new Extras()
 const db = levelup('../temp')
 const EventEmitter = new events.EventEmitter
 let All = []
-db.del('Perfiles')
-db.del('Agenda')
-db.del('Contenidos')
-db.del('Comentarios')
-db.del('Recursos')
-db.del('All')
 
 // Funciones para consultar la API de tupale.
 module.exports = {
@@ -73,7 +67,7 @@ module.exports = {
         let total = 0
         EventEmitter.on('finish', (type) => {
             total = total + 1
-            if (total === 5) {
+            if (total === 6) {
                 callback(null, 'ok')
             }
         })
@@ -186,6 +180,28 @@ module.exports = {
         }).catch((error) => {
             console.error(error)
         })
+
+        let BitacorasPromise = new Promise((resolve, reject) => {
+            let endpoint = endpoints.bitacoras
+            request({
+                url: endpoint,
+                method: 'GET',
+                json: true
+            }, (error, response, body) => {
+                if (error) reject(error)
+                resolve(body)
+            })
+        }).then((bitacoras) => {
+            let orderData = extras.orderedKeys(bitacoras)
+            let result = extras.normalizeNames(orderData)
+            let inHtml = extras.normalizeHtml(result)
+            db.put('Bitacoras', JSON.stringify(inHtml))
+            All[5] = inHtml
+            db.put('All', JSON.stringify(All))
+            EventEmitter.emit('finish', 'Bitacoras')
+        }).catch((error) => {
+            callback(error)
+        })
     },
 
     getEdition: (callback) => {
@@ -267,20 +283,13 @@ module.exports = {
     },
 
     getBitacorasByPost: (fecha, callback) => {
-        let endpoint = endpoints.bitacoras
-        let BitacorasPromise = new Promise((resolve, reject) => {
-            request({
-                url: endpoint,
-                method: 'GET',
-                json: true
-            }, (error, response, body) => {
-                if (error) reject(error)
-                resolve(body)
-            })
-        }).then((bitacoras) => {
-            let result = extras.filterByDate(fecha, bitacoras)
-        }).catch((error) => {
-            callback(error)
+        db.get('Bitacoras', { fillCache: false }, (error, data) => {
+            if (! error) {
+                let result = extras.filterBitacoras(fecha, JSON.parse(data))
+                callback(null, result)
+            } else {
+                callback(error)
+            }
         })
     } 
     
