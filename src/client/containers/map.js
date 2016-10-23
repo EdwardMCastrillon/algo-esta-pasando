@@ -107,25 +107,3 @@ export default class CustomComponent extends Component {
         )
     }
 }
-
-
-/*
-
-
-<div>
-<a href="#">
-<figure class="targetPost">
-<img src="https://tupale.co/milfs/images/secure/?file=600/ccd6152ef2a9dd1b04433efc709ad272.jpg"/>
-<span>Morocho</span>
-</figure>
-</a>
-</div>
-
-
-
-<Marker position={item} icon={icon}>
-    <Popup>
-        <span>A pretty CSS3 popup.<br/>Easily customizable.</span>
-    </Popup>
-</Marker>
-*/

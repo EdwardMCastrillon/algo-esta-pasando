@@ -69,7 +69,6 @@ function getJSONHome(url, cb) {
         if (res.status === 404) {
             cb(new Error('not found'))
         } else {
-            console.log(res.body)
             cb(null, (res.body))
         }
     });

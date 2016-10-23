@@ -52,7 +52,7 @@ const relacionAutor = {
 }
 
 function getJSONRAutor(url,name, cb) {
-    console.log(url,{ autor: name});
+
     request
     .post(url)
     .send({ autor: name})

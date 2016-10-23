@@ -19,6 +19,7 @@ const Aep = {
             res.forEach(function (item,k) {
                 _AeP[item.id] = item;
             })
+            console.log(_AeP);
             Aep.notifyChange()
         })
     },
@@ -35,6 +36,7 @@ const Aep = {
         return array
     },
     getAeP: function (id) {
+        console.log(_AeP);
         return _AeP[id]
     },
     addChangeListener: function (listener) {

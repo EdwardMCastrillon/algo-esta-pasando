@@ -334,6 +334,5 @@ module.exports = {
                 callback(error)
             }
         })
-    } 
-    
+    }
 }

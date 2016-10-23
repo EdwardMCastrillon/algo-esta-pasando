@@ -2,7 +2,7 @@ import request from 'superagent'
 // Importamos los endpoints de el servidor propio
 import apiEndpoints from '../utils/apiEndpoints'
 // Direccion url del server
-const server = 'http://localhost:8082/api'
+const server = '/api'
 
 let _agenda = {}
 let _initCalled = false

@@ -20,6 +20,7 @@ render((
             <Route path={RouterApp.posContenido.path} component={ RouterApp.posContenido.handler } />
             <Route path={RouterApp.posAeP.path1} component={ RouterApp.posAeP.handler1 } />
             <Route path={RouterApp.posAeP.path} component={ RouterApp.posAeP.handler } />
+            <Route path={RouterApp.postAgenda.path} component={ RouterApp.postAgenda.handler } />
 
 
             <Route path={RouterApp.recursos.path} component={RouterApp.recursos.handler}/>

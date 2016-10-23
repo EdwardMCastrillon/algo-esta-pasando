@@ -46,7 +46,6 @@ const perfilStore = {
         _changeListeners.push(listener)
     },
     removeChangeListener: function (listener) {
-        console.log("removeChangeListener");
         _changeListeners = []
     }
 }
