@@ -26,6 +26,11 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.i-keyboard_arrow_down {
+  &:before {
+    content: $i-keyboard_arrow_down;
+  }
+}
 .i-plus {
   &:before {
     content: $i-plus;
@@ -41,24 +46,29 @@
     content: $i-arrow_left;
   }
 }
+.i-instagram {
+  &:before {
+    content: $i-instagram;
+  }
+}
 .i-google {
   &:before {
-    content: $i-google_icon;
+    content: $i-google;
   }
 }
 .i-mail {
   &:before {
-    content: $i-mail_icon;
+    content: $i-mail;
   }
 }
 .i-twitter {
   &:before {
-    content: $i-twitter_icon;
+    content: $i-twitter;
   }
 }
-.i-lupa_icon {
+.i-lupa {
   &:before {
-    content: $i-lupa_icon;
+    content: $i-lupa;
   }
 }
 .i-mapa {
@@ -66,30 +76,30 @@
     content: $i-mapa;
   }
 }
-.i-mas_icon .path1 {
+.i-mas .path1 {
   &:before {
-    content: $i-mas_icon-path1;
+    content: $i-mas-path1;
     color: rgb(255, 255, 255);
     opacity: 0.35;
   }
 }
-.i-mas_icon .path2 {
+.i-mas .path2 {
   &:before {
-    content: $i-mas_icon-path2;
+    content: $i-mas-path2;
     margin-left: -1em;
     color: rgb(255, 255, 255);
   }
 }
-.i-mas_icon .path3 {
+.i-mas .path3 {
   &:before {
-    content: $i-mas_icon-path3;
+    content: $i-mas-path3;
     margin-left: -1em;
     color: rgb(0, 68, 94);
   }
 }
-.i-mas_icon .path4 {
+.i-mas .path4 {
   &:before {
-    content: $i-mas_icon-path4;
+    content: $i-mas-path4;
     margin-left: -1em;
     color: rgb(0, 68, 94);
   }
@@ -99,9 +109,9 @@
     content: $i-centro_de_recursos;
   }
 }
-.i-view_icon {
+.i-view {
   &:before {
-    content: $i-view_icon;
+    content: $i-view;
   }
 }
 .i-ediciones_anteriores {

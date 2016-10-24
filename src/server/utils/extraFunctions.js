@@ -75,6 +75,14 @@ export default class Extras {
                 .replace(/&nbsp;/g, ' ')
                 .replace(/&apos;/g, "'")
             }
+            if (data['textCopyLeft']) {
+                data['textCopyLeft'] = data['textCopyLeft'].replace(/&lt;/g, '<')
+                .replace(/&gt;/g, '>')
+                .replace(/&quot;/g, '"')
+                .replace(/&amp;/g, '&')
+                .replace(/&nbsp;/g, ' ')
+                .replace(/&apos;/g, "'")
+            }
         })
         return data
     }
@@ -117,6 +125,8 @@ export default class Extras {
     }
 
     formatEdicion(body){
+        // urlTwitter
+        // urlInstagram
         let menu = {}
         for (var r = 0; r < body.length; r++) {
             for (var i = 1; i < 10; i++) {
@@ -132,6 +142,10 @@ export default class Extras {
                 }
             }
             body[r].menu = menu;
+            // body[r].redes = {
+            //     instagran: body[r].urlInstagram,
+            //     twitter: body[r].urlTwitter
+            // };
         }
 
         return body;
@@ -172,7 +186,7 @@ export default class Extras {
                             if (obj['Resumen']) {
                                 if (obj['Resumen'] == "Falta resumen" || obj['Resumen'] == "Falta Resumen") {
                                     let text = obj['Escribir/Párrafos/Texto'].substr(0, 200) + '...'
-                                    partial.text = text    
+                                    partial.text = text
                                 }
                             } else {
                                 let text = obj['Escribir/Párrafos/Texto'].substr(0, 200) + '...'
@@ -185,7 +199,7 @@ export default class Extras {
                             if (obj['Resumen']) {
                                 if (obj['Resumen'] == "Falta resumen" || obj['Resumen'] == "Falta Resumen") {
                                     let text = obj['Escribir/Párrafos/Texto'].substr(0, 200) + '...'
-                                    partial.text = text    
+                                    partial.text = text
                                 }
                             } else {
                                 let text = obj['Escribir/Párrafos/Texto'].substr(0, 200) + '...'
@@ -240,7 +254,7 @@ export default class Extras {
             array.forEach((obj, idx) => {
                 // Si llegaron los 3 parametros
                 if (edicion != "" && autor != "") {
-                    // Seccion Agenda 
+                    // Seccion Agenda
 
                     // Seccion Contenidos
                     if (obj['Autor'] && obj['Autor'].trim() == autor) {

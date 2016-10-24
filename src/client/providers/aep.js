@@ -36,7 +36,6 @@ const Aep = {
         return array
     },
     getAeP: function (id) {
-        console.log(_AeP);
         return _AeP[id]
     },
     addChangeListener: function (listener) {

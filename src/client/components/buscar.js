@@ -64,7 +64,7 @@ export default class Buscar extends React.Component {
                     }
                 </div>
                 <div className="drawSearch" style={this.state.background}>
-                    <i className="i-lupa_icon"></i>
+                    <i className="i-lupa"></i>
                 </div>
             </div>
         )

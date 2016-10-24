@@ -3,7 +3,7 @@ import { Link, Router } from 'react-router'
 // import Aep from '../providers/aep'
 import FunctExtra from '../utils/functExtra'
 import Menus from '../constants/menus'
-import Logo from "../img/logoAep.png"
+// import Logo from "../img/logoAep.png"
 
 
 require("../style/NavBar.scss");
@@ -17,7 +17,8 @@ export default class NavBar extends Component {
             logoClosed:'',
             background:{},
             hideName:"hideName",
-            hidepad:"hidepad"
+            hidepad:"hidepad",
+            LogoAEP:'',
         }
     }
     logoOpen(){
@@ -91,11 +92,17 @@ export default class NavBar extends Component {
         },300)
     }
     render() {
+        let redes = ''
         if(this.state.logoOpen == "" && this.props.edicion){
+            redes = `<a target="_blank" href="${this.props.edicion.urlTwitter}"><i class="i-twitter"></i></a><a target="_blank" href="${this.props.edicion.urlInstagram}"><i class="i-instagram"></i></a>`
             this.setState({
                 logoOpen:this.props.edicion.logoOpen,
                 logoClosed:this.props.edicion.logoClosed,
-                menu:this.props.edicion.menu
+                menu:this.props.edicion.menu,
+                redes:redes,
+                textCopyLeft:this.props.edicion.textCopyLeft,
+                LogoAEP:`https://tupale.co/milfs/images/secure/?file=300/${this.props.edicion.AgregaunaImagen}`
+
             })
             this.openNav()
         }
@@ -130,11 +137,10 @@ export default class NavBar extends Component {
             </div>
             <div className="NavBar-footer">
             <div>
-            <img src={ Logo } />
+            <img src={ this.state.LogoAEP } />
             </div>
-            <div>
-
-            </div>
+            <div className="contenRedes" dangerouslySetInnerHTML={FunctExtra.createMarkup(this,this.state.redes)}></div>
+            <div className="copyright" dangerouslySetInnerHTML={FunctExtra.createMarkup(this,this.state.textCopyLeft)}></div>
             </div>
             </div>
         );

@@ -29,6 +29,11 @@
             .plus{
                 display: block;
             }
+            .titulo{
+                text-overflow: inherit;
+                white-space: inherit;
+                overflow: inherit;
+            }
         }
     }
     .tP_description{
@@ -73,12 +78,14 @@
             padding: 17px 10px;
             left: 0;
             display: block;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
         }
         .description {
             display: block;
             padding: 0px 15px;
         }
-
     }
     img {
         width: 100%;
@@ -290,6 +297,25 @@
         }
     }
 
+}
+.Descripcion.aep {
+    height: 300px;
+    overflow: hidden;
+    position: relative;
+    font-family: MerriweatherSans-Regular,sans-serif!important;;
+    &:before {
+        font-family: icomoon!important;
+        height: 24px;
+        width: 100%;
+        position: absolute;
+        bottom: 0px;
+        box-shadow: -1px -19px 41px rgb(255, 255, 255);
+        background: rgba(255, 255, 255, 0.81);
+        font-size: 50px;
+        text-align: center;
+        line-height: 0;
+        cursor: pointer;
+    }
 }
 .Descripcion {
     word-break: break-word;

@@ -37,6 +37,7 @@
             border-top: 1px solid #dedede;
             .diaEvent {
                 font-size: 22px;
+                color: #005fae;
                 span {
                     display: block;
                     font-size: 12px;
@@ -46,6 +47,7 @@
                 border-bottom: 1px solid #dedede;
                 padding-bottom: 5px;
                 margin-bottom: 15px;
+                color: #005fae;
             }
             .FigureEvent {
                 width: 100%;
@@ -57,6 +59,10 @@
             .organizador, .hora {
                 display: block;
                 font-size: 12px;
+            }
+
+            .hora{
+                color: #005fae;
             }
             .hora {
                 font-size: 14px;
@@ -77,7 +83,7 @@
                     margin: 0px 3px;
                     border-radius: 50%;
                     border: 2px solid;
-                    color: #777;
+                    color: #005fae;
                 }
             }
         }
@@ -97,7 +103,11 @@
         left: 51px;
         width: 330px;
         height: 400px;
-
+        &:hover{
+            .popup-close-button {
+                color: #000;
+            }
+        }
         .popup-content-wrapper {
             height: 390px;
             padding-top: 14px;
@@ -107,12 +117,13 @@
         }
         .popup-content-name {
             font-size: 14px;
-            padding: 12px 0px;
+            padding: 12px 10px;
         }
         .popup-content {
-            margin: 13px 19px;
+            // margin: 13px 19px;
             line-height: 1.4;
-            padding-top: 6px;
+            // padding-top: 6px;
+
         }
         .popup-content p {
             margin: 18px 0;
@@ -159,15 +170,14 @@
             text-align: center;
             width: 18px;
             height: 14px;
-            font-size: 24px;
+            font-size: 28px;
             color: #c3c3c3;
             text-decoration: none;
             font-weight: 700;
-            background: transparent
+            background: transparent;
+            z-index: 2;
         }
-        .popup-close-button:hover {
-            color: #999;
-        }
+
         .popup-scrolled {
             overflow: auto;
             border-bottom: 1px solid #ddd;

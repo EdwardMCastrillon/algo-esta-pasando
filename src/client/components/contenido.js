@@ -24,7 +24,8 @@ export default class PostContenido extends React.Component {
         }else{
             p = this.props.params.id;
         }
-        let cp,text,titulo;
+        let cp,text,titulo,classAep;
+        classAep = "Descripcion "
         switch (this.props.route.path.replace("/","").replace("/","").replace(":id","")) {
             case "contenido":
             cp = Contenido.getContenido(p);
@@ -55,9 +56,11 @@ export default class PostContenido extends React.Component {
             titulo =  cp.Título
             break;
             case "aep":
+            case "aep_":
             cp = Aep.getAeP(p);
             text = cp["EDITOR(Recurso)"];
             titulo =  cp.Título
+            classAep += " aep i-keyboard_arrow_down"
             break;
         }
         let img = false;
@@ -68,7 +71,8 @@ export default class PostContenido extends React.Component {
             image: img,
             titulo: titulo,
             autor: cp.Autor,
-            text: text
+            text: text,
+            classAep:classAep
         })
     }
     createMarkup(e,text){
@@ -78,7 +82,12 @@ export default class PostContenido extends React.Component {
         // document.querySelector(".showContent").style.left = "0px"
         document.querySelector(".Descripcion").innerHTML = this.state.text
     }
-
+    showMore(){
+        console.log("showMore");
+        this.setState({
+            classAep: "Descripcion"
+        })
+    }
     render () {
         let divStyle = {
             height: window.innerHeight - 50
@@ -106,7 +115,8 @@ export default class PostContenido extends React.Component {
                     <div className="colum">
                         <h1 className="Titulo" dangerouslySetInnerHTML={this.createMarkup(this,this.state.titulo)}></h1>
 
-                        <div className="Descripcion" > </div>
+                        <div className={this.state.classAep} onClick={this.showMore.bind(this)}> </div>
+
                     </div>
                     <div className="column">
 

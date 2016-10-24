@@ -124,7 +124,40 @@
         margin: auto;
         display: block;
         margin-top: 30px;
+        height: 65px;
+        margin-bottom: 8px;
     }
+    .contenRedes {
+        margin: auto;
+        display: table;
+        width: 78px;
+        i {
+            width: 30px;
+            height: 30px;
+            font-size: 26px;
+            margin: 0 7px;
+        }
+        a {
+            width: 30px;
+            height: 30px;
+            display: block;
+            float: left;
+            color: #656565;
+        }
+        .i-instagram {
+            font-size: 47px !important;
+            line-height: 0.6;
+        }
+    }
+    .copyright {
+        padding: 0px 10px;
+        font-size: 12px;
+        img{
+            width: 95%;
+            height: auto;
+        }
+    }
+
 }
 
 .drawSearch {

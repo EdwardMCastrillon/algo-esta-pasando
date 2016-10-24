@@ -242,8 +242,11 @@ module.exports = {
             json: true
         }, (error, response, body) => {
             if (error) callback(error)
-
-            body = extras.formatEdicion(body)
+            let result = extras.normalizeNames(body)
+            let orderData = extras.orderedKeys(result)
+            let inHtml = extras.normalizeHtml(orderData)
+            body = extras.formatEdicion(inHtml)
+            console.log(inHtml[0].textCopyLeft);
             callback(null, body)
         })
     },
