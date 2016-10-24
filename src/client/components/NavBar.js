@@ -9,7 +9,6 @@ import Logo from "../img/logoAep.png"
 require("../style/NavBar.scss");
 require("../style/icomoon/style.scss");
 
-
 export default class NavBar extends Component {
     constructor (props) {
         super(props)
@@ -100,7 +99,12 @@ export default class NavBar extends Component {
                     }
                 </div>
                 <div className="NavBar-footer">
-                    <img src={ Logo } />
+                    <div>
+                        <img src={ Logo } />
+                    </div>
+                    <div>
+
+                    </div>
                 </div>
             </div>
         );
