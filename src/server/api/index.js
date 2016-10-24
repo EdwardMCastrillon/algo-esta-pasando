@@ -145,4 +145,40 @@ Router.post('/bitacoras', (req, res) => {
     })
 })
 
+/*
+* GET /manifiesto
+* Obtiene el manifiesto de AEP
+*/
+Router.get('/manifiesto', (req, res) => {
+    client.getManifiestos((error, manifiestos) => {
+        if (error) res.sendStatus(500).json(error)
+        res.json(manifiestos)
+    })
+})
+
+/*
+* GET /ultimosPosts?edicion=Imanarios de paz
+* @param Nombre de la edicion
+*/
+Router.get('/ultimosPosts', (req, res) => {
+    let edicion = req.query.edicion
+    client.getLastContenidos(edicion, (error, posts) => {
+        if (error) res.sendStatus(500).json(error)
+        res.json(posts)
+    })
+})
+
+/*
+* GET /relacionesPost?etiqueta=Imanarios de paz
+* @param Nombre de la etiqueta para filtrar
+* Esta ruta devuele los posts y los contenidos asociados a una etiqueta especifica
+*/
+Router.get('/relacionesPost', (req, res) => {
+    let etiqueta = req.query.etiqueta
+    client.getRelacionesEtiqueta(etiqueta, (error, resultados) => {
+        if (error) res.sendStatus(500).json(error)
+        res.json(resultados)
+    })
+})
+
 export default Router
