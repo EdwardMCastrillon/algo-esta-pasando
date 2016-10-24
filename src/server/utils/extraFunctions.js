@@ -303,4 +303,11 @@ export default class Extras {
         }
     }
 
+    filterByEtiqueta (etiqueta, data) {
+        let result = data.filter((obj) => {
+            if (obj['SeccionesAEP'] && obj['SeccionesAEP'].trim() == etiqueta) return obj
+        })
+        return result
+    }
+
 }

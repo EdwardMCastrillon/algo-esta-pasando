@@ -168,4 +168,17 @@ Router.get('/ultimosPosts', (req, res) => {
     })
 })
 
+/*
+* GET /relacionesPost?etiqueta=Imanarios de paz
+* @param Nombre de la etiqueta para filtrar
+* Esta ruta devuele los posts y los contenidos asociados a una etiqueta especifica
+*/
+Router.get('/relacionesPost', (req, res) => {
+    let etiqueta = req.query.etiqueta
+    client.getRelacionesEtiqueta(etiqueta, (error, resultados) => {
+        if (error) res.sendStatus(500).json(error)
+        res.json(resultados)
+    })
+})
+
 export default Router

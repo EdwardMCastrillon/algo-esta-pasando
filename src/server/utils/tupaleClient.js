@@ -330,7 +330,17 @@ module.exports = {
             if (! error) {
                 callback(null, data)
             } else {
-                console.log('Error')
+                callback(error)
+            }
+        })
+    },
+
+    getRelacionesEtiqueta: (etiqueta, callback) => {
+        db.get('Contenidos', { fillCache: false }, (error, data) => {
+            if (! error) {
+                let result = extras.filterByEtiqueta(etiqueta, JSON.parse(data))
+                callback(null, result)
+            } else {
                 callback(error)
             }
         })
