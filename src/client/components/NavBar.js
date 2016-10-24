@@ -8,7 +8,7 @@ import Logo from "../img/logoAep.png"
 
 require("../style/NavBar.scss");
 require("../style/icomoon/style.scss");
-
+const ACTIVE = { color: 'red' }
 export default class NavBar extends Component {
     constructor (props) {
         super(props)
@@ -51,14 +51,44 @@ export default class NavBar extends Component {
             }
         })
     }
+    iconClick(obj,color){
+        if(document.querySelector(`.active`)){
+            document.querySelector(`.active span`).removeAttribute("style");
+            document.querySelector(`.active i`).removeAttribute("style");
+            document.querySelector(`.active`).removeAttribute("style");
+            document.querySelector(`.active i`).style.color = document.querySelector(`.active i`).getAttribute("data-color");
+        }
+
+        document.querySelector(`.${obj} span`).style.color = color;
+        document.querySelector(`.${obj} i`).style.background = color;
+        document.querySelector(`.${obj} i`).style.color = "#fff";
+    }
     iconHover(obj,color){
-        document.querySelector(`.${obj}:hover`).style.color = color;
+        if(document.querySelector(`.${obj}.active`)){
+            document.querySelector(`.${obj}.active span`).style.color = color;
+            document.querySelector(`.${obj}.active i`).style.background = color;
+            document.querySelector(`.${obj}.active i`).style.color = "#fff";
+        }else{
+            if(document.querySelector(`.${obj} span`)){
+                document.querySelector(`.${obj} span`).removeAttribute("style");
+                document.querySelector(`.${obj} i`).style.color = color;
+            }
+            document.querySelector(`.${obj}:hover`).style.color = color;
+        }
     }
     iconOut(obj,color){
-        if(!document.querySelector(`.${obj}:hover`)){
+        if(!document.querySelector(`.${obj}:hover`) && !document.querySelector(`.${obj}.active`)){
             document.querySelector(`.${obj}`).removeAttribute("style");
         }
 
+    }
+    componentDidMount(){
+        setTimeout(function(){
+            let color = document.querySelector(`.active i`).getAttribute("data-color");;
+            document.querySelector(`.active span`).style.color = color;
+            document.querySelector(`.active i`).style.background = color;
+            document.querySelector(`.active i`).style.color = "#fff";
+        },300)
     }
     render() {
         if(this.state.logoOpen == "" && this.props.edicion){
@@ -67,45 +97,45 @@ export default class NavBar extends Component {
                 logoClosed:this.props.edicion.logoClosed,
                 menu:this.props.edicion.menu
             })
-
             this.openNav()
         }
+
         return (
             <div id="NavBar" className="NavBar" onClick={this.classClosepMenu.bind()}
-                onMouseEnter={this.logoOpen.bind(this)} onMouseOut={this.logoClosed.bind(this)}>
-                <div className="NavBar-title" style={this.state.background}> </div>
-                <div className="NavBar-links">
-                    {
-                        Menus.map(item => {
-                            if(this.state.menu){
-                                let url = (item == "inicio") ? "/" : `/${item}`
-                                let icon = `i-${item}`
-                                let option = this.state.menu[item].name
-                                let styleIcon={
-                                    color:this.state.menu[item].color
-                                }
-                                let clas = `${this.state.hidepad} ${item}`
-                                return (
-                                    <Link key={ item } to={ url } className={clas}
-                                        onMouseEnter={this.iconHover.bind(this,item,this.state.menu[item].color)} onMouseOut={this.iconOut.bind(this,item,this.state.menu[item].color)}>
-                                        <span className="flex align-center">
-                                            <i className={ icon } style={styleIcon}></i>
-                                            <span className={this.state.hideName}>{ option }</span>
-                                        </span>
-                                    </Link>
-                                );
-                            }
-                        })
+            onMouseEnter={this.logoOpen.bind(this)} onMouseOut={this.logoClosed.bind(this)}>
+            <div className="NavBar-title" style={this.state.background}> </div>
+            <div className="NavBar-links">
+            {
+                Menus.map(item => {
+                    if(this.state.menu){
+                        let url = (item == "inicio") ? "/" : `/${item}`
+                        let icon = `i-${item}`
+                        let option = this.state.menu[item].name
+                        let styleIcon={
+                            color:this.state.menu[item].color
+                        }
+                        let clas = `${this.state.hidepad} ${item}`
+                        return (
+                            <Link activeClassName="active" key={ item } to={ url } className={clas} onClick={this.iconClick.bind(this,item,this.state.menu[item].color)}
+                            onMouseEnter={this.iconHover.bind(this,item,this.state.menu[item].color)} onMouseOut={this.iconOut.bind(this,item,this.state.menu[item].color)}>
+                            <span className="flex align-center">
+                            <i className={ icon } style={styleIcon} data-color={this.state.menu[item].color}></i>
+                            <span className={this.state.hideName}>{ option }</span>
+                            </span>
+                            </Link>
+                        );
                     }
-                </div>
-                <div className="NavBar-footer">
-                    <div>
-                        <img src={ Logo } />
-                    </div>
-                    <div>
+                })
+            }
+            </div>
+            <div className="NavBar-footer">
+            <div>
+            <img src={ Logo } />
+            </div>
+            <div>
 
-                    </div>
-                </div>
+            </div>
+            </div>
             </div>
         );
 
