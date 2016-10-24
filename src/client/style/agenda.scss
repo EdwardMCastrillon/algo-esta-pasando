@@ -2,6 +2,7 @@
     padding: 0 1em;
     h1 {
         text-align: left;
+        color:#005fae,
     }
     .days{
         > span {
@@ -19,7 +20,7 @@
             font-size: 20px
         }
         .active{
-            color: red;
+            color: #005fae;
         }
     }
     .event{
@@ -35,7 +36,6 @@
             margin-top: 15px;
             border-top: 1px solid #dedede;
             .diaEvent {
-                position: absolute;
                 font-size: 22px;
                 span {
                     display: block;
@@ -48,11 +48,10 @@
                 margin-bottom: 15px;
             }
             .FigureEvent {
-                width: 210px;
+                width: 100%;
                 height: 210px;
-                border-radius: 100%;
                 background-color: #efefef;
-                margin: 12px auto;
+                margin: 2px auto;
             }
 
             .organizador, .hora {
