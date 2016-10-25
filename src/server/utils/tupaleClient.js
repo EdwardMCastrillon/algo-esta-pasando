@@ -66,7 +66,8 @@ module.exports = {
         let total = 0
         EventEmitter.on('finish', (type) => {
             total = total + 1
-            if (total === 7) {
+            console.log(total);
+            if (total === 8) {
                 callback(null, 'ok')
             }
         })
@@ -87,6 +88,7 @@ module.exports = {
             db.put('Perfiles', JSON.stringify(inHtml))
             All[0] = inHtml
             db.put('All', JSON.stringify(All))
+            console.log("Perfiles");
             EventEmitter.emit('finish', 'Perfiles')
         }).catch((error) => {
             console.error(error)
@@ -223,9 +225,34 @@ module.exports = {
         }).catch((error) => {
             callback(error)
         })
+        // Ediciones
+        let EdicionesPromise = new Promise((resolve, reject) => {
+            let endpoint = endpoints.ediciones
+            request({
+                url: endpoint,
+                method: 'GET',
+                json: true
+            }, (error, response, body) => {
+                if (error) reject(error)
+                resolve(body)
+            })
+        }).then((contenidos) => {
+            let result = extras.normalizeNames(contenidos)
+            let orderData = extras.orderedKeys(result)
+            let inHtml = extras.normalizeHtml(orderData)
+            let formatEdicion = extras.formatEdicion(inHtml)
+
+            db.put('Ediciones', JSON.stringify(formatEdicion))
+            All[7] = inHtml
+            db.put('All', JSON.stringify(All))
+            EventEmitter.emit('finish', 'Ediciones')
+        }).catch((error) => {
+            console.error(error)
+        })
     },
 
     getEdition: (callback) => {
+        console.log("getEdition");
         let endpoint = endpoints.parametrizacion
         let edicionPromise = new Promise((resolve, reject) => {
             request({
@@ -245,6 +272,7 @@ module.exports = {
     },
 
     getRelations: (autor, callback) => {
+
         db.get('All', { fillCache: false }, (error, data) => {
             let result = []
             if (! error) {
@@ -258,19 +286,26 @@ module.exports = {
     },
 
     getEdiciones(e,callback){
-        request({
-            url: endpoints.ediciones,
-            method: 'GET',
-            json: true
-        }, (error, response, body) => {
-            if (error) callback(error)
-            let result = extras.normalizeNames(body)
-            let orderData = extras.orderedKeys(result)
-            let inHtml = extras.normalizeHtml(orderData)
-            body = extras.formatEdicion(inHtml)
-            console.log(inHtml[0].textCopyLeft);
-            callback(null, body)
+        db.get('Ediciones', { fillCache: false }, (error, data) => {
+            if (! error) {
+                callback(null, data)
+            } else {
+                callback(error)
+            }
         })
+        // request({
+        //     url: endpoints.ediciones,
+        //     method: 'GET',
+        //     json: true
+        // }, (error, response, body) => {
+        //     if (error) callback(error)
+        //     let result = extras.normalizeNames(body)
+        //     let orderData = extras.orderedKeys(result)
+        //     let inHtml = extras.normalizeHtml(orderData)
+        //     body = extras.formatEdicion(inHtml)
+        //     console.log(inHtml[0].textCopyLeft);
+        //     callback(null, body)
+        // })
     },
 
     getMapCoords: (callback) => {

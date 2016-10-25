@@ -8,7 +8,8 @@ const endpoints = {
     edicion:"/ediciones",
     comentarios:"/comentarios",
     aep:"/aeP",
-    infoMapa:"/infoMapa"
+    infoMapa:"/infoMapa",
+    relacionesPost:"/relacionesPost"
 }
 
 export default endpoints

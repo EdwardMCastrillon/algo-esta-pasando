@@ -1,43 +1,48 @@
 import request from 'superagent'
 // Importamos los endpoints de el servidor propio
 import apiEndpoints from '../utils/apiEndpoints'
-// Direccion url del server
-const server = '/api'
 
-let _AeP = {}
+let _posts = {}
 let _initCalled = false
 let _changeListeners = []
 
-const Aep = {
+const server = '/api'
 
-    init: function () {
-        if (_initCalled)
-        return
+const relacionesPost = {
 
+    init: function (name) {
+        // if (_initCalled)
+        // return
+        _posts = {};
         _initCalled = true
-        getJSONAeP(`${server}${apiEndpoints.aep}`, function (err, res) {
-            res.forEach(function (item,k) {
-                _AeP[item.id] = item;
-            })
-
-            Aep.notifyChange()
+        getJSONRpost(`${server}${apiEndpoints.relacionesPost}`,name, function (err, res) {
+            // res.forEach(function (item, key) {
+            //     _posts[key+1] = item
+            //     _posts[key+1].keyId = key+1
+            //     _posts[key+1].maxId = res.length;
+            // })
+            _posts = res
+            relacionesPost.notifyChange()
         })
     },
+
     notifyChange: function () {
         _changeListeners.forEach(function (listener) {
             listener()
         })
     },
-    getAePs: function () {
+    getRposts: function () {
         const array = []
-        for (const id in _AeP)
-        array.push(_AeP[id])
+        for (const id in _posts)
+        array.push(_posts[id])
 
         return array
     },
-    getAeP: function (id) {
-        return _AeP[id]
+
+    getRpost: function (id) {
+        return _posts[id]
     },
+
     addChangeListener: function (listener) {
         _changeListeners.push(listener)
     },
@@ -46,10 +51,10 @@ const Aep = {
     }
 }
 
-function getJSONAeP(url, cb) {
-
+function getJSONRpost(url,name, cb) {
     request
     .get(url)
+    .query({ etiqueta: name})
     .set('Accept', 'application/json')
     .end(function(err, res){
         if (res.status === 404) {
@@ -61,4 +66,4 @@ function getJSONAeP(url, cb) {
 }
 
 
-export default Aep
+export default relacionesPost

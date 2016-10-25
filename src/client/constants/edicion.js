@@ -17,7 +17,7 @@ const Edicion = {
         _initCalled = true
         getJSONEdicion(`${server}${apiEndpoints.edicion}`, function (err, res) {
             let r,l,init;
-
+            console.log(res);
             res.forEach(function (item,k) {
                 _Edicion[item.EDNUMERO] = item;
             })
@@ -66,7 +66,7 @@ function getJSONEdicion(url, cb) {
         if (res.status === 404) {
             cb(new Error('not found'))
         } else {
-            cb(null, (res.body))
+            cb(null, (JSON.parse(res.body)))
         }
     });
 }

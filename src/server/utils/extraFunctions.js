@@ -125,8 +125,8 @@ export default class Extras {
     }
 
     formatEdicion(body){
-        // urlTwitter
-        // urlInstagram
+        console.log("formatEdicion");
+        
         let menu = {}
         for (var r = 0; r < body.length; r++) {
             for (var i = 1; i < 10; i++) {

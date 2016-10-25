@@ -15,6 +15,7 @@
     column-gap: 2px;
     margin: 1em auto;
 }
+
 .targetPost {
     position: relative;
     overflow: hidden;
@@ -356,5 +357,26 @@
             overflow: hidden;
         }
 
+    }
+}
+.relatedPosts{
+    > div {
+        position: relative !important;
+        top: inherit !important;
+    }
+    .targetPost {
+        &:hover {
+            .tP_description {
+                height: 62px;
+            }
+            .plus{
+                display: none;
+            }
+            .titulo{
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+            }
+        }
     }
 }
