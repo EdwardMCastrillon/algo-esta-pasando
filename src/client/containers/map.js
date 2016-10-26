@@ -92,8 +92,9 @@ class Map extends Component {
         // this._mapNode = null;
     }
     componentWillUnmount() {
+        console.log("componentWillUnmount");
+        this.state.map.remove();
         LocationMap.removeChangeListener(this.updateData.bind(this))
-        // this.state.map.remove();
 
     }
 
@@ -101,6 +102,7 @@ class Map extends Component {
         console.log("update");
         const id = this.state.idmap
         if (this.state.map) return;
+        console.log("mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm");
         // this function creates the Leaflet map object and is called after the Map component mounts
         let map = L.map(id, config.params);
         L.control.zoom({ position: "bottomleft"}).addTo(map);
