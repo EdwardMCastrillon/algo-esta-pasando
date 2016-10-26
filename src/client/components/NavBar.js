@@ -73,6 +73,9 @@ export default class NavBar extends Component {
             if(document.querySelector(`.${obj} span`)){
                 document.querySelector(`.${obj} span`).removeAttribute("style");
                 document.querySelector(`.${obj} i`).style.color = color;
+                if(!document.querySelector(`.${obj}.active`)){
+                    document.querySelector(`.${obj} i`).style.background ="transparent"
+                }
             }
             document.querySelector(`.${obj}:hover`).style.color = color;
         }

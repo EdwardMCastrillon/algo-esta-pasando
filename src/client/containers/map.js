@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import L from 'leaflet';
 import {  Map, TileLayer, Marker, Popup  } from 'react-leaflet';
 import LocationMap from '../providers/infoMapa'
 import IconPerfil from '../img/perfil.png'
@@ -7,9 +8,7 @@ import IconContebido from '../img/los_objetos.png'
 // import IconContebido from '../img/rayemos.png'
 const MyMarker = ({ map, position, icon }) => (
     <Marker map={map} position={position} icon={icon}>
-        <Popup>
-            <span>A pretty CSS3 popup.<br/>Easily customizable.</span>
-        </Popup>
+        <Popup><span>A pretty CSS3 popup.<br/>Easily customizable.</span></Popup>
     </Marker>
 );
 // markers:LocationMap.getLocations()
@@ -19,7 +18,7 @@ export default class CustomComponent extends Component {
         this.state = {
             lat: 7.2700951,
             lng: -75.5835595,
-            zoom: 8.85,
+            zoom: 9,
             markers:LocationMap.getLocations()
         }
     }
@@ -68,41 +67,38 @@ export default class CustomComponent extends Component {
             iconAnchor: [16, 37],
             popupAnchor: [0, -28]
         });
-        // Perfil
-        // Agenda
-        // Recurso
-        // Contenido
-        // Comentario
 
         return (
             <div className="P-B-ContentPost">
-                <Map center={center} zoom={this.state.zoom}>
-                    <TileLayer
-                        attribution='&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                        url='http://{s}.tile.osm.org/{z}/{x}/{y}.png' />
-                    {
-                        this.state.markers.map(item => {
-                            switch (item.type) {
-                                case "Perfil":
-                                icon = IconP;
-                                break;
-                                case "Agenda":
-                                icon = IconE;
-                                break;
-                                case "Contenido":
-                                case "Comentario":
-                                case "Recurso":
-                                icon = IconCont;
-                                break;
-                                default:
-                                icon = baseballIcon;
-                            }
-                            return(
-                                <MyMarker icon={icon} position={item} />
-                            )
-                        })
+            <Map center={center} zoom={this.state.zoom}>
+            <TileLayer
+            attribution='&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+            url='http://{s}.tile.osm.org/{z}/{x}/{y}.png' />
+            {
+                this.state.markers.map(item => {
+                    let min = 1,max =  new Date().getTime();
+                    let key = Math.random() * (max - min) + min;
+                    switch (item.type) {
+                        case "Perfil":
+                        icon = IconP;
+                        break;
+                        case "Agenda":
+                        icon = IconE;
+                        break;
+                        case "Contenido":
+                        case "Comentario":
+                        case "Recurso":
+                        icon = IconCont;
+                        break;
+                        default:
+                        icon = baseballIcon;
                     }
-                </Map>
+                    return(
+                        <MyMarker key={ key } icon={icon} position={item} />
+                    )
+                })
+            }
+            </Map>
             </div>
         )
     }

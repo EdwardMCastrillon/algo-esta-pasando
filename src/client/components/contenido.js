@@ -45,7 +45,7 @@ export default class PostContenido extends React.Component {
                 Contenido.init();
                 return
             }
-            console.log(cp);
+
             if(cp["Escribir/Párrafos/Texto"]){
                 text = cp["Escribir/Párrafos/Texto"];
             }else{
