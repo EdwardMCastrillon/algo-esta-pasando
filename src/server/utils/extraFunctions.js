@@ -126,7 +126,7 @@ export default class Extras {
 
     formatEdicion(body){
         console.log("formatEdicion");
-        
+
         let menu = {}
         for (var r = 0; r < body.length; r++) {
             for (var i = 1; i < 10; i++) {
@@ -164,57 +164,67 @@ export default class Extras {
                         id: '',
                         type: '',
                         image: '',
+                        name:'',
                         text: '',
                     }
                     switch(index) {
                         case 0:
-                            partial.type = 'Perfil'
-                            partial.id = obj['id']
-                            if (obj['AgregaunaImagen']) partial.image = obj['AgregaunaImagen']
-                            partial.text = obj['Perfil']
-                            break
+                        partial.type = 'Perfil'
+                        partial.id = obj['id']
+                        if (obj['AgregaunaImagen']) partial.image = obj['AgregaunaImagen']
+                        partial.name = obj['Nombres']+" "+obj['Apellidos']
+                        partial.text = obj['Perfil'].substr(0, 200) + '...'
+                        break
                         case 1:
-                            partial.type = 'Agenda'
-                            partial.id = obj['id']
-                            if (obj['AgregaunaImagen']) partial.image = obj['AgregaunaImagen']
-                            partial.text = obj['Descripcióndelaactividad']
-                            break
+                        partial.type = 'Agenda'
+                        partial.id = obj['id']
+                        if (obj['AgregaunaImagen']) partial.image = obj['AgregaunaImagen']
+                        partial.name = obj['Nombredelaactividad']
+                        partial.text = obj['Descripcióndelaactividad'].substr(0, 200) + '...'
+                        break
                         case 2:
-                            partial.type = 'Recurso'
-                            partial.id = obj['id']
-                            if (obj['AgregaunaImagen']) partial.image = obj['AgregaunaImagen']
-                            if (obj['Resumen']) {
-                                if (obj['Resumen'] == "Falta resumen" || obj['Resumen'] == "Falta Resumen") {
-                                    let text = obj['Escribir/Párrafos/Texto'].substr(0, 200) + '...'
-                                    partial.text = text
-                                }
-                            } else {
+                        partial.type = 'Recurso'
+                        partial.id = obj['id']
+                        if (obj['AgregaunaImagen']) partial.image = obj['AgregaunaImagen']
+                        if (obj['Resumen']) {
+                            if (obj['Resumen'] == "Falta resumen" || obj['Resumen'] == "Falta Resumen") {
+                                partial.name = obj['Título']
                                 let text = obj['Escribir/Párrafos/Texto'].substr(0, 200) + '...'
                                 partial.text = text
                             }
-                            break
+                        } else {
+                            let text = obj['Escribir/Párrafos/Texto'].substr(0, 200) + '...'
+                            partial.name = obj['Título']
+                            partial.text = text
+                        }
+                        break
                         case 3:
-                            partial.type = 'Contenido'
-                            partial.id = obj['id']
-                            if (obj['Resumen']) {
-                                if (obj['Resumen'] == "Falta resumen" || obj['Resumen'] == "Falta Resumen") {
-                                    let text = obj['Escribir/Párrafos/Texto'].substr(0, 200) + '...'
-                                    partial.text = text
-                                }
-                            } else {
+                        partial.type = 'Contenido'
+                        partial.id = obj['id']
+                        if (obj['Resumen']) {
+                            if (obj['Resumen'] == "Falta resumen" || obj['Resumen'] == "Falta Resumen") {
                                 let text = obj['Escribir/Párrafos/Texto'].substr(0, 200) + '...'
                                 partial.text = text
+                                partial.name = obj['Título']
                             }
-                            if (obj['AgregaunaImagen']) partial.image = obj['AgregaunaImagen']
-                            break
+                        } else {
+                            let text = obj['Escribir/Párrafos/Texto'].substr(0, 200) + '...'
+                            partial.name = obj['Título']
+                            partial.text = text
+                        }
+                        if (obj['AgregaunaImagen']) partial.image = obj['AgregaunaImagen']
+                        break
                         case 4:
-                            partial.type = 'Comentario'
-                            partial.id = obj['id']
-                            if (obj['AgregaunaImagen']) partial.image = obj['AgregaunaImagen']
-                            partial.text = obj['Escribir/Párrafos/Texto'].substr(0, 200) + '...'
-                            break
+                        partial.type = 'Comentario'
+                        partial.id = obj['id']
+                        if (obj['AgregaunaImagen']) partial.image = obj['AgregaunaImagen']
+                        partial.name = obj['Título']
+                        partial.text = obj['Escribir/Párrafos/Texto'].substr(0, 200) + '...'
+                        break
                     }
-                    result.push(partial)
+                    if(partial.name != '' && partial.text != ''){
+                        result.push(partial)
+                    }
                 }
             })
         })
@@ -276,7 +286,7 @@ export default class Extras {
                             }
                         }
                     }
-                // Si llegaron edicion y autor.
+                    // Si llegaron edicion y autor.
                 } else if (edicion != "" && autor == "") {
                     // Seccion Agenda
 
@@ -309,11 +319,11 @@ export default class Extras {
         }
         switch (result.length) {
             case 1:
-                return result
+            return result
             case 2:
-                return [result[0], result[1]]
+            return [result[0], result[1]]
             default:
-                return [result[0], result[1], result[2]]
+            return [result[0], result[1], result[2]]
         }
     }
 

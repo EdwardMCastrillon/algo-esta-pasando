@@ -66,7 +66,6 @@ module.exports = {
         let total = 0
         EventEmitter.on('finish', (type) => {
             total = total + 1
-            console.log(total);
             if (total === 8) {
                 callback(null, 'ok')
             }
@@ -88,7 +87,6 @@ module.exports = {
             db.put('Perfiles', JSON.stringify(inHtml))
             All[0] = inHtml
             db.put('All', JSON.stringify(All))
-            console.log("Perfiles");
             EventEmitter.emit('finish', 'Perfiles')
         }).catch((error) => {
             console.error(error)
@@ -252,7 +250,6 @@ module.exports = {
     },
 
     getEdition: (callback) => {
-        console.log("getEdition");
         let endpoint = endpoints.parametrizacion
         let edicionPromise = new Promise((resolve, reject) => {
             request({
