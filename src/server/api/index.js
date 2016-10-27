@@ -67,7 +67,8 @@ Router.get('/comentarios', (req, res) => {
 
 Router.post('/relaciones', (req, res) => {
     let autor = req.body.autor
-    client.getRelations(autor, (error, relaciones) => {
+    let edicion = req.body.edicion
+    client.getRelations(autor, edicion, (error, relaciones) => {
         res.json(relaciones)
     })
 })
