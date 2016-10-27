@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router'
 import Aep from '../providers/aep'
+import request from 'superagent'
 import FunctExtra from '../utils/functExtra'
 import PosContenido from './contenido'
 import Edicion from '../constants/edicion'
@@ -57,6 +58,24 @@ export default class Buscar extends React.Component {
         Edicion.addChangeListener(this.updateEdicion.bind(this))
     }
     showFilters(){
+
+        if(document.querySelector(".filter").classList.contains("active")){
+            console.log(document.querySelector(".edicion").value,
+            document.querySelector(".autor").value
+            );
+            // request
+            // .get('api/')
+            // .set('Accept', 'application/json')
+            // .end(function(err, res){
+            //
+            //     if (res.status === 404) {
+            //         cb(new Error('not found'))
+            //     } else {
+            //         cb(null, (res.body))
+            //     }
+            // });
+            return
+        }
         document.querySelector(".filter").classList.toggle("active");
         document.querySelector(".P-B-ContentPost").style.height = window.innerHeight - (50 + 43);
         document.querySelector(".P-B-ContentPost").style.marginTop= '4.5em';
@@ -91,21 +110,24 @@ export default class Buscar extends React.Component {
             }
             </div>
             <div className="filter flex  align-center ">
-            <select>
+            <select className="edicion">
             {
                 this.state.ediciones.map(item => {
+                    let Título = FunctExtra.accentDecode(item['Título']);
                     return(
-                        <option value="">{item.Título}</option>
+                        <option value={Título}>{Título}</option>
                     )
                 })
             }
             </select>
 
-            <select>
+            <select className="autor">
+            <option value="0">Autor</option>
             {
                 this.state.autores.map(item => {
+                    let name = FunctExtra.accentDecode(item['Nombres']+" "+item['Apellidos']);
                     return(
-                        <option value="">{item.Nombres} {item.Apellidos}</option>
+                        <option value={name}>{name}</option>
                     )
                 })
             }

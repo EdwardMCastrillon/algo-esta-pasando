@@ -121,10 +121,9 @@ Router.get('/infoMapa', (req, res) => {
 })
 
 /*
-* GET /search?edicion=0&autor=María Juliana Yepes Burgos
+* GET /search?edicion=Imaginarios de paz&autor=María Juliana Yepes Burgos
 * @param edicion, autor, destacados (Querystring)
 */
-
 Router.get('/search', (req, res) => {
     let params = [req.query.edicion, req.query.autor]
     client.customSearch(params, (error, data) => {
