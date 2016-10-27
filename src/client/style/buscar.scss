@@ -1,0 +1,59 @@
+#NavBarTop {
+    height: 46px;
+    position: relative;
+    z-index: 9;
+    background: #fff;
+    .item {
+        font-size: 14px;
+        margin: 0 17px;
+        display: block;
+        color: #4e4e4e;
+    }
+}
+.filter.active{
+    top: 1px;
+}
+.filter{
+
+    height: 43px;
+    position: relative;
+    z-index: 0;
+    top: -50px;
+    transition: all .5s;
+    padding-left: 35px;
+    input {
+        background: #fbfbfb;
+        border: none;
+        border-bottom: 1px solid #c8c7c7;
+        outline: none;
+    }
+    select{
+        appearance: searchfield;
+        font-size: 14px;
+        width: 20%;
+        border: none;
+        outline: none;
+        border-bottom: 1px solid #c8c7c7;
+        margin: 0 9px;
+        height: 26px;
+        border-radius: 0;
+        background: #fbfbfb;
+    }
+}
+.drawSearch {
+    top: 0;
+    right: 25px;
+    width: 45px;
+    height: 85px;
+    position: absolute;
+    z-index: 10;
+    i {
+        color: #FFE;
+        font-size: 22px;
+        font-weight: bold;
+        padding-top: 50px;
+        display: block;
+        text-align: center;
+        cursor: pointer;
+    }
+}

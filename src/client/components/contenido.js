@@ -26,6 +26,9 @@ export default class PostContenido extends React.Component {
             self.loadContent()
         },300)
     }
+    componentDidUpdate(){
+        console.log("componentDidUpdate");
+    }
     loadContent(){
 
         // // Se captura el id del post que llega como parametro en la ruta

@@ -63,7 +63,7 @@ class Map extends Component {
         this._mapNode = null;
     }
     componentDidUpdate(){
-        console.log("componentDidUpdate");
+
     }
     updateData(){
         this.setState({
@@ -72,50 +72,50 @@ class Map extends Component {
         this.init(this._mapNode)
     }
     componentDidMount() {
-        console.log("componentDidMount");
+
         // create the Leaflet map object
         if (!this.state.map){
-            console.log("entra");
+
             this.setState({
                 idmap:this._mapNode
             })
             LocationMap.addChangeListener(this.updateData.bind(this))
         }
         if(this.state.markers.length > 0){
-            console.log("mayor  a cero");
+
             this.updateData()
         }
     }
     componentWillMount(){
         LocationMap.init()
-        console.log("componentWillMount");
+
     }
     componentWillUnmount() {
-        console.log("componentWillUnmount");
+
         this.state.map.remove();
     }
 
     init(id) {
-        console.log("update");
+
 
         if (this.state.map) return;
 
         // this function creates the Leaflet map object and is called after the Map component mounts
-        console.log("1");
+
         let map = L.map(id, config.params);
         L.control.zoom({ position: "bottomleft"}).addTo(map);
         L.control.scale({ position: "bottomleft"}).addTo(map);
-        console.log("2");
+
         // a TileLayer is used as the "basemap"
         const tileLayer = L.tileLayer(config.tileLayer.uri, config.tileLayer.params).addTo(map);
-        console.log("3");
+
         // set our state to include the tile layer
 
         L.layerGroup(this.getData()).addTo(map);
 
         this.setState({ map, tileLayer });
         document.querySelector(".leaflet-container").style.height = `${window.innerHeight - 50}px`
-        console.log("4");
+
 
     }
     getData(){

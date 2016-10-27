@@ -160,22 +160,6 @@
 
 }
 
-.drawSearch {
-    top: 0;
-    right: 25px;
-    width: 45px;
-    height: 85px;
-    position: absolute;
-    i {
-        color: #FFE;
-        font-size: 22px;
-        font-weight: bold;
-        padding-top: 50px;
-        display: block;
-        text-align: center;
-        cursor: pointer;
-    }
-}
 .NavBar-links a span > span{
     padding: 0;
     width: 179px;
@@ -226,15 +210,6 @@
                 }
             }
         }
-    }
-}
-#NavBarTop {
-    height: 46px;
-    .item {
-        font-size: 14px;
-        margin: 0 17px;
-        display: block;
-        color: #4e4e4e;
     }
 }
 a[href="/editorial"],a[href="/algo_esta_pasando"] {
