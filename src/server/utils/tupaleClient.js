@@ -268,15 +268,15 @@ module.exports = {
         })
     },
 
-    getRelations: (autor, callback) => {
+    getRelations: (autor, edicion, callback) => {
 
         db.get('All', { fillCache: false }, (error, data) => {
             let result = []
             if (! error) {
-                result = extras.filterByAutor(autor, JSON.parse(data))
+                result = extras.filterByAutor(autor, edicion, JSON.parse(data))
                 callback(null, result)
             } else {
-                result = extras.filterByAutor(autor, All)
+                result = extras.filterByAutor(autor, edicion, All)
                 callback(null, result)
             }
         })
