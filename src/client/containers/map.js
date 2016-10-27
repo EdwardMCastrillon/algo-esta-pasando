@@ -65,8 +65,15 @@ class Map extends Component {
     componentDidUpdate(){
         console.log("componentDidUpdate");
     }
+    updateData(){
+        this.setState({
+            markers:LocationMap.getLocations()
+        })
+        this.init(this._mapNode)
+    }
     componentDidMount() {
-        console.log("this.state.markers  ",this.state.markers);
+        console.log("componentDidMount");
+        // create the Leaflet map object
         if (!this.state.map){
             console.log("entra");
             this.setState({
@@ -74,45 +81,44 @@ class Map extends Component {
             })
             LocationMap.addChangeListener(this.updateData.bind(this))
         }
+        if(this.state.markers.length > 0){
+            console.log("mayor  a cero");
+            this.updateData()
+        }
     }
     componentWillMount(){
         LocationMap.init()
-        if(this.state.markers.length > 0){
-            this.updateData();
-        }
-        //if(this.state.markers){this.updateData()}
-        // this.setState({
-        //     map: null,
-        //     tileLayer: null,
-        //     geojsonLayer: null,
-        //     geojson: null,
-        //     numEntrances: null
-        // });
-        // // markers:LocationMap.getLocations()
-        // this._mapNode = null;
+        console.log("componentWillMount");
     }
     componentWillUnmount() {
         console.log("componentWillUnmount");
         this.state.map.remove();
-        LocationMap.removeChangeListener(this.updateData.bind(this))
-
     }
 
-    updateData() {
+    init(id) {
         console.log("update");
-        const id = this.state.idmap
+
         if (this.state.map) return;
-        console.log("mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm");
+
         // this function creates the Leaflet map object and is called after the Map component mounts
+        console.log("1");
         let map = L.map(id, config.params);
         L.control.zoom({ position: "bottomleft"}).addTo(map);
         L.control.scale({ position: "bottomleft"}).addTo(map);
-
+        console.log("2");
         // a TileLayer is used as the "basemap"
         const tileLayer = L.tileLayer(config.tileLayer.uri, config.tileLayer.params).addTo(map);
-        this.setState({
-            markers:LocationMap.getLocations()
-        })
+        console.log("3");
+        // set our state to include the tile layer
+
+        L.layerGroup(this.getData()).addTo(map);
+
+        this.setState({ map, tileLayer });
+        document.querySelector(".leaflet-container").style.height = `${window.innerHeight - 50}px`
+        console.log("4");
+
+    }
+    getData(){
         let icon;
         let m = []
         this.state.markers.map(item => {
@@ -140,22 +146,14 @@ class Map extends Component {
             };
             m.push(L.marker([item.lat, item.lng],{icon:icon}).bindPopup(`<div><div class ="img" style="background: rgb(234, 234, 234) url(${img}) top center"></div><div class="content"><div class="c_name">${item.name}</div><div class="c_resumen">${item.text}</div></div><div/>`))
         })
-        L.layerGroup(m).addTo(map);;
 
-        // set our state to include the tile layer
-        this.setState({ map, tileLayer });
-        document.querySelector(".leaflet-container").style.height = `${window.innerHeight - 50}px`
-
-        // map.on("click", function (event) {
-        //     console.log(event);
-        // });
+        return m;
     }
-
     render() {
         return (
             <div id="mapUI" className="P-B-ContentPost">
 
-            <div ref={(node) => this._mapNode = node} id="map" />
+                <div ref={(node) => this._mapNode = node} id="map" />
 
             </div>
         );

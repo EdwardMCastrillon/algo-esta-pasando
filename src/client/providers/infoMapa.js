@@ -17,7 +17,6 @@ const locationMap = {
         _initCalled = true
         getJSONLocation(`${server}${apiEndpoints.infoMapa}`, function (err, res) {
             _location = res
-            console.log("locationMap ")
             locationMap.notifyChange()
         })
     },
@@ -39,7 +38,6 @@ const locationMap = {
     },
 
     addChangeListener: function (listener) {
-        console.log("addChangeListener");
         _changeListeners.push(listener)
     },
     removeChangeListener: function (listener) {
@@ -52,7 +50,6 @@ function getJSONLocation(url, cb) {
     .get(url)
     .set('Accept', 'application/json')
     .end(function(err, res){
-        console.log("getJSONLocation");
         if (res.status === 404) {
             cb(new Error('not found'))
         } else {
