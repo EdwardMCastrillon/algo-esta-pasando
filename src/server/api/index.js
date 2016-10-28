@@ -126,7 +126,7 @@ Router.get('/infoMapa', (req, res) => {
 */
 
 Router.get('/search', (req, res) => {
-    let params = [req.query.edicion, req.query.autor]
+    let params = [req.query.edicion, req.query.autor, req.query.api]
     client.customSearch(params, (error, data) => {
         if (error) res.sendStatus(500).json(error)
         res.json(data)
