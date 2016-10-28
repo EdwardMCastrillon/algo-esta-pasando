@@ -404,5 +404,15 @@ module.exports = {
                 callback(error)
             }
         })
+    },
+
+    getEditorial: (callback) => {
+        db.get('Editorial', { fillCache: false }, (error, data) => {
+            if (! error) {
+                callback(null, JSON.parse(data))
+            } else {
+                callback(error)
+            }
+        })
     }
 }
