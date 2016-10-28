@@ -182,4 +182,11 @@ Router.get('/relacionesPost', (req, res) => {
     })
 })
 
+Router.get('/editorial', (req, res) => {
+    client.getEditorial((error, editorial) => {
+        if (error) res.sendStatus(500).json(error)
+        res.json(editorial)
+    })
+})
+
 export default Router
