@@ -28,7 +28,7 @@ export default class PostContenido extends React.Component {
         // }else{
             p = this.props.params.id;
         // }
-        let cp,text,titulo,classAep,postRelation={};
+        let cp,text,titulo,classAep,postRelation={},textCompleto;
         classAep = "Descripcion "
         switch (this.props.route.path.replace("/","").replace("/","").replace(":id","")) {
             case "contenido":
@@ -85,11 +85,11 @@ export default class PostContenido extends React.Component {
             case "aep":
             case "aep_":
             cp = Aep.getAeP(p);
-            text = cp["EDITOR(Recurso)"];
+            textCompleto = cp["EDITOR(Recurso)"];
             text = cp.Resumen
             titulo =  cp.Título
             RelacionesPost.init(titulo);
-            classAep += " "//aep i-keyboard_arrow_down
+            classAep += " aep "//aep i-keyboard_arrow_down
             break;
         }
         let img = false;
@@ -100,6 +100,7 @@ export default class PostContenido extends React.Component {
             image: img,
             titulo: titulo,
             autor: cp.Autor,
+            textCompleto:textCompleto,
             text: text,
             classAep:classAep
         })
@@ -127,9 +128,12 @@ export default class PostContenido extends React.Component {
         // document.querySelector(".Descripcion").innerHTML = this.state.text
     }
     showMore(){
-        this.setState({
-            classAep: "Descripcion"
-        })
+        if(document.querySelector(".aep")){
+            this.setState({
+                classAep: "Descripcion",
+                text: this.state.textCompleto
+            })
+        }
     }
     render () {
         let divStyle = {
@@ -156,7 +160,6 @@ export default class PostContenido extends React.Component {
             <div className="colum">
             <h1 className="Titulo" dangerouslySetInnerHTML={FunctExtra.createMarkup(this,this.state.titulo)}></h1>
             <div className={this.state.classAep} onClick={this.showMore.bind(this)}  dangerouslySetInnerHTML={FunctExtra.createMarkup(this,this.state.text)}></div>
-
             </div>
             <div id="relacionesPost" className="relatedPosts flex">
             {

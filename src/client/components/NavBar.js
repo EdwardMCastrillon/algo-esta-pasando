@@ -1,6 +1,5 @@
 import React, { PropTypes, Component } from "react";
 import { Link, Router } from 'react-router'
-// import Aep from '../providers/aep'
 import FunctExtra from '../utils/functExtra'
 import Menus from '../constants/menus'
 // import Logo from "../img/logoAep.png"
@@ -54,10 +53,12 @@ export default class NavBar extends Component {
     }
     iconClick(obj,color){
         if(document.querySelector(`.active`)){
-            document.querySelector(`.active span`).removeAttribute("style");
-            document.querySelector(`.active i`).removeAttribute("style");
-            document.querySelector(`.active`).removeAttribute("style");
-            document.querySelector(`.active i`).style.color = document.querySelector(`.active i`).getAttribute("data-color");
+            if(document.querySelector(`.active span`)){
+                document.querySelector(`.active span`).removeAttribute("style");
+                document.querySelector(`.active i`).removeAttribute("style");
+                document.querySelector(`.active`).removeAttribute("style");
+                document.querySelector(`.active i`).style.color = document.querySelector(`.active i`).getAttribute("data-color");
+            }
         }
 
         document.querySelector(`.${obj} span`).style.color = color;
@@ -86,12 +87,15 @@ export default class NavBar extends Component {
         }
 
     }
+
     componentDidMount(){
         setTimeout(function(){
-            let color = document.querySelector(`.active i`).getAttribute("data-color");;
-            document.querySelector(`.active span`).style.color = color;
-            document.querySelector(`.active i`).style.background = color;
-            document.querySelector(`.active i`).style.color = "#fff";
+            if(document.querySelector(`.active`)){
+                let color = document.querySelector(`.active i`).getAttribute("data-color");;
+                document.querySelector(`.active span`).style.color = color;
+                document.querySelector(`.active i`).style.background = color;
+                document.querySelector(`.active i`).style.color = "#fff";    
+            }
         },300)
     }
     render() {
@@ -140,7 +144,9 @@ export default class NavBar extends Component {
             </div>
             <div className="NavBar-footer">
             <div>
+            <Link to="/editorial">
             <img src={ this.state.LogoAEP } />
+            </Link>
             </div>
             <div className="contenRedes" dangerouslySetInnerHTML={FunctExtra.createMarkup(this,this.state.redes)}></div>
             <div className="copyright" dangerouslySetInnerHTML={FunctExtra.createMarkup(this,this.state.textCopyLeft)}></div>

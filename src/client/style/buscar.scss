@@ -11,14 +11,14 @@
     }
 }
 .filter.active{
-    top: 1px;
+    margin-top: 1px;
 }
 .filter{
 
     height: 43px;
     position: relative;
     z-index: 0;
-    top: -50px;
+    margin-top: -50px;
     transition: all .5s;
     padding-left: 35px;
     input {

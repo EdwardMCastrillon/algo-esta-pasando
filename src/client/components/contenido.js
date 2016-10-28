@@ -7,6 +7,7 @@ import Recursos from '../providers/recursoStore'
 import Aep from '../providers/aep'
 import AgendaStore from '../providers/agendaStore'
 import RelacionesPost from '../providers/relacionesPost'
+import Editiorial from '../providers/editorialStore'
 import Post from '../components/posts'
 
 export default class PostContenido extends React.Component {
@@ -27,7 +28,7 @@ export default class PostContenido extends React.Component {
         },300)
     }
     componentDidUpdate(){
-        console.log("componentDidUpdate");
+
     }
     loadContent(){
 
@@ -38,7 +39,7 @@ export default class PostContenido extends React.Component {
         // }else{
             p = this.props.params.id;
         // }
-        let cp,text,titulo,classAep,postRelation={};
+        let cp,text,titulo,classAep,postRelation={},textCompleto;
         classAep = "Descripcion "
         switch (this.props.route.path.replace("/","").replace("/","").replace(":id","")) {
             case "contenido":
@@ -93,14 +94,28 @@ export default class PostContenido extends React.Component {
             }
             titulo =  cp.Título
             break;
+            case "editorial":
+
+            cp = Editiorial.getEditorial(p);
+            if(!cp){
+                Editiorial.init();
+                return
+            }
+            if(cp["Escribir / Párrafos / Texto"]){
+                text = cp["Escribir / Párrafos / Texto"];
+            }else{
+                text = cp["Escribir/Párrafos/Texto"];
+            }
+            titulo =  cp.Título
+            break;
             case "aep":
             case "aep_":
             cp = Aep.getAeP(p);
-            text = cp["EDITOR(Recurso)"];
-            text = cp.Resumen
+            textCompleto = cp["EDITOR(Recurso)"];
+            text = cp.Resumen;
             titulo =  cp.Título
             RelacionesPost.init(titulo);
-            classAep += " "//aep i-keyboard_arrow_down
+            classAep += " aep "
             break;
         }
         let img = false;
@@ -112,8 +127,10 @@ export default class PostContenido extends React.Component {
             titulo: titulo,
             autor: cp.Autor,
             text: text,
+            textCompleto:textCompleto,
             classAep:classAep
         })
+        Editiorial.removeChangeListener(this.loadContent.bind(this))
         Contenido.removeChangeListener(this.loadContent.bind(this))
         AgendaStore.removeChangeListener(this.loadContent.bind(this))
         Comentarios.removeChangeListener(this.loadContent.bind(this))
@@ -135,12 +152,17 @@ export default class PostContenido extends React.Component {
         AgendaStore.addChangeListener(this.loadContent.bind(this))
         Comentarios.addChangeListener(this.loadContent.bind(this))
         Recursos.addChangeListener(this.loadContent.bind(this))
+        Editiorial.addChangeListener(this.loadContent.bind(this))
+
         // document.querySelector(".Descripcion").innerHTML = this.state.text
     }
     showMore(){
-        this.setState({
-            classAep: "Descripcion"
-        })
+        if(document.querySelector(".aep")){
+            this.setState({
+                classAep: "Descripcion",
+                text: this.state.textCompleto
+            })
+        }
     }
     render () {
         let divStyle = {

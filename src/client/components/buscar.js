@@ -60,25 +60,29 @@ export default class Buscar extends React.Component {
     showFilters(){
 
         if(document.querySelector(".filter").classList.contains("active")){
-            console.log(document.querySelector(".edicion").value,
-            document.querySelector(".autor").value
-            );
-            // request
-            // .get('api/')
-            // .set('Accept', 'application/json')
-            // .end(function(err, res){
-            //
-            //     if (res.status === 404) {
-            //         cb(new Error('not found'))
-            //     } else {
-            //         cb(null, (res.body))
-            //     }
-            // });
+            let edicion = document.querySelector(".edicion").value;
+            let autor = document.querySelector(".autor").value;
+            request
+            .get(`/api/search?edicion=${edicion}&autor=${autor}`)
+            .set('Accept', 'application/json')
+            .end(function(err, res){
+                if (res.status === 404) {
+                    console.errr(err);
+                } else {
+                    console.log(res.body);
+                }
+            });
             return
         }
         document.querySelector(".filter").classList.toggle("active");
-        document.querySelector(".P-B-ContentPost").style.height = window.innerHeight - (50 + 43);
-        document.querySelector(".P-B-ContentPost").style.marginTop= '4.5em';
+        if(document.querySelector(".P-B-ContentPost")){
+            document.querySelector(".P-B-ContentPost").style.height = window.innerHeight - (50 + 43);
+            document.querySelector(".P-B-ContentPost").style.marginTop= '4.5em';
+        }
+    }
+    pruebas(){
+        console.log("pruebas aaaaaa");
+        this.props.prueba();
     }
     render () {
         let urlAux = "aep"
@@ -114,6 +118,10 @@ export default class Buscar extends React.Component {
             {
                 this.state.ediciones.map(item => {
                     let Título = FunctExtra.accentDecode(item['Título']);
+                    let select = '';
+                    if(localStorage.getItem("nameEdicion") == Título){
+                        select = 'selected'
+                    }
                     return(
                         <option value={Título}>{Título}</option>
                     )
@@ -121,7 +129,7 @@ export default class Buscar extends React.Component {
             }
             </select>
 
-            <select className="autor">
+            <select className="autor"  onChange={this.pruebas.bind(this)}>
             <option value="0">Autor</option>
             {
                 this.state.autores.map(item => {
@@ -136,10 +144,11 @@ export default class Buscar extends React.Component {
             <input type="text" placeholder="Escribe para buscar"/>
 
             </div>
-            <div className="drawSearch" onClick={this.showFilters.bind(this)} style={this.state.background}>
-            <i className="i-lupa"></i>
-            </div>
+
             </div>
         )
     }
 }
+// <div className="drawSearch" onClick={this.showFilters.bind(this)} style={this.state.background}>
+// <i className="i-lupa"></i>
+// </div>

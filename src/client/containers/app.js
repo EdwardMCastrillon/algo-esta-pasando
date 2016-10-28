@@ -45,6 +45,9 @@ export default class App extends React.Component {
     createMarkup(e,text){
         return {__html: text};
     }
+    prueba(){
+        console.log("prueba app");
+    }
     render () {
         if(this.state.edicion && this.state.load){
             let component = "div",transitionName="",
@@ -60,7 +63,7 @@ export default class App extends React.Component {
                     <Nav edicion={this.state.edicion}/>
                     <div className="Page-body">
                         <div className="Page-body-top">
-                            <Buscar route={this.props}/>
+                            <Buscar route={this.props} prueba={this.prueba.bind(this)}/>
                         </div>
                         {this.props.children}
                     </div>

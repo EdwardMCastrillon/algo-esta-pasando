@@ -2,6 +2,7 @@
 
 import Inicio from './containers/inicio'
 import Contenido from './containers/contenido'
+import Editorial from './containers/editorial'
 import Recursos from './containers/recursos'
 import Perfiles from './containers/perfiles'
 import Mapa from './containers/map'
@@ -80,5 +81,16 @@ export default {
         path:"/ediciones_anteriores",
         method: "get",
         handler: Ediciones,
-    }
+    },
+    editorial:{
+        path:"/editorial",
+        method: "get",
+        handler: Editorial,
+    },
+    posEditorial: {
+        path: "/editorial/:id",
+        method: "get",
+        handler: PosContenido,
+        id:118
+    },
 };
