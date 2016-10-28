@@ -9,8 +9,8 @@ const endpoints = {
     comentariosRedaccion: 'https://tupale.co/milfs/api.php?id=213&tipo=simple',
     parametrizacion: 'https://tupale.co//milfs/api.php?id=207&tipo=simple',
     ediciones:"https://tupale.co//milfs/api.php?id=207&tipo=simple",
-    aeP:"https://tupale.co//milfs/api.php?id=206&tipo=simple"
-
+    aeP:"https://tupale.co//milfs/api.php?id=206&tipo=simple",
+    editorial: "https://tupale.co//milfs/api.php?id=219&tipo=simple"
 }
 
 export default endpoints

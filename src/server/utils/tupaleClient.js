@@ -41,6 +41,8 @@ module.exports = {
                 case 'AeP':
                     endpoint = endpoints.aeP
                     break;
+                case 'editorial':
+                    endpoint = endpoints.editorial
                 default:
                     break;
             }
@@ -244,6 +246,29 @@ module.exports = {
             All[7] = inHtml
             db.put('All', JSON.stringify(All))
             EventEmitter.emit('finish', 'Ediciones')
+        }).catch((error) => {
+            console.error(error)
+        })
+
+        let EditorialPromise = new Promise((resolve, reject) => {
+            let endpoint = endpoints.editorial
+            request({
+                url: endpoint,
+                method: 'GET',
+                json: true
+            }, (error, response, body) => {
+                if (error) reject(error)
+                resolve(body)
+            })
+        }).then((contenidos) => {
+            let result = extras.normalizeNames(contenidos)
+            let orderData = extras.orderedKeys(result)
+            let inHtml = extras.normalizeHtml(orderData)
+
+            db.put('Editorial', JSON.stringify(inHtml))
+            All[8] = inHtml
+            db.put('All', JSON.stringify(All))
+            EventEmitter.emit('finish', 'Editorial')
         }).catch((error) => {
             console.error(error)
         })
