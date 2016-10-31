@@ -7,7 +7,7 @@ const server = `/api`
 let _editorial = {}
 let _initCalled = false
 let _changeListeners = []
-// ${server}${apiEndpoints.comentarios}
+
 const EditorialStore = {
 
     init: function () {
@@ -15,7 +15,7 @@ const EditorialStore = {
         return
 
         _initCalled = true
-        getJSONEditorial(`https://tupale.co//milfs/api.php?id=219&tipo=simple`, function (err, res) {
+        getJSONEditorial(`${server}${apiEndpoints.editorial}`, function (err, res) {
             res.forEach(function (item) {
                 _editorial[item.id] = item
             })

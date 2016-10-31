@@ -9,7 +9,8 @@ const endpoints = {
     comentarios:"/comentarios",
     aep:"/aeP",
     infoMapa:"/infoMapa",
-    relacionesPost:"/relacionesPost"
+    relacionesPost:"/relacionesPost",
+    editorial:"/editorial"
 }
 
 export default endpoints
