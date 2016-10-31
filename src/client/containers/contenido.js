@@ -25,6 +25,14 @@ export default class Contenido extends React.Component {
     componentDidMount(){
         contenidoStore.addChangeListener(this.updateData.bind(this))
     }
+    componentDidUpdate(){
+        // if(parseInt(document.querySelector(".autor").value) !== 0){
+        //     document.querySelector(".autor").value = 0
+        //     this.setState({
+        //         posts:contenidoStore.getContenidos()
+        //     })
+        // }
+    }
     renderFilter(obj,autor){
         if(parseInt(autor) == 0){
             this.setState({
@@ -43,16 +51,16 @@ export default class Contenido extends React.Component {
         if (this.state.posts.length > 0) {
             return (
                 <div className="P-B-ContentPost" style={divStyle}>
-                    <Filters renderFilter={this.renderFilter.bind(this)} api="Contenidos"/>
-                    <section className="P-B-Post post">
-                        {
-                            this.state.posts.map(item => {
-                                return(
-                                    <Post key={ item.identificador } data={item} url="contenido/" tipo="1"/>
-                                )
-                            })
-                        }
-                    </section>
+                <Filters renderFilter={this.renderFilter.bind(this)} api="Contenidos"/>
+                <section className="P-B-Post post">
+                {
+                    this.state.posts.map(item => {
+                        return(
+                            <Post key={ item.identificador } data={item} url="contenido/" tipo="1"/>
+                        )
+                    })
+                }
+                </section>
                 </div>
             )
         }else{
@@ -60,7 +68,7 @@ export default class Contenido extends React.Component {
             return(
                 <div className="P-B-ContentPost" style={divStyle}>
                 <Filters renderFilter={this.renderFilter.bind(this)} api="Contenidos"/>
-                    <h1> Cargando Datos.. </h1>
+                <h1> Cargando Datos.. </h1>
                 </div>
             )
         }

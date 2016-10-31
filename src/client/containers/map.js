@@ -113,6 +113,8 @@ class Map extends Component {
 
         L.layerGroup(this.getData()).addTo(map);
 
+        map.panTo(new L.LatLng(this.state.markers[0].lat,this.state.markers[0].lng));
+
         this.setState({ map, tileLayer });
         document.querySelector(".leaflet-container").style.height = `${window.innerHeight - 50}px`
 

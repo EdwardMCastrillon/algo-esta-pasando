@@ -17,6 +17,15 @@ export default class Recursos extends React.Component {
     componentWillMount(){
         RecursoStore.init()
     }
+    componentDidUpdate(){
+        // console.log(document.querySelector(".autor"));
+        // if(parseInt(document.querySelector(".autor").value )!== 0){
+        //     document.querySelector(".autor").value = 0
+        //     this.setState({
+        //         posts:RecursoStore.getRecursos()
+        //     })
+        // }
+    }
     updateData() {
         this.setState({
             posts:RecursoStore.getRecursos()

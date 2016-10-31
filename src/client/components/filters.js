@@ -57,14 +57,14 @@ export default class Buscar extends React.Component {
             if (res.status === 404) {
                 console.errr(err);
             } else {
-                console.log(self.props.renderFilter(res.body,autor))
+                self.props.renderFilter(res.body,autor)
             }
         });
         return
     }
     render () {
         return (
-            <div className="filterSelect flex  align-center ">
+            <div className="filterSelect flex align-center">
 
             <select className="edicion">
             {
