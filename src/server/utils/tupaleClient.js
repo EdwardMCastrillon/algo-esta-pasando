@@ -68,7 +68,7 @@ module.exports = {
         let total = 0
         EventEmitter.on('finish', (type) => {
             total = total + 1
-            if (total === 8) {
+            if (total === 9) {
                 callback(null, 'ok')
             }
         })

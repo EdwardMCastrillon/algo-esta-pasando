@@ -269,7 +269,7 @@ export default class Extras {
                 if (api != "") {
                     switch(api){
                         case "Contenidos":
-                            if (index == 2) {
+                            if (index == 3) {
                                 if (edicion != "" && autor != "") {
                                     if (obj['Número(Edición)deAlgoestápasando'] && obj['Número(Edición)deAlgoestápasando'].trim() == edicion) {
                                         // Seccion Contenidos
@@ -295,30 +295,26 @@ export default class Extras {
                             }
                             break;
                         case "Recursos":
-                            if (index == 3) {
+                            if (index == 2) {
                                 if (edicion != "" && autor != "") {
-                                    if (obj['Número(Edición)deAlgoestápasando'] && obj['Número(Edición)deAlgoestápasando'].trim() == edicion) {
-                                        // Seccion Contenidos
-                                        if (obj['Autor'] && obj['Autor'].trim() == autor) {
-                                            result.push(obj)
-                                        }
+                                    // Seccion Contenidos
+                                    if (obj['Autor'] && obj['Autor'].trim() == autor) {
+                                        result.push(obj)
+                                    }
 
 
-                                        // Seccion Recursos
-                                        if (obj['Otrosautores'] && obj['Otrosautores'].trim() == autor) {
-                                            result.push(obj)
-                                        }
-                                        if (obj['Otrosautores']) {
-                                            let autores = obj['Otrosautores'].split(' ')
-                                            for (let name in autores) {
-                                                if (name.trim() == autor) {
-                                                    result.push(obj)
-                                                }
+                                    // Seccion Recursos
+                                    if (obj['Otrosautores'] && obj['Otrosautores'].trim() == autor) {
+                                        result.push(obj)
+                                    }
+                                    if (obj['Otrosautores']) {
+                                        let autores = obj['Otrosautores'].split(' ')
+                                        for (let name in autores) {
+                                            if (name.trim() == autor) {
+                                                result.push(obj)
                                             }
                                         }
-
                                     }
-                                    // Solo llego edicion.
                                 } else if (edicion != "" && autor == "") {
                                     // Seccion Agenda
 
