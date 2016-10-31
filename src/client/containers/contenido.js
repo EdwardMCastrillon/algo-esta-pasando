@@ -10,7 +10,6 @@ export default class Contenido extends React.Component {
         this.state = ({
             posts:contenidoStore.getContenidos()
         })
-
     }
     componentWillUnmount() {
         contenidoStore.removeChangeListener(this.updateData.bind(this))
@@ -25,13 +24,17 @@ export default class Contenido extends React.Component {
     }
     componentDidMount(){
         contenidoStore.addChangeListener(this.updateData.bind(this))
-        // this.getData()
     }
-    renderFilter(obj){
-        console.log("renderFilter  ",obj);
-        this.setState({
-            posts:obj
-        })
+    renderFilter(obj,autor){
+        if(parseInt(autor) == 0){
+            this.setState({
+                posts:contenidoStore.getContenidos()
+            })
+        }else{
+            this.setState({
+                posts:obj
+            })
+        }
     }
     render () {
         var divStyle = {

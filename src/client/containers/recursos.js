@@ -25,10 +25,16 @@ export default class Recursos extends React.Component {
     componentDidMount(){
         RecursoStore.addChangeListener(this.updateData.bind(this))
     }
-    renderFilter(obj){
-        this.setState({
-            posts:obj
-        })
+    renderFilter(obj,autor){
+        if(parseInt(autor) == 0){
+            this.setState({
+                posts:RecursoStore.getRecursos()
+            })
+        }else{
+            this.setState({
+                posts:obj
+            })
+        }
     }
     render () {
         var divStyle = {
@@ -36,29 +42,26 @@ export default class Recursos extends React.Component {
         };
         if (this.state.posts.length > 0) {
             return (
-
                 <div className="P-B-ContentPost" style={divStyle}>
-                    <Filters renderFilter={this.renderFilter.bind(this)} api="recursos"/>
-                    <section className="P-B-Post post">
-                        {
-                            this.state.posts.map(item => {
-                                return(
-                                    <Post key={ item.identificador } url="centro_de_recursos/" data={item} tipo="1"/>
-                                )
-                            })
-                        }
-                    </section>
+                <Filters renderFilter={this.renderFilter.bind(this)} api="Recursos"/>
+                <section className="P-B-Post post">
+                {
+                    this.state.posts.map(item => {
+                        return(
+                            <Post key={ item.identificador } url="centro_de_recursos/" data={item} tipo="1"/>
+                        )
+                    })
+                }
+                </section>
                 </div>
             )
         }else{
-
             return(
                 <div className="P-B-ContentPost" style={divStyle}>
-                    <Filters renderFilter={this.renderFilter.bind(this)} api="recursos"/>
-                    <h1> Cargando Datos.. </h1>
+                <Filters renderFilter={this.renderFilter.bind(this)} api="Recursos"/>
+                <h1> Cargando Datos.. </h1>
                 </div>
             )
         }
-
     }
 }
