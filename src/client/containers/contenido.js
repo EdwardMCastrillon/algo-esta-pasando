@@ -40,7 +40,7 @@ export default class Contenido extends React.Component {
         if (this.state.posts.length > 0) {
             return (
                 <div className="P-B-ContentPost" style={divStyle}>
-                    <Filters renderFilter={this.renderFilter.bind(this)}/>
+                    <Filters renderFilter={this.renderFilter.bind(this)} api="Contenidos"/>
                     <section className="P-B-Post post">
                         {
                             this.state.posts.map(item => {
@@ -56,7 +56,7 @@ export default class Contenido extends React.Component {
 
             return(
                 <div className="P-B-ContentPost" style={divStyle}>
-                <Filters renderFilter={this.renderFilter.bind(this)}/>
+                <Filters renderFilter={this.renderFilter.bind(this)} api="Contenidos"/>
                     <h1> Cargando Datos.. </h1>
                 </div>
             )

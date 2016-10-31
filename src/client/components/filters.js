@@ -49,8 +49,10 @@ export default class Buscar extends React.Component {
         self = this;
         let edicion = document.querySelector(".edicion").value;
         let autor = document.querySelector(".autor").value;
+        let api = this.props.api;
+        console.log(`/api/search?edicion=${edicion}&autor=${autor}&api=${api}`);
         request
-        .get(`/api/search?edicion=${edicion}&autor=${autor}`)
+        .get(`/api/search?edicion=${edicion}&autor=${autor}&api=${api}`)
         .set('Accept', 'application/json')
         .end(function(err, res){
             if (res.status === 404) {

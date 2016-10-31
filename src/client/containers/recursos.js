@@ -2,6 +2,7 @@ import React from 'react'
 import { hashHistory } from 'react-router'
 import Post from '../components/posts'
 import RecursoStore from '../providers/recursoStore'
+import Filters from '../components/filters'
 import '../style/Posts.scss'
 export default class Recursos extends React.Component {
     constructor (props) {
@@ -24,6 +25,11 @@ export default class Recursos extends React.Component {
     componentDidMount(){
         RecursoStore.addChangeListener(this.updateData.bind(this))
     }
+    renderFilter(obj){
+        this.setState({
+            posts:obj
+        })
+    }
     render () {
         var divStyle = {
             height: window.innerHeight - 50
@@ -32,6 +38,7 @@ export default class Recursos extends React.Component {
             return (
 
                 <div className="P-B-ContentPost" style={divStyle}>
+                    <Filters renderFilter={this.renderFilter.bind(this)} api="recursos"/>
                     <section className="P-B-Post post">
                         {
                             this.state.posts.map(item => {
@@ -47,6 +54,7 @@ export default class Recursos extends React.Component {
 
             return(
                 <div className="P-B-ContentPost" style={divStyle}>
+                    <Filters renderFilter={this.renderFilter.bind(this)} api="recursos"/>
                     <h1> Cargando Datos.. </h1>
                 </div>
             )
