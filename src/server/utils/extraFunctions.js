@@ -127,8 +127,6 @@ export default class Extras {
     }
 
     formatEdicion(body){
-        console.log("formatEdicion");
-
         let menu = {}
         for (var r = 0; r < body.length; r++) {
             for (var i = 1; i < 10; i++) {
@@ -261,7 +259,7 @@ export default class Extras {
 
     customSearch (data, query) {
         console.log(query)
-        let [ edicion, autor, api, input ] = query
+        let [ filtro1, filtro2, filtro3, api, input ] = query
         let recursos = 2, contenidos = 3
         let result = []
         data.forEach((array, index) => {
@@ -277,6 +275,8 @@ export default class Extras {
                         }
                     }
                 } else {
+
+                    /*
                     if (api != "") {
                         switch(api){
                             case "Contenidos":
@@ -407,7 +407,7 @@ export default class Extras {
                                 }
                             }
                         }
-                    }
+                    }*/
                 }
             })
         })
@@ -451,23 +451,22 @@ export default class Extras {
         let filtro1 = ediciones[0].FILTRO_1.replace(/ /g, ''), 
             filtro2 = ediciones[0].FILTRO_2.replace(/ /g, ''), 
             filtro3 = ediciones[0].FILTRO_3.replace(/ /g, '');
-        let result = {
-            "FILTRO_1": [],
-            "FILTRO_2": [],
-            "FILTRO_3": []
-        }
+        let result = {}
+        result[filtro1] = []
+        result[filtro2] = []
+        result[filtro3] = []
         data.forEach((array, index) => {
             array.forEach((obj, idx) => {
                 if (filtro1 != undefined && obj[filtro1]) {
-                    if (! result.FILTRO_1.includes(obj[filtro1])) result.FILTRO_1.push(obj[filtro1])
+                    if (! result[filtro1].includes(obj[filtro1])) result[filtro1].push(obj[filtro1])
                 }
                 
                 if(filtro2 != undefined && obj[filtro2]) {
-                    if (! result.FILTRO_2.includes(obj[filtro2])) result.FILTRO_2.push(obj[filtro2])
+                    if (! result[filtro2].includes(obj[filtro2])) result[filtro2].push(obj[filtro2])
                 }
 
                 if(filtro3 != undefined && obj[filtro3]) {
-                    if (! result.FILTRO_3.includes(obj[filtro3])) result.FILTRO_3.push(obj[filtro3])
+                    if (! result[filtro3].includes(obj[filtro3])) result[filtro3].push(obj[filtro3])
                 }
             })
         })
