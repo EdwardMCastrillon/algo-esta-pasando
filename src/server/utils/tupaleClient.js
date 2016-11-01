@@ -308,26 +308,20 @@ module.exports = {
     },
 
     getEdiciones(e,callback){
-        db.get('Ediciones', { fillCache: false }, (error, data) => {
+        db.get('Ediciones', { fillCache: false }, (error, ediciones) => {
             if (! error) {
-                callback(null, data)
+                db.get('All', { fillCache: false }, (error, data) => {
+                    if (!error) {
+                        let filtros = extras.searchFilters(JSON.parse(ediciones), JSON.parse(data))
+                        callback(null, {"Ediciones": JSON.parse(ediciones), "Filtros": filtros})
+                    } else {
+                        callback(error)
+                    }
+                })
             } else {
                 callback(error)
             }
         })
-        // request({
-        //     url: endpoints.ediciones,
-        //     method: 'GET',
-        //     json: true
-        // }, (error, response, body) => {
-        //     if (error) callback(error)
-        //     let result = extras.normalizeNames(body)
-        //     let orderData = extras.orderedKeys(result)
-        //     let inHtml = extras.normalizeHtml(orderData)
-        //     body = extras.formatEdicion(inHtml)
-        //     console.log(inHtml[0].textCopyLeft);
-        //     callback(null, body)
-        // })
     },
 
     getMapCoords: (callback) => {

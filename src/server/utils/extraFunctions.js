@@ -447,4 +447,32 @@ export default class Extras {
         return result
     }
 
+    searchFilters (ediciones, data) {
+        let filtro1 = ediciones[0].FILTRO_1.replace(/ /g, ''), 
+            filtro2 = ediciones[0].FILTRO_2.replace(/ /g, ''), 
+            filtro3 = ediciones[0].FILTRO_3.replace(/ /g, '');
+        let result = {
+            "FILTRO_1": [],
+            "FILTRO_2": [],
+            "FILTRO_3": []
+        }
+        data.forEach((array, index) => {
+            array.forEach((obj, idx) => {
+                if (filtro1 != undefined && obj[filtro1]) {
+                    if (! result.FILTRO_1.includes(obj[filtro1])) result.FILTRO_1.push(obj[filtro1])
+                }
+                
+                if(filtro2 != undefined && obj[filtro2]) {
+                    if (! result.FILTRO_2.includes(obj[filtro2])) result.FILTRO_2.push(obj[filtro2])
+                }
+
+                if(filtro3 != undefined && obj[filtro3]) {
+                    if (! result.FILTRO_3.includes(obj[filtro3])) result.FILTRO_3.push(obj[filtro3])
+                }
+            })
+        })
+
+        return result
+    }
+
 }
