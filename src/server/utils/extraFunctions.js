@@ -260,95 +260,135 @@ export default class Extras {
     };
 
     customSearch (data, query) {
-        let [ edicion, autor, api ] = query
+        console.log(query)
+        let [ edicion, autor, api, input ] = query
         let recursos = 2, contenidos = 3
         let result = []
         data.forEach((array, index) => {
             array.forEach((obj, idx) => {
-                // Si llegaron los 2 parametros
-                if (api != "") {
-                    switch(api){
-                        case "Contenidos":
-                            if (index == 3) {
-                                if (edicion != "" && autor != "") {
-                                    if (obj['Número(Edición)deAlgoestápasando'] && obj['Número(Edición)deAlgoestápasando'].trim() == edicion) {
+                if (input != "") {
+                    if (index == 1 || index == 2 || index == 3) {
+                        for(let x in obj) {
+                            if (typeof obj[x] == 'string') {
+                                if (obj[x].indexOf(input) !== -1) {
+                                    result.push(obj)
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    if (api != "") {
+                        switch(api){
+                            case "Contenidos":
+                                if (index == 3) {
+                                    if (edicion != "" && autor != "") {
+                                        if (obj['Número(Edición)deAlgoestápasando'] && obj['Número(Edición)deAlgoestápasando'].trim() == edicion) {
+                                            // Seccion Contenidos
+                                            if (obj['Autor'] && obj['Autor'].trim() == autor) {
+                                                result.push(obj)
+                                            }
+
+                                        }
+                                        // Solo llego edicion.
+                                    } else if (edicion != "" && autor == "") {
+                                        // Seccion Agenda
+
+                                        // Seccion Contenidos
+                                        if (obj['Número(Edición)deAlgoestápasando'] && obj['Número(Edición)deAlgoestápasando'].trim() == edicion) {
+                                            result.push(obj)
+                                        }
+                                        // Solo llego el autor
+                                    } else if (edicion == "" && autor != "") {
+                                        if (obj['Autor'] && obj['Autor'].trim() == autor) {
+                                            result.push(obj)
+                                        }
+                                    }
+                                }
+                                break;
+                            case "Recursos":
+                                if (index == 2) {
+                                    if (edicion != "" && autor != "") {
                                         // Seccion Contenidos
                                         if (obj['Autor'] && obj['Autor'].trim() == autor) {
                                             result.push(obj)
                                         }
 
-                                    }
-                                    // Solo llego edicion.
-                                } else if (edicion != "" && autor == "") {
-                                    // Seccion Agenda
 
-                                    // Seccion Contenidos
-                                    if (obj['Número(Edición)deAlgoestápasando'] && obj['Número(Edición)deAlgoestápasando'].trim() == edicion) {
-                                        result.push(obj)
-                                    }
-                                    // Solo llego el autor
-                                } else if (edicion == "" && autor != "") {
-                                    if (obj['Autor'] && obj['Autor'].trim() == autor) {
-                                        result.push(obj)
-                                    }
-                                }
-                            }
-                            break;
-                        case "Recursos":
-                            if (index == 2) {
-                                if (edicion != "" && autor != "") {
-                                    // Seccion Contenidos
-                                    if (obj['Autor'] && obj['Autor'].trim() == autor) {
-                                        result.push(obj)
-                                    }
-
-
-                                    // Seccion Recursos
-                                    if (obj['Otrosautores'] && obj['Otrosautores'].trim() == autor) {
-                                        result.push(obj)
-                                    }
-                                    if (obj['Otrosautores']) {
-                                        let autores = obj['Otrosautores'].split(' ')
-                                        for (let name in autores) {
-                                            if (name.trim() == autor) {
-                                                result.push(obj)
+                                        // Seccion Recursos
+                                        if (obj['Otrosautores'] && obj['Otrosautores'].trim() == autor) {
+                                            result.push(obj)
+                                        }
+                                        if (obj['Otrosautores']) {
+                                            let autores = obj['Otrosautores'].split(' ')
+                                            for (let name in autores) {
+                                                if (name.trim() == autor) {
+                                                    result.push(obj)
+                                                }
                                             }
                                         }
-                                    }
-                                } else if (edicion != "" && autor == "") {
-                                    // Seccion Agenda
+                                    } else if (edicion != "" && autor == "") {
+                                        // Seccion Agenda
 
-                                    // Seccion Contenidos
-                                    if (obj['Número(Edición)deAlgoestápasando'] && obj['Número(Edición)deAlgoestápasando'].trim() == edicion) {
-                                        result.push(obj)
-                                    }
-                                    // Solo llego el autor
-                                } else if (edicion == "" && autor != "") {
-                                    if (obj['Autor'] && obj['Autor'].trim() == autor) {
-                                        result.push(obj)
-                                    }
+                                        // Seccion Contenidos
+                                        if (obj['Número(Edición)deAlgoestápasando'] && obj['Número(Edición)deAlgoestápasando'].trim() == edicion) {
+                                            result.push(obj)
+                                        }
+                                        // Solo llego el autor
+                                    } else if (edicion == "" && autor != "") {
+                                        if (obj['Autor'] && obj['Autor'].trim() == autor) {
+                                            result.push(obj)
+                                        }
 
 
-                                    // Seccion Recursos
-                                    if (obj['Otrosautores'] && obj['Otrosautores'].trim() == autor) {
-                                        result.push(obj)
-                                    }
-                                    if (obj['Otrosautores']) {
-                                        let autores = obj['Otrosautores'].split(' ')
-                                        for (let name in autores) {
-                                            if (name.trim() == autor) {
-                                                result.push(obj)
+                                        // Seccion Recursos
+                                        if (obj['Otrosautores'] && obj['Otrosautores'].trim() == autor) {
+                                            result.push(obj)
+                                        }
+                                        if (obj['Otrosautores']) {
+                                            let autores = obj['Otrosautores'].split(' ')
+                                            for (let name in autores) {
+                                                if (name.trim() == autor) {
+                                                    result.push(obj)
+                                                }
                                             }
                                         }
                                     }
                                 }
+                                break;
+                        }
+                    } else {
+                        if (edicion != "" && autor != "") {
+                            if (obj['Número(Edición)deAlgoestápasando'] && obj['Número(Edición)deAlgoestápasando'].trim() == edicion) {
+                                // Seccion Contenidos
+                                if (obj['Autor'] && obj['Autor'].trim() == autor) {
+                                    result.push(obj)
+                                }
+
+
+                                // Seccion Recursos
+                                if (obj['Otrosautores'] && obj['Otrosautores'].trim() == autor) {
+                                    result.push(obj)
+                                }
+                                if (obj['Otrosautores']) {
+                                    let autores = obj['Otrosautores'].split(' ')
+                                    for (let name in autores) {
+                                        if (name.trim() == autor) {
+                                            result.push(obj)
+                                        }
+                                    }
+                                }
+
                             }
-                            break;
-                    }
-                } else {
-                    if (edicion != "" && autor != "") {
-                        if (obj['Número(Edición)deAlgoestápasando'] && obj['Número(Edición)deAlgoestápasando'].trim() == edicion) {
+                            // Solo llego edicion.
+                        } else if (edicion != "" && autor == "") {
+                            // Seccion Agenda
+
                             // Seccion Contenidos
+                            if (obj['Número(Edición)deAlgoestápasando'] && obj['Número(Edición)deAlgoestápasando'].trim() == edicion) {
+                                result.push(obj)
+                            }
+                            // Solo llego el autor
+                        } else if (edicion == "" && autor != "") {
                             if (obj['Autor'] && obj['Autor'].trim() == autor) {
                                 result.push(obj)
                             }
@@ -364,34 +404,6 @@ export default class Extras {
                                     if (name.trim() == autor) {
                                         result.push(obj)
                                     }
-                                }
-                            }
-
-                        }
-                        // Solo llego edicion.
-                    } else if (edicion != "" && autor == "") {
-                        // Seccion Agenda
-
-                        // Seccion Contenidos
-                        if (obj['Número(Edición)deAlgoestápasando'] && obj['Número(Edición)deAlgoestápasando'].trim() == edicion) {
-                            result.push(obj)
-                        }
-                        // Solo llego el autor
-                    } else if (edicion == "" && autor != "") {
-                        if (obj['Autor'] && obj['Autor'].trim() == autor) {
-                            result.push(obj)
-                        }
-
-
-                        // Seccion Recursos
-                        if (obj['Otrosautores'] && obj['Otrosautores'].trim() == autor) {
-                            result.push(obj)
-                        }
-                        if (obj['Otrosautores']) {
-                            let autores = obj['Otrosautores'].split(' ')
-                            for (let name in autores) {
-                                if (name.trim() == autor) {
-                                    result.push(obj)
                                 }
                             }
                         }

@@ -125,7 +125,7 @@ Router.get('/infoMapa', (req, res) => {
 * @param edicion, autor, destacados (Querystring)
 */
 Router.get('/search', (req, res) => {
-    let params = [req.query.edicion, req.query.autor, req.query.api]
+    let params = [req.query.edicion, req.query.autor, req.query.api, req.query.input]
     client.customSearch(params, (error, data) => {
         if (error) res.sendStatus(500).json(error)
         res.json(data)
