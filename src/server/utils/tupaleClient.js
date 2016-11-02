@@ -325,7 +325,7 @@ module.exports = {
                                 }
                             })
                         }
-                        callback(null, {"Ediciones": parseEdiciones})
+                        callback(null, parseEdiciones)
                     } else {
                         callback(error)
                     }
