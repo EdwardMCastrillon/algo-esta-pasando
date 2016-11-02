@@ -78,14 +78,7 @@ Router.post('/relaciones', (req, res) => {
 */
 
 Router.get('/ediciones', (req, res) => {
-    /*
-    client.getEdiciones('ediciones', (error, ediciones) => {
-        if (error) res.sendStatus(500).json(error)
-        console.log(ediciones);
-        res.json(ediciones)
-    })
-    */
-    client.getDataByParam('Ediciones', (error, ediciones) => {
+    client.getEdiciones((error, ediciones) => {
         if (error) res.sendStatus(500).json(error)
         res.json(ediciones)
     })
@@ -131,8 +124,8 @@ Router.get('/infoMapa', (req, res) => {
 * GET /search?edicion=Imaginarios de paz&autor=María Juliana Yepes Burgos
 * @param edicion, autor, destacados (Querystring)
 */
-Router.get('/search', (req, res) => {
-    let params = [req.query.edicion, req.query.autor, req.query.api, req.query.input]
+Router.post('/search', (req, res) => {
+    let params = [req.body.filtro1, req.body.filtro2, req.body.filtro3, req.body.input]
     client.customSearch(params, (error, data) => {
         if (error) res.sendStatus(500).json(error)
         res.json(data)
@@ -160,6 +153,14 @@ Router.get('/manifiesto', (req, res) => {
     client.getManifiestos((error, manifiestos) => {
         if (error) res.sendStatus(500).json(error)
         res.json(manifiestos)
+    })
+})
+
+Router.get('/refreshData', (req, res) => {
+    client.getAllData((error, confirm) => {
+        if (!error && confirm == "ok") {
+            res.send("La información se actualizo correctamente")
+        }
     })
 })
 

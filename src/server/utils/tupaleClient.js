@@ -277,7 +277,7 @@ module.exports = {
             console.error(error)
         })
     },
-    /*
+    
     getEdition: (callback) => {
         let endpoint = endpoints.parametrizacion
         let edicionPromise = new Promise((resolve, reject) => {
@@ -296,7 +296,7 @@ module.exports = {
             callback(e)
         })
     },
-    */
+    
     getRelations: (autor, edicion, callback) => {
 
         db.get('All', { fillCache: false }, (error, data) => {
@@ -310,14 +310,22 @@ module.exports = {
             }
         })
     },
-    /*
-    getEdiciones(e,callback){
+    
+    getEdiciones(callback){
         db.get('Ediciones', { fillCache: false }, (error, ediciones) => {
             if (! error) {
                 db.get('All', { fillCache: false }, (error, data) => {
                     if (!error) {
                         let filtros = extras.searchFilters(JSON.parse(ediciones), JSON.parse(data))
-                        callback(null, {"Ediciones": JSON.parse(ediciones), "Filtros": filtros})
+                        let parseEdiciones = JSON.parse(ediciones)
+                        for(let i in filtros) {
+                            parseEdiciones.map((edicion) => {
+                                if (i == edicion['Título']) {
+                                    edicion['filtros'] = filtros[i]
+                                }
+                            })
+                        }
+                        callback(null, {"Ediciones": parseEdiciones})
                     } else {
                         callback(error)
                     }
@@ -326,7 +334,7 @@ module.exports = {
                 callback(error)
             }
         })
-    },*/
+    },
 
     getMapCoords: (callback) => {
         db.get('All', { fillCache: false }, (error, data) => {
