@@ -51,18 +51,29 @@ export default class Buscar extends React.Component {
         // filter2
         // filter3
         if(this.state.filter1.length == 0){
-            document.querySelector(".filter1").style.display = "none"
+            document.querySelector(".FILTRO_1").style.display = "none"
         }
         if(this.state.filter2.length == 0){
-            document.querySelector(".filter2").style.display = "none"
+            document.querySelector(".FILTRO_2").style.display = "none"
         }
         if(this.state.filter3.length == 0){
-            document.querySelector(".filter3").style.display = "none"
+            document.querySelector(".FILTRO_3").style.display = "none"
         }
     }
     showFilters(){
         self = this;
-        let edicion = document.querySelector(".edicion").value;
+        let FILTRO_1 = ''
+        let FILTRO_2 = ''
+        let FILTRO_3 = ''
+        if(this.state.filter1.length == 0){
+            FILTRO_1 = document.querySelector(".FILTRO_1").value
+        }
+        if(this.state.filter2.length == 0){
+            FILTRO_2 = document.querySelector(".FILTRO_2").value
+        }
+        if(this.state.filter3.length == 0){
+            FILTRO_3 = document.querySelector(".FILTRO_3").value
+        }
         let autor = document.querySelector(".autor").value;
         let api = this.props.api;
         request
@@ -81,7 +92,7 @@ export default class Buscar extends React.Component {
         return (
             <div className="filterSelect flex align-center">
 
-            <select className="filter1">
+            <select className="FILTRO_1" onChange={this.showFilters.bind(this)}>
             <option value="0" >filtrar por:</option>
             {
                 this.state.filter1.map(item => {
@@ -91,7 +102,7 @@ export default class Buscar extends React.Component {
                 })
             }
             </select>
-            <select className="filter2">
+            <select className="FILTRO_2" onChange={this.showFilters.bind(this)}>
             <option value="0" >filtrar por:</option>
             {
                 this.state.filter2.map(item => {
@@ -101,7 +112,7 @@ export default class Buscar extends React.Component {
                 })
             }
             </select>
-            <select className="filter3">
+            <select className="FILTRO_3" onChange={this.showFilters.bind(this)}>
             <option value="0" >filtrar por:</option>
             {
                 this.state.filter3.map(item => {
