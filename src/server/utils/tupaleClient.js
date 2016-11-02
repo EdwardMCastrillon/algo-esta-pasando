@@ -44,7 +44,7 @@ module.exports = {
                 case 'editorial':
                     endpoint = endpoints.editorial
                 break;
-                case 'ediciones':
+                case 'Ediciones':
                     endpoint = endpoints.ediciones
                 break;
                 default:
@@ -60,7 +60,7 @@ module.exports = {
                 let result = extras.normalizeNames(body)
                 let orderData = extras.orderedKeys(result)
                 let inHtml = extras.normalizeHtml(orderData)
-                
+
                 callback(null, inHtml)
             })
         })

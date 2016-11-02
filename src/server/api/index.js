@@ -85,7 +85,7 @@ Router.get('/ediciones', (req, res) => {
         res.json(ediciones)
     })
     */
-    client.getDataByParam('ediciones', (error, ediciones) => {
+    client.getDataByParam('Ediciones', (error, ediciones) => {
         if (error) res.sendStatus(500).json(error)
         res.json(ediciones)
     })
