@@ -8,7 +8,9 @@ export default class Buscar extends React.Component {
     constructor (props) {
         super(props)
         this.state =  ({
-            ediciones:Edicion.getEdiciones(),
+            filter1:Edicion.getEdicionfiltros("FILTRO_1"),
+            filter2:Edicion.getEdicionfiltros("FILTRO_2"),
+            filter3:Edicion.getEdicionfiltros("FILTRO_3"),
             autores: PerfilStore.getPerfiles()
         })
     }
@@ -33,8 +35,9 @@ export default class Buscar extends React.Component {
     }
     updateEdicion(){
         this.setState({
-            ediciones: Edicion.getEdiciones()
+            filter: Edicion.getEdicionfiltros()
         })
+
     }
     updateAutor(){
         this.setState({
@@ -44,6 +47,18 @@ export default class Buscar extends React.Component {
     componentDidMount(){
         PerfilStore.addChangeListener(this.updateAutor.bind(this))
         Edicion.addChangeListener(this.updateEdicion.bind(this))
+        // filter1
+        // filter2
+        // filter3
+        if(this.state.filter1.length == 0){
+            document.querySelector(".filter1").style.display = "none"
+        }
+        if(this.state.filter2.length == 0){
+            document.querySelector(".filter2").style.display = "none"
+        }
+        if(this.state.filter3.length == 0){
+            document.querySelector(".filter3").style.display = "none"
+        }
     }
     showFilters(){
         self = this;
@@ -66,16 +81,32 @@ export default class Buscar extends React.Component {
         return (
             <div className="filterSelect flex align-center">
 
-            <select className="edicion">
+            <select className="filter1">
+            <option value="0" >filtrar por:</option>
             {
-                this.state.ediciones.map(item => {
-                    let Título = FunctExtra.accentDecode(item['Título']);
-                    let select = '';
-                    if(localStorage.getItem("nameEdicion") == Título){
-                        select = 'selected'
-                    }
+                this.state.filter1.map(item => {
                     return(
-                        <option value={Título}>{Título}</option>
+                        <option value={item}>{item}</option>
+                    )
+                })
+            }
+            </select>
+            <select className="filter2">
+            <option value="0" >filtrar por:</option>
+            {
+                this.state.filter2.map(item => {
+                    return(
+                        <option value={item}>{item}</option>
+                    )
+                })
+            }
+            </select>
+            <select className="filter3">
+            <option value="0" >filtrar por:</option>
+            {
+                this.state.filter3.map(item => {
+                    return(
+                        <option value={item}>{item}</option>
                     )
                 })
             }

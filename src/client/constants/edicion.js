@@ -45,6 +45,16 @@ const Edicion = {
         }
 
     },
+    getEdicionfiltros: function(f){
+        // FILTRO_1
+        // FILTRO_2
+        // FILTRO_3
+        if(!_Edicion[localStorage.getItem("edicion")][f]){
+            return []
+        }
+        f = _Edicion[localStorage.getItem("edicion")][f].replace(new RegExp(" ", 'g'), "");
+        return _Edicion[localStorage.getItem("edicion")].filtros[f]
+    },
     getEdicionId: function (id) {
         localStorage.setItem("edicion",id);
         return _Edicion[id]
