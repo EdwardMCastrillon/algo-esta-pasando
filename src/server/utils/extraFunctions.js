@@ -21,6 +21,21 @@ export default class Extras {
         return result
     }
 
+    removeCharacters(data) {
+        data.map((objeto) => {
+            for(let i in objeto) {
+                objeto[i] = objeto[i].toString().replace(/&aacute;/g, 'á')
+                                                .replace(/&eacute;/g, 'é')
+                                                .replace(/&iacute;/g, 'í')
+                                                .replace(/&oacute;/g, 'ó')
+                                                .replace(/&uacute;/g, 'ú')
+                                                .replace(/&ntilde;/g, 'ñ')
+                                                .replace(/&uuml;/g, 'ü')
+            }
+        })
+        return data
+    }
+
     normalizeNames (data) {
         data.forEach((object, idx) => {
             if (object['Autor']) {
@@ -84,6 +99,8 @@ export default class Extras {
                 .replace(/&nbsp;/g, ' ')
                 .replace(/&apos;/g, "'")
             }
+
+
         })
         return data
     }
