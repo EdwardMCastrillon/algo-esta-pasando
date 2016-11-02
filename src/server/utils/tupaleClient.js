@@ -277,7 +277,7 @@ module.exports = {
             console.error(error)
         })
     },
-
+    /*
     getEdition: (callback) => {
         let endpoint = endpoints.parametrizacion
         let edicionPromise = new Promise((resolve, reject) => {
@@ -296,7 +296,7 @@ module.exports = {
             callback(e)
         })
     },
-
+    */
     getRelations: (autor, edicion, callback) => {
 
         db.get('All', { fillCache: false }, (error, data) => {
