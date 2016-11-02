@@ -43,6 +43,10 @@ module.exports = {
                     break;
                 case 'editorial':
                     endpoint = endpoints.editorial
+                break;
+                case 'Ediciones':
+                    endpoint = endpoints.ediciones
+                break;
                 default:
                     break;
             }
@@ -56,6 +60,7 @@ module.exports = {
                 let result = extras.normalizeNames(body)
                 let orderData = extras.orderedKeys(result)
                 let inHtml = extras.normalizeHtml(orderData)
+
                 callback(null, inHtml)
             })
         })
@@ -241,7 +246,6 @@ module.exports = {
             let orderData = extras.orderedKeys(result)
             let inHtml = extras.normalizeHtml(orderData)
             let formatEdicion = extras.formatEdicion(inHtml)
-
             db.put('Ediciones', JSON.stringify(formatEdicion))
             All[7] = inHtml
             db.put('All', JSON.stringify(All))
@@ -273,7 +277,7 @@ module.exports = {
             console.error(error)
         })
     },
-
+    /*
     getEdition: (callback) => {
         let endpoint = endpoints.parametrizacion
         let edicionPromise = new Promise((resolve, reject) => {
@@ -292,7 +296,7 @@ module.exports = {
             callback(e)
         })
     },
-
+    */
     getRelations: (autor, edicion, callback) => {
 
         db.get('All', { fillCache: false }, (error, data) => {
@@ -306,7 +310,7 @@ module.exports = {
             }
         })
     },
-
+    /*
     getEdiciones(e,callback){
         db.get('Ediciones', { fillCache: false }, (error, ediciones) => {
             if (! error) {
@@ -322,7 +326,7 @@ module.exports = {
                 callback(error)
             }
         })
-    },
+    },*/
 
     getMapCoords: (callback) => {
         db.get('All', { fillCache: false }, (error, data) => {

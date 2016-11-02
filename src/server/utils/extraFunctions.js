@@ -142,12 +142,7 @@ export default class Extras {
                 }
             }
             body[r].menu = menu;
-            // body[r].redes = {
-            //     instagran: body[r].urlInstagram,
-            //     twitter: body[r].urlTwitter
-            // };
         }
-
         return body;
     }
 

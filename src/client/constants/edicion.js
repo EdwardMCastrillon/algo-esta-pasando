@@ -65,7 +65,8 @@ function getJSONEdicion(url, cb) {
         if (res.status === 404) {
             cb(new Error('not found'))
         } else {
-            cb(null, (JSON.parse(res.body)))
+            console.log(res.body);
+            cb(null, ((res.body)))
         }
     });
 }
