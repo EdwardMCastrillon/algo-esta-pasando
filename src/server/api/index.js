@@ -125,6 +125,7 @@ Router.get('/infoMapa', (req, res) => {
 * @param edicion, autor, destacados (Querystring)
 */
 Router.post('/search', (req, res) => {
+    console.log(res.body);
     let params = [req.body.filtro1, req.body.filtro2, req.body.filtro3, req.body.input]
     client.customSearch(params, (error, data) => {
         if (error) res.sendStatus(500).json(error)

@@ -45,6 +45,9 @@ const Edicion = {
         }
 
     },
+    getObjectkeys(f){
+        _Edicion[localStorage.getItem("edicion")][f].replace(new RegExp(" ", 'g'), "");
+    },
     getEdicionfiltros: function(f){
         // FILTRO_1
         // FILTRO_2
