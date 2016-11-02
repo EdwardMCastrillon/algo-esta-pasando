@@ -91,8 +91,9 @@ module.exports = {
             let result = extras.normalizeNames(perfiles)
             let orderData = extras.orderedKeys(result)
             let inHtml = extras.normalizeHtml(orderData)
-            db.put('Perfiles', JSON.stringify(inHtml))
-            All[0] = inHtml
+            let outCharacters = extras.removeCharacters(inHtml)
+            db.put('Perfiles', JSON.stringify(outCharacters))
+            All[0] = outCharacters
             db.put('All', JSON.stringify(All))
             EventEmitter.emit('finish', 'Perfiles')
         }).catch((error) => {
@@ -113,8 +114,9 @@ module.exports = {
             let orderData = extras.orderedKeys(agenda)
             let result = extras.normalizeNames(orderData)
             let inHtml = extras.normalizeHtml(result)
-            db.put('Agenda', JSON.stringify(inHtml))
-            All[1] = inHtml
+            let outCharacters = extras.removeCharacters(inHtml)
+            db.put('Agenda', JSON.stringify(outCharacters))
+            All[1] = outCharacters
             db.put('All', JSON.stringify(All))
             EventEmitter.emit('finish', 'Agenda')
         }).catch((error) => {
@@ -135,8 +137,9 @@ module.exports = {
             let orderData = extras.orderedKeys(recursos)
             let result = extras.normalizeNames(orderData)
             let inHtml = extras.normalizeHtml(result)
-            db.put('Recursos', JSON.stringify(inHtml))
-            All[2] = inHtml
+            let outCharacters = extras.removeCharacters(inHtml)
+            db.put('Recursos', JSON.stringify(outCharacters))
+            All[2] = outCharacters
             db.put('All', JSON.stringify(All))
             EventEmitter.emit('finish', 'Recursos')
         }).catch((error) => {
@@ -157,8 +160,9 @@ module.exports = {
             let orderData = extras.orderedKeys(contenidos)
             let result = extras.normalizeNames(orderData)
             let inHtml = extras.normalizeHtml(result)
-            db.put('Contenidos', JSON.stringify(inHtml))
-            All[3] = inHtml
+            let outCharacters = extras.removeCharacters(inHtml)
+            db.put('Contenidos', JSON.stringify(outCharacters))
+            All[3] = outCharacters
             db.put('All', JSON.stringify(All))
             EventEmitter.emit('finish', 'Contenidos')
         }).catch((error) => {
@@ -179,8 +183,9 @@ module.exports = {
             let orderData = extras.orderedKeys(comentarios)
             let result = extras.normalizeNames(orderData)
             let inHtml = extras.normalizeHtml(result)
-            db.put('Comentarios', JSON.stringify(inHtml))
-            All[4] = inHtml
+            let outCharacters = extras.removeCharacters(inHtml)
+            db.put('Comentarios', JSON.stringify(outCharacters))
+            All[4] = outCharacters
             db.put('All', JSON.stringify(All))
             EventEmitter.emit('finish', 'Comentarios')
         }).catch((error) => {
@@ -201,8 +206,9 @@ module.exports = {
             let orderData = extras.orderedKeys(bitacoras)
             let result = extras.normalizeNames(orderData)
             let inHtml = extras.normalizeHtml(result)
-            db.put('Bitacoras', JSON.stringify(inHtml))
-            All[5] = inHtml
+            let outCharacters = extras.removeCharacters(inHtml)
+            db.put('Bitacoras', JSON.stringify(outCharacters))
+            All[5] = outCharacters
             db.put('All', JSON.stringify(All))
             EventEmitter.emit('finish', 'Bitacoras')
         }).catch((error) => {
@@ -223,8 +229,9 @@ module.exports = {
             let orderData = extras.orderedKeys(manifiestos)
             let result = extras.normalizeNames(orderData)
             let inHtml = extras.normalizeHtml(result)
-            db.put('Manifiestos', JSON.stringify(inHtml))
-            All[6] = inHtml
+            let outCharacters = extras.removeCharacters(inHtml)
+            db.put('Manifiestos', JSON.stringify(outCharacters))
+            All[6] = outCharacters
             db.put('All', JSON.stringify(All))
             EventEmitter.emit('finish', 'Manifiestos')
         }).catch((error) => {
@@ -245,9 +252,10 @@ module.exports = {
             let result = extras.normalizeNames(contenidos)
             let orderData = extras.orderedKeys(result)
             let inHtml = extras.normalizeHtml(orderData)
-            let formatEdicion = extras.formatEdicion(inHtml)
+            let outCharacters = extras.removeCharacters(inHtml)
+            let formatEdicion = extras.formatEdicion(outCharacters)
             db.put('Ediciones', JSON.stringify(formatEdicion))
-            All[7] = inHtml
+            All[7] = formatEdicion
             db.put('All', JSON.stringify(All))
             EventEmitter.emit('finish', 'Ediciones')
         }).catch((error) => {
@@ -268,9 +276,9 @@ module.exports = {
             let result = extras.normalizeNames(contenidos)
             let orderData = extras.orderedKeys(result)
             let inHtml = extras.normalizeHtml(orderData)
-
-            db.put('Editorial', JSON.stringify(inHtml))
-            All[8] = inHtml
+            let outCharacters = extras.removeCharacters(inHtml)
+            db.put('Editorial', JSON.stringify(outCharacters))
+            All[8] = outCharacters
             db.put('All', JSON.stringify(All))
             EventEmitter.emit('finish', 'Editorial')
         }).catch((error) => {
