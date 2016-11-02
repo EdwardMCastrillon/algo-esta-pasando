@@ -60,6 +60,7 @@ module.exports = {
                 let result = extras.normalizeNames(body)
                 let orderData = extras.orderedKeys(result)
                 let inHtml = extras.normalizeHtml(orderData)
+                
                 callback(null, inHtml)
             })
         })
@@ -245,7 +246,6 @@ module.exports = {
             let orderData = extras.orderedKeys(result)
             let inHtml = extras.normalizeHtml(orderData)
             let formatEdicion = extras.formatEdicion(inHtml)
-
             db.put('Ediciones', JSON.stringify(formatEdicion))
             All[7] = inHtml
             db.put('All', JSON.stringify(All))

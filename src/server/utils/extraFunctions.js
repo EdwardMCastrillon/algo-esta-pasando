@@ -142,12 +142,7 @@ export default class Extras {
                 }
             }
             body[r].menu = menu;
-            // body[r].redes = {
-            //     instagran: body[r].urlInstagram,
-            //     twitter: body[r].urlTwitter
-            // };
         }
-
         return body;
     }
 
@@ -448,8 +443,8 @@ export default class Extras {
     }
 
     searchFilters (ediciones, data) {
-        let filtro1 = ediciones[0].FILTRO_1.replace(/ /g, ''), 
-            filtro2 = ediciones[0].FILTRO_2.replace(/ /g, ''), 
+        let filtro1 = ediciones[0].FILTRO_1.replace(/ /g, ''),
+            filtro2 = ediciones[0].FILTRO_2.replace(/ /g, ''),
             filtro3 = ediciones[0].FILTRO_3.replace(/ /g, '');
         let result = {}
         result[filtro1] = []
@@ -460,7 +455,7 @@ export default class Extras {
                 if (filtro1 != undefined && obj[filtro1]) {
                     if (! result[filtro1].includes(obj[filtro1])) result[filtro1].push(obj[filtro1])
                 }
-                
+
                 if(filtro2 != undefined && obj[filtro2]) {
                     if (! result[filtro2].includes(obj[filtro2])) result[filtro2].push(obj[filtro2])
                 }
