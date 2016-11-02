@@ -275,7 +275,17 @@ export default class Extras {
                         }
                     }
                 } else {
+                    if(filtro1 != "" && filtro2 != "" && filtro3 != "") {
+                        let keyFiltro1 = filtro1.name
+                        let keyFiltro2 = filtro2.name
+                        let keyFiltro3 = filtro2.name
 
+                        if(obj[keyFiltro1] && obj[keyFiltro1] === filtro1.value) {
+                            
+                        }
+
+
+                    }
                     /*
                     if (api != "") {
                         switch(api){
@@ -448,29 +458,38 @@ export default class Extras {
     }
 
     searchFilters (ediciones, data) {
-        let filtro1 = ediciones[0].FILTRO_1.replace(/ /g, ''), 
-            filtro2 = ediciones[0].FILTRO_2.replace(/ /g, ''), 
-            filtro3 = ediciones[0].FILTRO_3.replace(/ /g, '');
-        let result = {}
-        result[filtro1] = []
-        result[filtro2] = []
-        result[filtro3] = []
-        data.forEach((array, index) => {
-            array.forEach((obj, idx) => {
-                if (filtro1 != undefined && obj[filtro1]) {
-                    if (! result[filtro1].includes(obj[filtro1])) result[filtro1].push(obj[filtro1])
-                }
-                
-                if(filtro2 != undefined && obj[filtro2]) {
-                    if (! result[filtro2].includes(obj[filtro2])) result[filtro2].push(obj[filtro2])
-                }
-
-                if(filtro3 != undefined && obj[filtro3]) {
-                    if (! result[filtro3].includes(obj[filtro3])) result[filtro3].push(obj[filtro3])
-                }
+        const db = levelup('../temp')
+        let filtros = []
+        let filtro1 = "", filtro2 = "", filtro3 = ""
+        ediciones.map((edicion) => {
+            let result = {}
+            result[edicion] = []
+            if (edicion.FILTRO_1) { 
+                filtro1 = edicion.FILTRO_1.replace(/ /g, '') 
+                result[edicion][filtro1] = []
+            }
+            if (edicion.FILTRO_2) { 
+                filtro2 = edicion.FILTRO_2.replace(/ /g, '') 
+                result[edicion][filtro2] = []
+            }
+            if (edicion.FILTRO_3) { 
+                filtro3 = edicion.FILTRO_3.replace(/ /g, '') 
+                result[edicion][filtro3] = []
+            }
+            data.forEach((array, index) => {
+                array.forEach((obj, idx) => {
+                    if (filtro1 != "" && obj[filtro1]) {
+                        if (! result[edicion][filtro1].includes(obj[filtro1])) result[edicion][filtro1].push(obj[filtro1])
+                    }
+                    if (filtro2 != "" && obj[filtro2]) {
+                        if (! result[edicion][filtro2].includes(obj[filtro2])) result[edicion][filtro2].push(obj[filtro2])
+                    }
+                    if (filtro3 != "" && obj[filtro3]) {
+                        if (! result[edicion][filtro3].includes(obj[filtro3])) result[edicion][filtro3].push(obj[filtro3])
+                    }
+                })
             })
         })
-
         return result
     }
 
