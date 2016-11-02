@@ -33,8 +33,7 @@ Client.getAllData((error, response) => {
 })
 
 setInterval(() => {
-  Client.getAllData((error, response) => {
-    console.log('Se actualizaron los datos correctamente a las: ' + new Date().getHours())
-  })  
+    Client.getAllData((error, response) => {
+        console.log('Se actualizaron los datos correctamente a las: ' + new Date().getHours())
+    })
 }, 3600000)
-

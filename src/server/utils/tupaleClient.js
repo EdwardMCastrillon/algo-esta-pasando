@@ -43,6 +43,10 @@ module.exports = {
                     break;
                 case 'editorial':
                     endpoint = endpoints.editorial
+                break;
+                case 'ediciones':
+                    endpoint = endpoints.ediciones
+                break;
                 default:
                     break;
             }
@@ -306,7 +310,7 @@ module.exports = {
             }
         })
     },
-
+    /*
     getEdiciones(e,callback){
         db.get('Ediciones', { fillCache: false }, (error, ediciones) => {
             if (! error) {
@@ -322,7 +326,7 @@ module.exports = {
                 callback(error)
             }
         })
-    },
+    },*/
 
     getMapCoords: (callback) => {
         db.get('All', { fillCache: false }, (error, data) => {
