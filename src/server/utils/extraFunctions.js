@@ -290,16 +290,52 @@ export default class Extras {
                     let keyFiltro1 = filtro1.name
                     let keyFiltro2 = filtro2.name
                     let keyFiltro3 = filtro2.name
+                    let origen = ""
+
+                    switch(index) {
+                        case 0:
+                            origen = "Perfiles"
+                            break;
+                        case 1:
+                            origen = "Agenda"
+                            break;
+                        case 2:
+                            origen = "Recursos"
+                            break;
+                        case 3:
+                            origen = "Contenido"
+                            break;
+                        case 4:
+                            origen = "Comentarios"
+                            break;
+                        case 5:
+                            origen = "Bitacoras"
+                            break;
+                        case 6:
+                            origen = "Manifiesto"
+                            break;
+                        case 7:
+                            origen = "Ediciones"
+                            break;
+                        case 8:
+                            origen = "Editorial"
+                            break;
+                        default:
+                            break;
+                    }
 
                     if(obj[keyFiltro1] && obj[keyFiltro1] === filtro1.value) {
+                        obj.origen = origen
                         if(!result.includes[obj]) result.push(obj)
                     }
 
                     if(obj[keyFiltro2] && obj[keyFiltro2] === filtro2.value) {
+                        obj.origen = origen
                         if(!result.includes[obj]) result.push(obj)
                     }
 
                     if(obj[keyFiltro3] && obj[keyFiltro3] === filtro3.value) {
+                        obj.origen = origen
                         if(!result.includes[obj]) result.push(obj)
                     }
                 }
