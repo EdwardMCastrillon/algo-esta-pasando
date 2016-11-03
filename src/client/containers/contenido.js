@@ -34,7 +34,7 @@ export default class Contenido extends React.Component {
         // }
     }
     renderFilter(obj,autor){
-        if(parseInt(autor) == 0){
+        if(obj.length == 0){
             this.setState({
                 posts:contenidoStore.getContenidos()
             })
@@ -43,6 +43,16 @@ export default class Contenido extends React.Component {
                 posts:obj
             })
         }
+        // if(parseInt(autor) == 0){
+        //     console.log("entra");
+        //     this.setState({
+        //         posts:contenidoStore.getContenidos()
+        //     })
+        // }else{
+        // this.setState({
+        //     posts:obj
+        // })
+        // }
     }
     render () {
         var divStyle = {

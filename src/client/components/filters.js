@@ -67,19 +67,24 @@ export default class Buscar extends React.Component {
         let FILTRO_3 = ''
         let keyF1 = '',keyF2 = '',keyF3 = '';
         if(this.state.filter1.length > 0){
-            console.log("entra");
-            keyF1 = Edicion.getObjectkeys("FILTRO_1")
-            FILTRO_1 = document.querySelector(".FILTRO_1").value
+
+            if(document.querySelector(".FILTRO_1").value != "0"){
+                keyF1 = Edicion.getObjectkeys("FILTRO_1")
+                FILTRO_1 = document.querySelector(".FILTRO_1").value
+            }
         }
         if(this.state.filter2.length > 0){
-            console.log("entra");
-            keyF2 = Edicion.getObjectkeys("FILTRO_1")
-            FILTRO_2 = document.querySelector(".FILTRO_2").value
+            if(document.querySelector(".FILTRO_2").value != "0"){
+                keyF2 = Edicion.getObjectkeys("FILTRO_2")
+                FILTRO_2 = document.querySelector(".FILTRO_2").value
+            }
         }
         if(this.state.filter3.length > 0){
-            console.log("entra");
-            keyF3 = Edicion.getObjectkeys("FILTRO_1")
-            FILTRO_3 = document.querySelector(".FILTRO_3").value
+
+            if(document.querySelector(".FILTRO_3").value != "0"){
+                keyF3 = Edicion.getObjectkeys("FILTRO_3")
+                FILTRO_3 = document.querySelector(".FILTRO_3").value
+            }
         }
 
         let getData = {
@@ -93,7 +98,7 @@ export default class Buscar extends React.Component {
         }
         let autor = document.querySelector(".autor").value;
         let api = this.props.api;
-        console.log(getData);
+
         request
         .post(`/api/search`)
         .send(getData)
@@ -102,8 +107,8 @@ export default class Buscar extends React.Component {
             if (res.status === 404) {
                 console.errr(err);
             } else {
-                console.log(res.body);
-                //self.props.renderFilter(res.body,autor)
+
+                self.props.renderFilter(res.body,autor)
             }
         });
         return
