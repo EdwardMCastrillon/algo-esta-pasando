@@ -21,7 +21,7 @@ const relacionAutor = {
                 _posts[key+1].keyId = key+1
                 _posts[key+1].maxId = res.length;
             })
-
+            console.log(_posts);
             relacionAutor.notifyChange()
         })
     },
@@ -30,6 +30,19 @@ const relacionAutor = {
         _changeListeners.forEach(function (listener) {
             listener()
         })
+    },
+    getRAutoresMax:function (r) {
+        const array = []
+        let i = 0
+        for (const id in _posts){
+            if(i == r){
+                break;
+            }
+            array.push(_posts[id])
+            i++
+        }
+
+        return array
     },
     getRAutores: function () {
         const array = []

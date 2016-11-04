@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "serve-api": "nodemon --exec babel-node src/server/",
+    "serve-api": "babel-node src/server/",
     "dev": "npm run build-dev && npm run serve-api",
     "start": "npm run dev",
     "build-prod": "rm -rf public/ && webpack -p --config webpack.prod.config.js && cp src/client/index.html public/",

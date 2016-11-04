@@ -8,7 +8,8 @@ export default class Recursos extends React.Component {
     constructor (props) {
         super(props)
         this.state = ({
-            posts: RecursoStore.getRecursos()
+            posts: RecursoStore.getRecursos(),
+            search:false
         })
     }
     componentWillUnmount() {
@@ -35,13 +36,14 @@ export default class Recursos extends React.Component {
         RecursoStore.addChangeListener(this.updateData.bind(this))
     }
     renderFilter(obj,autor){
-        if(parseInt(autor) == 0){
+        if(obj.length == 0){
             this.setState({
                 posts:RecursoStore.getRecursos()
             })
         }else{
             this.setState({
-                posts:obj
+                posts:obj,
+                search:true
             })
         }
     }
@@ -56,8 +58,13 @@ export default class Recursos extends React.Component {
                 <section className="P-B-Post post">
                 {
                     this.state.posts.map(item => {
+                        let origen = ''
+                        let tipo = 1;
+                        if(item.origen == "Perfiles"){
+                            tipo = 2;
+                        }
                         return(
-                            <Post key={ item.identificador } url="centro_de_recursos/" data={item} tipo="1"/>
+                            <Post key={ item.identificador }  search={this.state.search}  url="centro_de_recursos/" data={item} tipo={tipo}/>
                         )
                     })
                 }

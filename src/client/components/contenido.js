@@ -8,7 +8,10 @@ import Aep from '../providers/aep'
 import AgendaStore from '../providers/agendaStore'
 import RelacionesPost from '../providers/relacionesPost'
 import Editiorial from '../providers/editorialStore'
+import Search from '../providers/search'
 import Post from '../components/posts'
+import PerfilStore from '../providers/perfilStore'
+import WidgetPerfilContent from './widgetPerfilContent'
 
 export default class PostContenido extends React.Component {
     constructor (props) {
@@ -17,7 +20,8 @@ export default class PostContenido extends React.Component {
             image: false,
             titulo: '',
             postRelation: [],
-            text:''
+            text:'',
+            Wautor:''
         }
     }
     loadContentAux(){
@@ -27,23 +31,31 @@ export default class PostContenido extends React.Component {
             self.loadContent()
         },300)
     }
-    componentDidUpdate(){
-
-    }
     loadContent(){
-
         // // Se captura el id del post que llega como parametro en la ruta
+
         let p;
-        // if(id){
-        //     p = id
-        // }else{
-            p = this.props.params.id;
-        // }
+        p = this.props.params.id;
         let cp,text,titulo,classAep,postRelation={},textCompleto;
         classAep = "Descripcion "
-        switch (this.props.route.path.replace("/","").replace("/","").replace(":id","")) {
+        let l = this.props.route.path.replace("/","").replace("/","").replace(":id","")
+        if(this.props.location.hash !== ""){
+            l = this.props.location.hash
+        }
+        switch (l) {
+            case "#search":
+            cp = Search.getsearch(p);
+            console.log(cp);
+            if(cp["Escribir/Párrafos/Texto"]){
+                text = cp["Escribir/Párrafos/Texto"];
+            }else if(cp["Descripcióndelaactividad"]){
+                text = cp["Descripcióndelaactividad"];
+            }else{
+                text = cp["EDITOR(Recurso)"]
+            }
+            titulo =  cp.Título
+            break
             case "contenido":
-
             cp = Contenido.getContenido(p);
             if(!cp){
                 Contenido.init();
@@ -122,10 +134,17 @@ export default class PostContenido extends React.Component {
         if(cp.AgregaunaImagen){
             img = `https://tupale.co/milfs/images/secure/?file=full/${cp.AgregaunaImagen}`
         }
+        console.log(cp);
+        let tags = ''
+        if(cp['Otrasetiquetas']){
+            tags = cp['Otrasetiquetas']
+        }
         this.setState({
             image: img,
             titulo: titulo,
             autor: cp.Autor,
+            tags:tags,
+            fecha:cp.timestamp,
             text: text,
             textCompleto:textCompleto,
             classAep:classAep
@@ -154,6 +173,12 @@ export default class PostContenido extends React.Component {
         Recursos.addChangeListener(this.loadContent.bind(this))
         Editiorial.addChangeListener(this.loadContent.bind(this))
 
+        let autor = PerfilStore.getPerfilName(this.state.autor);
+        if(autor){
+            this.setState({
+                Wautor: <AutorRelation autor={autor} fecha={this.state.fecha} tags={this.state.tags}/>
+            })
+        }
         // document.querySelector(".Descripcion").innerHTML = this.state.text
     }
     showMore(){
@@ -179,32 +204,41 @@ export default class PostContenido extends React.Component {
         }
         return (
             <section className="showContent Post"  style={divStyle}>
-            {figure}
-            <div className="FlechaIzquierda"></div>
-            <div className="FlechaDerecha"></div>
-            <div className="AutorFoto">
-            {this.state.autor}
-            </div>
-            <article className="Detalle flex-container column">
-            <div className="colum">
-            <h1 className="Titulo" dangerouslySetInnerHTML={FunctExtra.createMarkup(this,this.state.titulo)}></h1>
-            <div className={this.state.classAep} onClick={this.showMore.bind(this)}  dangerouslySetInnerHTML={FunctExtra.createMarkup(this,this.state.text)}></div>
-
-            </div>
-            <div id="relacionesPost" className="relatedPosts flex" onClick={this.loadContentAux.bind(this)}>
-            {
-                this.state.postRelation.map(item => {
-                    return(
-                        <Post key={ item.identificador } data={item}  url="contenido/" tipo="1"/>
-                    )
-                })
-            }
-            </div>
-            </article>
+                {figure}
+                <div className="FlechaIzquierda"></div>
+                <div className="FlechaDerecha"></div>
+                <div className="AutorFoto">
+                {this.state.autor}
+                </div>
+                <article className="Detalle flex-container column">
+                    <div className="colum flex">
+                        <div className="C_content">
+                            <h1 className="Titulo" dangerouslySetInnerHTML={FunctExtra.createMarkup(this,this.state.titulo)}></h1>
+                            <div className="flex">
+                                <div className={this.state.classAep} onClick={this.showMore.bind(this)}  dangerouslySetInnerHTML={FunctExtra.createMarkup(this,this.state.text)}></div>
+                                {this.state.Wautor}
+                            </div>
+                        </div>
+                    </div>
+                    <div id="relacionesPost" className="relatedPosts flex" onClick={this.loadContentAux.bind(this)}>
+                    {
+                        this.state.postRelation.map(item => {
+                            return(
+                                <Post key={ item.identificador } data={item}  url="contenido/" tipo="1"/>
+                            )
+                        })
+                    }
+                    </div>
+                </article>
             </section>
         )
     }
 }
+const AutorRelation =({autor,tags,fecha}) =>(
+    <div className="c_AutorRelations">
+        <WidgetPerfilContent autor={autor} fecha={fecha} tags={tags}/>
+    </div>
+)
 const ImgPost = ({ background }) => (
     <figure className="Figure" style={background}></figure>
 );

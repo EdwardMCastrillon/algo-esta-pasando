@@ -1,6 +1,7 @@
 import React from 'react'
 import Edicion from '../constants/edicion'
 import PerfilStore from '../providers/perfilStore'
+import Search from '../providers/search'
 import FunctExtra from '../utils/functExtra'
 import request from 'superagent'
 
@@ -9,8 +10,11 @@ export default class Buscar extends React.Component {
         super(props)
         this.state =  ({
             filter1:Edicion.getEdicionfiltros("FILTRO_1"),
+            namefilter1:Edicion.getNamefiltros("FILTRO_1"),
             filter2:Edicion.getEdicionfiltros("FILTRO_2"),
+            namefilter2:Edicion.getNamefiltros("FILTRO_2"),
             filter3:Edicion.getEdicionfiltros("FILTRO_3"),
+            namefilter3:Edicion.getNamefiltros("FILTRO_3"),
             autores: PerfilStore.getPerfiles()
         })
     }
@@ -47,9 +51,6 @@ export default class Buscar extends React.Component {
     componentDidMount(){
         PerfilStore.addChangeListener(this.updateAutor.bind(this))
         Edicion.addChangeListener(this.updateEdicion.bind(this))
-        // filter1
-        // filter2
-        // filter3
         if(this.state.filter1.length == 0){
             document.querySelector(".FILTRO_1").style.display = "none"
         }
@@ -61,6 +62,7 @@ export default class Buscar extends React.Component {
         }
     }
     showFilters(){
+        Search.removeChangeListener(this.updateFilter.bind(this))
         self = this;
         let FILTRO_1 = ''
         let FILTRO_2 = ''
@@ -98,27 +100,32 @@ export default class Buscar extends React.Component {
         }
         let autor = document.querySelector(".autor").value;
         let api = this.props.api;
+        Search.init(getData)
 
-        request
-        .post(`/api/search`)
-        .send(getData)
-        .set('Accept', 'application/json')
-        .end(function(err, res){
-            if (res.status === 404) {
-                console.errr(err);
-            } else {
-
-                self.props.renderFilter(res.body,autor)
-            }
-        });
+        Search.addChangeListener(this.updateFilter.bind(this))
+        // request
+        // .post(`/api/search`)
+        // .send(getData)
+        // .set('Accept', 'application/json')
+        // .end(function(err, res){
+        //     if (res.status === 404) {
+        //         console.errr(err);
+        //     } else {
+        //         console.log(res.body);
+        //         self.props.renderFilter(res.body,autor)
+        //     }
+        // });
         return
+    }
+    updateFilter(){
+        self.props.renderFilter(Search.getsearchs())
     }
     render () {
         return (
             <div className="filterSelect flex align-center">
 
             <select className="FILTRO_1" onChange={this.showFilters.bind(this)}>
-            <option value="0" >filtrar por:</option>
+            <option value="0" >{this.state.namefilter1}</option>
             {
                 this.state.filter1.map(item => {
                     return(
@@ -128,7 +135,7 @@ export default class Buscar extends React.Component {
             }
             </select>
             <select className="FILTRO_2" onChange={this.showFilters.bind(this)}>
-            <option value="0" >filtrar por:</option>
+            <option value="0" >{this.state.namefilter2}</option>
             {
                 this.state.filter2.map(item => {
                     return(
@@ -138,7 +145,7 @@ export default class Buscar extends React.Component {
             }
             </select>
             <select className="FILTRO_3" onChange={this.showFilters.bind(this)}>
-            <option value="0" >filtrar por:</option>
+            <option value="0" >{this.state.namefilter3}</option>
             {
                 this.state.filter3.map(item => {
                     return(

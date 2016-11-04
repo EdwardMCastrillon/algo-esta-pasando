@@ -4,61 +4,51 @@ import apiEndpoints from '../utils/apiEndpoints'
 // Direccion url del server
 const server = `/api`
 
-let _posts = {}
+let _search = {}
 let _initCalled = false
 let _changeListeners = []
 
-const perfilStore = {
+const SearchStore = {
 
-    init: function () {
-        if (_initCalled)
-        return
-
+    init: function (getData) {
+        // if (_initCalled)
+        // return
+        _search = {}
         _initCalled = true
-        getJSONPerfil(`${server}${apiEndpoints.perfiles}`, function (err, res) {
+        getJSONsearch(`${server}${apiEndpoints.search}`,getData, function (err, res) {
             let r,l,init;
             res.forEach(function (item,k) {
-                _posts[item.id] = item;
+                _search[item.id] = item;
                 if(res[k+1]){
                     r = (res[k+1].id);
+                }else{
+                    r = (r)? r: init;
                 }
-
-                if(l != item.id && l != undefined){
-                    _posts[item.id].next = l;
+                if (k == 0) {
+                    init = item.id;
                 }
-                if(r != item.id && r != undefined){
-                    _posts[item.id].prev = r;
-                }
+                _search[item.id].next = r;
+                _search[item.id].prev = l;
                 l = item.id;
             })
-            console.log(_posts);
-            perfilStore.notifyChange()
+            SearchStore.notifyChange()
         })
     },
-
     notifyChange: function () {
         _changeListeners.forEach(function (listener) {
             listener()
         })
     },
-    getPerfiles: function () {
+    getsearchs: function () {
         const array = []
-        for (const id in _posts)
-        array.push(_posts[id])
+        for (const id in _search)
+        array.push(_search[id])
 
         return array
     },
-    getPerfilName(name){
-        for (const id in _posts){
-            if(`${_posts[id].Nombres} ${_posts[id].Apellidos}` == name){
-                return _posts[id];
-            }
-        }
+    getsearch: function (id) {
+        return _search[id]
     },
-    getPerfil: function (id) {
-        return _posts[id]
-    },
-
     addChangeListener: function (listener) {
         _changeListeners.push(listener)
     },
@@ -67,11 +57,12 @@ const perfilStore = {
     }
 }
 
-function getJSONPerfil(url, cb) {
+function getJSONsearch(url,getData, cb) {
     request
-    .get(url)
-    .set('Accept', 'application/json')
+    .post(url)
+    .send(getData)
     .end(function(err, res){
+
         if (res.status === 404) {
             cb(new Error('not found'))
         } else {
@@ -81,4 +72,4 @@ function getJSONPerfil(url, cb) {
 }
 
 
-export default perfilStore
+export default SearchStore

@@ -41,11 +41,12 @@
         position: absolute;
         z-index: 1;
         bottom: 0;
-        width: 100%;
+        width:calc(100% - 30px);
         text-align: center;
         color: #fff;
         height: 62px;
         transition: .5s;
+        padding: 0px 15px;
         .plus{
             border-radius: 100%;
             width: 24px;
@@ -85,7 +86,6 @@
         }
         .description {
             display: block;
-            padding: 0px 15px;
         }
     }
     img {
@@ -99,6 +99,10 @@
     //     height: 18em;
     // }
 
+    >div {
+        display: inline-block;
+        width: 100%;
+    }
     .perfil {
         position: relative;
         margin: auto;
@@ -225,13 +229,14 @@
 
     .Detalle {
         margin-left: .5em;
-        text-align: center;
+        // text-align: center;
         padding-bottom: 50px;
         .Titulo {
             font-family: 'MonopolSemiBold';
             color: rgb(91, 91, 91);
             font-size: 5em;
             margin-top: .2em !important;
+             text-align: center;
         }
         .Subtitulo {
             text-align: center;
@@ -321,6 +326,7 @@
 .Descripcion {
     padding: 0px 20px;
     text-align: left;
+    width: calc(100% - 324px - 20px)
 }
 .aep.Descripcion {
     word-break: break-word;
@@ -391,8 +397,6 @@
         }
     }
 }
-
-
 .leaflet-popup-content{
     .img {
         width: 302px;
@@ -405,5 +409,87 @@
 
     .c_resumen {
         font-size: 16px;
+    }
+}
+.noInmg{
+    position: relative;
+    height: auto;
+    padding: 36px 0px;
+    .tP_description{
+        position: relative;
+        background: transparent !important;
+        height: auto;
+    }
+    .plus{
+        display: block !important;
+        margin-top: 0 !important;
+    }
+    .titulo{
+        text-overflow: inherit !important;
+        white-space: inherit !important;
+        overflow: inherit !important;
+    }
+    &:hover {
+        .tP_description {
+            height: auto;
+        }
+    }
+}
+.colum{
+    .C_content{
+
+    }
+
+    .c_AutorRelations{
+        width: 300px;
+        overflow: hidden;
+        .widgetPerfilCont{
+                width: 100%;
+            position: relative;
+            border-bottom: 1px solid #dedede;
+            padding-bottom: 12px;
+
+            .figure {
+                width: 70px;
+                height: 70px;
+                border-radius: 100%;
+                display: table;
+                position: relative;
+            }
+            .contentnameTwiter{
+                width: calc(100% - 70px - 16px)
+            }
+            .fecha{
+                font-size: 14px;
+            }
+            .name,a,.fecha{
+                color: #656565;
+                text-align: left;
+                display: block;
+                padding-left: 8px;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+                width: calc(100% - 16px);
+            }
+            .linkTo{
+                position: absolute;
+                bottom: -24px;
+                right: 0px;
+                color: #53a0fd !important;
+                width: auto;
+            }
+        }
+        .contentTags {
+            margin-top: 40px;
+            > span {
+                text-align: left;
+                width: 100%;
+                display: block;
+                border-bottom: 1px solid #dedede;
+                padding: 5px 0px;
+                margin-bottom: 5px;
+            }
+        }
     }
 }

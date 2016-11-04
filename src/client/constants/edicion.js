@@ -45,8 +45,17 @@ const Edicion = {
         }
 
     },
+    getNamefiltros(f){
+        if(_Edicion[localStorage.getItem("edicion")][f]){
+            return _Edicion[localStorage.getItem("edicion")][f].replace(new RegExp("_", 'g'), " ");
+        }
+        return ''
+    },
     getObjectkeys(f){
-        return _Edicion[localStorage.getItem("edicion")][f].replace(new RegExp(" ", 'g'), "");
+        if(_Edicion[localStorage.getItem("edicion")][f]){
+            return _Edicion[localStorage.getItem("edicion")][f].replace(new RegExp(" ", 'g'), "");
+        }
+        return ''
     },
     getEdicionfiltros: function(f){
         // FILTRO_1
@@ -78,7 +87,6 @@ function getJSONEdicion(url, cb) {
         if (res.status === 404) {
             cb(new Error('not found'))
         } else {
-            console.log(res.body);
             cb(null, ((res.body)))
         }
     });

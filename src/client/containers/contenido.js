@@ -8,7 +8,8 @@ export default class Contenido extends React.Component {
     constructor (props) {
         super(props)
         this.state = ({
-            posts:contenidoStore.getContenidos()
+            posts:contenidoStore.getContenidos(),
+            search:false
         })
     }
     componentWillUnmount() {
@@ -40,19 +41,10 @@ export default class Contenido extends React.Component {
             })
         }else{
             this.setState({
-                posts:obj
+                posts:obj,
+                search:true
             })
         }
-        // if(parseInt(autor) == 0){
-        //     console.log("entra");
-        //     this.setState({
-        //         posts:contenidoStore.getContenidos()
-        //     })
-        // }else{
-        // this.setState({
-        //     posts:obj
-        // })
-        // }
     }
     render () {
         var divStyle = {
@@ -65,8 +57,13 @@ export default class Contenido extends React.Component {
                 <section className="P-B-Post post">
                 {
                     this.state.posts.map(item => {
+                        let origen = ''
+                        let tipo = 1;
+                        if(item.origen == "Perfiles"){
+                            tipo = 2;
+                        }
                         return(
-                            <Post key={ item.identificador } data={item} url="contenido/" tipo="1"/>
+                            <Post key={ item.identificador } data={item} search={this.state.search} url="contenido/" tipo={tipo}/>
                         )
                     })
                 }

@@ -28,24 +28,17 @@ export default class Perfil extends React.Component {
             }
         });
     }
-    up(idP,event){
-        let id = parseInt(idP)+1
-        if(this.state.maxId < id){
-            id = 1;
-        }
-        this.loadPerfile(id,event)
+    up(idP){
+        this.loadPerfile(idP)
     }
-    down(idP,event){
-        let id = parseInt(idP)-1;
-        if(id == 0){
-            id = this.state.maxId
-        }
-        this.loadPerfile(id,event)
+    down(idP){
+        this.loadPerfile(idP)
     }
     rlAutor(name){
         RelacionAutor.init(name)
     }
     loadPerfile(id){
+        console.log("loadPerfile  ",id);
         this.setState({
             relacion:[]
         })
@@ -63,14 +56,9 @@ export default class Perfil extends React.Component {
         let twitter = (t)?t.replace("https://twitter.com/","@"):'';
         twitter = (t)?t.replace("@",""):'';
         twitter = `https://twitter.com/${twitter}`
-        let urlLeft = `/autores/${perfil.keyId - 1}`
-        if(perfil.keyId - 1 == 0){
-            urlLeft = `/autores/${perfil.maxId}`
-        }
-        let urlRight = `/autores/${perfil.keyId + 1}`
-        if(perfil.keyId + 1 > perfil.maxId){
-            urlRight = '/autores/1'
-        }
+        let urlLeft = `/autores/${perfil.prev}`
+
+        let urlRight = `/autores/${perfil.next}`
         this.setState({
             name: name,
             img: perfil['AgregaunaImagen'],
@@ -78,7 +66,9 @@ export default class Perfil extends React.Component {
             twitter:twitter,
             urlLeft:urlLeft,
             urlRight:urlRight,
-            maxId:perfil['maxId']
+            maxId:perfil['maxId'],
+            prev:perfil.prev,
+            next:perfil.next
         })
     }
     componentWillMount() {
@@ -89,7 +79,6 @@ export default class Perfil extends React.Component {
         this.setState({
             height: document.querySelector(".figure").offsetWidth
         })
-        // document.querySelector(".showContent").style.left = "0px"
         this.heightImgResize()
         RelacionAutor.addChangeListener(this.updateData.bind(this))
     }
@@ -114,7 +103,7 @@ export default class Perfil extends React.Component {
         return (
             <section className="showContent autor flex"  style={heightStyle}>
                 <div className="arrow_left align-center ">
-                    <Link to={this.state.urlLeft} onClick={this.down.bind(this,this.props.params.id)}><i className="i-arrow_left"></i></Link>
+                    <Link to={this.state.urlLeft} onClick={this.down.bind(this,this.state.prev)}><i className="i-arrow_left"></i></Link>
                 </div>
                 <div className="contentInfoAutor">
                     <div className="contentAutor flex justify-space-between">
@@ -151,7 +140,6 @@ export default class Perfil extends React.Component {
                                     break;
 
                                 }
-
                                 return(
                                     <Post key={ item.identificador } data={ item } url={url} tipo={1} />
                                 )
@@ -161,7 +149,7 @@ export default class Perfil extends React.Component {
 
                 </div>
                 <div className="arrow_right align-center">
-                    <Link to={this.state.urlRight} onClick={this.up.bind(this,this.props.params.id)}><i className="i-arrow_right"></i></Link>
+                    <Link to={this.state.urlRight} onClick={this.up.bind(this,this.state.next)}><i className="i-arrow_right"></i></Link>
                 </div>
             </section>
         )
