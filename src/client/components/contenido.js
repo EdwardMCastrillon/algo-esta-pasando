@@ -45,7 +45,7 @@ export default class PostContenido extends React.Component {
         switch (l) {
             case "#search":
             cp = Search.getsearch(p);
-            console.log(cp);
+
             if(cp["Escribir/Párrafos/Texto"]){
                 text = cp["Escribir/Párrafos/Texto"];
             }else if(cp["Descripcióndelaactividad"]){
@@ -179,7 +179,9 @@ export default class PostContenido extends React.Component {
                 Wautor: <AutorRelation autor={autor} fecha={this.state.fecha} tags={this.state.tags}/>
             })
         }
-        // document.querySelector(".Descripcion").innerHTML = this.state.text
+        if(!document.querySelector(".c_AutorRelations")){
+            document.querySelector(".Descripcion").style.width = "100%"
+        }
     }
     showMore(){
         if(document.querySelector(".aep")){
@@ -214,7 +216,7 @@ export default class PostContenido extends React.Component {
                     <div className="colum flex">
                         <div className="C_content">
                             <h1 className="Titulo" dangerouslySetInnerHTML={FunctExtra.createMarkup(this,this.state.titulo)}></h1>
-                            <div className="flex">
+                            <div className="flex c_c_d">
                                 <div className={this.state.classAep} onClick={this.showMore.bind(this)}  dangerouslySetInnerHTML={FunctExtra.createMarkup(this,this.state.text)}></div>
                                 {this.state.Wautor}
                             </div>

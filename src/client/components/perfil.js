@@ -119,9 +119,8 @@ export default class Perfil extends React.Component {
                             <i className="i-mail"></i>
                         </div>
                     </div>
-
+                    <span className="artAutor">Artículos del autor</span>
                     <div className="relatedPosts flex">
-                        <span>Artículos del autor</span>
                         {
                             this.state.relacion.map(item => {
                                 let url;
