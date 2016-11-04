@@ -227,13 +227,6 @@ export default class Extras {
                         }
                         if (obj['AgregaunaImagen']) partial.image = obj['AgregaunaImagen']
                         break
-                        case 4:
-                        partial.type = 'Comentario'
-                        partial.id = obj['id']
-                        if (obj['AgregaunaImagen']) partial.image = obj['AgregaunaImagen']
-                        partial.name = obj['Título']
-                        partial.text = obj['Escribir/Párrafos/Texto'].substr(0, 200) + '...'
-                        break
                     }
                     if(partial.name != '' && partial.text != ''){
                         result.push(partial)
@@ -383,16 +376,16 @@ export default class Extras {
         ediciones.map((edicion) => {
             let filtro1 = "", filtro2 = "", filtro3 = ""
             result[edicion['Título']] = {}
-            if (edicion.FILTRO_1) { 
-                filtro1 = edicion.FILTRO_1.replace(/ /g, '') 
+            if (edicion.FILTRO_1) {
+                filtro1 = edicion.FILTRO_1.replace(/ /g, '')
                 result[edicion['Título']][filtro1] = []
             }
-            if (edicion.FILTRO_2) { 
-                filtro2 = edicion.FILTRO_2.replace(/ /g, '') 
+            if (edicion.FILTRO_2) {
+                filtro2 = edicion.FILTRO_2.replace(/ /g, '')
                 result[edicion['Título']][filtro2] = []
             }
-            if (edicion.FILTRO_3) { 
-                filtro3 = edicion.FILTRO_3.replace(/ /g, '') 
+            if (edicion.FILTRO_3) {
+                filtro3 = edicion.FILTRO_3.replace(/ /g, '')
                 result[edicion['Título']][filtro3] = []
             }
             data.forEach((array, index) => {
