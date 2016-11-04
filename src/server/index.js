@@ -25,7 +25,7 @@ app.get('*', (req, res) => {
 
 const server = http.createServer(app)
 
-server.listen(port, () => console.log(`API Running on port: ${port} \nCargando Datos...`))
+server.listen(port, '0.0.0.0', () => console.log(`API Running on port: ${port} \nCargando Datos...`))
 
 
 Client.getAllData((error, response) => {
