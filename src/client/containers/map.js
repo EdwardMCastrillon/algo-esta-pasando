@@ -162,10 +162,10 @@ class Map extends Component {
             }
             let img = `https://tupale.co/milfs/images/secure/?file=300/${item.image}`
             var background = {
-                background: `rgb(234, 234, 234) url(${img}) top center`,
+                background: `rgb(234, 234, 234) url(${img}) center center`,
                 'backgroundSize': 'cover'
             };
-            m.push(L.marker([item.lat, item.lng],{icon:icon}).bindPopup(`<div><div class ="img" style="background: rgb(234, 234, 234) url(${img}) top center"></div><div class="content"><div class="c_name">${item.name}</div><div class="c_resumen">${item.text}</div></div><div/>`))
+            m.push(L.marker([item.lat, item.lng],{icon:icon}).bindPopup(`<div><div class ="img" style="background: rgb(234, 234, 234) url(${img}) center center"></div><div class="content"><div class="c_name">${item.name}</div><div class="c_resumen">${item.text}</div></div><div/>`))
         })
 
         return m;

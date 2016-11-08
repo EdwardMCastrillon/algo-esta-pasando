@@ -20,6 +20,7 @@ const Edicion = {
             res.forEach(function (item,k) {
                 _Edicion[item.EDNUMERO] = item;
             })
+            console.log(_Edicion);
             Edicion.notifyChange();
         })
     },

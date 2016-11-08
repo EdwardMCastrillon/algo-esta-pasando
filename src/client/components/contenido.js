@@ -45,8 +45,9 @@ export default class PostContenido extends React.Component {
         }
         switch (l) {
             case "#search":
+            console.log(p);
             cp = Search.getsearch(p);
-
+            console.log(cp);
             if(cp["Escribir/Párrafos/Texto"]){
                 text = cp["Escribir/Párrafos/Texto"];
             }else if(cp["Descripcióndelaactividad"]){

@@ -35,14 +35,16 @@ export default class Contenido extends React.Component {
         // }
     }
     renderFilter(obj,autor){
-        if(obj.length == 0){
-            this.setState({
-                posts:contenidoStore.getContenidos()
-            })
-        }else{
+        console.log(obj.length);
+        if(obj.length > 0){
             this.setState({
                 posts:obj,
                 search:true
+            })
+        }else{
+            this.setState({
+                posts:contenidoStore.getContenidos(),
+                search:false
             })
         }
     }

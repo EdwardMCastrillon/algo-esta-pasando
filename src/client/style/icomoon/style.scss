@@ -51,6 +51,11 @@
     content: $i-instagram;
   }
 }
+.i-contenido {
+  &:before {
+    content: $i-contenido;
+  }
+}
 .i-google {
   &:before {
     content: $i-google;
@@ -149,8 +154,8 @@
     content: $i-autores;
   }
 }
-.i-contenido {
+.i-publicar_en_aep {
   &:before {
-    content: $i-contenido;
+    content: $i-publicar_en_aep;
   }
 }

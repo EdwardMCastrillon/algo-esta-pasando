@@ -18,6 +18,7 @@ export default class NavBar extends Component {
             hideName:"hideName",
             hidepad:"hidepad",
             LogoAEP:'',
+            slogan:''
         }
     }
     logoOpen(){
@@ -94,7 +95,7 @@ export default class NavBar extends Component {
                 let color = document.querySelector(`.active i`).getAttribute("data-color");;
                 document.querySelector(`.active span`).style.color = color;
                 document.querySelector(`.active i`).style.background = color;
-                document.querySelector(`.active i`).style.color = "#fff";    
+                document.querySelector(`.active i`).style.color = "#fff";
             }
         },300)
     }
@@ -108,8 +109,8 @@ export default class NavBar extends Component {
                 menu:this.props.edicion.menu,
                 redes:redes,
                 textCopyLeft:this.props.edicion.textCopyLeft,
-                LogoAEP:`https://tupale.co/milfs/images/secure/?file=300/${this.props.edicion.AgregaunaImagen}`
-
+                LogoAEP:`https://tupale.co/milfs/images/secure/?file=300/${this.props.edicion.AgregaunaImagen}`,
+                slogan:this.props.edicion.slogan
             })
             this.openNav()
         }
@@ -146,6 +147,7 @@ export default class NavBar extends Component {
             <div>
             <Link to="/editorial">
             <img src={ this.state.LogoAEP } />
+            <span className="slogan">{this.state.slogan}</span>
             </Link>
             </div>
             <div className="contenRedes" dangerouslySetInnerHTML={FunctExtra.createMarkup(this,this.state.redes)}></div>
