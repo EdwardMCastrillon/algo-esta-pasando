@@ -3,6 +3,7 @@
     position: relative;
     z-index: 9;
     background: #fff;
+    width: 93%;
     .item {
         font-size: 14px;
         margin: 0 17px;
@@ -21,24 +22,39 @@
     // margin-top: -50px;
     transition: all .5s;
     padding-left: 35px;
+    .contentSelect{
+        &:after {
+            content: '\25BE';
+            position: absolute;
+            right: 0px;
+        }
+    }
+    >div{
+        width: calc(20% - 15px);
+        max-width: 170px;
+        margin: 0 9px;
+        position: relative;
+        padding-right: 15px;
+
+        select{
+            appearance: searchfield;
+            font-size: 14px;
+            width: 100%;
+            border: none;
+            outline: none;
+            border-bottom: 1px solid #c8c7c7;
+            height: 26px;
+            border-radius: 0;
+            background: #fbfbfb;
+        }
+    }
     input {
         background: #fbfbfb;
         border: none;
         border-bottom: 1px solid #c8c7c7;
         outline: none;
     }
-    select{
-        appearance: searchfield;
-        font-size: 14px;
-        width: 20%;
-        border: none;
-        outline: none;
-        border-bottom: 1px solid #c8c7c7;
-        margin: 0 9px;
-        height: 26px;
-        border-radius: 0;
-        background: #fbfbfb;
-    }
+
 }
 .drawSearch {
     top: 0;

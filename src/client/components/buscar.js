@@ -6,7 +6,7 @@ import PosContenido from './contenido'
 import Edicion from '../constants/edicion'
 import PerfilStore from '../providers/perfilStore'
 import '../style/buscar.scss'
-
+const ACTIVE = { color: 'red' }
 export default class Buscar extends React.Component {
     constructor (props) {
         super(props)
@@ -48,6 +48,7 @@ export default class Buscar extends React.Component {
         Aep.addChangeListener(this.updateData.bind(this))
         Edicion.addChangeListener(this.updateEdicion.bind(this))
     }
+    
     render () {
         let urlAux = "aep"
         switch (this.props.route.location.pathname.split("/")[1]) {
@@ -64,20 +65,22 @@ export default class Buscar extends React.Component {
         }
         return (
             <div>
-            <div id="NavBarTop" className="flex  align-center justify-center">
-            {
-                this.state.itemNavTop.map(item => {
-                    let url = `/${urlAux}/${item.id}`
-                    return(
-                        <Link to={url}>
-                        <div className="item" dangerouslySetInnerHTML={FunctExtra.createMarkup(this,item.Título)}></div>
-                        </Link>
+                <div id="NavBarTop" className="flex  align-center justify-center">
+                    {
+                        this.state.itemNavTop.map(item => {
+                            let url = `/${urlAux}/${item.id}`
+                            return(
+                                <Link activeClassName={ACTIVE}  to={url}>
+                                    <div className="item" dangerouslySetInnerHTML={FunctExtra.createMarkup(this,item.Título)}></div>
+                                </Link>
 
-                    )
-                })
-            }
-            </div>
-
+                            )
+                        })
+                    }
+                </div>
+                <div className="drawSearch" style={this.state.background}>
+                    <i className="i-lupa"></i>
+                </div>
 
             </div>
         )

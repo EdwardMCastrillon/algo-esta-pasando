@@ -32,6 +32,7 @@ export default class PostContenido extends React.Component {
         },300)
     }
     loadContent(){
+        console.log("loadContent");
         // // Se captura el id del post que llega como parametro en la ruta
 
         let p;
@@ -158,6 +159,12 @@ export default class PostContenido extends React.Component {
     componentWillMount(id) {
         this.loadContent(id)
     }
+    componentDidUpdate(){
+        // console.log("componentDidUpdate");
+        // if(!document.querySelector(".c_AutorRelations")){
+        //     document.querySelector(".Descripcion").style.width = "100%"
+        // }
+    }
     updateData() {
         this.setState({
             postRelation:RelacionesPost.getRposts()
@@ -165,7 +172,6 @@ export default class PostContenido extends React.Component {
         RelacionesPost.removeChangeListener(this.updateData.bind(this))
     }
     componentDidMount(){
-
         RelacionesPost.addChangeListener(this.updateData.bind(this))
         Contenido.addChangeListener(this.loadContent.bind(this))
         AgendaStore.addChangeListener(this.loadContent.bind(this))
@@ -176,12 +182,10 @@ export default class PostContenido extends React.Component {
         let autor = PerfilStore.getPerfilName(this.state.autor);
         if(autor){
             this.setState({
-                Wautor: <AutorRelation autor={autor} fecha={this.state.fecha} tags={this.state.tags}/>
+                Wautor: <AutorRelation loadContent={this.loadContent.bind(this)} autor={autor} fecha={this.state.fecha} tags={this.state.tags}/>
             })
         }
-        if(!document.querySelector(".c_AutorRelations")){
-            document.querySelector(".Descripcion").style.width = "100%"
-        }
+
     }
     showMore(){
         if(document.querySelector(".aep")){
@@ -209,9 +213,7 @@ export default class PostContenido extends React.Component {
                 {figure}
                 <div className="FlechaIzquierda"></div>
                 <div className="FlechaDerecha"></div>
-                <div className="AutorFoto">
-                {this.state.autor}
-                </div>
+
                 <article className="Detalle flex-container column">
                     <div className="colum flex">
                         <div className="C_content">
@@ -236,9 +238,9 @@ export default class PostContenido extends React.Component {
         )
     }
 }
-const AutorRelation =({autor,tags,fecha}) =>(
+const AutorRelation =({autor,tags,fecha,loadContent}) =>(
     <div className="c_AutorRelations">
-        <WidgetPerfilContent autor={autor} fecha={fecha} tags={tags}/>
+        <WidgetPerfilContent autor={autor} fecha={fecha} tags={tags} loadContent={loadContent}/>
     </div>
 )
 const ImgPost = ({ background }) => (
@@ -250,3 +252,6 @@ const ImgPost = ({ background }) => (
 //     "¿SERÁ UNA GRAN ANALOGÍA AL MIEDO DE TODOS LOS COLOMBIANOS"
 // </h2>
 //dangerouslySetInnerHTML={FunctExtra.createMarkup(this,this.renderPost(this.state.postRelation))}
+// <div className="AutorFoto">
+// {this.state.autor}
+// </div>

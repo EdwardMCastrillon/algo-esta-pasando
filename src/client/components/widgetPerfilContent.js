@@ -21,6 +21,7 @@ export default class WidgetPerfilContent extends React.Component {
     componentDidMount(){
         RelacionAutor.init(`${this.props.autor.Nombres} ${this.props.autor.Apellidos}`)
         RelacionAutor.addChangeListener(this.updateData.bind(this))
+        document.querySelector(".Descripcion").style.width = "calc(100% - 324px - 20px)"
     }
     componentWillUnmount() {
         RelacionAutor.removeChangeListener(this.updateData.bind(this))
@@ -79,7 +80,7 @@ export default class WidgetPerfilContent extends React.Component {
             </div>
             <div className="contentTags">
             <span>Articulos relacionados</span>
-            <div>
+            <div onClick={this.props.loadContent()}>
             {
                 this.state.relacion.map(item => {
                     let url;

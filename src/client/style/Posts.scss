@@ -236,7 +236,7 @@
             color: rgb(91, 91, 91);
             font-size: 5em;
             margin-top: .2em !important;
-             text-align: center;
+            text-align: center;
         }
         .Subtitulo {
             text-align: center;
@@ -326,7 +326,11 @@
 .Descripcion {
     padding: 0px 20px;
     text-align: left;
-    width: calc(100% - 324px - 20px)
+    // width: calc(100% - 324px - 20px)
+    width:100%;
+    img {
+        max-width: 100% !important;
+    }
 }
 .aep.Descripcion {
     word-break: break-word;
@@ -444,7 +448,7 @@
         width: 300px;
         overflow: hidden;
         .widgetPerfilCont{
-                width: 100%;
+            width: 100%;
             position: relative;
             border-bottom: 1px solid #dedede;
             padding-bottom: 12px;
@@ -494,10 +498,32 @@
     }
 }
 .c_c_d{
-        padding-right: 50px;
+    padding-right: 50px;
 }
 .artAutor {
     position: relative;
     top: 58px;
     font-size: 22px;
+}
+#mapUI{
+    .leaflet-container {
+        height: 400px;
+        width: calc(100% - 300px);
+        margin: 0 auto;
+    }
+    .c_AutorRelations {
+        width: 350px;
+        padding: 25px 12px 0 12px;
+        .title {
+            font-size: 18px;
+            border-bottom: 1px solid #dedede;
+            padding: 0 9px;
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+    }
+}
+.C_content {
+    width: 100%;
 }

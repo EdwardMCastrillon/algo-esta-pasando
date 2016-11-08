@@ -40,8 +40,35 @@ export default class Ediciones extends React.Component {
                     <section className="P-B-Post post">
                         {
                             this.state.posts.map(item => {
+                                let img = '';
+                                if(item['logoOpen']){
+                                    img = item['logoOpen']
+                                }
+                                let figure = ''
+                                let classFigure = "targetPost noInmg"
+                                let back = {
+                                    background:item.coloritemgrid
+                                }
+                                let b = {
+                                    background:item.coloritemgrid
+                                }
+                                if(img != ''){
+                                    classFigure = "targetPost"
+                                    back = {}
+                                    figure = <Imgfigure background={img} />
+                                    // figure = <Imgfigure background={`https://tupale.co/milfs/images/secure/?file=600/${img}`} />
+                                }
                                 return(
-                                    <div onClick={this.changeEdition.bind(this,item.EDNUMERO,item.Título)}>{item.Título}</div>
+                                    <div onClick={this.changeEdition.bind(this,item.EDNUMERO,item.Título)}>
+                                            <figure className={classFigure} style={back}>
+                                                {figure}
+                                                <div style={b} className="tP_description">
+                                                <i className="plus i-plus"></i>
+                                                    <span className="titulo">{item.Título}</span>
+                                                    <span className="description">{item.Resumen.substring(0, 150)}...</span>
+                                                </div>
+                                            </figure>
+                                    </div>
                                 )
                             })
                         }
@@ -59,3 +86,6 @@ export default class Ediciones extends React.Component {
 
     }
 }
+const Imgfigure = ({ background }) => (
+    <img src={background}/>
+);

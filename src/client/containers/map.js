@@ -4,7 +4,10 @@ import LocationMap from '../providers/infoMapa'
 import IconPerfil from '../img/perfil.png'
 import IconEvent from '../img/wikicuidad.png'
 import IconContebido from '../img/los_objetos.png'
-
+import request from 'superagent'
+import apiEndpoints from '../utils/apiEndpoints'
+import Post from '../components/posts'
+const server = '/api'
 let config = {};
 
 const IconP = L.icon({
@@ -57,7 +60,8 @@ class Map extends Component {
             geojsonLayer: null,
             geojson: null,
             numEntrances: null,
-            markers:LocationMap.getLocations()
+            markers:LocationMap.getLocations(),
+            postUltimos:[]
         };
         //
         this._mapNode = null;
@@ -89,14 +93,29 @@ class Map extends Component {
     componentWillMount(){
         LocationMap.init()
 
+        this.ultimosPosts()
+    }
+    ultimosPosts(){
+        const self = this;
+        request
+        .get(`${server}${apiEndpoints.ultimosPosts}`)
+        .query({ edicion: localStorage.getItem("nameEdicion")})
+        .set('Accept', 'application/json')
+        .end(function(err, res){
+            if (res.status === 404) {
+                cb(new Error('not found'))
+            } else {
+                self.setState({
+                    postUltimos:res.body
+                })
+            }
+        });
     }
     componentWillUnmount() {
-
         this.state.map.remove();
     }
 
     init(id) {
-
 
         if (this.state.map) return;
 
@@ -153,13 +172,21 @@ class Map extends Component {
     }
     render() {
         return (
-            <div id="mapUI" className="P-B-ContentPost">
+            <div id="mapUI" className="P-B-ContentPost flex">
 
                 <div ref={(node) => this._mapNode = node} id="map" />
-
+                <div className="c_AutorRelations">
+                <span className="title">Articulos relacionados</span>
+                {
+                    this.state.postUltimos.map(item => {
+                        return(
+                            <Post key={ item.identificador } data={item}  url="contenido/" tipo="1"/>
+                        )
+                    })
+                }
+                </div>
             </div>
         );
     }
 }
-
 export default Map;

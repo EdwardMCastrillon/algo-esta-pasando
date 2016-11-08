@@ -52,13 +52,34 @@ export default class Buscar extends React.Component {
         PerfilStore.addChangeListener(this.updateAutor.bind(this))
         Edicion.addChangeListener(this.updateEdicion.bind(this))
         if(this.state.filter1.length == 0){
-            document.querySelector(".FILTRO_1").style.display = "none"
+            document.querySelector(".FILTRO_1").parentNode.style.display = "none"
         }
         if(this.state.filter2.length == 0){
-            document.querySelector(".FILTRO_2").style.display = "none"
+            document.querySelector(".FILTRO_2").parentNode.style.display = "none"
         }
         if(this.state.filter3.length == 0){
-            document.querySelector(".FILTRO_3").style.display = "none"
+            document.querySelector(".FILTRO_3").parentNode.style.display = "none"
+        }
+
+    }
+    searchClick(){
+        Search.removeChangeListener(this.updateFilter.bind(this))
+        let searchInput = document.getElementById("searchInput").value;
+        let getData = {
+            "filtro1": {
+                "name": "",
+                "value": ""
+            },
+            "filtro2": {"name": "", "value": ""},
+            "filtro3": {"name": "", "value": ""},
+            "input": searchInput
+        }
+        Search.init(getData)
+        Search.addChangeListener(this.updateFilter.bind(this))
+    }
+    onKeyUpInput(){
+        if (event.keyCode == 13) {
+            this.searchClick()
         }
     }
     showFilters(){
@@ -99,73 +120,71 @@ export default class Buscar extends React.Component {
             "input": ""
         }
         let autor = document.querySelector(".autor").value;
-        let api = this.props.api;
+        // let api = this.props.api;
         Search.init(getData)
 
         Search.addChangeListener(this.updateFilter.bind(this))
-        // request
-        // .post(`/api/search`)
-        // .send(getData)
-        // .set('Accept', 'application/json')
-        // .end(function(err, res){
-        //     if (res.status === 404) {
-        //         console.errr(err);
-        //     } else {
-        //         console.log(res.body);
-        //         self.props.renderFilter(res.body,autor)
-        //     }
-        // });
-        return
     }
     updateFilter(){
-        self.props.renderFilter(Search.getsearchs())
+        this.props.renderFilter(Search.getsearchs())
     }
     render () {
         return (
             <div className="filterSelect flex align-center">
-
-            <select className="FILTRO_1" onChange={this.showFilters.bind(this)}>
-            <option value="0" >{this.state.namefilter1}</option>
-            {
-                this.state.filter1.map(item => {
-                    return(
-                        <option value={item}>{item}</option>
-                    )
-                })
-            }
-            </select>
-            <select className="FILTRO_2" onChange={this.showFilters.bind(this)}>
-            <option value="0" >{this.state.namefilter2}</option>
-            {
-                this.state.filter2.map(item => {
-                    return(
-                        <option value={item}>{item}</option>
-                    )
-                })
-            }
-            </select>
-            <select className="FILTRO_3" onChange={this.showFilters.bind(this)}>
-            <option value="0" >{this.state.namefilter3}</option>
-            {
-                this.state.filter3.map(item => {
-                    return(
-                        <option value={item}>{item}</option>
-                    )
-                })
-            }
-            </select>
-
-            <select className="autor" onChange={this.showFilters.bind(this)}>
-            <option value="0" >Autor</option>
-            {
-                this.state.autores.map(item => {
-                    let name = FunctExtra.accentDecode(item['Nombres']+" "+item['Apellidos']);
-                    return(
-                        <option value={name}>{name}</option>
-                    )
-                })
-            }
-            </select>
+                <div className="contentSelect">
+                    <select className="FILTRO_1" onChange={this.showFilters.bind(this)}>
+                        <option value="0" >{this.state.namefilter1}</option>
+                        {
+                            this.state.filter1.map(item => {
+                                return(
+                                    <option value={item}>{item}</option>
+                                )
+                            })
+                        }
+                    </select>
+                </div>
+                <div className="contentSelect">
+                    <select className="FILTRO_2" onChange={this.showFilters.bind(this)}>
+                        <option value="0" >{this.state.namefilter2}</option>
+                        {
+                            this.state.filter2.map(item => {
+                                return(
+                                    <option value={item}>{item}</option>
+                                )
+                            })
+                        }
+                    </select>
+                </div>
+                <div className="contentSelect">
+                    <select className="FILTRO_3" onChange={this.showFilters.bind(this)}>
+                        <option value="0" >{this.state.namefilter3}</option>
+                        {
+                            this.state.filter3.map(item => {
+                                return(
+                                    <option value={item}>{item}</option>
+                                )
+                            })
+                        }
+                    </select>
+                </div>
+                <div className="contentSelect">
+                    <select className="autor" onChange={this.showFilters.bind(this)}>
+                        <option value="0" >Autor</option>
+                        {
+                            this.state.autores.map(item => {
+                                let name = FunctExtra.accentDecode(item['Nombres']+" "+item['Apellidos']);
+                                return(
+                                    <option value={name}>{name}</option>
+                                )
+                            })
+                        }
+                    </select>
+                </div>
+                <div>
+                    <div className="filter flex  align-center ">
+                        <input id="searchInput" type="text" onKeyUp={this.onKeyUpInput.bind(this)} placeholder="Escribe para buscar"/>
+                    </div>
+                </div>
             </div>
 
         )

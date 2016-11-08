@@ -53,29 +53,29 @@ export default class Contenido extends React.Component {
         if (this.state.posts.length > 0) {
             return (
                 <div className="P-B-ContentPost" style={divStyle}>
-                <Filters renderFilter={this.renderFilter.bind(this)} api="Contenidos"/>
-                <section className="P-B-Post post">
-                {
-                    this.state.posts.map(item => {
-                        let origen = ''
-                        let tipo = 1;
-                        if(item.origen == "Perfiles"){
-                            tipo = 2;
+                    <Filters renderFilter={this.renderFilter.bind(this)} />
+                    <section className="P-B-Post post">
+                        {
+                            this.state.posts.map(item => {
+                                let origen = ''
+                                let tipo = 1;
+                                if(item.origen == "Perfiles"){
+                                    tipo = 2;
+                                }
+                                return(
+                                    <Post key={ item.identificador } data={item} search={this.state.search} url="contenido/" tipo={tipo}/>
+                                )
+                            })
                         }
-                        return(
-                            <Post key={ item.identificador } data={item} search={this.state.search} url="contenido/" tipo={tipo}/>
-                        )
-                    })
-                }
-                </section>
+                    </section>
                 </div>
             )
         }else{
 
             return(
                 <div className="P-B-ContentPost" style={divStyle}>
-                <Filters renderFilter={this.renderFilter.bind(this)} api="Contenidos"/>
-                <h1> Cargando Datos.. </h1>
+                    <Filters renderFilter={this.renderFilter.bind(this)} />
+                    <h1> Cargando Datos.. </h1>
                 </div>
             )
         }

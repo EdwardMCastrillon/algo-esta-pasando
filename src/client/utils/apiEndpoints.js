@@ -11,7 +11,8 @@ const endpoints = {
     infoMapa:"/infoMapa",
     relacionesPost:"/relacionesPost",
     editorial:"/editorial",
-    search:"/search"
+    search:"/search",
+    ultimosPosts:"/ultimosPosts"
 }
 
 export default endpoints

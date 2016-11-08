@@ -170,6 +170,7 @@ Router.get('/refreshData', (req, res) => {
 * @param Nombre de la edicion
 */
 Router.get('/ultimosPosts', (req, res) => {
+    console.log(req.query);
     let edicion = req.query.edicion
     client.getLastContenidos(edicion, (error, posts) => {
         if (error) res.sendStatus(500).json(error)
