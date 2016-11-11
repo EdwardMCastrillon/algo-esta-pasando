@@ -7,6 +7,13 @@ El codigo de este repositorio es una visualización o un FrontEnd construido par
 Todas las API que se utilizan para el desarrollo de esta herramienta se pueden encontrar en el siguiente enlace: 
 https://a.algoestapasando.cc/opendata.php?proyecto=55
 
+#Instalación
+Esta aplicacón esta desarrollada utilizando reactNative, NodeJS y en general JavaScript. El codigo que se encuentra a la hora de descargar el repositorio debe ser "compilado" o contruido de la siguiente formas.
+
+**Prerequisitos**: Debe tener instalado en su computador NodeJS (una version reciente recomendamos v5 o superior) 
+
+**Instrucciones**:
+
 
 ## Creditos
 
