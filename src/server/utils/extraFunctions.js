@@ -311,7 +311,7 @@ export default class Extras {
                             origen = "Ediciones"
                             break;
                         case 8:
-                            origen = "Editorial"
+                            origen = "Sobre"
                             break;
                         default:
                             break;

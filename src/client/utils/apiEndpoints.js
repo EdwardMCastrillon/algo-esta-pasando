@@ -10,7 +10,7 @@ const endpoints = {
     aep:"/aeP",
     infoMapa:"/infoMapa",
     relacionesPost:"/relacionesPost",
-    editorial:"/editorial",
+    sobre:"/sobre",
     search:"/search",
     ultimosPosts:"/ultimosPosts"
 }

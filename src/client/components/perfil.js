@@ -90,7 +90,11 @@ export default class Perfil extends React.Component {
             relacion:RelacionAutor.getRAutores()
         })
     }
-
+    componentDidUpdate(){
+        if(document.querySelector(".contentSearch")){
+            document.querySelector(".contentSearch").classList.add('active');
+        }
+    }
     render () {
         let heightStyle = {
             height: window.innerHeight - 50,

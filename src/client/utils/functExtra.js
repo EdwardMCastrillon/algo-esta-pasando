@@ -80,6 +80,25 @@ const FunctExtra = {
         }
 
         return utftext
+    },
+    showFilters(){
+        var className = document.querySelector(".filterSelect").className;
+        if ( className.replace(/[\n\t]/g, " ").indexOf("active") < 0 ) {
+            if(document.querySelector(".Page-body > .P-B-ContentPost")){
+                document.querySelector(".Page-body > .P-B-ContentPost").style.marginTop = "5em"
+
+            }
+            if(document.querySelector(".Page-body > .showContent.Post")){
+                document.querySelector(".Page-body > .showContent.Post").style.marginTop = "95px"
+            }
+        }else{
+            if(document.querySelector(".Page-body > .P-B-ContentPost")){
+                document.querySelector(".Page-body > .P-B-ContentPost").style.marginTop = "3em"
+            }
+            if(document.querySelector(".Page-body > .showContent.Post")){
+                document.querySelector(".Page-body > .showContent.Post").style.marginTop = "3em"
+            }
+        }
     }
 };
 

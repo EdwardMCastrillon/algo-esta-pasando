@@ -7,13 +7,16 @@ import Nav from '../components/NavBar'
 import Buscar from '../components/buscar'
 import Init from '../constants/init'
 import Edicion from '../constants/edicion'
+import Loader from '../components/loader'
 
 // import Aep from '../providers/aep'
 // Estilos
+
 import "../style/font.scss"
 import "../style/Page.scss"
 import "../style/Animate.scss"
 import "../style/flex.scss"
+
 
 export default class App extends React.Component {
     constructor (props) {
@@ -48,6 +51,9 @@ export default class App extends React.Component {
     prueba(){
         console.log("prueba app");
     }
+    componentDidUpdate(){
+
+    }
     render () {
         if(this.state.edicion && this.state.load){
             let component = "div",transitionName="",
@@ -71,14 +77,15 @@ export default class App extends React.Component {
             )
         }else {
             return (
-                <div>
-                    <h1> Cargando Datos.. </h1>
-                </div>
+                <Loader/>
             )
         }
 
     }
 }
+// <div>
+//     <h1> Cargando Datos.. </h1>
+// </div>
 // <ReactCSSTransitionGroup
 //     component={component}
 //     transitionName={transitionName}

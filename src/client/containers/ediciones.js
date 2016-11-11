@@ -2,7 +2,8 @@ import React from 'react'
 import { hashHistory } from 'react-router'
 import Post from '../components/posts'
 import Edicion from '../constants/edicion'
-
+import FunctExtra from '../utils/functExtra'
+import Loader from '../components/loader'
 export default class Ediciones extends React.Component {
     constructor (props) {
         super(props)
@@ -24,6 +25,7 @@ export default class Ediciones extends React.Component {
     componentDidMount(){
         Edicion.addChangeListener(this.updateData.bind(this))
         // this.getData()
+        FunctExtra.showFilters()
     }
     changeEdition(id,name){
         localStorage.setItem("edicion",id)
@@ -36,8 +38,8 @@ export default class Ediciones extends React.Component {
         };
         if (this.state.posts.length > 0) {
             return (
-                <div className="P-B-ContentPost" style={divStyle}>
-                    <section className="P-B-Post post">
+                <div className="P-B-ContentPost edicion" style={divStyle}>
+                    <section className="P-B-Post ">
                         {
                             this.state.posts.map(item => {
                                 let img = '';
@@ -53,7 +55,7 @@ export default class Ediciones extends React.Component {
                                     background:item.coloritemgrid
                                 }
                                 if(img != ''){
-                                    classFigure = "targetPost"
+                                    classFigure = "targetPost "
                                     back = {}
                                     figure = <Imgfigure background={img} />
                                     // figure = <Imgfigure background={`https://tupale.co/milfs/images/secure/?file=600/${img}`} />
@@ -78,9 +80,7 @@ export default class Ediciones extends React.Component {
         }else{
 
             return(
-                <div className="P-B-ContentPost" style={divStyle}>
-                    <h1> Cargando Datos.. </h1>
-                </div>
+                                <Loader/>
             )
         }
 

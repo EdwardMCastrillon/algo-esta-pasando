@@ -1,6 +1,6 @@
 import React from 'react'
 import { hashHistory } from 'react-router'
-
+import FunctExtra from '../utils/functExtra'
 import Perfil from '../components/widgetPerfil'
 import PerfilStore from '../providers/perfilStore'
 
@@ -25,6 +25,7 @@ export default class Perfiles extends React.Component {
     }
     componentDidMount(){
         PerfilStore.addChangeListener(this.updateData.bind(this))
+        FunctExtra.showFilters()
     }
     render () {
 

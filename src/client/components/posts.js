@@ -43,28 +43,28 @@ export default class Post extends React.Component {
                 case "Perfiles":
                     url = `/autores/${this.props.data.id}`
                 break;
-                case"Agenda":
+                case "Agenda":
                     url = `/agenda/${this.props.data.id}`
                 break;
-                case"Recursos":
+                case "Recursos":
                     url = `/centro_de_recursos/${this.props.data.id}`
                 break;
-                case"Contenido":
+                case "Contenido":
                     url = `/contenido/${this.props.data.id}`
                 break;
-                case"Comentarios":
+                case "Comentarios":
                     url = `/comentarios/${this.props.data.id}`
                 break;
-                case"Bitacoras":
+                case "Bitacoras":
                     url = `/contenido/${this.props.data.id}`
                 break;
-                case"Manifiesto":
+                case "Manifiesto":
                     url = `/${this.props.url}${this.props.data.id}`
                 break;
-                case"Ediciones":
+                case "Ediciones":
                     url = `/${this.props.url}${this.props.data.id}`
                 break;
-                case"Editorial":
+                case "Editorial":
                     url = `/${this.props.url}${this.props.data.id}`
                 break;
             }

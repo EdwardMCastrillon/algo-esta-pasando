@@ -58,54 +58,54 @@ export default class WidgetPerfilContent extends React.Component {
 
         return (
             <div>
-            <div className="widgetPerfilCont flex">
-            <div className="figure" style={figure}></div>
-            <div className=" contentnameTwiter flex column  justify-center">
-            <span className="name">Por: {name}</span>
-            <a href={Linktwitter}  target="_blank">
-            @{twitter}
-            </a>
-            <span className="fecha">{fecha}</span>
-            </div>
-            <Link className="linkTo" to={urlPerfil}>Ver Perfil</Link>
-            </div>
-            <div className="contentTags">
-            <span>Tags</span>
-            <div>
-            {this.props.tags}
-            ,{this.state.namefilter1}
-            ,{this.state.namefilter2}
-            ,{this.state.namefilter3}
-            </div>
-            </div>
-            <div className="contentTags">
-            <span>Articulos relacionados</span>
-            <div onClick={this.props.loadContent()}>
-            {
-                this.state.relacion.map(item => {
-                    let url;
-                    switch (item.origen) {
-                        case 'Agenda':
-                        url="";
-                        break;
-                        case 'Recursos':
-                        url="centro_de_recursos/";
-                        break;
-                        case 'Contenidos':
-                        url="contenido/";
-                        break;
-                        case 'Comentarios':
-                        url="comentarios/";
-                        break;
+                <div className="widgetPerfilCont flex">
+                    <div className="figure" style={figure}></div>
+                    <div className=" contentnameTwiter flex column  justify-center">
+                        <span className="name">Por: {name}</span>
+                        <a href={Linktwitter}  target="_blank">
+                            @{twitter}
+                        </a>
+                        <span className="fecha">{fecha}</span>
+                    </div>
+                    <Link className="linkTo" to={urlPerfil}>Ver Perfil</Link>
+                </div>
+                <div className="contentTags">
+                    <span>Tags</span>
+                    <div>
+                        {this.props.tags}
+                        ,{this.state.namefilter1}
+                        ,{this.state.namefilter2}
+                        ,{this.state.namefilter3}
+                    </div>
+                </div>
+                <div className="contentTags">
+                    <span>Articulos relacionados</span>
+                    <div onClick={this.props.loadContent()}>
+                        {
+                            this.state.relacion.map(item => {
+                                let url;
+                                switch (item.origen) {
+                                    case 'Agenda':
+                                    url="";
+                                    break;
+                                    case 'Recursos':
+                                    url="centro_de_recursos/";
+                                    break;
+                                    case 'Contenidos':
+                                    url="contenido/";
+                                    break;
+                                    case 'Comentarios':
+                                    url="comentarios/";
+                                    break;
 
-                    }
-                    return(
-                        <Post key={ item.identificador } data={ item } url={url} tipo={1} />
-                    )
-                })
-            }
-            </div>
-            </div>
+                                }
+                                return(
+                                    <Post key={ item.identificador } data={ item } url={url} tipo={1} />
+                                )
+                            })
+                        }
+                    </div>
+                </div>
             </div>
         )
     }

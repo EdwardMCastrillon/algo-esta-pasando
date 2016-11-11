@@ -6,14 +6,14 @@
 }
 
 .Autores {
-    background: url(../img/backgroung.jpg) no-repeat center center fixed;
+    // background: url(../img/backgroung.jpg) no-repeat center center fixed;
 }
 
 .P-B-Post.post {
-    padding-left: 35px;
+
     column-width: 320px;
     column-gap: 2px;
-    margin: 1em auto;
+
 }
 
 .targetPost {
@@ -98,7 +98,8 @@
     // div {
     //     height: 18em;
     // }
-
+    padding-left: 35px;
+    margin: 1em auto;
     >div {
         display: inline-block;
         width: 100%;
@@ -160,7 +161,7 @@
         .name{
             background: transparent;
             position: relative;
-            color: #fff;
+            color: #4e4e4e;
             font-size: 18px;
             z-index: 1;
             display: block;
@@ -176,7 +177,7 @@
             margin: auto;
             display: block;
             font-size: 14px;
-            color: rgba(255, 255, 255, 0.81);
+            color: #4e4e4e;
             text-align: center;
         }
 
@@ -194,7 +195,7 @@
         font-size: 12px;
         border-radius: 50%;
         border: 1px solid;
-        color: #ffffff;
+        color: #4e4e4e;
         padding: 6px 6px;
         text-align: center;
         margin: 0 6px;
@@ -323,13 +324,27 @@
         cursor: pointer;
     }
 }
-.Descripcion {
+
+
+.Descripcion ,.content-from{
     padding: 0px 20px;
     text-align: left;
-    // width: calc(100% - 324px - 20px)
     width:100%;
     img {
         max-width: 100% !important;
+    }
+
+}
+.content-from {
+    padding-bottom: 10px;
+    .form-agenda {
+        span:first-child {
+            color: #000;
+            font-size: 17px;
+        }
+        span:last-child {
+            padding-left: 12px;
+        }
     }
 }
 .aep.Descripcion {
@@ -527,4 +542,22 @@
 }
 .C_content {
     width: 100%;
+}
+.P-B-ContentPost.edicion .targetPost img {
+    width: auto;
+}
+.P-B-ContentPost.edicion{
+    .P-B-Post>div{
+        width: auto;
+    }
+}
+.Conversaciones {
+    span {
+        display: block;
+        font-size: 15px;
+        &:last-child {
+            display: block;
+            color: #53a0fd;
+        }
+    }
 }

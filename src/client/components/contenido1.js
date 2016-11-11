@@ -7,8 +7,9 @@ import Recursos from '../providers/recursoStore'
 import Aep from '../providers/aep'
 import AgendaStore from '../providers/agendaStore'
 import RelacionesPost from '../providers/relacionesPost'
-import Editiorial from '../providers/editorialStore'
+import sobre_algo_esta_pasando from '../providers/editorialStore'
 import Search from '../providers/search'
+import Letrequest from '../providers/request'
 import Post from '../components/posts'
 import PerfilStore from '../providers/perfilStore'
 import WidgetPerfilContent from './widgetPerfilContent'
@@ -21,7 +22,9 @@ export default class PostContenido extends React.Component {
             titulo: '',
             postRelation: [],
             text:'',
-            Wautor:''
+            Wautor:'',
+            HtmlAgenda:'',
+            classContent:"flex c_c_d"
         }
     }
     loadContentAux(){
@@ -45,6 +48,7 @@ export default class PostContenido extends React.Component {
         }
         switch (l) {
             case "#search":
+
             cp = Search.getsearch(p);
 
             if(cp["Escribir/Párrafos/Texto"]){
@@ -80,7 +84,12 @@ export default class PostContenido extends React.Component {
                 AgendaStore.init();
                 return
             }
+
             text = cp["Descripcióndelaactividad"];
+            this.setState({
+                HtmlAgenda: <HtmlAgenda obj={cp}></HtmlAgenda>,
+                classContent:"flex c_c_d column"
+            })
             titulo =  cp.Nombredelaactividad
             break;
             case "comentarios":
@@ -107,11 +116,11 @@ export default class PostContenido extends React.Component {
             }
             titulo =  cp.Título
             break;
-            case "editorial":
+            case "sobre_algo_esta_pasando":
 
-            cp = Editiorial.getEditorial(p);
+            cp = sobre_algo_esta_pasando.getEditorial(p);
             if(!cp){
-                Editiorial.init();
+                sobre_algo_esta_pasando.init();
                 return
             }
             if(cp["Escribir / Párrafos / Texto"]){
@@ -135,7 +144,7 @@ export default class PostContenido extends React.Component {
         if(cp.AgregaunaImagen){
             img = `https://tupale.co/milfs/images/secure/?file=full/${cp.AgregaunaImagen}`
         }
-        console.log(cp);
+
         let tags = ''
         if(cp['Otrasetiquetas']){
             tags = cp['Otrasetiquetas']
@@ -150,7 +159,7 @@ export default class PostContenido extends React.Component {
             textCompleto:textCompleto,
             classAep:classAep
         })
-        Editiorial.removeChangeListener(this.loadContent.bind(this))
+        sobre_algo_esta_pasando.removeChangeListener(this.loadContent.bind(this))
         Contenido.removeChangeListener(this.loadContent.bind(this))
         AgendaStore.removeChangeListener(this.loadContent.bind(this))
         Comentarios.removeChangeListener(this.loadContent.bind(this))
@@ -160,10 +169,9 @@ export default class PostContenido extends React.Component {
         this.loadContent(id)
     }
     componentDidUpdate(){
-        // console.log("componentDidUpdate");
-        // if(!document.querySelector(".c_AutorRelations")){
-        //     document.querySelector(".Descripcion").style.width = "100%"
-        // }
+        if(document.querySelector(".contentSearch")){
+            document.querySelector(".contentSearch").classList.add('active');
+        }
     }
     updateData() {
         this.setState({
@@ -177,54 +185,56 @@ export default class PostContenido extends React.Component {
         AgendaStore.addChangeListener(this.loadContent.bind(this))
         Comentarios.addChangeListener(this.loadContent.bind(this))
         Recursos.addChangeListener(this.loadContent.bind(this))
-        Editiorial.addChangeListener(this.loadContent.bind(this))
+        Letrequest.addChangeListener(this.loadContent.bind(this))
+        sobre_algo_esta_pasando.addChangeListener(this.loadContent.bind(this))
 
         let autor = PerfilStore.getPerfilName(this.state.autor);
         if(autor){
             this.setState({
                 Wautor: <AutorRelation loadContent={this.loadContent.bind(this)} autor={autor} fecha={this.state.fecha} tags={this.state.tags}/>
-            })
-        }
-
+        })
     }
-    showMore(){
-        if(document.querySelector(".aep")){
-            this.setState({
-                classAep: "Descripcion",
-                text: this.state.textCompleto
-            })
-        }
+    FunctExtra.showFilters()
+}
+showMore(){
+    if(document.querySelector(".aep")){
+        this.setState({
+            classAep: "Descripcion",
+            text: this.state.textCompleto
+        })
     }
-    render () {
-        let divStyle = {
-            height: window.innerHeight - 50
-        };
-        var background = {
-            background: `rgb(234, 234, 234) url(${this.state.image}) top center`,
-            'backgroundSize': 'cover'
-        };
-        let id = this.props.params.id
-        let figure = '';
-        if(this.state.image){
-            figure = <ImgPost background={background} />
-        }
-        return (
-            <section className="showContent Post"  style={divStyle}>
-                {figure}
-                <div className="FlechaIzquierda"></div>
-                <div className="FlechaDerecha"></div>
+}
+render () {
+    let divStyle = {
+        height: window.innerHeight - 50
+    };
+    var background = {
+        background: `rgb(234, 234, 234) url(${this.state.image}) top center`,
+        'backgroundSize': 'cover'
+    };
+    let id = this.props.params.id
+    let figure = '';
+    if(this.state.image){
+        figure = <ImgPost background={background} />
+    }
+    return (
+        <section className="showContent Post"  style={divStyle}>
+            {figure}
+            <div className="FlechaIzquierda"></div>
+            <div className="FlechaDerecha"></div>
 
-                <article className="Detalle flex-container column">
-                    <div className="colum flex">
-                        <div className="C_content">
-                            <h1 className="Titulo" dangerouslySetInnerHTML={FunctExtra.createMarkup(this,this.state.titulo)}></h1>
-                            <div className="flex c_c_d">
-                                <div className={this.state.classAep} onClick={this.showMore.bind(this)}  dangerouslySetInnerHTML={FunctExtra.createMarkup(this,this.state.text)}></div>
-                                {this.state.Wautor}
-                            </div>
+            <article className="Detalle flex-container column">
+                <div className="colum flex">
+                    <div className="C_content">
+                        <h1 className="Titulo" dangerouslySetInnerHTML={FunctExtra.createMarkup(this,this.state.titulo)}></h1>
+                        <div className={this.state.classContent}>
+                            {this.state.HtmlAgenda}
+                            <div className={this.state.classAep} onClick={this.showMore.bind(this)}  dangerouslySetInnerHTML={FunctExtra.createMarkup(this,this.state.text)}></div>
+                            {this.state.Wautor}
                         </div>
                     </div>
-                    <div id="relacionesPost" className="relatedPosts flex" onClick={this.loadContentAux.bind(this)}>
+                </div>
+                <div id="relacionesPost" className="relatedPosts flex" onClick={this.loadContentAux.bind(this)}>
                     {
                         this.state.postRelation.map(item => {
                             return(
@@ -232,11 +242,56 @@ export default class PostContenido extends React.Component {
                             )
                         })
                     }
-                    </div>
-                </article>
-            </section>
-        )
-    }
+                </div>
+            </article>
+        </section>
+    )
+}
+}
+
+const HtmlAgenda = ({obj}) =>{
+    return(
+        <div className="flex column content-from">
+            <div className="form-agenda">
+                <span>Organizadores del evento:</span>
+                <span>{obj['Organizadoresdelevento']}</span>
+            </div>
+            <div className="form-agenda">
+                <span>Formato de la actividad:</span>
+                <span>{obj['Formatodelaactividad']}</span>
+            </div>
+            <div className="form-agenda">
+                <span>Lugar del evento:</span>
+                <span>{obj['Lugardelevento']}</span>
+            </div>
+            <div className="form-agenda">
+                <span>Fecha:</span>
+                <span>{obj['Fecha']}</span>
+            </div>
+            <div className="form-agenda">
+                <span>Hora de inicio:</span>
+                <span>{obj['Horadeinicio']} - {obj['Horadefinalización']}</span>
+            </div>
+            <div className="form-agenda">
+                <span>Dirección:</span>
+                <span>{obj['Dirección']}</span>
+            </div>
+            <div className="form-agenda">
+                <span>Correo Electrónico:</span>
+                <span>{obj['CorreoElectrónico']}</span>
+            </div>
+
+            <div className="form-agenda">
+                <span>Teléfono:</span>
+                <span>{obj['Teléfono']}</span>
+            </div>
+            <div className="form-agenda">
+                <span>Celular:</span>
+                <span>{obj['Celular']}</span>
+            </div>
+
+        </div>
+    )
 }
 const AutorRelation =({autor,tags,fecha,loadContent}) =>(
     <div className="c_AutorRelations">
@@ -246,12 +301,3 @@ const AutorRelation =({autor,tags,fecha,loadContent}) =>(
 const ImgPost = ({ background }) => (
     <figure className="Figure" style={background}></figure>
 );
-
-// <h2 className="Subtitulo">
-//     "¿CUÁL SERÁ EL MIEDO A HABLAR?"
-//     "¿SERÁ UNA GRAN ANALOGÍA AL MIEDO DE TODOS LOS COLOMBIANOS"
-// </h2>
-//dangerouslySetInnerHTML={FunctExtra.createMarkup(this,this.renderPost(this.state.postRelation))}
-// <div className="AutorFoto">
-// {this.state.autor}
-// </div>

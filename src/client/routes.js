@@ -2,13 +2,15 @@
 
 import Inicio from './containers/inicio'
 import Contenido from './containers/contenido'
-import Editorial from './containers/editorial'
+import Sobre_algo_esta_pasando from './containers/sobre_algo_esta_pasando'
 import Recursos from './containers/recursos'
 import Perfiles from './containers/perfiles'
 import Mapa from './containers/map'
 import Ediciones from './containers/ediciones'
 import Agenda from './containers/agenda'
 import Perfil from './components/perfil'
+import Editorial from './components/editorial'
+import Publicar_en_aep from './components/publicar_en_aep'
 import PosContenido from './components/contenido'
 import PosContenido1 from './components/contenido1'
 
@@ -82,15 +84,25 @@ export default {
         method: "get",
         handler: Ediciones,
     },
-    editorial:{
-        path:"/editorial",
+    sobre_algo_esta_pasando:{
+        path:"/sobre_algo_esta_pasando",
         method: "get",
-        handler: Editorial,
+        handler: Sobre_algo_esta_pasando,
     },
-    posEditorial: {
-        path: "/editorial/:id",
+    posSobre_algo_esta_pasando: {
+        path: "/sobre_algo_esta_pasando/:id",
         method: "get",
         handler: PosContenido,
         id:118
     },
+    publicar_en_aep: {
+        path: "/publicar_en_aep",
+        method: "get",
+        handler: Publicar_en_aep,
+    },
+    editorial: {
+        path: "/editorial",
+        method: "get",
+        handler: Editorial,
+    }
 };

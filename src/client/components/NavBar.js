@@ -91,7 +91,7 @@ export default class NavBar extends Component {
 
     componentDidMount(){
         setTimeout(function(){
-            if(document.querySelector(`.active`)){
+            if(document.querySelector(`.active`) && document.querySelector(`.active i`)){
                 let color = document.querySelector(`.active i`).getAttribute("data-color");;
                 document.querySelector(`.active span`).style.color = color;
                 document.querySelector(`.active i`).style.background = color;
@@ -109,6 +109,7 @@ export default class NavBar extends Component {
                 menu:this.props.edicion.menu,
                 redes:redes,
                 textCopyLeft:this.props.edicion.textCopyLeft,
+                Info_de_contacto:this.props.edicion.Info_de_contacto,
                 LogoAEP:`https://tupale.co/milfs/images/secure/?file=300/${this.props.edicion.AgregaunaImagen}`,
                 slogan:this.props.edicion.slogan
             })
@@ -117,42 +118,45 @@ export default class NavBar extends Component {
 
         return (
             <div id="NavBar" className="NavBar" onClick={this.classClosepMenu.bind()}
-            onMouseEnter={this.logoOpen.bind(this)} onMouseOut={this.logoClosed.bind(this)}>
-            <div className="NavBar-title" style={this.state.background}> </div>
-            <div className="NavBar-links">
-            {
-                Menus.map(item => {
-                    if(this.state.menu){
-                        let url = (item == "inicio") ? "/" : `/${item}`
-                        let icon = `i-${item}`
-                        let option = this.state.menu[item].name
-                        let styleIcon={
-                            color:this.state.menu[item].color
-                        }
-                        let clas = `${this.state.hidepad} ${item}`
-                        return (
-                            <Link activeClassName="active" key={ item } to={ url } className={clas} onClick={this.iconClick.bind(this,item,this.state.menu[item].color)}
-                            onMouseEnter={this.iconHover.bind(this,item,this.state.menu[item].color)} onMouseOut={this.iconOut.bind(this,item,this.state.menu[item].color)}>
-                            <span className="flex align-center">
-                            <i className={ icon } style={styleIcon} data-color={this.state.menu[item].color}></i>
-                            <span className={this.state.hideName}>{ option }</span>
-                            </span>
-                            </Link>
-                        );
+                onMouseEnter={this.logoOpen.bind(this)} onMouseOut={this.logoClosed.bind(this)}>
+                <div className="NavBar-title" style={this.state.background}> </div>
+                <div className="NavBar-links">
+                    {
+                        Menus.map(item => {
+                            if(this.state.menu){
+                                let url = (item == "inicio") ? "/" : `/${item}`
+                                let icon = `i-${item}`
+                                let option = this.state.menu[item].name
+                                let styleIcon={
+                                    color:this.state.menu[item].color
+                                }
+                                let clas = `${this.state.hidepad} ${item}`
+                                return (
+                                    <Link activeClassName="active" key={ item } to={ url } className={clas} onClick={this.iconClick.bind(this,item,this.state.menu[item].color)}
+                                        onMouseEnter={this.iconHover.bind(this,item,this.state.menu[item].color)} onMouseOut={this.iconOut.bind(this,item,this.state.menu[item].color)}>
+                                        <span className="flex align-center">
+                                            <i className={ icon } style={styleIcon} data-color={this.state.menu[item].color}></i>
+                                            <span className={this.state.hideName}>{ option }</span>
+                                        </span>
+                                    </Link>
+                                );
+                            }
+                        })
                     }
-                })
-            }
-            </div>
-            <div className="NavBar-footer">
-            <div>
-            <Link to="/editorial">
-            <img src={ this.state.LogoAEP } />
-            <span className="slogan">{this.state.slogan}</span>
-            </Link>
-            </div>
-            <div className="contenRedes" dangerouslySetInnerHTML={FunctExtra.createMarkup(this,this.state.redes)}></div>
-            <div className="copyright" dangerouslySetInnerHTML={FunctExtra.createMarkup(this,this.state.textCopyLeft)}></div>
-            </div>
+                </div>
+                <div className="NavBar-footer">
+                    <div>
+                        <Link to="/sobre_algo_esta_pasando">
+                            <img src={ this.state.LogoAEP } />
+                            <span className="slogan">{this.state.slogan}</span>
+                        </Link>
+
+                    </div>
+                    <div className="contenRedes" dangerouslySetInnerHTML={FunctExtra.createMarkup(this,this.state.redes)}></div>
+                    <div className="info">{this.state.Info_de_contacto}</div>
+                    <div className="copyright" dangerouslySetInnerHTML={FunctExtra.createMarkup(this,this.state.textCopyLeft)}></div>
+
+                </div>
             </div>
         );
 

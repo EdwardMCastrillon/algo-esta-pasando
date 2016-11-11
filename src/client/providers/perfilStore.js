@@ -31,7 +31,6 @@ const perfilStore = {
                 }
                 l = item.id;
             })
-            console.log(_posts);
             perfilStore.notifyChange()
         })
     },

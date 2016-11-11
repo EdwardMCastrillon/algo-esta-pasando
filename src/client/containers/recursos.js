@@ -3,6 +3,8 @@ import { hashHistory } from 'react-router'
 import Post from '../components/posts'
 import RecursoStore from '../providers/recursoStore'
 import Filters from '../components/filters'
+import FunctExtra from '../utils/functExtra'
+import Loader from '../components/loader'
 import '../style/Posts.scss'
 export default class Recursos extends React.Component {
     constructor (props) {
@@ -34,6 +36,7 @@ export default class Recursos extends React.Component {
     }
     componentDidMount(){
         RecursoStore.addChangeListener(this.updateData.bind(this))
+        FunctExtra.showFilters()
     }
     renderFilter(obj,autor){
         if(obj.length == 0){
@@ -54,29 +57,25 @@ export default class Recursos extends React.Component {
         if (this.state.posts.length > 0) {
             return (
                 <div className="P-B-ContentPost" style={divStyle}>
-                <Filters renderFilter={this.renderFilter.bind(this)} api="Recursos"/>
-                <section className="P-B-Post post">
-                {
-                    this.state.posts.map(item => {
-                        let origen = ''
-                        let tipo = 1;
-                        if(item.origen == "Perfiles"){
-                            tipo = 2;
+                    <section className="P-B-Post post">
+                        {
+                            this.state.posts.map(item => {
+                                let origen = ''
+                                let tipo = 1;
+                                if(item.origen == "Perfiles"){
+                                    tipo = 2;
+                                }
+                                return(
+                                    <Post key={ item.identificador }  search={this.state.search}  url="centro_de_recursos/" data={item} tipo={tipo}/>
+                                )
+                            })
                         }
-                        return(
-                            <Post key={ item.identificador }  search={this.state.search}  url="centro_de_recursos/" data={item} tipo={tipo}/>
-                        )
-                    })
-                }
-                </section>
+                    </section>
                 </div>
             )
         }else{
             return(
-                <div className="P-B-ContentPost" style={divStyle}>
-                <Filters renderFilter={this.renderFilter.bind(this)} api="Recursos"/>
-                <h1> Cargando Datos.. </h1>
-                </div>
+                <Loader/>
             )
         }
     }

@@ -2,8 +2,9 @@ import React from 'react'
 import { hashHistory } from 'react-router'
 import Post from '../components/posts'
 import Editiorial from '../providers/editorialStore'
-
-export default class Editorial extends React.Component {
+import FunctExtra from '../utils/functExtra'
+import Loader from '../components/loader'
+export default class Sobre_algo_esta_pasando extends React.Component {
     constructor (props) {
         super(props)
         this.state = ({
@@ -24,6 +25,7 @@ export default class Editorial extends React.Component {
     }
     componentDidMount(){
         Editiorial.addChangeListener(this.updateEditorial.bind(this))
+        FunctExtra.showFilters()
     }
     render () {
         var divStyle = {
@@ -36,7 +38,7 @@ export default class Editorial extends React.Component {
                         {
                             this.state.editorial.map(item => {
                                 return(
-                                    <Post key={ item.identificador } data={item} url="editorial/" tipo="1"/>
+                                    <Post key={ item.identificador } data={item} url="sobre_algo_esta_pasando/" tipo="1"/>
                                 )
                             })
                         }
@@ -44,11 +46,8 @@ export default class Editorial extends React.Component {
                 </div>
             )
         }else{
-
             return(
-                <div className="P-B-ContentPost" style={divStyle}>
-                    <h1> Cargando Datos.. </h1>
-                </div>
+                <Loader/>
             )
         }
 

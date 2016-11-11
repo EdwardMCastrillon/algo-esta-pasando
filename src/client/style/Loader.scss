@@ -1,9 +1,80 @@
-// @credit Loader SVG from http://samherbert.net/svg-loaders/
+$animationLength: 1.5s;
+$animationRadius: 20px;
+$dotSize: 16px;
 
-.Loader {
-  height: 2rem;
-  background-image: url('../../static/assets/grid-loader.svg');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
+.sampleContainer { margin-top: 250px; }
+
+.loader {
+    width: $animationRadius * 3 + $dotSize;
+    height: $dotSize;
+    position: absolute;
+    width: 44px;
+    height: 8px;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.dot {
+    display: inline-block;
+    width: $dotSize;
+    height: $dotSize;
+    border-radius: $dotSize * 0.5;
+    background: #ccc;
+    position: absolute;
+}
+
+.dot_1 {
+    animation: animateDot1 $animationLength linear infinite;
+    left: $animationRadius;
+    background: #9c27b0;
+}
+
+.dot_2 {
+    animation: animateDot2 $animationLength linear infinite;
+    animation-delay: $animationLength / 3;
+    left: $animationRadius * 2;
+}
+
+.dot_3 {
+    animation: animateDot3 $animationLength linear infinite;
+    left: $animationRadius;
+}
+
+.dot_4 {
+    animation: animateDot4 $animationLength linear infinite;
+    animation-delay: $animationLength / 3;
+    left: $animationRadius * 2;
+}
+
+@keyframes animateDot1 {
+    0%{ transform: rotate(0deg) translateX(-$animationRadius);}
+    25% { transform: rotate(180deg) translateX(-$animationRadius); }
+    50%{background: #f44336;}
+    75% { transform: rotate(180deg) translateX(-$animationRadius); }
+    100% { transform: rotate(360deg) translateX(-$animationRadius);
+    background:  #ff9800}
+}
+
+@keyframes animateDot2 {
+    0%{ transform: rotate(-0deg) translateX(-$animationRadius); }
+    25% { transform: rotate(-180deg) translateX(-$animationRadius); }
+    75% { transform: rotate(-180deg) translateX(-$animationRadius); }
+    100% { transform: rotate(-360deg) translateX(-$animationRadius); }
+}
+
+@keyframes animateDot3 {
+    0%{ transform: rotate(0deg) translateX($animationRadius); }
+    25% { transform: rotate(180deg) translateX($animationRadius); }
+    75% { transform: rotate(180deg) translateX($animationRadius); }
+    100% { transform: rotate(360deg) translateX($animationRadius);}
+}
+
+@keyframes animateDot4 {
+    0%{ transform: rotate(-0deg) translateX($animationRadius); }
+    25% { transform: rotate(-180deg) translateX($animationRadius); }
+    75% { transform: rotate(-180deg) translateX($animationRadius); }
+    100% { transform: rotate(-360deg) translateX($animationRadius); }
 }

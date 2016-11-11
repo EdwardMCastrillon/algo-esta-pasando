@@ -129,8 +129,9 @@ export default class Buscar extends React.Component {
         this.props.renderFilter(Search.getsearchs())
     }
     render () {
+
         return (
-            <div className="filterSelect flex align-center">
+            <div className="filterSelect flex align-center active">
                 <div className="contentSelect">
                     <select className="FILTRO_1" onChange={this.showFilters.bind(this)}>
                         <option value="0" >{this.state.namefilter1}</option>
@@ -186,7 +187,6 @@ export default class Buscar extends React.Component {
                     </div>
                 </div>
             </div>
-
         )
     }
 }

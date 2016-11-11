@@ -21,9 +21,11 @@ render((
             <Route path={RouterApp.posAeP.path1} component={ RouterApp.posAeP.handler1 } />
             <Route path={RouterApp.posAeP.path} component={ RouterApp.posAeP.handler } />
             <Route path={RouterApp.postAgenda.path} component={ RouterApp.postAgenda.handler } />
+            <Route path={RouterApp.sobre_algo_esta_pasando.path} component={RouterApp.sobre_algo_esta_pasando.handler}/>
+            <Route path={RouterApp.posSobre_algo_esta_pasando.path} component={RouterApp.posSobre_algo_esta_pasando.handler}/>
+
+            <Route path={RouterApp.publicar_en_aep.path} component={RouterApp.publicar_en_aep.handler}/>
             <Route path={RouterApp.editorial.path} component={RouterApp.editorial.handler}/>
-            <Route path={RouterApp.posEditorial.path} component={RouterApp.posEditorial.handler}/>
-            
 
             <Route path={RouterApp.recursos.path} component={RouterApp.recursos.handler}/>
             <Route path={RouterApp.posRecursos.path} component={RouterApp.posRecursos.handler}/>

@@ -15,7 +15,7 @@ const EditorialStore = {
         return
 
         _initCalled = true
-        getJSONEditorial(`${server}${apiEndpoints.editorial}`, function (err, res) {
+        getJSONEditorial(`${server}${apiEndpoints.sobre}`, function (err, res) {
             res.forEach(function (item) {
                 _editorial[item.id] = item
             })

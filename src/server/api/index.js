@@ -191,10 +191,10 @@ Router.get('/relacionesPost', (req, res) => {
     })
 })
 
-Router.get('/editorial', (req, res) => {
-    client.getEditorial((error, editorial) => {
+Router.get('/sobre', (req, res) => {
+    client.getSobre((error, sobre) => {
         if (error) res.sendStatus(500).json(error)
-        res.json(editorial)
+        res.json(sobre)
     })
 })
 

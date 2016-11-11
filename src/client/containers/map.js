@@ -7,6 +7,7 @@ import IconContebido from '../img/los_objetos.png'
 import request from 'superagent'
 import apiEndpoints from '../utils/apiEndpoints'
 import Post from '../components/posts'
+import FunctExtra from '../utils/functExtra'
 const server = '/api'
 let config = {};
 
@@ -89,6 +90,7 @@ class Map extends Component {
 
             this.updateData()
         }
+        FunctExtra.showFilters()
     }
     componentWillMount(){
         LocationMap.init()

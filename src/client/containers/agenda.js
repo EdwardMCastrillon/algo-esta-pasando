@@ -3,11 +3,11 @@ import { hashHistory } from 'react-router'
 import Post from '../components/posts'
 import TargetaAgenda from '../components/targetaAgenda'
 import Calendar from '../utils/calendar'
-
+import FunctExtra from '../utils/functExtra'
 import AgendaStore from '../providers/agendaStore'
 import '../style/agenda.scss'
 import '../style/select.scss'
-
+import Loader from '../components/loader'
 export default class Agenda extends React.Component {
     constructor(props) {
         super(props)
@@ -41,7 +41,7 @@ export default class Agenda extends React.Component {
 
     }
     componentDidMount(){
-
+        FunctExtra.showFilters()
         AgendaStore.addChangeListener(this.updateData.bind(this));
     }
     openSelect(){
@@ -113,9 +113,7 @@ export default class Agenda extends React.Component {
             )
         } else{
             return(
-                <div className="P-B-ContentPost" style={divStyle}>
-                    <h1> Cargando Datos.. </h1>
-                </div>
+                                <Loader/>
             )
         }
     }

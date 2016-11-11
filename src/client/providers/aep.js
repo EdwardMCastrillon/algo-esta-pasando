@@ -4,7 +4,7 @@ import apiEndpoints from '../utils/apiEndpoints'
 // Direccion url del server
 const server = '/api'
 
-let _AeP = {}
+let _AeP = []
 let _initCalled = false
 let _changeListeners = []
 

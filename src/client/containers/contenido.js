@@ -1,9 +1,9 @@
 import React from 'react'
 import { hashHistory } from 'react-router'
 import Post from '../components/posts'
-import Filters from '../components/filters'
 import contenidoStore from '../providers/contenidoStore'
-
+import FunctExtra from '../utils/functExtra'
+import Loader from '../components/loader'
 export default class Contenido extends React.Component {
     constructor (props) {
         super(props)
@@ -17,6 +17,7 @@ export default class Contenido extends React.Component {
     }
     componentWillMount(){
         contenidoStore.init(118)
+
     }
     updateData() {
         this.setState({
@@ -25,6 +26,7 @@ export default class Contenido extends React.Component {
     }
     componentDidMount(){
         contenidoStore.addChangeListener(this.updateData.bind(this))
+        FunctExtra.showFilters()
     }
     componentDidUpdate(){
         // if(parseInt(document.querySelector(".autor").value) !== 0){
@@ -33,21 +35,9 @@ export default class Contenido extends React.Component {
         //         posts:contenidoStore.getContenidos()
         //     })
         // }
+
     }
-    renderFilter(obj,autor){
-        console.log(obj.length);
-        if(obj.length > 0){
-            this.setState({
-                posts:obj,
-                search:true
-            })
-        }else{
-            this.setState({
-                posts:contenidoStore.getContenidos(),
-                search:false
-            })
-        }
-    }
+
     render () {
         var divStyle = {
             height: window.innerHeight - 50
@@ -55,7 +45,6 @@ export default class Contenido extends React.Component {
         if (this.state.posts.length > 0) {
             return (
                 <div className="P-B-ContentPost" style={divStyle}>
-                    <Filters renderFilter={this.renderFilter.bind(this)} />
                     <section className="P-B-Post post">
                         {
                             this.state.posts.map(item => {
@@ -75,12 +64,10 @@ export default class Contenido extends React.Component {
         }else{
 
             return(
-                <div className="P-B-ContentPost" style={divStyle}>
-                    <Filters renderFilter={this.renderFilter.bind(this)} />
-                    <h1> Cargando Datos.. </h1>
-                </div>
+                <Loader/>
             )
         }
 
     }
 }
+// <Filters renderFilter={this.renderFilter.bind(this)} />

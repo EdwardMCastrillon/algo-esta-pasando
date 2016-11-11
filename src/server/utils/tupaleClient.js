@@ -41,8 +41,8 @@ module.exports = {
                 case 'AeP':
                     endpoint = endpoints.aeP
                     break;
-                case 'editorial':
-                    endpoint = endpoints.editorial
+                case 'sobre':
+                    endpoint = endpoints.sobre
                 break;
                 case 'Ediciones':
                     endpoint = endpoints.ediciones
@@ -262,8 +262,8 @@ module.exports = {
             console.error(error)
         })
 
-        let EditorialPromise = new Promise((resolve, reject) => {
-            let endpoint = endpoints.editorial
+        let SobrePromise = new Promise((resolve, reject) => {
+            let endpoint = endpoints.sobre
             request({
                 url: endpoint,
                 method: 'GET',
@@ -277,10 +277,10 @@ module.exports = {
             let orderData = extras.orderedKeys(result)
             let inHtml = extras.normalizeHtml(orderData)
             let outCharacters = extras.removeCharacters(inHtml)
-            db.put('Editorial', JSON.stringify(outCharacters))
+            db.put('Sobre', JSON.stringify(outCharacters))
             All[8] = outCharacters
             db.put('All', JSON.stringify(All))
-            EventEmitter.emit('finish', 'Editorial')
+            EventEmitter.emit('finish', 'Sobre')
         }).catch((error) => {
             console.error(error)
         })
@@ -420,8 +420,8 @@ module.exports = {
         })
     },
 
-    getEditorial: (callback) => {
-        db.get('Editorial', { fillCache: false }, (error, data) => {
+    getSobre: (callback) => {
+        db.get('Sobre', { fillCache: false }, (error, data) => {
             if (! error) {
                 callback(null, JSON.parse(data))
             } else {
