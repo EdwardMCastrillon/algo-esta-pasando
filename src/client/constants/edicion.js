@@ -48,7 +48,15 @@ const Edicion = {
     },
     getNamefiltros(f){
         if(_Edicion[localStorage.getItem("edicion")][f]){
+            // console.log(_Edicion[localStorage.getItem("edicion")][f].replace(new RegExp("_", 'g'), " "));
             return _Edicion[localStorage.getItem("edicion")][f].replace(new RegExp("_", 'g'), " ");
+        }
+        return ''
+    },
+    getNamefiltrosTags(f){
+        if(_Edicion[localStorage.getItem("edicion")][f]){
+            // console.log(_Edicion[localStorage.getItem("edicion")][f].replace(new RegExp("_", 'g'), " "));
+            return _Edicion[localStorage.getItem("edicion")][f]//.replace(new RegExp("_", 'g'), " ");
         }
         return ''
     },
@@ -59,13 +67,11 @@ const Edicion = {
         return ''
     },
     getEdicionfiltros: function(f){
-        // FILTRO_1
-        // FILTRO_2
-        // FILTRO_3
         if(!_Edicion[localStorage.getItem("edicion")][f]){
             return []
         }
         f = _Edicion[localStorage.getItem("edicion")][f].replace(new RegExp(" ", 'g'), "");
+
         return _Edicion[localStorage.getItem("edicion")].filtros[f]
     },
     getEdicionId: function (id) {

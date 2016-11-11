@@ -86,6 +86,7 @@
         }
         .description {
             display: block;
+            font-size: 14px;
         }
     }
     img {
@@ -364,57 +365,50 @@
     margin-top: 65px;
     position: relative;
     padding: 10px 10px 0px 10px;
-    overflow: hidden;
-    >:first-child {
-        position: absolute;
-        top: -24px;
-    }
-
-
-    .postsRelated {
-        width: 250px;
-        height: 250px;
-        background: #e4e4e4;
-        margin: 0px 5px;
-    }
-    >:last-child{
-        margin-right: 0;
-    }
-    >:nth-child(2){
-        margin-left: 0;
-    }
-    .targetPost {
-        height: 250px;
-        width: 250px;
-        > :nth-child(2) {
-
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            overflow: hidden;
-        }
-
-    }
+    // >:first-child {
+    //     // position: absolute;
+    //     // top: -24px;
+    // }
+    // .postsRelated {
+    //     width: 250px;
+    //     height: 250px;
+    //     background: #e4e4e4;
+    //     margin: 0px 5px;
+    // }
+    // >:last-child{
+    //     margin-right: 0;
+    // }
+    // >:nth-child(2){
+    //     margin-left: 0;
+    // }
+    // .targetPost {
+    //
+    //     > :nth-child(2) {
+    //
+    //         text-overflow: ellipsis;
+    //         white-space: nowrap;
+    //         overflow: hidden;
+    //     }
+    //
+    // }
 }
 .relatedPosts{
     > div {
         position: relative !important;
         top: inherit !important;
     }
-    .targetPost {
-        &:hover {
-            .tP_description {
-                height: 62px;
-            }
-            .plus{
-                display: none;
-            }
-            .titulo{
-                text-overflow: ellipsis;
-                white-space: nowrap;
-                overflow: hidden;
-            }
-        }
-    }
+    // .targetPost {
+    //     &:hover {
+    //         .plus{
+    //             display: none;
+    //         }
+    //         .titulo{
+    //             text-overflow: ellipsis;
+    //             white-space: nowrap;
+    //             overflow: hidden;
+    //         }
+    //     }
+    // }
 }
 .leaflet-popup-content{
     .img {

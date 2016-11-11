@@ -1,5 +1,6 @@
 //conenido1.js y contenido.js es el mismo componecte mejorar esto!!!
 import React from 'react'
+import { Link } from 'react-router'
 import FunctExtra from '../utils/functExtra'
 import Contenido from '../providers/contenidoStore'
 import Comentarios from '../providers/comentarioStore'
@@ -37,13 +38,15 @@ export default class PostContenido extends React.Component {
         },300)
     }
     loadContent(){
-        console.log("loadContent");
-        // // Se captura el id del post que llega como parametro en la ruta
 
+        // // Se captura el id del post que llega como parametro en la ruta
         let p;
         p = this.props.params.id;
         let cp,text,titulo,classAep,postRelation={},textCompleto;
         classAep = "Descripcion "
+        this.setState({
+            postRelation: []
+        })
         let l = this.props.route.path.replace("/","").replace("/","").replace(":id","")
         if(this.props.location.hash !== ""){
             l = this.props.location.hash
@@ -75,7 +78,6 @@ export default class PostContenido extends React.Component {
                 text = cp["Resumen"];
             }
             this.setState({
-                postRelation: [],
                 info1:"Las conversaciones son mejores que los comentarios, que también van deprisa como las noticias, son sordos y hacen mucha bulla.",
                 info2:"Continúa la conversación que propone esta historia creando un contenido."
             })
@@ -137,6 +139,10 @@ export default class PostContenido extends React.Component {
             case "aep":
             case "aep_":
             cp = Aep.getAeP(p);
+            if(!cp){
+                Aep.init();
+                return
+            }
             textCompleto = cp["EDITOR(Recurso)"];
             text = cp.Resumen;
             titulo =  cp.Título
@@ -149,10 +155,7 @@ export default class PostContenido extends React.Component {
             img = `https://tupale.co/milfs/images/secure/?file=full/${cp.AgregaunaImagen}`
         }
 
-        let tags = ''
-        if(cp['Otrasetiquetas']){
-            tags = cp['Otrasetiquetas']
-        }
+        let tags = cp
         this.setState({
             image: img,
             titulo: titulo,
@@ -163,11 +166,14 @@ export default class PostContenido extends React.Component {
             textCompleto:textCompleto,
             classAep:classAep
         })
-        sobre_algo_esta_pasando.removeChangeListener(this.loadContent.bind(this))
+        RelacionesPost.removeChangeListener(this.updateData.bind(this))
+        Aep.removeChangeListener(this.loadContent.bind(this))
         Contenido.removeChangeListener(this.loadContent.bind(this))
         AgendaStore.removeChangeListener(this.loadContent.bind(this))
         Comentarios.removeChangeListener(this.loadContent.bind(this))
         Recursos.removeChangeListener(this.loadContent.bind(this))
+        Letrequest.removeChangeListener(this.loadContent.bind(this))
+        sobre_algo_esta_pasando.removeChangeListener(this.loadContent.bind(this))
     }
     componentWillMount(id) {
         this.loadContent(id)
@@ -178,13 +184,26 @@ export default class PostContenido extends React.Component {
         }
     }
     updateData() {
+        // let l = this.props.route.path.replace("/","").replace("/","").replace(":id","")
+
+        // switch (l) {
+        //     case "aep":
+        //     case "aep_":
         this.setState({
             postRelation:RelacionesPost.getRposts()
         })
+        //     break
+        // }
         RelacionesPost.removeChangeListener(this.updateData.bind(this))
     }
+    changeFilter(filter){
+        console.log("changeFilter ",this.props);
+        this.props.changeFilterApp.bind(this,filter);
+    }
     componentDidMount(){
+
         RelacionesPost.addChangeListener(this.updateData.bind(this))
+        Aep.addChangeListener(this.loadContent.bind(this))
         Contenido.addChangeListener(this.loadContent.bind(this))
         AgendaStore.addChangeListener(this.loadContent.bind(this))
         Comentarios.addChangeListener(this.loadContent.bind(this))
@@ -194,69 +213,70 @@ export default class PostContenido extends React.Component {
 
         let autor = PerfilStore.getPerfilName(this.state.autor);
         if(autor){
+            this.setState({ Wautor: <AutorRelation changeFilter={this.changeFilter.bind(this)} loadContent={this.loadContent.bind(this)} autor={autor} fecha={this.state.fecha} tags={this.state.tags}/> })
+        }
+        FunctExtra.showFilters()
+    }
+    showMore(){
+        if(document.querySelector(".aep")){
             this.setState({
-                Wautor: <AutorRelation loadContent={this.loadContent.bind(this)} autor={autor} fecha={this.state.fecha} tags={this.state.tags}/>
-        })
+                classAep: "Descripcion",
+                text: this.state.textCompleto
+            })
+        }
     }
-    FunctExtra.showFilters()
-}
-showMore(){
-    if(document.querySelector(".aep")){
-        this.setState({
-            classAep: "Descripcion",
-            text: this.state.textCompleto
-        })
-    }
-}
-render () {
-    let divStyle = {
-        height: window.innerHeight - 50
-    };
-    var background = {
-        background: `rgb(234, 234, 234) url(${this.state.image}) top center`,
-        'backgroundSize': 'cover'
-    };
-    let id = this.props.params.id
-    let figure = '';
-    if(this.state.image){
-        figure = <ImgPost background={background} />
-    }
-    return (
-        <section className="showContent Post"  style={divStyle}>
-            {figure}
-            <div className="FlechaIzquierda"></div>
-            <div className="FlechaDerecha"></div>
 
-            <article className="Detalle flex-container column">
-                <div className="colum flex">
-                    <div className="C_content">
-                        <h1 className="Titulo" dangerouslySetInnerHTML={FunctExtra.createMarkup(this,this.state.titulo)}></h1>
-                        <div className={this.state.classContent}>
-                            {this.state.HtmlAgenda}
-                            <div className={this.state.classAep}>
-                                <div onClick={this.showMore.bind(this)}  dangerouslySetInnerHTML={FunctExtra.createMarkup(this,this.state.text)}></div>
+    render () {
+        let divStyle = {
+            height: window.innerHeight - 50
+        };
+        var background = {
+            background: `rgb(234, 234, 234) url(${this.state.image}) top center`,
+            'backgroundSize': 'cover'
+        };
+        let id = this.props.params.id
+        let figure = '';
+        if(this.state.image){
+            figure = <ImgPost background={background} />
+        }
+        return (
+            <section className="showContent Post"  style={divStyle}>
+                {figure}
+                <div className="FlechaIzquierda"></div>
+                <div className="FlechaDerecha"></div>
+
+                <article className="Detalle flex-container column">
+                    <div className="colum flex">
+                        <div className="C_content">
+                            <h1 className="Titulo" dangerouslySetInnerHTML={FunctExtra.createMarkup(this,this.state.titulo)}></h1>
+                            <div className={this.state.classContent}>
+                                {this.state.HtmlAgenda}
+                                <div className={this.state.classAep}>
+                                    <div onClick={this.showMore.bind(this)}  dangerouslySetInnerHTML={FunctExtra.createMarkup(this,this.state.text)}></div>
+                                </div>
+                                {this.state.Wautor}
                             </div>
-                            {this.state.Wautor}
                         </div>
                     </div>
-                </div>
-                <div id="relacionesPost" className="relatedPosts flex" onClick={this.loadContentAux.bind(this)}>
-                    {
-                        this.state.postRelation.map(item => {
-                            return(
-                                <Post key={ item.identificador } data={item}  url="contenido/" tipo="1"/>
-                            )
-                        })
-                    }
-                    <div className="Conversaciones">
-                        <span>{this.state.info1}</span>
-                        <span>{this.state.info2}</span>
+                    <div id="relacionesPost" className="relatedPosts " >
+                        <section className="P-B-Post post" onClick={this.loadContentAux.bind(this)}>
+                            {
+                                this.state.postRelation.map(item => {
+                                    return(
+                                        <Post key={ item.identificador } data={item}  url="contenido/" tipo="1"/>
+                                    )
+                                })
+                            }
+                        </section>
+                        <div className="Conversaciones">
+                            <span>{this.state.info1}</span>
+                            <span><Link to="sobre_algo_esta_pasando/89644">{this.state.info2}</Link></span>
+                        </div>
                     </div>
-                </div>
-            </article>
-        </section>
-    )
-}
+                </article>
+            </section>
+        )
+    }
 }
 
 const HtmlAgenda = ({obj}) =>{
@@ -303,9 +323,9 @@ const HtmlAgenda = ({obj}) =>{
         </div>
     )
 }
-const AutorRelation =({autor,tags,fecha,loadContent}) =>(
+const AutorRelation =({autor,tags,fecha,loadContent,changeFilter}) =>(
     <div className="c_AutorRelations">
-        <WidgetPerfilContent autor={autor} fecha={fecha} tags={tags} loadContent={loadContent}/>
+        <WidgetPerfilContent changeFilter={changeFilter} autor={autor} fecha={fecha} tags={tags} loadContent={loadContent}/>
     </div>
 )
 const ImgPost = ({ background }) => (

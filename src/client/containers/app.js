@@ -48,11 +48,16 @@ export default class App extends React.Component {
     createMarkup(e,text){
         return {__html: text};
     }
-    prueba(){
-        console.log("prueba app");
+    changeFilterApp2(filter){
+        alert("ENTRAAAA")
+        console.log("app ",filter);
     }
-    componentDidUpdate(){
-
+    renderChildren(props) {
+        // return React.Children.map(props.children, child => {
+        return React.cloneElement(props.children, {
+            changeFilterApp: this.changeFilterApp2.bind(this)
+        })
+        // })
     }
     render () {
         if(this.state.edicion && this.state.load){
@@ -69,9 +74,9 @@ export default class App extends React.Component {
                     <Nav edicion={this.state.edicion}/>
                     <div className="Page-body">
                         <div className="Page-body-top">
-                            <Buscar route={this.props} prueba={this.prueba.bind(this)}/>
+                            <Buscar route={this.props}/>
                         </div>
-                        {this.props.children}
+                        {this.renderChildren(this.props)}
                     </div>
                 </div>
             )
@@ -83,14 +88,3 @@ export default class App extends React.Component {
 
     }
 }
-// <div>
-//     <h1> Cargando Datos.. </h1>
-// </div>
-// <ReactCSSTransitionGroup
-//     component={component}
-//     transitionName={transitionName}
-//     transitionEnterTimeout={transitionEnterTimeout}
-//     transitionLeaveTimeout={transitionLeaveTimeout} >
-//     {React.cloneElement(this.props.children, { key: this.props.location.pathname })}
-//
-// </ReactCSSTransitionGroup>

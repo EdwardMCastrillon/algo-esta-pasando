@@ -82,6 +82,8 @@ const FunctExtra = {
         return utftext
     },
     showFilters(){
+        document.querySelector(".filterSelect").classList.add("active")
+        document.querySelector(".contentSearch").classList.add('active');
         var className = document.querySelector(".filterSelect").className;
         if ( className.replace(/[\n\t]/g, " ").indexOf("active") < 0 ) {
             if(document.querySelector(".Page-body > .P-B-ContentPost")){
@@ -99,7 +101,14 @@ const FunctExtra = {
                 document.querySelector(".Page-body > .showContent.Post").style.marginTop = "3em"
             }
         }
+        for (var i = 0; i < document.getElementsByTagName("select").length; i++) {
+            if(parseInt(document.getElementsByTagName("select")[i]) != 0){
+                document.getElementsByTagName("select")[i].value = 0
+            }
+        }
+
     }
+
 };
 
 export default FunctExtra;

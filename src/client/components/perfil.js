@@ -38,7 +38,7 @@ export default class Perfil extends React.Component {
         RelacionAutor.init(name)
     }
     loadPerfile(id){
-        console.log("loadPerfile  ",id);
+        console.log("loadPerfile  ",id,this.props);
         this.setState({
             relacion:[]
         })
@@ -49,6 +49,11 @@ export default class Perfil extends React.Component {
             p = this.props.params.id;
         }
         let perfil = PerfilStore.getPerfil(p);
+        if(!perfil){
+            PerfilStore.init()
+            PerfilStore.addChangeListener(this.loadPerfile.bind(this))
+            return;
+        }
         let name = FunctExtra.accentDecode(perfil['Nombres']+ " "+perfil['Apellidos'])
         this.rlAutor(name);
 
@@ -84,6 +89,7 @@ export default class Perfil extends React.Component {
     }
     componentWillUnmount() {
         RelacionAutor.removeChangeListener(this.updateData.bind(this))
+        PerfilStore.removeChangeListener(this.loadPerfile.bind(this))
     }
     updateData() {
         this.setState({
@@ -125,29 +131,32 @@ export default class Perfil extends React.Component {
                     </div>
                     <span className="artAutor">Artículos del autor</span>
                     <div className="relatedPosts flex">
-                        {
-                            this.state.relacion.map(item => {
-                                let url;
-                                switch (item.origen) {
-                                    case 'Agenda':
+                        <section className="P-B-Post post">
+                            {
+                                this.state.relacion.map(item => {
+                                    let url;
+                                    switch (item.origen) {
+                                        case 'Agenda':
                                         url="";
-                                    break;
-                                    case 'Recursos':
+                                        break;
+                                        case 'Recursos':
                                         url="centro_de_recursos/";
-                                    break;
-                                    case 'Contenidos':
+                                        break;
+                                        case 'Contenidos':
                                         url="contenido/";
-                                    break;
-                                    case 'Comentarios':
+                                        break;
+                                        case 'Comentarios':
                                         url="comentarios/";
-                                    break;
+                                        break;
 
-                                }
-                                return(
-                                    <Post key={ item.identificador } data={ item } url={url} tipo={1} />
-                                )
-                            })
-                        }
+                                    }
+                                    return(
+                                        <Post key={ item.identificador } data={ item } url={url} tipo={1} />
+                                    )
+                                })
+                            }
+                        </section>
+                        
                     </div>
 
                 </div>

@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import {  Map, TileLayer, Marker, Popup  } from 'react-leaflet';
-
+import Ubicacion_mapa from '../img/ubicacion_mapa.png'
 
 // markers:LocationMap.getLocations()
 export default class CustomMap extends Component {
@@ -18,9 +18,9 @@ export default class CustomMap extends Component {
     }
     render () {
         const center = [this.props.position.lat, this.props.position.lng]
-        var baseballIcon = L.icon({
-            iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-icon-2x.png',
-            iconSize: [32, 48],
+        const IconCont = L.icon({
+            iconUrl: Ubicacion_mapa,
+            iconSize: [32, 39],
             iconAnchor: [16, 37],
             popupAnchor: [0, -28]
         });
@@ -29,7 +29,7 @@ export default class CustomMap extends Component {
                 <TileLayer
                     attribution='&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                     url='http://{s}.tile.osm.org/{z}/{x}/{y}.png' />
-                <Marker position={center} icon={baseballIcon}></Marker>
+                <Marker position={center} icon={IconCont}></Marker>
             </Map>
         )
     }

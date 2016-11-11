@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 import L from 'leaflet';
 import LocationMap from '../providers/infoMapa'
-import IconPerfil from '../img/perfil.png'
-import IconEvent from '../img/wikicuidad.png'
-import IconContebido from '../img/los_objetos.png'
+
+import IconPerfil from '../img/mapa_autor.png'
+import IconEvent from '../img/mapa_agenda.png'
+import IconContebido from '../img/mapa_contenidos.png'
+import IconRecursi from '../img/mapa_recursos.png'
+import IconEditorial from '../img/mapa_editorial.png'
 import request from 'superagent'
 import apiEndpoints from '../utils/apiEndpoints'
 import Post from '../components/posts'
 import FunctExtra from '../utils/functExtra'
+
 const server = '/api'
 let config = {};
 
@@ -29,8 +33,20 @@ const IconCont = L.icon({
     iconAnchor: [16, 37],
     popupAnchor: [0, -28]
 });
+const IconEdito = L.icon({
+    iconUrl: IconEditorial,
+    iconSize: [32, 39],
+    iconAnchor: [16, 37],
+    popupAnchor: [0, -28]
+});
+const IconRecur = L.icon({
+    iconUrl: IconRecursi,
+    iconSize: [32, 39],
+    iconAnchor: [16, 37],
+    popupAnchor: [0, -28]
+});
 const baseballIcon = L.icon({
-    iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-icon-2x.png',
+    iconUrl: IconContebido,
     iconSize: [32, 37],
     iconAnchor: [16, 37],
     popupAnchor: [0, -28]
@@ -144,6 +160,7 @@ class Map extends Component {
     getData(){
         let icon;
         let m = []
+        console.log(this.state.markers);
         this.state.markers.map(item => {
             let min = 1,max =  new Date().getTime();
             let key = Math.random() * (max - min) + min;
@@ -154,10 +171,15 @@ class Map extends Component {
                 case "Agenda":
                 icon = IconE;
                 break;
+                case "Editorial":
+                icon = IconEdito;
+                break
                 case "Contenido":
                 case "Comentario":
-                case "Recurso":
                 icon = IconCont;
+                break;
+                case "Recurso":
+                icon = IconRecur;
                 break;
                 default:
                 icon = baseballIcon;

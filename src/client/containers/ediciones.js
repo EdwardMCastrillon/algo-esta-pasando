@@ -30,7 +30,7 @@ export default class Ediciones extends React.Component {
     changeEdition(id,name){
         localStorage.setItem("edicion",id)
         localStorage.setItem("nameEdicion",name)
-        location.reload();
+        window.location.href = "/"
     }
     render () {
         var divStyle = {

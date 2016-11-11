@@ -10,9 +10,9 @@ export default class WidgetPerfilContent extends React.Component {
         super(props)
         this.state = {
             relacion:RelacionAutor.getRAutoresMax(5),
-            namefilter1:Edicion.getNamefiltros("FILTRO_1"),
-            namefilter2:Edicion.getNamefiltros("FILTRO_2"),
-            namefilter3:Edicion.getNamefiltros("FILTRO_3")
+            namefilter1:Edicion.getNamefiltrosTags("FILTRO_1"),
+            namefilter2:Edicion.getNamefiltrosTags("FILTRO_2"),
+            namefilter3:Edicion.getNamefiltrosTags("FILTRO_3")
         }
     }
     componentWillMount(){
@@ -27,7 +27,7 @@ export default class WidgetPerfilContent extends React.Component {
         RelacionAutor.removeChangeListener(this.updateData.bind(this))
     }
     updateData() {
-        console.log("updateData");
+
         this.setState({
             relacion:RelacionAutor.getRAutoresMax(5)
         })
@@ -42,6 +42,7 @@ export default class WidgetPerfilContent extends React.Component {
         let name = `${this.props.autor.Nombres} ${this.props.autor.Apellidos}`;
         let Linktwitter = '';
         let twitter = '';
+        let tags = '';
         if(this.props.autor['CuentadeTwitter']){
             let t = this.props.autor['CuentadeTwitter'];
             twitter = (t)?t.replace("https://twitter.com/","@"):'';
@@ -49,6 +50,17 @@ export default class WidgetPerfilContent extends React.Component {
 
             Linktwitter = `https://twitter.com/${twitter}`
         }
+        console.log(this.props.tags);
+        if((this.props.tags[this.state.namefilter1])){
+            tags += (this.props.tags[this.state.namefilter1])+',';
+        }
+        if((this.props.tags[this.state.namefilter2])){
+            tags += (this.props.tags[this.state.namefilter2])+',';
+        }
+        if((this.props.tags[this.state.namefilter3])){
+            tags += (this.props.tags[this.state.namefilter3]);
+        }
+        tags = tags.split(",")
         let fecha=''
         if(this.props.fecha){
             var month = [ "January" ,"February" ,"March" ,"April" ,"May" ,"June" ,"July" ,"August" ,"September" ,"October" ,"November" ,"December"];
@@ -72,10 +84,13 @@ export default class WidgetPerfilContent extends React.Component {
                 <div className="contentTags">
                     <span>Tags</span>
                     <div>
-                        {this.props.tags}
-                        ,{this.state.namefilter1}
-                        ,{this.state.namefilter2}
-                        ,{this.state.namefilter3}
+                        {
+                            tags.map(item => {
+                                return(
+                                    <span onClick={this.props.changeFilter.bind(this,item)}>{item}</span>
+                                )
+                            })
+                        }
                     </div>
                 </div>
                 <div className="contentTags">
@@ -110,3 +125,4 @@ export default class WidgetPerfilContent extends React.Component {
         )
     }
 }
+// <span onClick={this.props.changeFilter.bind(this,'Identidad')}>Identidad</span>
