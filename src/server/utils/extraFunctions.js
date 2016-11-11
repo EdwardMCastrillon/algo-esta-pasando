@@ -182,51 +182,59 @@ export default class Extras {
                     }
                     switch(index) {
                         case 0:
-                        partial.type = 'Perfil'
-                        partial.id = obj['id']
-                        if (obj['AgregaunaImagen']) partial.image = obj['AgregaunaImagen']
-                        partial.name = obj['Nombres']+" "+obj['Apellidos']
-                        partial.text = obj['Perfil'].substr(0, 200) + '...'
-                        break
+                          partial.type = 'Perfil'
+                          partial.id = obj['id']
+                          if (obj['AgregaunaImagen']) partial.image = obj['AgregaunaImagen']
+                          partial.name = obj['Nombres']+" "+obj['Apellidos']
+                          partial.text = obj['Perfil'].substr(0, 200) + '...'
+                          break
                         case 1:
-                        partial.type = 'Agenda'
-                        partial.id = obj['id']
-                        if (obj['AgregaunaImagen']) partial.image = obj['AgregaunaImagen']
-                        partial.name = obj['Nombredelaactividad']
-                        partial.text = obj['Descripcióndelaactividad'].substr(0, 200) + '...'
-                        break
+                          partial.type = 'Agenda'
+                          partial.id = obj['id']
+                          if (obj['AgregaunaImagen']) partial.image = obj['AgregaunaImagen']
+                          partial.name = obj['Nombredelaactividad']
+                          partial.text = obj['Descripcióndelaactividad'].substr(0, 200) + '...'
+                          break
                         case 2:
-                        partial.type = 'Recurso'
-                        partial.id = obj['id']
-                        if (obj['AgregaunaImagen']) partial.image = obj['AgregaunaImagen']
-                        if (obj['Resumen']) {
-                            if (obj['Resumen'] == "Falta resumen" || obj['Resumen'] == "Falta Resumen") {
-                                partial.name = obj['Título']
-                                let text = obj['Escribir/Párrafos/Texto'].substr(0, 200) + '...'
-                                partial.text = text
-                            }
-                        } else {
-                            let text = obj['Escribir/Párrafos/Texto'].substr(0, 200) + '...'
-                            partial.name = obj['Título']
-                            partial.text = text
-                        }
-                        break
+                          partial.type = 'Recurso'
+                          partial.id = obj['id']
+                          if (obj['AgregaunaImagen']) partial.image = obj['AgregaunaImagen']
+                          if (obj['Resumen']) {
+                              if (obj['Resumen'] == "Falta resumen" || obj['Resumen'] == "Falta Resumen") {
+                                  partial.name = obj['Título']
+                                  let text = obj['Escribir/Párrafos/Texto'].substr(0, 200) + '...'
+                                  partial.text = text
+                              } else {
+                                  let text = obj['Resumen']
+                                  partial.text = text
+                                  partial.name = obj['Título']
+                              }
+                          } else {
+                              let text = obj['Escribir/Párrafos/Texto'].substr(0, 200) + '...'
+                              partial.name = obj['Título']
+                              partial.text = text
+                          }
+                          break
                         case 3:
-                        partial.type = 'Contenido'
-                        partial.id = obj['id']
-                        if (obj['Resumen']) {
-                            if (obj['Resumen'] == "Falta resumen" || obj['Resumen'] == "Falta Resumen") {
-                                let text = obj['Escribir/Párrafos/Texto'].substr(0, 200) + '...'
-                                partial.text = text
-                                partial.name = obj['Título']
-                            }
-                        } else {
-                            let text = obj['Escribir/Párrafos/Texto'].substr(0, 200) + '...'
-                            partial.name = obj['Título']
-                            partial.text = text
-                        }
-                        if (obj['AgregaunaImagen']) partial.image = obj['AgregaunaImagen']
-                        break
+                          partial.type = 'Contenido'
+                          partial.id = obj['id']
+                          if (obj['Resumen']) {
+                              if (obj['Resumen'] == "Falta resumen" || obj['Resumen'] == "Falta Resumen") {
+                                  let text = obj['Escribir/Párrafos/Texto'].substr(0, 200) + '...'
+                                  partial.text = text
+                                  partial.name = obj['Título']
+                              } else {
+                                  let text = obj['Resumen']
+                                  partial.text = text
+                                  partial.name = obj['Título']
+                              }
+                          } else {
+                              let text = obj['Escribir/Párrafos/Texto'].substr(0, 200) + '...'
+                              partial.name = obj['Título']
+                              partial.text = text
+                          }
+                          if (obj['AgregaunaImagen']) partial.image = obj['AgregaunaImagen']
+                          break
                     }
                     if(partial.name != '' && partial.text != ''){
                         result.push(partial)
