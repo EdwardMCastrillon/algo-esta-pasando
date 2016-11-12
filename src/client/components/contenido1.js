@@ -197,7 +197,9 @@ export default class PostContenido extends React.Component {
         RelacionesPost.removeChangeListener(this.updateData.bind(this))
     }
     changeFilter(filter){
-        this.props.changeFilter.bind(this,filter);
+        console.log("changeFilter ",this.props);
+
+        this.props.changeFilterApp().bind(this,filter)
     }
     componentDidMount(){
 
@@ -257,8 +259,8 @@ export default class PostContenido extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <div id="relacionesPost" className="relatedPosts " >
-                        <section className="P-B-Post post" onClick={this.loadContentAux.bind(this)}>
+                    <div id="relacionesPost" className="relatedPosts " onClick={this.loadContentAux.bind(this)}>
+                        <section className="P-B-Post post" >
                             {
                                 this.state.postRelation.map(item => {
                                     return(

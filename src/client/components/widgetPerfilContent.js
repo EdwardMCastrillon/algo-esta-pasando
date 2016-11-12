@@ -15,9 +15,6 @@ export default class WidgetPerfilContent extends React.Component {
             namefilter3:Edicion.getNamefiltrosTags("FILTRO_3")
         }
     }
-    componentWillMount(){
-
-    }
     componentDidMount(){
         RelacionAutor.init(`${this.props.autor.Nombres} ${this.props.autor.Apellidos}`)
         RelacionAutor.addChangeListener(this.updateData.bind(this))
@@ -50,7 +47,7 @@ export default class WidgetPerfilContent extends React.Component {
 
             Linktwitter = `https://twitter.com/${twitter}`
         }
-        console.log(this.props.tags);
+
         if((this.props.tags[this.state.namefilter1])){
             tags += (this.props.tags[this.state.namefilter1])+',';
         }
@@ -83,6 +80,7 @@ export default class WidgetPerfilContent extends React.Component {
                 </div>
                 <div className="contentTags">
                     <span>Tags</span>
+                    <span onClick={this.props.changeFilter.bind(this,'Identidad')}>Identidad</span>
                     <div>
                         {
                             tags.map(item => {
@@ -92,6 +90,9 @@ export default class WidgetPerfilContent extends React.Component {
                             })
                         }
                     </div>
+                </div>
+                <div className="contentCompart">
+
                 </div>
                 <div className="contentTags">
                     <span>Articulos relacionados</span>

@@ -38,7 +38,6 @@ export default class Perfil extends React.Component {
         RelacionAutor.init(name)
     }
     loadPerfile(id){
-        console.log("loadPerfile  ",id,this.props);
         this.setState({
             relacion:[]
         })
@@ -126,7 +125,6 @@ export default class Perfil extends React.Component {
                             <a href={this.state.twitter}  target="_blank">
                                 <i className="i-twitter"></i>
                             </a>
-                            <i className="i-mail"></i>
                         </div>
                     </div>
                     <span className="artAutor">Artículos del autor</span>
@@ -156,7 +154,7 @@ export default class Perfil extends React.Component {
                                 })
                             }
                         </section>
-                        
+
                     </div>
 
                 </div>

@@ -15,7 +15,8 @@ export default class Buscar extends React.Component {
             namefilter2:Edicion.getNamefiltros("FILTRO_2"),
             filter3:Edicion.getEdicionfiltros("FILTRO_3"),
             namefilter3:Edicion.getNamefiltros("FILTRO_3"),
-            autores: PerfilStore.getPerfiles()
+            autores: PerfilStore.getPerfiles(),
+            filter:''
         })
     }
     componentWillUnmount() {
@@ -60,7 +61,6 @@ export default class Buscar extends React.Component {
         if(this.state.filter3.length == 0){
             document.querySelector(".FILTRO_3").parentNode.style.display = "none"
         }
-
     }
     searchClick(){
         Search.removeChangeListener(this.updateFilter.bind(this))
@@ -83,9 +83,10 @@ export default class Buscar extends React.Component {
         }
     }
     showFilters(){
+        console.log("showFilters");
         Search.removeChangeListener(this.updateFilter.bind(this))
         self = this;
-        let FILTRO_1 = ''
+        let FILTRO_1 = '';
         let FILTRO_2 = ''
         let FILTRO_3 = ''
         let keyF1 = '',keyF2 = '',keyF3 = '';
@@ -127,6 +128,49 @@ export default class Buscar extends React.Component {
     }
     updateFilter(){
         this.props.renderFilter(Search.getsearchs())
+    }
+    prueba(obj){
+        // this.setState({
+        //     filter:obj
+        // })
+        // this.showFilters()
+        let keyF1 = Edicion.getObjectkeys("FILTRO_1")
+        let getData = {
+            "filtro1": {
+                "name": keyF1,
+                "value": obj.filter
+            },
+            "filtro2": {"name": '', "value": ''},
+            "filtro3": {"name": '', "value": ''},
+            "input": ""
+        }
+        // let api = this.props.api;
+        Search.init(getData)
+
+        Search.addChangeListener(this.updateFilter.bind(this))
+        console.log("prueba");
+        // if(this.state.filter1.indexOf(obj.filter) > -1){
+        //     document.querySelector(".FILTRO_1").value = obj.filter
+        //     this.showFilters()
+        //     return
+        // }
+        // if(this.state.filter2.indexOf(obj.filter) > -1){
+        //     document.querySelector(".FILTRO_2").value = obj.filter
+        //     return
+        // }
+        // if(this.state.filter3.indexOf(obj.filter) > -1){
+        //     document.querySelector(".FILTRO_3").value = obj.filter
+        //     return
+        // }
+    }
+    componentWillReceiveProps(obj){
+        console.log("componentWillReceiveProps",obj);
+        // if(obj.filter){
+        //     this.prueba(obj)
+        // }
+    }
+    shouldComponentUpdate(newProps, newState) {
+        console.log("shouldComponentUpdate ",newProps,newState);
     }
     render () {
 

@@ -41,7 +41,6 @@ export default class WPerfil extends React.Component {
                     <a href={twitter}  target="_blank">
                         <i className="i-twitter"></i>
                     </a>
-                    <i className="i-mail"></i>
                 </div>
             </figure>
 

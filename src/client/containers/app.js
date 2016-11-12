@@ -23,7 +23,8 @@ export default class App extends React.Component {
         super(props)
         this.state = ({
             edicion:Edicion.getEdicion(),
-            load:Init.getInit()
+            load:Init.getInit(),
+            filter:''
         })
 
     }
@@ -49,10 +50,25 @@ export default class App extends React.Component {
         return {__html: text};
     }
     changeFilterApp2(filter){
-        alert("ENTRAAAA")
-        console.log("app ",filter);
+        this.setState({
+            filter:filter
+        })
+        // if(this.state.filter1.indexOf(obj.filter) > -1){
+        //     document.querySelector(".FILTRO_1").value = obj.filter
+        //     // this.showFilters()
+        //     return
+        // }
+        // if(this.state.filter2.indexOf(obj.filter) > -1){
+        //     document.querySelector(".FILTRO_2").value = obj.filter
+        //     return
+        // }
+        // if(this.state.filter3.indexOf(obj.filter) > -1){
+        //     document.querySelector(".FILTRO_3").value = obj.filter
+        //     return
+        // }
     }
     renderChildren(props) {
+        console.log("renderChildren");
         // return React.Children.map(props.children, child => {
         return React.cloneElement(props.children, {
             changeFilterApp: this.changeFilterApp2.bind(this)
@@ -74,7 +90,7 @@ export default class App extends React.Component {
                     <Nav edicion={this.state.edicion}/>
                     <div className="Page-body">
                         <div className="Page-body-top">
-                            <Buscar route={this.props}/>
+                            <Buscar filter={this.state.filter} route={this.props}/>
                         </div>
                         {this.renderChildren(this.props)}
                     </div>

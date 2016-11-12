@@ -125,7 +125,7 @@ export default class Buscar extends React.Component {
                 <div className="drawSearch" onClick={this.activeFilter.bind(this)} style={this.state.background}>
                     <i className="i-lupa"></i>
                 </div>
-                <Filters renderFilter={this.renderFilter.bind(this)} />
+                <Filters renderFilter={this.renderFilter.bind(this)} filter={this.props.filter} />
                 <div className="contentSearch active" style={divStyle}>
                     <div className="P-B-ContentPost" style={divStyle}>
                         <section className="P-B-Post post">
