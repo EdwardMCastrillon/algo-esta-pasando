@@ -103,6 +103,7 @@ export default class NavBar extends Component {
         let redes = ''
         if(this.state.logoOpen == "" && this.props.edicion){
             redes = `<a target="_blank" href="${this.props.edicion.urlTwitter}"><i class="i-twitter"></i></a><a target="_blank" href="${this.props.edicion.urlInstagram}"><i class="i-instagram"></i></a>`
+            let f = this.props.edicion.font_menu_izq.replace(/&quot;/g, '').replace(";","").split(":")
             this.setState({
                 logoOpen:this.props.edicion.logoOpen,
                 logoClosed:this.props.edicion.logoClosed,
@@ -111,7 +112,10 @@ export default class NavBar extends Component {
                 textCopyLeft:this.props.edicion.textCopyLeft,
                 Info_de_contacto:this.props.edicion.Info_de_contacto,
                 LogoAEP:`https://tupale.co/milfs/images/secure/?file=300/${this.props.edicion.AgregaunaImagen}`,
-                slogan:this.props.edicion.slogan
+                slogan:this.props.edicion.slogan,
+                font_menu_izq:{
+                    "font-family":f[1]
+                }
             })
             this.openNav()
         }
@@ -136,7 +140,7 @@ export default class NavBar extends Component {
                                         onMouseEnter={this.iconHover.bind(this,item,this.state.menu[item].color)} onMouseOut={this.iconOut.bind(this,item,this.state.menu[item].color)}>
                                         <span className="flex align-center">
                                             <i className={ icon } style={styleIcon} data-color={this.state.menu[item].color}></i>
-                                            <span className={this.state.hideName}>{ option }</span>
+                                            <span style={this.state.font_menu_izq} className={this.state.hideName}>{ option }</span>
                                         </span>
                                     </Link>
                                 );
@@ -148,13 +152,13 @@ export default class NavBar extends Component {
                     <div>
                         <Link to="/sobre_algo_esta_pasando">
                             <img src={ this.state.LogoAEP } />
-                            <span className="slogan">{this.state.slogan}</span>
+                            <span style={this.state.font_menu_izq}  className="slogan">{this.state.slogan}</span>
                         </Link>
 
                     </div>
-                    <div className="contenRedes" dangerouslySetInnerHTML={FunctExtra.createMarkup(this,this.state.redes)}></div>
-                    <div className="info">{this.state.Info_de_contacto}</div>
-                    <div className="copyright" dangerouslySetInnerHTML={FunctExtra.createMarkup(this,this.state.textCopyLeft)}></div>
+                    <div className="contenRedes" style={this.state.font_menu_izq}  dangerouslySetInnerHTML={FunctExtra.createMarkup(this,this.state.redes)}></div>
+                    <div style={this.state.font_menu_izq} className="info">{this.state.Info_de_contacto}</div>
+                    <div style={this.state.font_menu_izq} className="copyright" dangerouslySetInnerHTML={FunctExtra.createMarkup(this,this.state.textCopyLeft)}></div>
 
                 </div>
             </div>

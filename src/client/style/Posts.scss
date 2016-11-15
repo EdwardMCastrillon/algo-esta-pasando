@@ -44,7 +44,7 @@
         width:calc(100% - 30px);
         text-align: center;
         color: #fff;
-        height: 62px;
+        height: 50px;
         transition: .5s;
         padding: 0px 15px;
         .plus{
@@ -73,11 +73,11 @@
         }
         .titulo{
             position: relative;
-            font-family: MonopolSemiBold;
+            // font-family: MonopolSemiBold;
             width: calc(100% - 20px);
-            font-size: 26px;
+            font-size: 18px;
             letter-spacing: .8px;
-            padding: 17px 10px;
+            padding: 16px 10px;
             left: 0;
             display: block;
             text-overflow: ellipsis;
@@ -166,7 +166,7 @@
             font-size: 18px;
             z-index: 1;
             display: block;
-            font-family: "MerriweatherSans-Regular", sans-serif;
+            // font-family: "MerriweatherSans-Regular", sans-serif;
             letter-spacing: 0;
             padding: 20px 0px 0px 0px;
             width: 100%;
@@ -234,9 +234,9 @@
         // text-align: center;
         padding-bottom: 50px;
         .Titulo {
-            font-family: 'MonopolSemiBold';
+            // font-family: 'MonopolSemiBold';
             color: rgb(91, 91, 91);
-            font-size: 5em;
+            font-size: 4em;
             margin-top: .2em !important;
             text-align: center;
         }
@@ -309,7 +309,7 @@
 .Descripcion.aep {
     overflow: hidden;
     position: relative;
-    font-family: MerriweatherSans-Regular,sans-serif!important;;
+    // font-family: MerriweatherSans-Regular,sans-serif!important;;
     &:before {
         font-family: icomoon!important;
         height: 24px;

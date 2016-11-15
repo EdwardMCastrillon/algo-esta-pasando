@@ -130,38 +130,7 @@ export default class Buscar extends React.Component {
         this.props.renderFilter(Search.getsearchs())
     }
     prueba(obj){
-        // this.setState({
-        //     filter:obj
-        // })
-        // this.showFilters()
-        let keyF1 = Edicion.getObjectkeys("FILTRO_1")
-        let getData = {
-            "filtro1": {
-                "name": keyF1,
-                "value": obj.filter
-            },
-            "filtro2": {"name": '', "value": ''},
-            "filtro3": {"name": '', "value": ''},
-            "input": ""
-        }
-        // let api = this.props.api;
-        Search.init(getData)
-
-        Search.addChangeListener(this.updateFilter.bind(this))
-        console.log("prueba");
-        // if(this.state.filter1.indexOf(obj.filter) > -1){
-        //     document.querySelector(".FILTRO_1").value = obj.filter
-        //     this.showFilters()
-        //     return
-        // }
-        // if(this.state.filter2.indexOf(obj.filter) > -1){
-        //     document.querySelector(".FILTRO_2").value = obj.filter
-        //     return
-        // }
-        // if(this.state.filter3.indexOf(obj.filter) > -1){
-        //     document.querySelector(".FILTRO_3").value = obj.filter
-        //     return
-        // }
+        
     }
     componentWillReceiveProps(obj){
         console.log("componentWillReceiveProps",obj);

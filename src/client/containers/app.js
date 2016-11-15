@@ -9,14 +9,10 @@ import Init from '../constants/init'
 import Edicion from '../constants/edicion'
 import Loader from '../components/loader'
 
-// import Aep from '../providers/aep'
-// Estilos
-
 import "../style/font.scss"
 import "../style/Page.scss"
 import "../style/Animate.scss"
 import "../style/flex.scss"
-
 
 export default class App extends React.Component {
     constructor (props) {
@@ -24,7 +20,8 @@ export default class App extends React.Component {
         this.state = ({
             edicion:Edicion.getEdicion(),
             load:Init.getInit(),
-            filter:''
+            filter:'',
+
         })
 
     }
@@ -34,7 +31,10 @@ export default class App extends React.Component {
     }
     updateData() {
         this.setState({
-            edicion:Edicion.getEdicion()
+            edicion:Edicion.getEdicion(),
+            font_parrafos:{
+                "font-family":Edicion.getEdicion().font_parrafos.replace(/&quot;/g, '').replace(";","").split(":")[1]
+            }
         })
     }
     init(){
@@ -53,27 +53,12 @@ export default class App extends React.Component {
         this.setState({
             filter:filter
         })
-        // if(this.state.filter1.indexOf(obj.filter) > -1){
-        //     document.querySelector(".FILTRO_1").value = obj.filter
-        //     // this.showFilters()
-        //     return
-        // }
-        // if(this.state.filter2.indexOf(obj.filter) > -1){
-        //     document.querySelector(".FILTRO_2").value = obj.filter
-        //     return
-        // }
-        // if(this.state.filter3.indexOf(obj.filter) > -1){
-        //     document.querySelector(".FILTRO_3").value = obj.filter
-        //     return
-        // }
+
     }
     renderChildren(props) {
-        console.log("renderChildren");
-        // return React.Children.map(props.children, child => {
         return React.cloneElement(props.children, {
             changeFilterApp: this.changeFilterApp2.bind(this)
         })
-        // })
     }
     render () {
         if(this.state.edicion && this.state.load){
@@ -85,8 +70,13 @@ export default class App extends React.Component {
                 component = "div",transitionName = "example",
                 transitionEnterTimeout = 1300,transitionLeaveTimeout = 1300;
             }
+            let font1 = this.state.edicion.font_1_url
+            let font2 = this.state.edicion.font_2_url
+
             return (
-                <div className="Page">
+                <div className="Page" style={this.state.font_parrafos}>
+                    <link href={font1} rel='stylesheet' type='text/css'/>
+                    <link href={font2} rel='stylesheet' type='text/css'/>
                     <Nav edicion={this.state.edicion}/>
                     <div className="Page-body">
                         <div className="Page-body-top">

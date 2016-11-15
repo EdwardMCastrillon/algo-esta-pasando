@@ -99,7 +99,64 @@ export default class Extras {
                 .replace(/&nbsp;/g, ' ')
                 .replace(/&apos;/g, "'")
             }
+            if (data['font_grid_resumen']) {
+                data['font_grid_resumen'] = data['font_grid_resumen'].replace(/&lt;/g, '<')
+                .replace(/&gt;/g, '>')
+                .replace(/&quot;/g, '"')
+                .replace(/&amp;/g, '&')
+                .replace(/&nbsp;/g, ' ')
+                .replace(/&apos;/g, "'")
+            }
 
+            if (data['font_menu_izq']) {
+                data['font_menu_izq'] = data['font_menu_izq'].replace(/&lt;/g, '<')
+                .replace(/&gt;/g, '>')
+                .replace(/&quot;/g, '"')
+                .replace(/&amp;/g, '&')
+                .replace(/&nbsp;/g, ' ')
+                .replace(/&apos;/g, "'")
+
+            }
+            if (data['font_grid_titulos']) {
+                data['font_grid_titulos'] = data['font_grid_titulos'].replace(/&lt;/g, '<')
+                .replace(/&gt;/g, '>')
+                .replace(/&quot;/g, '"')
+                .replace(/&amp;/g, '&')
+                .replace(/&nbsp;/g, ' ')
+                .replace(/&apos;/g, "'")
+            }
+            if (data['font_menu_up_secciones']) {
+                data['font_menu_up_secciones'] = data['font_menu_up_secciones'].replace(/&lt;/g, '<')
+                .replace(/&gt;/g, '>')
+                .replace(/&quot;/g, '"')
+                .replace(/&amp;/g, '&')
+                .replace(/&nbsp;/g, ' ')
+                .replace(/&apos;/g, "'")
+            }
+            if (data['font_subtitles']) {
+                data['font_subtitles'] = data['font_subtitles'].replace(/&lt;/g, '<')
+                .replace(/&gt;/g, '>')
+                .replace(/&quot;/g, '"')
+                .replace(/&amp;/g, '&')
+                .replace(/&nbsp;/g, ' ')
+                .replace(/&apos;/g, "'")
+            }
+            if (data['font_parrafos']) {
+                data['font_parrafos'] = data['font_parrafos'].replace(/&lt;/g, '<')
+                .replace(/&gt;/g, '>')
+                .replace(/&quot;/g, '"')
+                .replace(/&amp;/g, '&')
+                .replace(/&nbsp;/g, ' ')
+                .replace(/&apos;/g, "'")
+            }
+            if (data['font_titulos']) {
+                data['font_titulos'] = data['font_titulos'].replace(/&lt;/g, '<')
+                .replace(/&gt;/g, '>')
+                .replace(/&quot;/g, '"')
+                .replace(/&amp;/g, '&')
+                .replace(/&nbsp;/g, ' ')
+                .replace(/&apos;/g, "'")
+            }
 
         })
         return data

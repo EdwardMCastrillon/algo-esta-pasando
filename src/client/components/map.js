@@ -13,8 +13,10 @@ export default class CustomMap extends Component {
         }
     }
     componentDidMount(){
-        document.querySelector(`#e${this.props.idEvent} .leaflet-container`).style.height = `300px`
-        document.querySelector(`#e${this.props.idEvent} .leaflet-container`).style.width = `100%`
+        if(document.querySelector(`#e${this.props.idEvent} .leaflet-container`)){
+            document.querySelector(`#e${this.props.idEvent} .leaflet-container`).style.height = `300px`
+            document.querySelector(`#e${this.props.idEvent} .leaflet-container`).style.width = `100%`
+        }
     }
     render () {
         const center = [this.props.position.lat, this.props.position.lng]

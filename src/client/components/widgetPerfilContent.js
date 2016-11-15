@@ -4,6 +4,10 @@ import { Link } from 'react-router'
 import RelacionAutor from '../providers/relacionAutor'
 import Edicion from '../constants/edicion'
 import Post from './posts'
+import Map from './map'
+import iconCompartir from '../img/compartir.svg'
+import iconMapa from '../img/mapa.svg'
+import PopupMapa from './map'
 
 export default class WidgetPerfilContent extends React.Component {
     constructor (props) {
@@ -29,12 +33,52 @@ export default class WidgetPerfilContent extends React.Component {
             relacion:RelacionAutor.getRAutoresMax(5)
         })
     }
+    compartir(){
+        this.setState({ htmlCompartir: <HTMLCompartir url={window.location.href}></HTMLCompartir> })
+    }
+    closedPopup(){
+        this.setState({
+            popup: ''
+        })
+    }
+    mapa(data){
+        const PositionMap = ({ data, position }) => (
+            <div className="popupConten open">
+                <div className="popup-close-button" onClick={this.closedPopup.bind(this)}>×</div>
+                <div className="popup-content-wrapper">
+                    <div className="popup-content">
+                        <Map position={position} idEvent={data.id}></Map>
+                        <div className="popup-content-name">
+                            {data.Lugardelevento}
+                        </div>
+                    </div>
+                </div>
+                <div className="popup-tip-container">
+                    <div className="popup-tip"></div>
+                    <div className="popup-tiptar"></div>
+                </div>
+            </div>
+        );
+        let position = {
+            lat: data['Georreferencia(mapa)'].split(" ")[1],
+            lng: data['Georreferencia(mapa)'].split(" ")[0]
+        }
+        this.setState({ popup: <PositionMap data={data} position={position}></PositionMap> })
+    }
     render () {
         let img = this.props.autor['AgregaunaImagen'];
         var figure = {
             background: `rgb(234, 234, 234) url(https://tupale.co/milfs/images/secure/?file=300/${img}) center center`,
             'backgroundSize': 'cover'
         };
+        let iconComp = {
+            background: `url(${iconCompartir}) center center`,
+            'backgroundSize': 'cover'
+        }
+        let iconMap = {
+            background: `url(${iconMapa}) center center`,
+            'backgroundSize': 'cover'
+        }
         let urlPerfil = `/autores/${this.props.autor.id}`
         let name = `${this.props.autor.Nombres} ${this.props.autor.Apellidos}`;
         let Linktwitter = '';
@@ -66,7 +110,8 @@ export default class WidgetPerfilContent extends React.Component {
         }
 
         return (
-            <div>
+            <div className="wp">
+                {this.state.popup}
                 <div className="widgetPerfilCont flex">
                     <div className="figure" style={figure}></div>
                     <div className=" contentnameTwiter flex column  justify-center">
@@ -91,8 +136,12 @@ export default class WidgetPerfilContent extends React.Component {
                         }
                     </div>
                 </div>
-                <div className="contentCompart">
-
+                <div className="contentCompart ">
+                    <div className="flex">
+                        <span className="compartir" onClick={this.compartir.bind(this)} style={iconComp}></span>
+                        <span className="mapaC" onClick={this.mapa.bind(this,this.props.tags)} style={iconMap}></span>
+                    </div>
+                    {this.state.htmlCompartir}
                 </div>
                 <div className="contentTags">
                     <span>Articulos relacionados</span>
@@ -126,4 +175,8 @@ export default class WidgetPerfilContent extends React.Component {
         )
     }
 }
-// <span onClick={this.props.changeFilter.bind(this,'Identidad')}>Identidad</span>
+const HTMLCompartir =({url}) =>(
+    <div className="HTMLCompartir">
+        <input value={url} dir="ltr"></input>
+    </div>
+)

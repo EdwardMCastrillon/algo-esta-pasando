@@ -27,12 +27,17 @@ export default class Buscar extends React.Component {
         if(!this.state.background){
             let colorgrid = Edicion.getEdicion()
             if(colorgrid){
+                let f = colorgrid.font_menu_up_secciones.replace(/&quot;/g, '').replace(";","").split(":")
                 colorgrid = colorgrid.coloraux;
                 this.setState({
                     background:{
-                        'background':`${colorgrid}`,
+                        'background':`${colorgrid}`
+                    },
+                    font_menu_up_secciones:{
+                        "font-family":f[1]
                     }
                 })
+
             }
         }
     }
@@ -45,9 +50,6 @@ export default class Buscar extends React.Component {
         this.setState({
             ediciones: Edicion.getEdiciones()
         })
-    }
-    componentDidUpdate(){
-        console.log(this.props.filter);
     }
     componentDidMount(){
         Aep.addChangeListener(this.updateData.bind(this))
@@ -111,7 +113,6 @@ export default class Buscar extends React.Component {
             height: window.innerHeight - 50,
             top:"46px"
         };
-
         return (
             <div>
                 <div id="NavBarTop" className="flex  align-center justify-center">
@@ -120,7 +121,7 @@ export default class Buscar extends React.Component {
                             let url = `/${urlAux}/${item.id}`
                             return(
                                 <Link activeClassName={ACTIVE}  to={url}>
-                                    <div className="item" dangerouslySetInnerHTML={FunctExtra.createMarkup(this,item.Título)}></div>
+                                    <div className="item" style={this.state.font_menu_up_secciones} dangerouslySetInnerHTML={FunctExtra.createMarkup(this,item.Título)}></div>
                                 </Link>
 
                             )

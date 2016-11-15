@@ -4,6 +4,7 @@ import FunctExtra from '../utils/functExtra'
 import PerfilStore from '../providers/perfilStore'
 import RelacionAutor from '../providers/relacionAutor'
 import Post from './posts'
+import Edicion from '../constants/edicion'
 
 import { Link } from 'react-router'
 
@@ -14,7 +15,19 @@ export default class Perfil extends React.Component {
         this.state = {
             image: '',
             titulo: '',
-            relacion:[]
+            relacion:[],
+            font_grid_titulos:{
+                "font-family":Edicion.getEdicion().font_grid_titulos.replace(/&quot;/g, '').replace(";","").split(":")[1]
+            },
+            font_grid_resumen:{
+                "font-family":Edicion.getEdicion().font_grid_resumen.replace(/&quot;/g, '').replace(";","").split(":")[1]
+            },
+            font_titulos:{
+                "font-family":Edicion.getEdicion().font_titulos.replace(/&quot;/g, '').replace(";","").split(":")[1]
+            },
+            font_parrafos:{
+                "font-family":Edicion.getEdicion().font_parrafos.replace(/&quot;/g, '').replace(";","").split(":")[1]
+            }
         }
     }
     heightImgResize(){
@@ -117,8 +130,8 @@ export default class Perfil extends React.Component {
                 <div className="contentInfoAutor">
                     <div className="contentAutor flex justify-space-between">
                         <div className="figure" style={figure}></div>
-                        <div className="descriptionAutor flex wrap align-content-center">
-                            <span className="nameAutor">{this.state.name}</span>
+                        <div style={this.state.font_grid_resumen} className="descriptionAutor flex wrap align-content-center">
+                            <span className="nameAutor" style={this.state.font_grid_titulos}>{this.state.name}</span>
                             {this.state.description}
                         </div>
                         <div className="rS">
@@ -127,7 +140,7 @@ export default class Perfil extends React.Component {
                             </a>
                         </div>
                     </div>
-                    <span className="artAutor">Artículos del autor</span>
+                    <span className="artAutor" style={this.state.font_titulos}>Artículos del autor</span>
                     <div className="relatedPosts flex">
                         <section className="P-B-Post post">
                             {

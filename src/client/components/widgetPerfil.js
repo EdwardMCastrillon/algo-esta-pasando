@@ -1,10 +1,25 @@
 import React from 'react'
 import FunctExtra from '../utils/functExtra'
 import { Link } from 'react-router'
+import Edicion from '../constants/edicion'
 
 export default class WPerfil extends React.Component {
     constructor (props) {
         super(props)
+        this.state = {
+            font_grid_titulos:{
+                "font-family":Edicion.getEdicion().font_grid_titulos.replace(/&quot;/g, '').replace(";","").split(":")[1]
+            },
+            font_grid_resumen:{
+                "font-family":Edicion.getEdicion().font_grid_resumen.replace(/&quot;/g, '').replace(";","").split(":")[1]
+            },
+            font_titulos:{
+                "font-family":Edicion.getEdicion().font_titulos.replace(/&quot;/g, '').replace(";","").split(":")[1]
+            },
+            font_parrafos:{
+                "font-family":Edicion.getEdicion().font_parrafos.replace(/&quot;/g, '').replace(";","").split(":")[1]
+            }
+        }
     }
 
     render () {
@@ -33,9 +48,9 @@ export default class WPerfil extends React.Component {
             <figure className="perfil">
                 <Link to={url}>
                     <div className="pfot" style={divStyle}> </div>
-                    <span className="name">{name}</span>
+                    <span className="name" style={this.state.font_titulos}>{name}</span>
                     <span></span>
-                    <span className="descPer">{perfil}...</span>
+                    <span className="descPer" style={this.state.font_grid_resumen}>{perfil}...</span>
                 </Link>
                 <div className="rS">
                     <a href={twitter}  target="_blank">

@@ -184,22 +184,13 @@ export default class PostContenido extends React.Component {
         }
     }
     updateData() {
-        // let l = this.props.route.path.replace("/","").replace("/","").replace(":id","")
-
-        // switch (l) {
-        //     case "aep":
-        //     case "aep_":
         this.setState({
             postRelation:RelacionesPost.getRposts()
         })
-        //     break
-        // }
         RelacionesPost.removeChangeListener(this.updateData.bind(this))
     }
     changeFilter(filter){
-        console.log("changeFilter ",this.props);
-
-        this.props.changeFilterApp().bind(this,filter)
+        this.props.changeFilterApp(filter)//.bind(this,filter)
     }
     componentDidMount(){
 
@@ -248,12 +239,12 @@ export default class PostContenido extends React.Component {
 
                 <article className="Detalle flex-container column">
                     <div className="colum flex">
-                        <div className="C_content">
+                        <div className="C_content"  onClick={this.showMore.bind(this)} >
                             <h1 className="Titulo" dangerouslySetInnerHTML={FunctExtra.createMarkup(this,this.state.titulo)}></h1>
                             <div className={this.state.classContent}>
                                 {this.state.HtmlAgenda}
                                 <div className={this.state.classAep}>
-                                    <div onClick={this.showMore.bind(this)}  dangerouslySetInnerHTML={FunctExtra.createMarkup(this,this.state.text)}></div>
+                                    <div dangerouslySetInnerHTML={FunctExtra.createMarkup(this,this.state.text)}></div>
                                 </div>
                                 {this.state.Wautor}
                             </div>
