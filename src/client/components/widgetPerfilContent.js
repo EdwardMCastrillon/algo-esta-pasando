@@ -34,7 +34,8 @@ export default class WidgetPerfilContent extends React.Component {
         })
     }
     compartir(){
-        this.setState({ htmlCompartir: <HTMLCompartir url={window.location.href}></HTMLCompartir> })
+        let url = `${window.location.href}?EdicionId=${localStorage.getItem("edicion")}`
+        this.setState({ htmlCompartir: <HTMLCompartir url={url}></HTMLCompartir> })
     }
     closedPopup(){
         this.setState({

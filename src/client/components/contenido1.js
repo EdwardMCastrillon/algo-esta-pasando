@@ -14,6 +14,7 @@ import Letrequest from '../providers/request'
 import Post from '../components/posts'
 import PerfilStore from '../providers/perfilStore'
 import WidgetPerfilContent from './widgetPerfilContent'
+import Edicion from '../constants/edicion'
 
 export default class PostContenido extends React.Component {
     constructor (props) {
@@ -27,7 +28,13 @@ export default class PostContenido extends React.Component {
             HtmlAgenda:'',
             classContent:"flex c_c_d",
             info1:'',
-            info2:''
+            info2:'',
+            font_titulos:{
+                "font-family":Edicion.getEdicion().font_titulos.replace(/&quot;/g, '').replace(";","").split(":")[1]
+            },
+            font_parrafos:{
+                "font-family":Edicion.getEdicion().font_parrafos.replace(/&quot;/g, '').replace(";","").split(":")[1]
+            }
         }
     }
     loadContentAux(){
@@ -240,11 +247,11 @@ export default class PostContenido extends React.Component {
                 <article className="Detalle flex-container column">
                     <div className="colum flex">
                         <div className="C_content"  onClick={this.showMore.bind(this)} >
-                            <h1 className="Titulo" dangerouslySetInnerHTML={FunctExtra.createMarkup(this,this.state.titulo)}></h1>
+                            <h1 className="Titulo" style={this.state.font_titulos} dangerouslySetInnerHTML={FunctExtra.createMarkup(this,this.state.titulo)}></h1>
                             <div className={this.state.classContent}>
                                 {this.state.HtmlAgenda}
                                 <div className={this.state.classAep}>
-                                    <div dangerouslySetInnerHTML={FunctExtra.createMarkup(this,this.state.text)}></div>
+                                    <div style={this.state.font_parrafos} dangerouslySetInnerHTML={FunctExtra.createMarkup(this,this.state.text)}></div>
                                 </div>
                                 {this.state.Wautor}
                             </div>

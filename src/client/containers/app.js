@@ -30,6 +30,13 @@ export default class App extends React.Component {
         Edicion.init()
     }
     updateData() {
+        debugger
+        if(getUrlVars()["EdicionId"]){
+            Edicion.getEdicionId(getUrlVars()["EdicionId"])
+            let url = window.location.href.replace(`?EdicionId=${getUrlVars()["EdicionId"]}`,"")
+            window.location.href = url
+        }
+
         this.setState({
             edicion:Edicion.getEdicion(),
             font_parrafos:{
@@ -53,7 +60,6 @@ export default class App extends React.Component {
         this.setState({
             filter:filter
         })
-
     }
     renderChildren(props) {
         return React.cloneElement(props.children, {
@@ -93,4 +99,15 @@ export default class App extends React.Component {
         }
 
     }
+}
+function getUrlVars() {
+    var vars = [], hash;
+    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('?');
+    for(var i = 0; i < hashes.length; i++)
+    {
+        hash = hashes[i].split('=');
+        vars.push(hash[0]);
+        vars[hash[0]] = hash[1];
+    }
+    return vars;
 }

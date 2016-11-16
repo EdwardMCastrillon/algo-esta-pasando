@@ -5,18 +5,37 @@
     <meta name="viewport" content="width=device-width initial-scale=1">
     <meta name="mobile-web-app-capable" content="yes">
     <title>AEP</title>
-        <!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.2/normalize.min.css"> -->
+    <!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.2/normalize.min.css"> -->
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.css">
     <style>
-      .leaflet-container {
+    .leaflet-container {
         height: 400px;
         width: 100%;
         margin: 0 auto;
-      }
+    }
     </style>
 </head>
 <body>
     <div id="app" class=""> </div>
     <script src="bundle.js"></script>
+
+    <!-- Piwik -->
+    <script type="text/javascript">
+    var _paq = _paq || [];
+    _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+    _paq.push(["setCookieDomain", "*.algoestapasando.cc"]);
+    _paq.push(["setDomains", ["*.algoestapasando.cc","*.algoestapasando.cc"]]);
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+        var u="//stats.tupale.co/";
+        _paq.push(['setTrackerUrl', u+'piwik.php']);
+        _paq.push(['setSiteId', '6']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+    })();
+    </script>
+    <noscript><p><img src="//stats.tupale.co/piwik.php?idsite=6" style="border:0;" alt="" /></p></noscript>
+    <!-- End Piwik Code -->
 </body>
 </html>

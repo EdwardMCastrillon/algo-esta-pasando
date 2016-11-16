@@ -76,6 +76,7 @@ const Edicion = {
     },
     getEdicionId: function (id) {
         localStorage.setItem("edicion",id);
+        localStorage.setItem("nameEdicion",_Edicion[id].Título);
         return _Edicion[id]
     },
     addChangeListener: function (listener) {
