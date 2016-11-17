@@ -7,6 +7,7 @@ module.exports = {
         './src/client'
     ],
     output: {
+        publicPath: "http://localhost:8082/",
         path: path.join(__dirname, 'public'),
         filename: 'bundle.js'
     },
@@ -24,7 +25,7 @@ module.exports = {
 
             {
                 test: /\.(eot|otf|ttf|woff|woff2)$/,
-                loader: 'file'
+                loader: 'file-loader'
             },
 
             {
