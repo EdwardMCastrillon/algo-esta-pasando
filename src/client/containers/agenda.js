@@ -8,6 +8,8 @@ import AgendaStore from '../providers/agendaStore'
 import '../style/agenda.scss'
 import '../style/select.scss'
 import Loader from '../components/loader'
+
+import Footer from '../components/footer'
 export default class Agenda extends React.Component {
     constructor(props) {
         super(props)
@@ -109,11 +111,12 @@ export default class Agenda extends React.Component {
                             }
                         </div>
                     </section>
+                    <Footer></Footer>
                 </div>
             )
         } else{
             return(
-                                <Loader/>
+                <Loader/>
             )
         }
     }

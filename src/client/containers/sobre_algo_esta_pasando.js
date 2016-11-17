@@ -4,6 +4,7 @@ import Post from '../components/posts'
 import Editiorial from '../providers/editorialStore'
 import FunctExtra from '../utils/functExtra'
 import Loader from '../components/loader'
+import Footer from '../components/footer'
 export default class Sobre_algo_esta_pasando extends React.Component {
     constructor (props) {
         super(props)
@@ -43,6 +44,7 @@ export default class Sobre_algo_esta_pasando extends React.Component {
                             })
                         }
                     </section>
+                    <Footer></Footer>
                 </div>
             )
         }else{

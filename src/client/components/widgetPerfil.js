@@ -35,8 +35,12 @@ export default class WPerfil extends React.Component {
 
         let twitter = (t)?t.replace("https://twitter.com/","@"):'';
         twitter = (t)?t.replace("@",""):'';
+        let classPointer = ''
+        if(twitter !== "" && twitter){
+            twitter = `https://twitter.com/${twitter}`
+            classPointer = "disabled"
+        }
 
-        twitter = `https://twitter.com/${twitter}`
 
 
         var divStyle = {
@@ -53,7 +57,7 @@ export default class WPerfil extends React.Component {
                     <span className="descPer" style={this.state.font_grid_resumen}>{perfil}...</span>
                 </Link>
                 <div className="rS">
-                    <a href={twitter}  target="_blank">
+                    <a href={twitter}  target="_blank" className={classPointer}>
                         <i className="i-twitter"></i>
                     </a>
                 </div>

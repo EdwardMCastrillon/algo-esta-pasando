@@ -2,7 +2,7 @@ import React, { PropTypes, Component } from "react";
 import { Link, Router } from 'react-router'
 import FunctExtra from '../utils/functExtra'
 import Menus from '../constants/menus'
-// import Logo from "../img/logoAep.png"
+import LogoGif from "../img/edicion.gif"
 
 
 require("../style/NavBar.scss");
@@ -23,6 +23,7 @@ export default class NavBar extends Component {
     }
     logoOpen(){
         if(document.querySelector(".NavBar:hover")){
+
             this.setState({
                 background:{
                     'background':`url(${this.state.logoOpen}) center center`,
@@ -32,17 +33,21 @@ export default class NavBar extends Component {
         }
     }
     logoClosed(){
-        if(!document.querySelector(".NavBar:hover") && document.querySelector(".closed")){
-            this.setState({
-                background:{
-                    'background':`url(${this.state.logoClosed}) center center`,
-                    'backgroundSize': 'cover'
-                }
-            })
+        if(document.body.clientWidth > 500){
+            if(!document.querySelector(".NavBar:hover") && document.querySelector(".closed")){
+                this.setState({
+                    background:{
+                        'background':`url(${this.state.logoClosed}) center center`,
+                        'backgroundSize': 'cover'
+                    }
+                })
+            }
         }
     }
     classClosepMenu(){
-        document.querySelector("#app").classList.add("closed")
+        if(document.body.clientWidth > 500){
+            document.querySelector("#app").classList.add("closed")
+        }
     }
     openNav(){
         this.setState({
@@ -98,6 +103,29 @@ export default class NavBar extends Component {
                 document.querySelector(`.active i`).style.color = "#fff";
             }
         },300)
+        if(document.body.clientWidth < 500){
+            document.querySelector("#NavBar").classList.add("ClosedMenu")
+        }
+        window.addEventListener('resize', function(event){
+            if(document.body.clientWidth < 500){
+                    document.querySelector("#app").classList.add("phone")
+                    document.querySelector("#NavBar").classList.add("ClosedMenu")
+            }else{
+                    document.querySelector("#app").classList.remove("phone")
+            }
+        });
+    }
+    ClosedMenuPhone(){
+        if(document.querySelector(".ClosedMenu")){
+            document.querySelector("#NavBar").classList.remove("ClosedMenu")
+            document.querySelector(".Hamburger").classList.add("MenuOpen")
+            document.querySelector(".Hamburger").classList.remove("MenuClose")
+        }else {
+            document.querySelector("#NavBar").classList.add("ClosedMenu")
+            document.querySelector(".Hamburger").classList.remove("MenuOpen")
+            document.querySelector(".Hamburger").classList.add("MenuClose")
+        }
+
     }
     render() {
         let redes = ''
@@ -119,10 +147,37 @@ export default class NavBar extends Component {
             })
             this.openNav()
         }
-
+        let behind = {
+            background: this.props.edicion.coloraux
+        }
         return (
             <div id="NavBar" className="NavBar" onClick={this.classClosepMenu.bind()}
                 onMouseEnter={this.logoOpen.bind(this)} onMouseOut={this.logoClosed.bind(this)}>
+
+
+
+                <div className="Hamburger MenuClose" onClick={this.ClosedMenuPhone.bind(this)}>
+
+                    <div className="behind" style={behind}> </div>
+                    <div className="wrapper">
+                        <div className="NavHamburgerLine1">
+                            <div className="inner">
+                            </div>
+                        </div>
+                        <div className="NavHamburgerLine2" >
+                            <div className="inner">
+                            </div>
+                        </div>
+                        <div className="NavHamburgerLine3" >
+                            <div className="inner">
+                            </div>
+                        </div>
+                    </div>
+                    <div className="hit" > </div>
+                </div>
+
+
+
                 <div className="NavBar-title" style={this.state.background}> </div>
                 <div className="NavBar-links">
                     {
@@ -157,8 +212,6 @@ export default class NavBar extends Component {
 
                     </div>
                     <div className="contenRedes" style={this.state.font_menu_izq}  dangerouslySetInnerHTML={FunctExtra.createMarkup(this,this.state.redes)}></div>
-                    <div style={this.state.font_menu_izq} className="info">{this.state.Info_de_contacto}</div>
-                    <div style={this.state.font_menu_izq} className="copyright" dangerouslySetInnerHTML={FunctExtra.createMarkup(this,this.state.textCopyLeft)}></div>
 
                 </div>
             </div>

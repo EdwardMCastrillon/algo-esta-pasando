@@ -5,6 +5,7 @@ import Post from '../components/posts'
 import HomeProvider from '../providers/homeProvider'
 import '../style/Posts.scss'
 
+import Footer from '../components/footer'
 export default class Inicio extends React.Component {
     constructor(props) {
         super(props)
@@ -46,6 +47,7 @@ export default class Inicio extends React.Component {
                             })
                         }
                     </section>
+                    <Footer></Footer>
                 </div>
             )
         } else {

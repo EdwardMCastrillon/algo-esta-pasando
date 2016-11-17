@@ -10,15 +10,16 @@
     background: #fff;
     z-index: 1000;
     // transition: 1s;
-    overflow: hidden;
+    // overflow: hidden;
 }
 
 .NavBar-title {
     text-align: left;
     margin: 0px 6px;
     background-repeat: no-repeat !important;
-    height: 270px;
+    height: 255px;
     width: 210px;
+    background-position: 0px -44px !important;
 }
 
 @media screen and (min-device-width: 481px) {
@@ -29,7 +30,7 @@
 
 .NavBar-links {
     position: relative;
-    margin-top: 1rem;
+    margin-top: 10px;
     text-align: center;
     &:after {
         content: "";
@@ -41,7 +42,7 @@
         left: 0;
         margin: auto;
         right: 0;
-        bottom: -9px;
+        bottom: -3px;
     }
     a{
         position: relative;
@@ -123,7 +124,7 @@
     img{
         margin: auto;
         display: block;
-        margin-top: 30px;
+        margin-top: 15px;
         height: 65px;
         margin-bottom: 8px;
     }
@@ -190,7 +191,7 @@
             .NavBar-links{
                 margin-top: 1.6rem;
                 a{
-                    padding: 8px 0 12px 12px;
+                    padding: 5px 0 12px 12px;
                     display: block;
                     span>span {
                         display: table;
@@ -201,7 +202,7 @@
         }
         .NavBar-title {
             width: 96px;
-
+            background-position: 0px -44px !important;
         }
         .NavBar-links {
             .hidepad{
@@ -227,8 +228,22 @@ a[href="/algo_esta_pasando"] {
 }
 .info{
     text-align: center;
-    margin: auto;
     display: block;
     color: #4c4c4c;
     font-size: 10px;
+}
+.Page-body-footer {
+    height: 30px;
+    position: relative;
+    z-index: 9;
+    background: #fff;
+}
+.copyright {
+    font-size: 10px;
+    a {
+        margin: 0px 10px;
+    }
+    br {
+        display: none;
+    }
 }

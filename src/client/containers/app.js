@@ -8,11 +8,12 @@ import Buscar from '../components/buscar'
 import Init from '../constants/init'
 import Edicion from '../constants/edicion'
 import Loader from '../components/loader'
-
+import FunctExtra from '../utils/functExtra'
 import "../style/font.scss"
 import "../style/Page.scss"
 import "../style/Animate.scss"
 import "../style/flex.scss"
+import "../style/phone.scss"
 
 export default class App extends React.Component {
     constructor (props) {
@@ -30,17 +31,19 @@ export default class App extends React.Component {
         Edicion.init()
     }
     updateData() {
-        debugger
         if(getUrlVars()["EdicionId"]){
             Edicion.getEdicionId(getUrlVars()["EdicionId"])
             let url = window.location.href.replace(`?EdicionId=${getUrlVars()["EdicionId"]}`,"")
             window.location.href = url
         }
-
+        let font_parrafos = '';
+        if(Edicion.getEdicion().font_parrafos){
+            font_parrafos = Edicion.getEdicion().font_parrafos.replace(/&quot;/g, '').replace(";","").split(":")[1]
+        }
         this.setState({
             edicion:Edicion.getEdicion(),
             font_parrafos:{
-                "font-family":Edicion.getEdicion().font_parrafos.replace(/&quot;/g, '').replace(";","").split(":")[1]
+                "font-family":font_parrafos
             }
         })
     }
@@ -52,6 +55,9 @@ export default class App extends React.Component {
     componentDidMount(){
         Init.addChangeListener(this.init.bind(this))
         Edicion.addChangeListener(this.updateData.bind(this))
+        if(document.body.clientWidth < 500){
+            document.querySelector("#app").classList.add("phone")
+        }
     }
     createMarkup(e,text){
         return {__html: text};
@@ -78,7 +84,10 @@ export default class App extends React.Component {
             }
             let font1 = this.state.edicion.font_1_url
             let font2 = this.state.edicion.font_2_url
-
+            let f = this.state.edicion.font_menu_izq.replace(/&quot;/g, '').replace(";","").split(":")
+            let font_menu_izq = {
+                    "font-family":f[1]
+                }
             return (
                 <div className="Page" style={this.state.font_parrafos}>
                     <link href={font1} rel='stylesheet' type='text/css'/>
@@ -89,6 +98,7 @@ export default class App extends React.Component {
                             <Buscar filter={this.state.filter} route={this.props}/>
                         </div>
                         {this.renderChildren(this.props)}
+
                     </div>
                 </div>
             )
@@ -100,6 +110,12 @@ export default class App extends React.Component {
 
     }
 }
+// <div className="Page-body-footer flex">
+//     <div style={font_menu_izq} className="info">{this.state.edicion.Info_de_contacto}</div>
+//     <div style={font_menu_izq} className="copyright flex" dangerouslySetInnerHTML={FunctExtra.createMarkup(this,this.state.edicion.textCopyLeft)}></div>
+// </div>
+
+
 function getUrlVars() {
     var vars = [], hash;
     var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('?');

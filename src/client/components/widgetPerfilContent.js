@@ -126,7 +126,7 @@ export default class WidgetPerfilContent extends React.Component {
                 </div>
                 <div className="contentTags">
                     <span>Tags</span>
-                    <span onClick={this.props.changeFilter.bind(this,'Identidad')}>Identidad</span>
+
                     <div>
                         {
                             tags.map(item => {
@@ -181,3 +181,4 @@ const HTMLCompartir =({url}) =>(
         <input value={url} dir="ltr"></input>
     </div>
 )
+// <span onClick={this.props.changeFilter.bind(this,'Identidad')}>Identidad</span>

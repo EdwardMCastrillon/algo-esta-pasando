@@ -5,6 +5,7 @@ import Search from '../providers/search'
 import Letrequest from '../providers/request'
 import PerfilStore from '../providers/perfilStore'
 import Loader from './loader'
+import Footer from '../components/footer'
 export default class PostContenido extends React.Component {
     constructor (props) {
         super(props)
@@ -117,6 +118,7 @@ render () {
                         </div>
                     </div>
                 </article>
+                <Footer></Footer>
             </section>
         )
     }else{

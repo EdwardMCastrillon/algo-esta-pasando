@@ -160,7 +160,6 @@ class Map extends Component {
     getData(){
         let icon;
         let m = []
-        console.log(this.state.markers);
         this.state.markers.map(item => {
             let min = 1,max =  new Date().getTime();
             let key = Math.random() * (max - min) + min;

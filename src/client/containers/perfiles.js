@@ -4,6 +4,7 @@ import FunctExtra from '../utils/functExtra'
 import Perfil from '../components/widgetPerfil'
 import PerfilStore from '../providers/perfilStore'
 
+import Footer from '../components/footer'
 export default class Perfiles extends React.Component {
     constructor (props) {
         super(props)
@@ -30,7 +31,7 @@ export default class Perfiles extends React.Component {
     render () {
 
         let divStyle = {
-            height: window.innerHeight - 46
+            height: window.innerHeight - 50
         }
         return (
             <div className="P-B-ContentPost Autores" style={divStyle}>
@@ -43,6 +44,7 @@ export default class Perfiles extends React.Component {
                         })
                     }
                 </section>
+                <Footer></Footer>
             </div>
         )
     }

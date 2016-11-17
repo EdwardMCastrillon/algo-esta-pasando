@@ -3,6 +3,8 @@
     overflow: auto;
     height: 100%;
     background-size: cover !important;
+    position: relative;
+    z-index: 0;
 }
 
 .Autores {
@@ -15,7 +17,9 @@
     column-gap: 2px;
 
 }
-
+.contentSearch .P-B-ContentPost {
+    top: 0 !important;
+}
 .targetPost {
     position: relative;
     overflow: hidden;
@@ -184,6 +188,7 @@
 
     }
 }
+
 .rS{
     position: absolute;
     bottom: 20px;
@@ -191,6 +196,9 @@
     right: 0;
     margin: auto;
     width: 66px;
+    &> a:hover i {
+        color: rgb(3, 156, 221);
+    }
     i {
         left: 0px;
         font-size: 12px;
@@ -200,6 +208,12 @@
         padding: 6px 6px;
         text-align: center;
         margin: 0 6px;
+    }
+}
+.disabled{
+    pointer-events: none;
+    i {
+        color: #c8c7c7 !important;
     }
 }
 // Estilos de la vista /post/id (Post Individual)

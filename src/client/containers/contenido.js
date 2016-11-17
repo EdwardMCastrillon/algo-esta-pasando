@@ -4,12 +4,14 @@ import Post from '../components/posts'
 import contenidoStore from '../providers/contenidoStore'
 import FunctExtra from '../utils/functExtra'
 import Loader from '../components/loader'
+import Footer from '../components/footer'
+
 export default class Contenido extends React.Component {
     constructor (props) {
         super(props)
         this.state = ({
             posts:contenidoStore.getContenidos(),
-            search:false
+            search:false,
         })
     }
     componentWillUnmount() {
@@ -17,7 +19,6 @@ export default class Contenido extends React.Component {
     }
     componentWillMount(){
         contenidoStore.init(118)
-
     }
     updateData() {
         this.setState({
@@ -35,7 +36,6 @@ export default class Contenido extends React.Component {
         //         posts:contenidoStore.getContenidos()
         //     })
         // }
-
     }
 
     render () {
@@ -59,6 +59,7 @@ export default class Contenido extends React.Component {
                             })
                         }
                     </section>
+                    <Footer></Footer>
                 </div>
             )
         }else{

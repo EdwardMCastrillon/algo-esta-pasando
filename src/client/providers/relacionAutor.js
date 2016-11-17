@@ -15,6 +15,7 @@ const relacionAutor = {
         // return
         _posts = {};
         _initCalled = true
+        console.log(name);
         getJSONRAutor(`${server}${apiEndpoints.relaciones}`,name, function (err, res) {
             res.forEach(function (item, key) {
                 _posts[key+1] = item

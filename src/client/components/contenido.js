@@ -15,6 +15,7 @@ import Post from '../components/posts'
 import PerfilStore from '../providers/perfilStore'
 import WidgetPerfilContent from './widgetPerfilContent'
 import Edicion from '../constants/edicion'
+import Footer from '../components/footer'
 
 export default class PostContenido extends React.Component {
     constructor (props) {
@@ -163,6 +164,10 @@ export default class PostContenido extends React.Component {
         }
 
         let tags = cp
+        // let Wautor = '';
+        // if(cp.Autor){
+        //     Wautor = <AutorRelation changeFilter={this.changeFilter.bind(this)} loadContent={this.loadContent.bind(this)} autor={cp.Autor} fecha={cp.timestamp} tags={tags}/>
+        // }
         this.setState({
             image: img,
             titulo: titulo,
@@ -202,17 +207,43 @@ export default class PostContenido extends React.Component {
     componentDidMount(){
 
         RelacionesPost.addChangeListener(this.updateData.bind(this))
-        Aep.addChangeListener(this.loadContent.bind(this))
-        Contenido.addChangeListener(this.loadContent.bind(this))
-        AgendaStore.addChangeListener(this.loadContent.bind(this))
-        Comentarios.addChangeListener(this.loadContent.bind(this))
-        Recursos.addChangeListener(this.loadContent.bind(this))
-        Letrequest.addChangeListener(this.loadContent.bind(this))
-        sobre_algo_esta_pasando.addChangeListener(this.loadContent.bind(this))
+        let l = this.props.route.path.replace("/","").replace("/","").replace(":id","")
+        if(this.props.location.hash !== ""){
+            l = this.props.location.hash
+        }
 
-        let autor = PerfilStore.getPerfilName(this.state.autor);
-        if(autor){
-            this.setState({ Wautor: <AutorRelation changeFilter={this.changeFilter.bind(this)} loadContent={this.loadContent.bind(this)} autor={autor} fecha={this.state.fecha} tags={this.state.tags}/> })
+        switch (l) {
+            case "#search":
+            Letrequest.addChangeListener(this.loadContent.bind(this))
+            break
+            case "contenido":
+            Contenido.addChangeListener(this.loadContent.bind(this))
+            break;
+            case "agenda":
+            AgendaStore.addChangeListener(this.loadContent.bind(this))
+            break;
+            case "comentarios":
+            Comentarios.addChangeListener(this.loadContent.bind(this))
+            break;
+            case "centro_de_recursos":
+            Recursos.addChangeListener(this.loadContent.bind(this))
+            break;
+            case "sobre_algo_esta_pasando":
+            sobre_algo_esta_pasando.addChangeListener(this.loadContent.bind(this))
+            break;
+            case "aep":
+            case "aep_":
+            Aep.addChangeListener(this.loadContent.bind(this))
+            break;
+        }
+        if(document.body.clientWidth > 768){
+            let self = this
+            setTimeout(function(){
+                let autor = PerfilStore.getPerfilName(self.state.autor);
+                if(autor){
+                    self.setState({ Wautor: <AutorRelation changeFilter={self.changeFilter.bind(self)} loadContent={self.loadContent.bind(self)} autor={autor} fecha={self.state.fecha} tags={self.state.tags}/> })
+                }
+            },1000)
         }
         FunctExtra.showFilters()
     }
@@ -238,6 +269,13 @@ export default class PostContenido extends React.Component {
         if(this.state.image){
             figure = <ImgPost background={background} />
         }
+        // let Wautor = ''
+        // if(this.state.autor){
+        //     let autor = PerfilStore.getPerfilName(this.state.autor);
+        //     console.log(autor);
+        //     Wautor = <AutorRelation changeFilter={this.changeFilter.bind(this)} loadContent={this.loadContent.bind(this)} autor={autor} fecha={this.state.fecha} tags={this.state.tags}/>
+        // }
+        console.log("render");
         return (
             <section className="showContent Post"  style={divStyle}>
                 {figure}
@@ -273,6 +311,7 @@ export default class PostContenido extends React.Component {
                         </div>
                     </div>
                 </article>
+                <Footer></Footer>
             </section>
         )
     }

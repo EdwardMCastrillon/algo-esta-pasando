@@ -4,6 +4,7 @@ import Post from '../components/posts'
 import Edicion from '../constants/edicion'
 import FunctExtra from '../utils/functExtra'
 import Loader from '../components/loader'
+import Footer from '../components/footer'
 export default class Ediciones extends React.Component {
     constructor (props) {
         super(props)
@@ -75,6 +76,7 @@ export default class Ediciones extends React.Component {
                             })
                         }
                     </section>
+                    <Footer></Footer>
                 </div>
             )
         }else{

@@ -45,6 +45,7 @@ const perfilStore = {
         for (const id in _posts)
         array.push(_posts[id])
 
+
         return array
     },
     getPerfilName(name){

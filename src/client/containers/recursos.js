@@ -6,6 +6,7 @@ import Filters from '../components/filters'
 import FunctExtra from '../utils/functExtra'
 import Loader from '../components/loader'
 import '../style/Posts.scss'
+import Footer from '../components/footer'
 export default class Recursos extends React.Component {
     constructor (props) {
         super(props)
@@ -71,6 +72,7 @@ export default class Recursos extends React.Component {
                             })
                         }
                     </section>
+                    <Footer></Footer>
                 </div>
             )
         }else{

@@ -2,6 +2,7 @@ import React from 'react'
 import Edicion from '../constants/edicion'
 import PerfilStore from '../providers/perfilStore'
 import Search from '../providers/search'
+import RelacionAutor from '../providers/relacionAutor'
 import FunctExtra from '../utils/functExtra'
 import request from 'superagent'
 
@@ -15,16 +16,18 @@ export default class Buscar extends React.Component {
             namefilter2:Edicion.getNamefiltros("FILTRO_2"),
             filter3:Edicion.getEdicionfiltros("FILTRO_3"),
             namefilter3:Edicion.getNamefiltros("FILTRO_3"),
-            autores: PerfilStore.getPerfiles(),
-            filter:''
+            perfil: PerfilStore.getPerfiles(),
+            filter:'',
+            relacion:[]
         })
+
     }
     componentWillUnmount() {
         PerfilStore.removeChangeListener(this.updateAutor.bind(this))
         Edicion.removeChangeListener(this.updateEdicion.bind(this))
     }
     componentWillMount(){
-        Edicion.init();
+        // Edicion.init();
         PerfilStore.init();
         if(!this.state.background){
             let colorgrid = Edicion.getEdicion()
@@ -46,21 +49,23 @@ export default class Buscar extends React.Component {
     }
     updateAutor(){
         this.setState({
-            autores: PerfilStore.getPerfiles()
+            perfil: PerfilStore.getPerfiles()
         })
     }
     componentDidMount(){
-        PerfilStore.addChangeListener(this.updateAutor.bind(this))
-        Edicion.addChangeListener(this.updateEdicion.bind(this))
-        if(this.state.filter1.length == 0){
-            document.querySelector(".FILTRO_1").parentNode.style.display = "none"
+        if(PerfilStore.getPerfiles().length == 0){
+            PerfilStore.addChangeListener(this.updateAutor.bind(this))
         }
-        if(this.state.filter2.length == 0){
-            document.querySelector(".FILTRO_2").parentNode.style.display = "none"
-        }
-        if(this.state.filter3.length == 0){
-            document.querySelector(".FILTRO_3").parentNode.style.display = "none"
-        }
+        // Edicion.addChangeListener(this.updateEdicion.bind(this))
+        // if(this.state.filter1.length == 0){
+        //     document.querySelector(".FILTRO_1").parentNode.style.display = "none"
+        // }
+        // if(this.state.filter2.length == 0){
+        //     document.querySelector(".FILTRO_2").parentNode.style.display = "none"
+        // }
+        // if(this.state.filter3.length == 0){
+        //     document.querySelector(".FILTRO_3").parentNode.style.display = "none"
+        // }
     }
     searchClick(){
         Search.removeChangeListener(this.updateFilter.bind(this))
@@ -83,7 +88,6 @@ export default class Buscar extends React.Component {
         }
     }
     showFilters(){
-        console.log("showFilters");
         Search.removeChangeListener(this.updateFilter.bind(this))
         self = this;
         let FILTRO_1 = '';
@@ -120,29 +124,29 @@ export default class Buscar extends React.Component {
             "filtro3": {"name": keyF3, "value": FILTRO_3},
             "input": ""
         }
-        let autor = document.querySelector(".autor").value;
+
         // let api = this.props.api;
         Search.init(getData)
 
         Search.addChangeListener(this.updateFilter.bind(this))
     }
+    showFiltersAutor(){
+        if(document.querySelector(".autor").value != "0" || document.querySelector(".autor").value != 0){
+            let autor = document.querySelector(".autor").value;
+            RelacionAutor.init(autor)
+            RelacionAutor.addChangeListener(this.updateRelacionAutor.bind(this))
+
+        }
+    }
+    updateRelacionAutor(){
+        this.props.renderFilter(RelacionAutor.getRAutores())
+        RelacionAutor.removeChangeListener(this.updateRelacionAutor.bind(this))
+    }
     updateFilter(){
         this.props.renderFilter(Search.getsearchs())
     }
-    prueba(obj){
-        
-    }
-    componentWillReceiveProps(obj){
-        console.log("componentWillReceiveProps",obj);
-        // if(obj.filter){
-        //     this.prueba(obj)
-        // }
-    }
-    shouldComponentUpdate(newProps, newState) {
-        console.log("shouldComponentUpdate ",newProps,newState);
-    }
     render () {
-
+        let perfil = this.state.perfil
         return (
             <div className="filterSelect flex align-center active">
                 <div className="contentSelect">
@@ -182,10 +186,10 @@ export default class Buscar extends React.Component {
                     </select>
                 </div>
                 <div className="contentSelect">
-                    <select className="autor" onChange={this.showFilters.bind(this)}>
+                    <select className="autor" onChange={this.showFiltersAutor.bind(this)}>
                         <option value="0" >Autor</option>
                         {
-                            this.state.autores.map(item => {
+                            this.state.perfil.map(item => {
                                 let name = FunctExtra.accentDecode(item['Nombres']+" "+item['Apellidos']);
                                 return(
                                     <option value={name}>{name}</option>
