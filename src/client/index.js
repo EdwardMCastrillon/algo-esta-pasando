@@ -3,7 +3,7 @@
 */
 import React from 'react'
 import { render } from 'react-dom'
-import { Router, Route, IndexRoute, Link, IndexLink, browserHistory,hashHistory } from 'react-router'
+import { Router, Route, IndexRoute, Link, IndexLink, browserHistory,hashHistory, HashLocation } from 'react-router'
 
 
 import App from './containers/app'
@@ -13,7 +13,7 @@ import "./style/Root.scss"
 
 render((
 
-    <Router history={hashHistory}>
+    <Router history={browserHistory}>
         <Route component={App}>
             <IndexRoute component={Inicio} />
             <Route path={RouterApp.home.path} component={ RouterApp.home.handler } />
