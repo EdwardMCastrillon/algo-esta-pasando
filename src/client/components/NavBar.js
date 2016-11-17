@@ -66,10 +66,16 @@ export default class NavBar extends Component {
                 document.querySelector(`.active i`).style.color = document.querySelector(`.active i`).getAttribute("data-color");
             }
         }
-
+        console.log("ENTRAAAA");
+        if(document.querySelector(".phone")){
+            document.querySelector(".NavBar").classList.add("ClosedMenu")
+            document.querySelector(".Hamburger").classList.remove("MenuOpen")
+        }
         document.querySelector(`.${obj} span`).style.color = color;
         document.querySelector(`.${obj} i`).style.background = color;
         document.querySelector(`.${obj} i`).style.color = "#fff";
+
+
     }
     iconHover(obj,color){
         if(document.querySelector(`.${obj}.active`)){
@@ -106,6 +112,15 @@ export default class NavBar extends Component {
         if(document.body.clientWidth < 500){
             document.querySelector("#NavBar").classList.add("ClosedMenu")
         }
+
+        if(document.querySelector(".c_c_d")){
+            if(document.body.clientWidth <  935){
+                document.querySelector(".c_c_d").classList.add("column")
+
+            }else {
+                document.querySelector(".c_c_d").classList.remove("column")
+            }
+        }
         window.addEventListener('resize', function(event){
             if(document.body.clientWidth < 500){
                 document.querySelector("#app").classList.add("phone")
@@ -116,9 +131,18 @@ export default class NavBar extends Component {
             if(document.querySelector(".c_c_d")){
                 if(document.body.clientWidth <  935){
                     document.querySelector(".c_c_d").classList.add("column")
+
                 }else {
                     document.querySelector(".c_c_d").classList.remove("column")
                 }
+            }
+            if(document.body.clientWidth <  935){
+                document.querySelector("#NavBarTop").classList.add("colapsable")
+                document.querySelector("#NavBarTop").classList.add("column")
+
+            }else {
+                document.querySelector("#NavBarTop").classList.remove("colapsable")
+                document.querySelector("#NavBarTop").classList.remove("column")
             }
         });
     }
@@ -160,8 +184,6 @@ export default class NavBar extends Component {
         return (
             <div id="NavBar" className="NavBar" onClick={this.classClosepMenu.bind()}
                 onMouseEnter={this.logoOpen.bind(this)} onMouseOut={this.logoClosed.bind(this)}>
-
-
 
                 <div className="Hamburger MenuClose" onClick={this.ClosedMenuPhone.bind(this)}>
 

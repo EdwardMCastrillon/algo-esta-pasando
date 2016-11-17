@@ -2,6 +2,16 @@
     display: none;
 }
 .phone{
+    .filterSelect {
+        height: auto;
+        -ms-flex-direction: column;
+        flex-direction: column;
+
+        .contentSelect,& > div{
+            max-width: 100%;
+            width: 55%;
+        }
+    }
     .NavBar {
         width: 100%;
         transition: 0.8s;
@@ -37,93 +47,93 @@
         width: calc(100% - 0px) !important;
     }
 
-.Hamburger{
-    display: block;
-    position: absolute;
-    right: -60px;
-    width: 60px;
-    height: 60px;
-    background-size: 60px 60px;
-    z-index: 1000;
-    overflow: hidden;
-    & *{
+    .Hamburger{
+        display: block;
         position: absolute;
-    }
-    .behind{
-        width: 180px; height: 180px; background-size: 180px 180px; bottom: 0px; right: 0px; border-radius: 180px; opacity: 0.9;
-    }
-    .wrapper{
-        width: 17px;
-        height: 17px;
-        background-size: 30px 30px;
-        top: 8px;
-        left: 8px;
+        right: -60px;
+        width: 60px;
+        height: 60px;
+        background-size: 60px 60px;
+        z-index: 1000;
         overflow: hidden;
-    }
-    .hit{
-        width: 100%; height: 100%; z-index: 99999; top: 0px; left: 0px; position: absolute; background: rgba(255, 255, 255, 0); pointer-events: auto;
-    }
-    .NavHamburgerLine1{
-        width: 30px; height: 2px; background-size: 30px 2px; overflow: hidden; background-color: rgb(34, 34, 34); top: 50%; margin-top: -6px; transform: translate3d(0px, 0px, 0px); opacity: 1; transition: opacity 600ms cubic-bezier(0.165, 0.84, 0.44, 1) 0ms, -webkit-transform 600ms cubic-bezier(0.165, 0.84, 0.44, 1) 0ms;
-        .inner{
-            width: 30px; height: 2px; background-size: 30px 2px; background-color: rgb(255, 255, 255);
+        & *{
+            position: absolute;
+        }
+        .behind{
+            width: 180px; height: 180px; background-size: 180px 180px; bottom: 0px; right: 0px; border-radius: 180px; opacity: 0.9;
+        }
+        .wrapper{
+            width: 17px;
+            height: 17px;
+            background-size: 30px 30px;
+            top: 8px;
+            left: 8px;
+            overflow: hidden;
+        }
+        .hit{
+            width: 100%; height: 100%; z-index: 99999; top: 0px; left: 0px; position: absolute; background: rgba(255, 255, 255, 0); pointer-events: auto;
+        }
+        .NavHamburgerLine1{
+            width: 30px; height: 2px; background-size: 30px 2px; overflow: hidden; background-color: rgb(34, 34, 34); top: 50%; margin-top: -6px; transform: translate3d(0px, 0px, 0px); opacity: 1; transition: opacity 600ms cubic-bezier(0.165, 0.84, 0.44, 1) 0ms, -webkit-transform 600ms cubic-bezier(0.165, 0.84, 0.44, 1) 0ms;
+            .inner{
+                width: 30px; height: 2px; background-size: 30px 2px; background-color: rgb(255, 255, 255);
+            }
+        }
+        .NavHamburgerLine2{
+            width: 30px; height: 2px; background-size: 30px 2px; overflow: hidden; background-color: rgb(34, 34, 34); top: 50%; margin-top: 0px; transform: translate3d(0px, 0px, 0px); opacity: 1; transition: opacity 600ms cubic-bezier(0.165, 0.84, 0.44, 1) 100ms, -webkit-transform 600ms cubic-bezier(0.165, 0.84, 0.44, 1) 100ms;
+            .inner{
+                width: 30px; height: 2px; background-size: 30px 2px; background-color: rgb(255, 255, 255);
+            }
+        }
+        .NavHamburgerLine3{
+            width: 30px; height: 2px; background-size: 30px 2px; overflow: hidden; background-color: rgb(34, 34, 34); top: 50%; margin-top: 6px; transform: translate3d(0px, 0px, 0px); opacity: 1; transition: opacity 600ms cubic-bezier(0.165, 0.84, 0.44, 1) 200ms, -webkit-transform 600ms cubic-bezier(0.165, 0.84, 0.44, 1) 200ms;
+            .inner{
+                width: 30px; height: 2px; background-size: 30px 2px; background-color: rgb(255, 255, 255);
+            }
         }
     }
-    .NavHamburgerLine2{
-        width: 30px; height: 2px; background-size: 30px 2px; overflow: hidden; background-color: rgb(34, 34, 34); top: 50%; margin-top: 0px; transform: translate3d(0px, 0px, 0px); opacity: 1; transition: opacity 600ms cubic-bezier(0.165, 0.84, 0.44, 1) 100ms, -webkit-transform 600ms cubic-bezier(0.165, 0.84, 0.44, 1) 100ms;
-        .inner{
-            width: 30px; height: 2px; background-size: 30px 2px; background-color: rgb(255, 255, 255);
-        }
-    }
-    .NavHamburgerLine3{
-        width: 30px; height: 2px; background-size: 30px 2px; overflow: hidden; background-color: rgb(34, 34, 34); top: 50%; margin-top: 6px; transform: translate3d(0px, 0px, 0px); opacity: 1; transition: opacity 600ms cubic-bezier(0.165, 0.84, 0.44, 1) 200ms, -webkit-transform 600ms cubic-bezier(0.165, 0.84, 0.44, 1) 200ms;
-        .inner{
-            width: 30px; height: 2px; background-size: 30px 2px; background-color: rgb(255, 255, 255);
-        }
-    }
-}
-.Hamburger.MenuOpen{
-    right: 0;
+    .Hamburger.MenuOpen{
+        right: 0;
 
-    .behind {
-        width: 150px;
-        height: 150px;
-        background-size: 180px 180px;
-        bottom: 0px;
-        right: 0px;
-        border-radius: 180px;
-        opacity: 1;
-        background-color: rgb(107, 71, 140);
-        transition: -webkit-transform 350ms cubic-bezier(0.215, 0.61, 0.355, 1) 0ms;
-        transform: translate3d(90px, 0px, 0px);
-    }
-    .wrapper{
-        width: 19px;
-        height: 17px;
-        background-size: 30px 30px;
-        top: 15px;
-        left: 10px;
-        transform: translate3d(20px,0,0);
-    }
-    .NavHamburgerLine1{
-        width: 30px;
-        height: 2px;
-        background-size: 30px 2px;
-        overflow: hidden;
-        background-color: rgb(34, 34, 34);
-        top: 77%;
-        margin-top: -7px;
-        transform: translate3d(3.9px, -5.4px, 0px) rotate(42deg);
-        opacity: 1;
-        transition: -webkit-transform 500ms cubic-bezier(0.215, 0.61, 0.355, 1) 0ms;
-        transform-origin: 0% 50% 0px;
+        .behind {
+            width: 150px;
+            height: 150px;
+            background-size: 180px 180px;
+            bottom: 0px;
+            right: 0px;
+            border-radius: 180px;
+            opacity: 1;
+            background-color: rgb(107, 71, 140);
+            transition: -webkit-transform 350ms cubic-bezier(0.215, 0.61, 0.355, 1) 0ms;
+            transform: translate3d(90px, 0px, 0px);
+        }
+        .wrapper{
+            width: 19px;
+            height: 17px;
+            background-size: 30px 30px;
+            top: 15px;
+            left: 10px;
+            transform: translate3d(20px,0,0);
+        }
+        .NavHamburgerLine1{
+            width: 30px;
+            height: 2px;
+            background-size: 30px 2px;
+            overflow: hidden;
+            background-color: rgb(34, 34, 34);
+            top: 77%;
+            margin-top: -7px;
+            transform: translate3d(3.9px, -5.4px, 0px) rotate(42deg);
+            opacity: 1;
+            transition: -webkit-transform 500ms cubic-bezier(0.215, 0.61, 0.355, 1) 0ms;
+            transform-origin: 0% 50% 0px;
 
+        }
+        .NavHamburgerLine2{
+            width: 30px; height: 2px; background-size: 30px 2px; overflow: hidden; background-color: rgb(34, 34, 34); top: 50%; margin-top: -6px; transform: translate3d(-30px, 0px, 0px); opacity: 0; transition: opacity 500ms cubic-bezier(0.215, 0.61, 0.355, 1) 0ms, -webkit-transform 500ms cubic-bezier(0.215, 0.61, 0.355, 1) 0ms;
+        }
+        .NavHamburgerLine3{
+            width: 30px; height: 2px; background-size: 30px 2px; overflow: hidden; background-color: rgb(34, 34, 34); top: 20%; margin-top: 7px; transform: translate3d(-3.9px, -16.5px, 0px) rotate(-42deg); opacity: 1; transition: -webkit-transform 500ms cubic-bezier(0.215, 0.61, 0.355, 1) 0ms; transform-origin: 100% 50% 0px;
+        }
     }
-    .NavHamburgerLine2{
-        width: 30px; height: 2px; background-size: 30px 2px; overflow: hidden; background-color: rgb(34, 34, 34); top: 50%; margin-top: -6px; transform: translate3d(-30px, 0px, 0px); opacity: 0; transition: opacity 500ms cubic-bezier(0.215, 0.61, 0.355, 1) 0ms, -webkit-transform 500ms cubic-bezier(0.215, 0.61, 0.355, 1) 0ms;
-    }
-    .NavHamburgerLine3{
-        width: 30px; height: 2px; background-size: 30px 2px; overflow: hidden; background-color: rgb(34, 34, 34); top: 20%; margin-top: 7px; transform: translate3d(-3.9px, -16.5px, 0px) rotate(-42deg); opacity: 1; transition: -webkit-transform 500ms cubic-bezier(0.215, 0.61, 0.355, 1) 0ms; transform-origin: 100% 50% 0px;
-    }
-}
 }

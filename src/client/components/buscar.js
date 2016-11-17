@@ -54,6 +54,14 @@ export default class Buscar extends React.Component {
     componentDidMount(){
         Aep.addChangeListener(this.updateData.bind(this))
         Edicion.addChangeListener(this.updateEdicion.bind(this))
+        if(document.body.clientWidth <  935){
+            document.querySelector("#NavBarTop").classList.add("colapsable")
+            document.querySelector("#NavBarTop").classList.add("column")
+
+        }else {
+            document.querySelector("#NavBarTop").classList.remove("colapsable")
+            document.querySelector("#NavBarTop").classList.remove("column")
+        }
     }
     renderFilterContenido(){
 
@@ -94,7 +102,15 @@ export default class Buscar extends React.Component {
             }
         }
     }
-
+    showSeccionnes(){
+        document.querySelector(".colapsable").classList.toggle("open")
+        // if(document.querySelector(".colapsable.open")){
+        //     document.querySelector(".colapsable").classList.remove("open")
+        //
+        // }else {
+        //     document.querySelector(".colapsable").classList.add("open")
+        // }
+    }
     render () {
         let urlAux = "aep"
         switch (this.props.route.location.pathname.split("/")[1]) {
@@ -116,6 +132,7 @@ export default class Buscar extends React.Component {
         return (
             <div>
                 <div id="NavBarTop" className="flex  align-center justify-center">
+                    <div className="item Secciones" onClick={this.showSeccionnes.bind(this)} style={this.state.font_menu_up_secciones}>Secciones</div>
                     {
                         this.state.itemNavTop.map(item => {
                             let url = `/${urlAux}/${item.id}`

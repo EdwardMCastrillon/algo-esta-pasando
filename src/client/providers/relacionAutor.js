@@ -69,7 +69,7 @@ function getJSONRAutor(url,name, cb) {
 
     request
     .post(url)
-    .send({ autor: name})
+    .send({ autor: name,edicion: localStorage.getItem("nameEdicion")})
     .set('Accept', 'application/json')
     .end(function(err, res){
         if (res.status === 404) {

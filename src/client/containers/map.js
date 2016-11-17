@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import L from 'leaflet';
 import LocationMap from '../providers/infoMapa'
-
+import { Link } from 'react-router'
 import IconPerfil from '../img/mapa_autor.png'
 import IconEvent from '../img/mapa_agenda.png'
 import IconContebido from '../img/mapa_contenidos.png'
@@ -107,21 +107,25 @@ class Map extends Component {
             this.updateData()
         }
         FunctExtra.showFilters()
+        this.ocultar()
+        let self = this
+        window.addEventListener('resize', function(event){
+            self.ocultar()
+        });
     }
     componentWillMount(){
         LocationMap.init()
         this.ultimosPosts()
 
-        window.addEventListener('resize', function(event){
-            if(document.querySelector("#map").clientWidth < 550){
-                    document.querySelector(".c_AutorRelations").style.display = "none"
-                    document.querySelector("#mapUI .leaflet-container").style.width = "100%"
-            }else{
-                document.querySelector(".c_AutorRelations").style.display = "block"
-                document.querySelector("#mapUI .leaflet-container").style.width = "calc(100% - 300px);"
-            }
-
-        });
+    }
+    ocultar(){
+        if(document.body.clientWidth < 750){
+            document.querySelector(".c_AutorRelations").style.display = "none"
+            document.querySelector("#map").style.width = `${document.body.clientWidth}px`
+        }else{
+            document.querySelector(".c_AutorRelations").style.display = "block"
+            document.querySelector("#map").style.width = "calc(100% - 300px);"
+        }
     }
     ultimosPosts(){
         const self = this;
@@ -173,32 +177,45 @@ class Map extends Component {
         this.state.markers.map(item => {
             let min = 1,max =  new Date().getTime();
             let key = Math.random() * (max - min) + min;
+            let url = ''
             switch (item.type) {
                 case "Perfil":
                 icon = IconP;
+                url = `/autores/${item.id}`
                 break;
                 case "Agenda":
                 icon = IconE;
+                url = `/agenda/${item.id}`
                 break;
                 case "Editorial":
                 icon = IconEdito;
+                // url = `/${this.props.url}${item.id}`
                 break
                 case "Contenido":
+                icon = IconCont;
+                url = `/contenido/${item.id}`
+                break;
                 case "Comentario":
                 icon = IconCont;
-                break;
+                break
                 case "Recurso":
                 icon = IconRecur;
+                url = `/centro_de_recursos/${item.id}`
                 break;
                 default:
                 icon = baseballIcon;
             }
+            url = `${url}`
+
+
+
             let img = `https://tupale.co/milfs/images/secure/?file=300/${item.image}`
             var background = {
                 background: `rgb(234, 234, 234) url(${img}) center center`,
                 'backgroundSize': 'cover'
             };
-            m.push(L.marker([item.lat, item.lng],{icon:icon}).bindPopup(`<div><div class ="img" style="background: rgb(234, 234, 234) url(${img}) center center"></div><div class="content"><div class="c_name">${item.name}</div><div class="c_resumen">${item.text}</div></div><div/>`))
+            // background: rgb(234, 234, 234) url({img}) center center
+            m.push(L.marker([item.lat, item.lng],{icon:icon}).bindPopup(`<div> <a href="${url}"> <div class ="img" style="background: rgb(234, 234, 234) url(${img}) center center"> </div> <div class="content"> <div class="c_name">${item.name} </div> <div class="c_resumen">${item.text} </div> </div> </a> </div>`))
         })
 
         return m;
@@ -209,17 +226,19 @@ class Map extends Component {
 
                 <div ref={(node) => this._mapNode = node} id="map" />
                 <div className="c_AutorRelations">
-                <span className="title">Articulos relacionados</span>
-                {
-                    this.state.postUltimos.map(item => {
-                        return(
-                            <Post key={ item.identificador } data={item}  url="contenido/" tipo="1"/>
-                        )
-                    })
-                }
+                    <span className="title">Articulos relacionados</span>
+                    {
+                        this.state.postUltimos.map(item => {
+                            return(
+                                <Post key={ item.identificador } data={item}  url="contenido/" tipo="1"/>
+                            )
+                        })
+                    }
                 </div>
             </div>
+
         );
     }
 }
+
 export default Map;

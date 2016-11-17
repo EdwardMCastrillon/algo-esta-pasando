@@ -250,7 +250,7 @@
         .Titulo {
             // font-family: 'MonopolSemiBold';
             color: rgb(91, 91, 91);
-            font-size: 4em;
+            font-size: 36px;
             margin-top: .2em !important;
             text-align: center;
         }
@@ -432,10 +432,12 @@
     .c_name {
         font-size: 18px;
         font-weight: bolder;
+        color: #656565;
     }
 
     .c_resumen {
         font-size: 16px;
+        color: #656565;
     }
 }
 .noInmg{
@@ -536,6 +538,7 @@
     }
     .c_AutorRelations {
         width: 350px;
+        position: relative;
         padding: 25px 12px 0 12px;
         .title {
             font-size: 18px;
