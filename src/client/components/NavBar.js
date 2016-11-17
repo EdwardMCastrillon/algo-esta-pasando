@@ -108,10 +108,17 @@ export default class NavBar extends Component {
         }
         window.addEventListener('resize', function(event){
             if(document.body.clientWidth < 500){
-                    document.querySelector("#app").classList.add("phone")
-                    document.querySelector("#NavBar").classList.add("ClosedMenu")
+                document.querySelector("#app").classList.add("phone")
+                document.querySelector("#NavBar").classList.add("ClosedMenu")
             }else{
-                    document.querySelector("#app").classList.remove("phone")
+                document.querySelector("#app").classList.remove("phone")
+            }
+            if(document.querySelector(".c_c_d")){
+                if(document.body.clientWidth <  935){
+                    document.querySelector(".c_c_d").classList.add("column")
+                }else {
+                    document.querySelector(".c_c_d").classList.remove("column")
+                }
             }
         });
     }

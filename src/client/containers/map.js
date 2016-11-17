@@ -110,8 +110,18 @@ class Map extends Component {
     }
     componentWillMount(){
         LocationMap.init()
-
         this.ultimosPosts()
+
+        window.addEventListener('resize', function(event){
+            if(document.querySelector("#map").clientWidth < 550){
+                    document.querySelector(".c_AutorRelations").style.display = "none"
+                    document.querySelector("#mapUI .leaflet-container").style.width = "100%"
+            }else{
+                document.querySelector(".c_AutorRelations").style.display = "block"
+                document.querySelector("#mapUI .leaflet-container").style.width = "calc(100% - 300px);"
+            }
+
+        });
     }
     ultimosPosts(){
         const self = this;

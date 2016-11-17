@@ -175,8 +175,9 @@ export default class Perfil extends React.Component {
                 <div className="arrow_right align-center">
                     <Link to={this.state.urlRight} onClick={this.up.bind(this,this.state.next)}><i className="i-arrow_right"></i></Link>
                 </div>
-                <Footer></Footer>
+
             </section>
         )
     }
 }
+// <Footer></Footer>

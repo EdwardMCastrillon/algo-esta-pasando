@@ -568,3 +568,11 @@
         }
     }
 }
+.c_c_d.column{
+    .Descripcion {
+        width: calc(100% - 40px) !important;
+    }
+    .c_AutorRelations{
+        width: 100%;
+    }
+}

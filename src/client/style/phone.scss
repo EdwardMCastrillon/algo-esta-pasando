@@ -33,7 +33,9 @@
     .showContent.Post .Detalle .Titulo {
         font-size: 3em;
     }
-
+    .Descripcion {
+        width: calc(100% - 0px) !important;
+    }
 
 .Hamburger{
     display: block;
