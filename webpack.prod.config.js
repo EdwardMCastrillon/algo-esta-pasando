@@ -7,7 +7,7 @@ module.exports = {
         './src/client'
     ],
     output: {
-        publicPath: "https://d.algoestapasando.cc/",
+        publicPath: "https://algoestapasando.cc/",
         path: path.join(__dirname, 'public'),
         filename: 'bundle.js'
     },
