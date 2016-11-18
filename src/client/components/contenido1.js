@@ -15,6 +15,7 @@ import Post from '../components/posts'
 import PerfilStore from '../providers/perfilStore'
 import WidgetPerfilContent from './widgetPerfilContent'
 import Edicion from '../constants/edicion'
+import Footer from '../components/footer'
 
 export default class PostContenido extends React.Component {
     constructor (props) {
@@ -310,6 +311,7 @@ export default class PostContenido extends React.Component {
                         </div>
                     </div>
                 </article>
+                <Footer></Footer>
             </section>
         )
     }

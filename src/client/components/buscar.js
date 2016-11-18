@@ -138,7 +138,7 @@ export default class Buscar extends React.Component {
                             let url = `/${urlAux}/${item.id}`
                             return(
                                 <Link activeClassName={ACTIVE}  to={url}>
-                                    <div className="item" style={this.state.font_menu_up_secciones} dangerouslySetInnerHTML={FunctExtra.createMarkup(this,item.Título)}></div>
+                                    <div className="item"  style={this.state.font_menu_up_secciones} dangerouslySetInnerHTML={FunctExtra.createMarkup(this,item.Título)}></div>
                                 </Link>
 
                             )
