@@ -188,10 +188,6 @@ export default class Extras {
                           result.push(object)
                         }
                         break
-                        case 4:
-                        object.origen = 'Comentarios'
-                        result.push(object)
-                        break
                         default:
                         break;
                     }
@@ -347,7 +343,7 @@ export default class Extras {
                 } else {
                     let keyFiltro1 = filtro1.name
                     let keyFiltro2 = filtro2.name
-                    let keyFiltro3 = filtro2.name
+                    let keyFiltro3 = filtro3.name
                     let origen = ""
 
                     switch(index) {
@@ -365,6 +361,7 @@ export default class Extras {
                             break;
                         case 4:
                             origen = "Comentarios"
+
                             break;
                         case 5:
                             origen = "Bitacoras"
@@ -461,7 +458,7 @@ export default class Extras {
                     if (filtro2 != "" && obj[filtro2]) {
                         if (! result[edicion['Título']][filtro2].includes(obj[filtro2])) result[edicion['Título']][filtro2].push(obj[filtro2])
                     }
-                    
+
                     if (filtro3 != "" && obj[filtro3]) {
                         if (! result[edicion['Título']][filtro3].includes(obj[filtro3])) result[edicion['Título']][filtro3].push(obj[filtro3])
                     }
