@@ -71,12 +71,12 @@ export default class PostContenido extends React.Component {
 
     componentDidMount(){
         Letrequest.addChangeListener(this.loadContent.bind(this))
-        let autor = PerfilStore.getPerfilName(this.state.autor);
-        if(autor){
-            this.setState({
-                Wautor: <AutorRelation loadContent={this.loadContent.bind(this)} autor={autor} fecha={this.state.fecha} tags={this.state.tags}/>
-        })
-    }
+    //     let autor = PerfilStore.getPerfilName(this.state.autor);
+    //     if(autor){
+    //         this.setState({
+    //             Wautor: <AutorRelation loadContent={this.loadContent.bind(this)} autor={autor} fecha={this.state.fecha} tags={this.state.tags}/>
+    //     })
+    // }
     FunctExtra.showFilters()
 }
 showMore(){

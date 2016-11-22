@@ -16,7 +16,7 @@ import PerfilStore from '../providers/perfilStore'
 import WidgetPerfilContent from './widgetPerfilContent'
 import Edicion from '../constants/edicion'
 import Footer from '../components/footer'
-
+import Loader from '../components/loader'
 export default class PostContenido extends React.Component {
     constructor (props) {
         super(props)
@@ -87,7 +87,8 @@ export default class PostContenido extends React.Component {
             }
             this.setState({
                 info1:"Las conversaciones son mejores que los comentarios, que también van deprisa como las noticias, son sordos y hacen mucha bulla.",
-                info2:"Continúa la conversación que propone esta historia creando un contenido."
+                info2:"Continúa la conversación que propone esta historia creando un contenido.",
+                referencias: cp["Referencias"]
             })
             titulo = (cp.Nombredelaactividad)?cp.Nombredelaactividad:cp.Título;
             break;
@@ -191,9 +192,9 @@ export default class PostContenido extends React.Component {
         this.loadContent(id)
     }
     componentDidUpdate(){
-        if(document.querySelector(".contentSearch")){
-            document.querySelector(".contentSearch").classList.add('active');
-        }
+        // if(document.querySelector(".contentSearch")){
+        //     document.querySelector(".contentSearch").classList.add('active');
+        // }
     }
     updateData() {
         this.setState({
@@ -202,7 +203,27 @@ export default class PostContenido extends React.Component {
         RelacionesPost.removeChangeListener(this.updateData.bind(this))
     }
     changeFilter(filter){
-        this.props.changeFilterApp(filter)//.bind(this,filter)
+        for (var i in document.querySelector(".FILTRO_1").children) {
+            if(document.querySelector(".FILTRO_1").children[i].value == filter){
+                document.querySelector(".FILTRO_1").value = filter
+                this.props.changeFilterApp(1,filter)
+                return
+            }
+        }
+        for (var i in document.querySelector(".FILTRO_2").children) {
+            if(document.querySelector(".FILTRO_2").children[i].value == filter){
+                document.querySelector(".FILTRO_2").value = filter
+                this.props.changeFilterApp(2,filter)
+                return
+            }
+        }
+        for (var i in document.querySelector(".FILTRO_3").children) {
+            if(document.querySelector(".FILTRO_3").children[i].value == filter){
+                document.querySelector(".FILTRO_3").value = filter
+                this.props.changeFilterApp(3,filter)
+                return
+            }
+        }
     }
     componentDidMount(){
 
@@ -269,51 +290,51 @@ export default class PostContenido extends React.Component {
         if(this.state.image){
             figure = <ImgPost background={background} />
         }
-        // let Wautor = ''
-        // if(this.state.autor){
-        //     let autor = PerfilStore.getPerfilName(this.state.autor);
-        //     console.log(autor);
-        //     Wautor = <AutorRelation changeFilter={this.changeFilter.bind(this)} loadContent={this.loadContent.bind(this)} autor={autor} fecha={this.state.fecha} tags={this.state.tags}/>
-        // }
-        console.log("render");
-        return (
-            <section className="showContent Post"  style={divStyle}>
-                {figure}
-                <div className="FlechaIzquierda"></div>
-                <div className="FlechaDerecha"></div>
+        if(this.state.text){
+            return (
+                <section className="showContent Post"  style={divStyle}>
+                    {figure}
+                    <div className="FlechaIzquierda"></div>
+                    <div className="FlechaDerecha"></div>
 
-                <article className="Detalle flex-container column">
-                    <div className="colum flex">
-                        <div className="C_content"  onClick={this.showMore.bind(this)} >
-                            <h1 className="Titulo" style={this.state.font_titulos} dangerouslySetInnerHTML={FunctExtra.createMarkup(this,this.state.titulo)}></h1>
-                            <div className={this.state.classContent}>
-                                {this.state.HtmlAgenda}
-                                <div className={this.state.classAep}>
-                                    <div style={this.state.font_parrafos} dangerouslySetInnerHTML={FunctExtra.createMarkup(this,this.state.text)}></div>
+                    <article className="Detalle flex-container column">
+                        <div className="colum flex">
+                            <div className="C_content"  onClick={this.showMore.bind(this)} >
+                                <h1 className="Titulo" style={this.state.font_titulos} dangerouslySetInnerHTML={FunctExtra.createMarkup(this,this.state.titulo)}></h1>
+                                <div className={this.state.classContent}>
+                                    {this.state.HtmlAgenda}
+                                    <div className={this.state.classAep}>
+                                        <div style={this.state.font_parrafos} dangerouslySetInnerHTML={FunctExtra.createMarkup(this,this.state.text)}></div>
+                                        <div><a target="_blank" href={this.state.referencias}>{this.state.referencias}</a></div>
+                                    </div>
+                                    {this.state.Wautor}
                                 </div>
-                                {this.state.Wautor}
                             </div>
                         </div>
-                    </div>
-                    <div id="relacionesPost" className="relatedPosts " onClick={this.loadContentAux.bind(this)}>
-                        <section className="P-B-Post post" >
-                            {
-                                this.state.postRelation.map(item => {
-                                    return(
-                                        <Post key={ item.identificador } data={item}  url="contenido/" tipo="1"/>
-                                    )
-                                })
-                            }
-                        </section>
-                        <div className="Conversaciones">
-                            <span>{this.state.info1}</span>
-                            <span><Link to="sobre_algo_esta_pasando/89644">{this.state.info2}</Link></span>
+                        <div id="relacionesPost" className="relatedPosts " onClick={this.loadContentAux.bind(this)}>
+                            <section className="P-B-Post post" >
+                                {
+                                    this.state.postRelation.map(item => {
+                                        return(
+                                            <Post key={ item.identificador } data={item}  url="contenido/" tipo="1"/>
+                                        )
+                                    })
+                                }
+                            </section>
+                            <div className="Conversaciones">
+                                <span>{this.state.info1}</span>
+                                <span><Link to="sobre_algo_esta_pasando/89644">{this.state.info2}</Link></span>
+                            </div>
                         </div>
-                    </div>
-                </article>
-                <Footer></Footer>
-            </section>
-        )
+                    </article>
+                    <Footer></Footer>
+                </section>
+            )
+        }else{
+            return(
+                <Loader/>
+            )
+        }
     }
 }
 

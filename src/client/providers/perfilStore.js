@@ -49,9 +49,17 @@ const perfilStore = {
         return array
     },
     getPerfilName(name){
-        for (const id in _posts){
-            if(`${_posts[id].Nombres} ${_posts[id].Apellidos}` == name){
-                return _posts[id];
+
+        if(name){
+            for (const id in _posts){
+                let nombre = `${_posts[id].Nombres.replace(" ","")} ${_posts[id].Apellidos.replace("  "," ")}`
+                nombre = nombre
+                nombre = nombre.trim()
+                name = name.replace("  ","")
+                name = name.trim()
+                if(nombre.toLowerCase() == name.toLowerCase()){
+                    return _posts[id];
+                }
             }
         }
     },

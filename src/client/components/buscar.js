@@ -15,7 +15,7 @@ export default class Buscar extends React.Component {
         this.state =  ({
             itemNavTop: Aep.getAePs(),
             ediciones:Edicion.getEdiciones(),
-            posts:[]
+
         })
     }
     componentWillUnmount() {
@@ -67,19 +67,7 @@ export default class Buscar extends React.Component {
 
     }
     renderFilter(obj,autor){
-        if(obj.length > 0){
-            document.querySelector(".contentSearch").classList.remove('active');
-            this.setState({
-                posts:obj,
-                search:true
-            })
-        }else{
-            document.querySelector(".contentSearch").classList.add('active');
-            this.setState({
-                posts:[],
-                search:false
-            })
-        }
+        this.props.changeFilterApp(obj)
     }
     activeFilter(){
         var className = document.querySelector(".filterSelect").className;
@@ -111,6 +99,13 @@ export default class Buscar extends React.Component {
         //     document.querySelector(".colapsable").classList.add("open")
         // }
     }
+    activeLink(event){
+        if(document.querySelector(".activeL")){
+            document.querySelector(".activeL").classList.remove("activeL")
+        }
+        event.target.classList.add("activeL")
+        console.log(event.target);
+    }
     render () {
         let urlAux = "aep"
         switch (this.props.route.location.pathname.split("/")[1]) {
@@ -137,7 +132,7 @@ export default class Buscar extends React.Component {
                         this.state.itemNavTop.map(item => {
                             let url = `/${urlAux}/${item.id}`
                             return(
-                                <Link activeClassName={ACTIVE}  to={url}>
+                                <Link activeClassName={ACTIVE} to={url} onClick={this.activeLink.bind(this)}>
                                     <div className="item"  style={this.state.font_menu_up_secciones} dangerouslySetInnerHTML={FunctExtra.createMarkup(this,item.Título)}></div>
                                 </Link>
 
@@ -149,25 +144,7 @@ export default class Buscar extends React.Component {
                     <i className="i-lupa"></i>
                 </div>
                 <Filters renderFilter={this.renderFilter.bind(this)} />
-                <div className="contentSearch active" style={divStyle}>
-                    <div className="P-B-ContentPost" style={divStyle}>
-                        <section className="P-B-Post post">
-                            {
-                                this.state.posts.map(item => {
-                                    let origen = ''
-                                    let tipo = 1;
-                                    if(item.origen == "Perfiles"){
-                                        tipo = 2;
-                                    }
-                                    return(
-                                        <Post key={ item.identificador } data={item} search={this.state.search} url="contenido/" tipo={tipo}/>
-                                    )
-                                })
-                            }
 
-                        </section>
-                    </div>
-                </div>
             </div>
         )
     }

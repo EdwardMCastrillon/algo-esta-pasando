@@ -35,10 +35,10 @@ export default class WPerfil extends React.Component {
 
         let twitter = (t)?t.replace("https://twitter.com/","@"):'';
         twitter = (t)?t.replace("@",""):'';
-        let classPointer = ''
+        let classPointer = 'disabled'
         if(twitter !== "" && twitter){
             twitter = `https://twitter.com/${twitter}`
-            classPointer = "disabled"
+            classPointer = ""
         }
 
 

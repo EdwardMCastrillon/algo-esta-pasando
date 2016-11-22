@@ -32,6 +32,11 @@ export default class Post extends React.Component {
             }
         }
     }
+    closeSearch(){
+        if(document.querySelector(".contentSearch")){
+            document.querySelector(".contentSearch").classList.add('active');
+        }
+    }
     render () {
 
         let url = `/${this.props.url}${this.props.data.id}`
@@ -76,7 +81,7 @@ export default class Post extends React.Component {
                 url = `/${this.props.url}${this.props.data.id}`
                 break;
             }
-            url = `${url}#search`
+            url = `${url}`
         }
         switch (parseInt(this.props.tipo)) {
             case 0:
@@ -105,7 +110,7 @@ export default class Post extends React.Component {
         }
         return (
             <div>
-                <Link to={url}>
+                <Link to={url} onClick={this.closeSearch.bind(this)}>
                     <figure className={classFigure} style={back}>
                         {figure}
                         <div style={this.state.background} className="tP_description">

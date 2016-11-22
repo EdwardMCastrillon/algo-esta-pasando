@@ -92,15 +92,24 @@ export default class WidgetPerfilContent extends React.Component {
 
             Linktwitter = `https://twitter.com/${twitter}`
         }
+        if(this.state.namefilter1){
+            var  f = this.state.namefilter1.replace(/ /g,"");
+            if(this.props.tags[f]){
+                tags += this.props.tags[f]+',';
+            }
+        }
 
-        if((this.props.tags[this.state.namefilter1])){
-            tags += (this.props.tags[this.state.namefilter1])+',';
+        if(this.state.namefilter1){
+            var  f = this.state.namefilter2.replace(/ /g,"");
+            if(this.props.tags[f]){
+                tags += this.props.tags[f]+',';
+            }
         }
-        if((this.props.tags[this.state.namefilter2])){
-            tags += (this.props.tags[this.state.namefilter2])+',';
-        }
-        if((this.props.tags[this.state.namefilter3])){
-            tags += (this.props.tags[this.state.namefilter3]);
+        if(this.state.namefilter3){
+            var  f = this.state.namefilter3.replace(/ /g,"");
+            if(this.props.tags[f]){
+                tags += this.props.tags[f];
+            }
         }
         tags = tags.split(",")
         let fecha=''
@@ -131,7 +140,7 @@ export default class WidgetPerfilContent extends React.Component {
                         {
                             tags.map(item => {
                                 return(
-                                    <span onClick={this.props.changeFilter.bind(this,item)}>{item}</span>
+                                    <span className="itemTags" onClick={this.props.changeFilter.bind(this,item)}>{item}</span>
                                 )
                             })
                         }

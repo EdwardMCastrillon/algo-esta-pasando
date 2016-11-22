@@ -73,7 +73,12 @@ export default class Perfil extends React.Component {
         let t = perfil['CuentadeTwitter'];
         let twitter = (t)?t.replace("https://twitter.com/","@"):'';
         twitter = (t)?t.replace("@",""):'';
-        twitter = `https://twitter.com/${twitter}`
+        // twitter = `https://twitter.com/${twitter}`
+        if(twitter !== "" && twitter){
+            twitter = `https://twitter.com/${twitter}`
+        }
+
+
         let urlLeft = `/autores/${perfil.prev}`
 
         let urlRight = `/autores/${perfil.next}`
@@ -110,9 +115,9 @@ export default class Perfil extends React.Component {
         })
     }
     componentDidUpdate(){
-        if(document.querySelector(".contentSearch")){
-            document.querySelector(".contentSearch").classList.add('active');
-        }
+        // if(document.querySelector(".contentSearch")){
+        //     document.querySelector(".contentSearch").classList.add('active');
+        // }
     }
     render () {
         let heightStyle = {
@@ -122,7 +127,10 @@ export default class Perfil extends React.Component {
             height:this.state.height,
             background: `url("https://tupale.co/milfs/images/secure/?file=600/${this.state.img}") center center / cover rgb(234, 234, 234)`,
         };
-
+        let classPointer = ''
+        if(this.state.twitter == ''){
+            classPointer = "disabled"
+        }
         return (
             <section className="showContent autor flex"  style={heightStyle}>
                 <div className="arrow_left align-center ">
@@ -136,7 +144,7 @@ export default class Perfil extends React.Component {
                             {this.state.description}
                         </div>
                         <div className="rS">
-                            <a href={this.state.twitter}  target="_blank">
+                            <a href={this.state.twitter}  target="_blank" className={classPointer}>
                                 <i className="i-twitter"></i>
                             </a>
                         </div>

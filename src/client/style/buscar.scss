@@ -14,7 +14,9 @@
         display: none;
     }
 }
-
+.item.activeL {
+    color: #19447f !important;
+}
 .contentSearch.active{
     display: none
 }

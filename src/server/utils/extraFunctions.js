@@ -461,6 +461,7 @@ export default class Extras {
                     if (filtro2 != "" && obj[filtro2]) {
                         if (! result[edicion['Título']][filtro2].includes(obj[filtro2])) result[edicion['Título']][filtro2].push(obj[filtro2])
                     }
+                    
                     if (filtro3 != "" && obj[filtro3]) {
                         if (! result[edicion['Título']][filtro3].includes(obj[filtro3])) result[edicion['Título']][filtro3].push(obj[filtro3])
                     }

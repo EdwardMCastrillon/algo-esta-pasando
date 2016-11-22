@@ -15,14 +15,14 @@ const relacionAutor = {
         // return
         _posts = {};
         _initCalled = true
-        console.log(name);
+
         getJSONRAutor(`${server}${apiEndpoints.relaciones}`,name, function (err, res) {
             res.forEach(function (item, key) {
                 _posts[key+1] = item
                 _posts[key+1].keyId = key+1
                 _posts[key+1].maxId = res.length;
             })
-            console.log(_posts);
+
             relacionAutor.notifyChange()
         })
     },

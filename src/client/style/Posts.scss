@@ -511,6 +511,7 @@
         }
         .contentTags {
             margin-top: 40px;
+            margin-bottom: 15px;
             > span {
                 text-align: left;
                 width: 100%;
@@ -578,4 +579,8 @@
     .c_AutorRelations{
         width: 100%;
     }
+}
+.itemTags:hover{
+    color:#53a0fd;
+    text-decoration: underline;
 }

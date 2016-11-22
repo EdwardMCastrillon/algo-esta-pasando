@@ -124,7 +124,7 @@ export default class Buscar extends React.Component {
             "filtro3": {"name": keyF3, "value": FILTRO_3},
             "input": ""
         }
-
+        console.log(getData);
         // let api = this.props.api;
         Search.init(getData)
 
