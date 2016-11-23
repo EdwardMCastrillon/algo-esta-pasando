@@ -224,6 +224,7 @@ export default class Extras {
                 if (obj['Georreferencia(mapa)']) {
                     let [ longitud, latitud, scala ] = obj['Georreferencia(mapa)'].split(' ')
                     let partial = {
+                        autor: '',
                         lat: latitud,
                         lng: longitud,
                         scala: scala,
@@ -238,6 +239,7 @@ export default class Extras {
                           partial.type = 'Perfil'
                           partial.id = obj['id']
                           if (obj['AgregaunaImagen']) partial.image = obj['AgregaunaImagen']
+                          if (obj['Autor']) partial.autor = obj['Autor']
                           partial.name = obj['Nombres']+" "+obj['Apellidos']
                           partial.text = obj['Perfil'].substr(0, 200) + '...'
                           break
@@ -245,6 +247,7 @@ export default class Extras {
                           partial.type = 'Agenda'
                           partial.id = obj['id']
                           if (obj['AgregaunaImagen']) partial.image = obj['AgregaunaImagen']
+                          if (obj['Autor']) partial.autor = obj['Autor']
                           partial.name = obj['Nombredelaactividad']
                           partial.text = obj['Descripcióndelaactividad'].substr(0, 200) + '...'
                           break
@@ -252,6 +255,7 @@ export default class Extras {
                           partial.type = 'Recurso'
                           partial.id = obj['id']
                           if (obj['AgregaunaImagen']) partial.image = obj['AgregaunaImagen']
+                          if (obj['Autor']) partial.autor = obj['Autor']
                           if (obj['Resumen']) {
                               if (obj['Resumen'] == "Falta resumen" || obj['Resumen'] == "Falta Resumen") {
                                   partial.name = obj['Título']
@@ -287,6 +291,7 @@ export default class Extras {
                               partial.text = text
                           }
                           if (obj['AgregaunaImagen']) partial.image = obj['AgregaunaImagen']
+                          if (obj['Autor']) partial.autor = obj['Autor']
                           break
                     }
                     if(partial.name != '' && partial.text != ''){

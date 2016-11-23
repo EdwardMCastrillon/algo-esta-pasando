@@ -73,7 +73,7 @@ module.exports = {
         let total = 0
         EventEmitter.on('finish', (type) => {
             total = total + 1
-            if (total === 9) {
+            if (total === 7) {
                 callback(null, 'ok')
             }
         })
@@ -169,7 +169,11 @@ module.exports = {
             console.error(error)
         })
 
-        let comentarioRedaccionPromise = new Promise((resolve, reject) => {
+        // Se comenta temporalmente el consumo a la api de comentarios y bitacoras
+        All[4] = [{}]
+        All[5] = [{}]
+        db.put('All', JSON.stringify(All))
+        /*let comentarioRedaccionPromise = new Promise((resolve, reject) => {
             let endpoint = endpoints.comentariosRedaccion
             request({
                 url: endpoint,
@@ -213,7 +217,7 @@ module.exports = {
             EventEmitter.emit('finish', 'Bitacoras')
         }).catch((error) => {
             callback(error)
-        })
+        })*/
 
         let ManifiestoPromise = new Promise((resolve, reject) => {
             let endpoint = endpoints.manifiestos
