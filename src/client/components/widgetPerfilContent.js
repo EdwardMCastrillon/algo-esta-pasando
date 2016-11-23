@@ -89,8 +89,8 @@ export default class WidgetPerfilContent extends React.Component {
             let t = this.props.autor['CuentadeTwitter'];
             twitter = (t)?t.replace("https://twitter.com/","@"):'';
             twitter = (t)?t.replace("@",""):'';
-
             Linktwitter = `https://twitter.com/${twitter}`
+            twitter = `@${twitter}`
         }
         if(this.state.namefilter1){
             var  f = this.state.namefilter1.replace(/ /g,"");
@@ -118,7 +118,7 @@ export default class WidgetPerfilContent extends React.Component {
             fecha = new Date(this.props.fecha*1000);
             fecha = `${month[fecha.getMonth()]} ${fecha.getDate()} ${fecha.getFullYear()}`
         }
-
+        let countTags = 0
         return (
             <div className="wp">
                 {this.state.popup}
@@ -127,7 +127,7 @@ export default class WidgetPerfilContent extends React.Component {
                     <div className=" contentnameTwiter flex column  justify-center">
                         <span className="name">Por: {name}</span>
                         <a href={Linktwitter}  target="_blank">
-                            @{twitter}
+                            {twitter}
                         </a>
                         <span className="fecha">{fecha}</span>
                     </div>
@@ -139,8 +139,13 @@ export default class WidgetPerfilContent extends React.Component {
                     <div>
                         {
                             tags.map(item => {
+                                ++countTags
+                                let separar = ''
+                                if(countTags < tags.length){
+                                    separar = <span>, </span>
+                                }
                                 return(
-                                    <span className="itemTags" onClick={this.props.changeFilter.bind(this,item)}>{item}</span>
+                                    <span className="itemTags" onClick={this.props.changeFilter.bind(this,item)}>{item}{separar} </span>
                                 )
                             })
                         }
@@ -155,7 +160,7 @@ export default class WidgetPerfilContent extends React.Component {
                 </div>
                 <div className="contentTags">
                     <span>Articulos relacionados</span>
-                    <div onClick={this.props.loadContent()}>
+                    <div onClick={this.props.loadContent.bind(this)}>
                         {
                             this.state.relacion.map(item => {
                                 let url;

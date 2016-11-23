@@ -291,6 +291,13 @@ export default class PostContenido extends React.Component {
             figure = <ImgPost background={background} />
         }
         if(this.state.text){
+            // let Wautor = ''
+            // if(document.body.clientWidth > 768){
+            //     let autor = PerfilStore.getPerfilName(this.state.autor);
+            //     if(autor){
+            //          Wautor =  <AutorRelation changeFilter={this.changeFilter.bind(this)} loadContent={this.loadContent.bind(this)} autor={autor} fecha={this.state.fecha} tags={this.state.tags}/>
+            //     }
+            // }
             return (
                 <section className="showContent Post"  style={divStyle}>
                     {figure}

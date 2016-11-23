@@ -190,7 +190,7 @@ export default class Buscar extends React.Component {
                         <option value="0" >Autor</option>
                         {
                             this.state.perfil.map(item => {
-                                let name = FunctExtra.accentDecode(item['Nombres']+" "+item['Apellidos']);
+                                let name = FunctExtra.accentDecode(item.nombreCompleto);
                                 return(
                                     <option value={name}>{name}</option>
                                 )

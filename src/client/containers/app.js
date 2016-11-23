@@ -25,7 +25,7 @@ export default class App extends React.Component {
             load:Init.getInit(),
             filter:'',
             posts:[],
-            search:false
+            search:false,
         })
 
     }
@@ -49,11 +49,14 @@ export default class App extends React.Component {
                 "font-family":font_parrafos
             }
         })
+
+        Edicion.removeChangeListener(this.updateData.bind(this))
     }
     init(){
         this.setState({
             load:Init.getInit()
         })
+        Init.removeChangeListener(this.init.bind(this))
     }
     componentDidMount(){
         Init.addChangeListener(this.init.bind(this))
@@ -66,16 +69,16 @@ export default class App extends React.Component {
         return {__html: text};
     }
     searchFilterContenido(obj){
-        console.log(obj.length);
+
         if(obj.length > 0){
-            console.log("ENTRAA");
+
             document.querySelector(".contentSearch").classList.remove('active');
             this.setState({
                 posts:obj,
                 search:true
             })
         }else{
-            console.log("no ENTRAA");
+
             document.querySelector(".contentSearch").classList.add('active');
             this.setState({
                 posts:[],
@@ -177,7 +180,7 @@ export default class App extends React.Component {
                                                     tipo = 2;
                                                 }
                                                 return(
-                                                    <Post key={ item.identificador } data={item} search={this.state.search} url="contenido/" tipo={tipo}/>
+                                                    <Post key={ item.identificador } data={item} refresh="true" search={this.state.search} url="contenido/" tipo={tipo}/>
                                                 )
                                             })
                                         }
