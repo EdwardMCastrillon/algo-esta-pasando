@@ -1407,6 +1407,33 @@
       "setIdx": 5,
       "setId": 3,
       "iconIdx": 17
+    },
+    {
+      "icon": {
+        "paths": [
+          "M608 192h160v-192h-160c-123.514 0-224 100.486-224 224v96h-128v192h128v512h192v-512h160l32-192h-192v-96c0-17.346 14.654-32 32-32z"
+        ],
+        "tags": [
+          "facebook",
+          "brand",
+          "social"
+        ],
+        "defaultCode": 60048,
+        "grid": 16,
+        "attrs": []
+      },
+      "attrs": [],
+      "properties": {
+        "ligatures": "facebook, brand10",
+        "name": "facebook",
+        "order": 28,
+        "id": 401,
+        "prevSize": 32,
+        "code": 60048
+      },
+      "setIdx": 7,
+      "setId": 1,
+      "iconIdx": 400
     }
   ],
   "height": 1024,

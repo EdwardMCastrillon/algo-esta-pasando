@@ -8,7 +8,7 @@ import Map from './map'
 import iconCompartir from '../img/compartir.svg'
 import iconMapa from '../img/mapa.svg'
 import PopupMapa from './map'
-
+import CompartirRedes from './compartir'
 export default class WidgetPerfilContent extends React.Component {
     constructor (props) {
         super(props)
@@ -31,7 +31,7 @@ export default class WidgetPerfilContent extends React.Component {
         RelacionAutor.removeChangeListener(this.updateData.bind(this))
     }
     updateData() {
-        console.log("updateData");
+
         this.setState({
             relacion:RelacionAutor.getRAutoresMax(5)
         })
@@ -174,6 +174,7 @@ export default class WidgetPerfilContent extends React.Component {
 const HTMLCompartir =({url}) =>(
     <div className="HTMLCompartir">
         <input value={url} dir="ltr"></input>
+        <CompartirRedes></CompartirRedes>
     </div>
 )
 // <span onClick={this.props.changeFilter.bind(this,'Identidad')}>Identidad</span>

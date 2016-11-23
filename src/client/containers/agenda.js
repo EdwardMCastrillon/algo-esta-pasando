@@ -8,7 +8,7 @@ import AgendaStore from '../providers/agendaStore'
 import '../style/agenda.scss'
 import '../style/select.scss'
 import Loader from '../components/loader'
-
+import CompartirRedes from '../components/compartir'
 import Footer from '../components/footer'
 export default class Agenda extends React.Component {
     constructor(props) {
@@ -135,7 +135,7 @@ export default class Agenda extends React.Component {
                                     <span>Celular:</span>
                                     <span>{data['Celular']}</span>
                                 </div>
-
+                                <CompartirRedes type="agenda" id={data.id}></CompartirRedes>
                             </div>
                         </div>
                     </div>

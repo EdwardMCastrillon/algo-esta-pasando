@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?40pda');
-  src:  url('fonts/icomoon.eot?40pda#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?40pda') format('truetype'),
-    url('fonts/icomoon.woff?40pda') format('woff'),
-    url('fonts/icomoon.svg?40pda#icomoon') format('svg');
+  src:  url('fonts/icomoon.eot?a5j85u');
+  src:  url('fonts/icomoon.eot?a5j85u#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?a5j85u') format('truetype'),
+    url('fonts/icomoon.woff?a5j85u') format('woff'),
+    url('fonts/icomoon.svg?a5j85u#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -106,5 +106,8 @@
 }
 .i-publicar_en_aep:before {
   content: "\1f388";
+}
+.i-facebook:before {
+  content: "\ea90";
 }
 

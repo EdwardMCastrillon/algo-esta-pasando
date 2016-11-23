@@ -159,3 +159,8 @@
     content: $i-publicar_en_aep;
   }
 }
+.i-facebook {
+  &:before {
+    content: $i-facebook;
+  }
+}

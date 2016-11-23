@@ -289,7 +289,6 @@ export default class PostContenido extends React.Component {
     }
 
     render () {
-        console.log("render Cintenido");
         let divStyle = {
             height: window.innerHeight - 50
         };

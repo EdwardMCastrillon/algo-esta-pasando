@@ -99,3 +99,13 @@
         }
     }
 }
+.sampleCompartir {
+    width: calc(98% - 20px);
+    padding: 3px 5px;
+    margin: auto;
+    margin-top: 7px;
+    i {
+        font-size: 23px;
+        cursor: pointer;
+    }
+}
