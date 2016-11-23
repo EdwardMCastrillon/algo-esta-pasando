@@ -20,15 +20,18 @@ export default class WidgetPerfilContent extends React.Component {
         }
     }
     componentDidMount(){
-        RelacionAutor.init(`${this.props.autor.Nombres} ${this.props.autor.Apellidos}`)
+        RelacionAutor.init(this.props.autor.nombreCompleto)
         RelacionAutor.addChangeListener(this.updateData.bind(this))
         document.querySelector(".Descripcion").style.width = "calc(100% - 324px - 20px)"
+    }
+    componentDidUpdate(){
+
     }
     componentWillUnmount() {
         RelacionAutor.removeChangeListener(this.updateData.bind(this))
     }
     updateData() {
-
+        console.log("updateData");
         this.setState({
             relacion:RelacionAutor.getRAutoresMax(5)
         })
@@ -151,7 +154,7 @@ export default class WidgetPerfilContent extends React.Component {
                         }
                     </div>
                 </div>
-                <div className="contentCompart ">
+                <div className="contentCompart">
                     <div className="flex">
                         <span className="compartir" onClick={this.compartir.bind(this)} style={iconComp}></span>
                         <span className="mapaC" onClick={this.mapa.bind(this,this.props.tags)} style={iconMap}></span>
@@ -160,30 +163,8 @@ export default class WidgetPerfilContent extends React.Component {
                 </div>
                 <div className="contentTags">
                     <span>Articulos relacionados</span>
-                    <div onClick={this.props.loadContent.bind(this)}>
-                        {
-                            this.state.relacion.map(item => {
-                                let url;
-                                switch (item.origen) {
-                                    case 'Agenda':
-                                    url="";
-                                    break;
-                                    case 'Recursos':
-                                    url="centro_de_recursos/";
-                                    break;
-                                    case 'Contenidos':
-                                    url="contenido/";
-                                    break;
-                                    case 'Comentarios':
-                                    url="comentarios/";
-                                    break;
+                    <div onClick={this.props.loadContent()}>
 
-                                }
-                                return(
-                                    <Post key={ item.identificador } data={ item } url={url} tipo={1} />
-                                )
-                            })
-                        }
                     </div>
                 </div>
             </div>
@@ -196,3 +177,29 @@ const HTMLCompartir =({url}) =>(
     </div>
 )
 // <span onClick={this.props.changeFilter.bind(this,'Identidad')}>Identidad</span>
+/*
+
+{
+    this.state.relacion.map(item => {
+        let url;
+        switch (item.origen) {
+            case 'Agenda':
+            url="";
+            break;
+            case 'Recursos':
+            url="centro_de_recursos/";
+            break;
+            case 'Contenidos':
+            url="contenido/";
+            break;
+            case 'Comentarios':
+            url="comentarios/";
+            break;
+
+        }
+        return(
+            <Post key={ item.identificador } data={ item } url={url} tipo={1} />
+        )
+    })
+}
+*/

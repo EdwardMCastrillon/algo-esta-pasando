@@ -11,8 +11,17 @@ export default class TargetaAgenda extends React.Component {
             popup:''
         }
     }
-    openPopup(data){
 
+    openPopup(data){
+        if(document.querySelector(".activeList")){
+            if(document.querySelector(".activeList .popupConten")){
+                document.querySelector(".activeList .popupConten").classList.remove("open")
+            }
+            document.querySelector(".activeList").classList.remove("activeList")
+        }
+        if(document.querySelector(`#e${data.id}`)){
+            document.querySelector(`#e${data.id}`).classList.add("activeList")
+        }
         const PositionMap = ({ data, position }) => (
             <div className="popupConten open">
                 <div className="popup-close-button" onClick={this.closedPopup.bind(this)}>×</div>
@@ -67,9 +76,7 @@ render () {
                     </span>
                 </div>
                 <div className="contenIcon">
-                    <Link to={`agenda/${this.props.data.id}`}>
-                        <i className="i-plus"></i>
-                    </Link>
+                    <i onClick={this.props.openPopupView.bind(this,this.props.data)} className="i-mapa " className="i-plus"></i>
                     <i onClick={this.openPopup.bind(this,this.props.data)} className="i-mapa "></i>
                     {this.state.popup}
                 </div>
