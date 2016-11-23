@@ -169,16 +169,32 @@ export default class PostContenido extends React.Component {
         // if(cp.Autor){
         //     Wautor = <AutorRelation changeFilter={this.changeFilter.bind(this)} loadContent={this.loadContent.bind(this)} autor={cp.Autor} fecha={cp.timestamp} tags={tags}/>
         // }
+        let resumen = ''
+        if(cp["Resumen"]){
+            resumen = cp["Resumen"];
+        }
         this.setState({
+            id:cp.id,
             image: img,
             titulo: titulo,
             autor: cp.Autor,
+            autorRel: PerfilStore.getPerfilName(cp.Autor),
             tags:tags,
+            resumen:resumen,
             fecha:cp.timestamp,
             text: text,
             textCompleto:textCompleto,
             classAep:classAep
         })
+        if(document.body.clientWidth > 768){
+            // let self = this
+            // setTimeout(function(){
+                let autor = PerfilStore.getPerfilName(cp.Autor);
+                if(autor){
+                    this.setState({ Wautor: <AutorRelation changeFilter={this.changeFilter.bind(this)} loadContent={this.loadContent.bind(this)} autor={autor} fecha={cp.timestamp} tags={tags}/> })
+                }
+            // },1000)
+        }
         RelacionesPost.removeChangeListener(this.updateData.bind(this))
         Aep.removeChangeListener(this.loadContent.bind(this))
         Contenido.removeChangeListener(this.loadContent.bind(this))
@@ -190,11 +206,6 @@ export default class PostContenido extends React.Component {
     }
     componentWillMount(id) {
         this.loadContent(id)
-    }
-    componentDidUpdate(){
-        // if(document.querySelector(".contentSearch")){
-        //     document.querySelector(".contentSearch").classList.add('active');
-        // }
     }
     updateData() {
         this.setState({
@@ -226,7 +237,7 @@ export default class PostContenido extends React.Component {
         }
     }
     componentDidMount(){
-
+        console.log("componentDidMount");
         RelacionesPost.addChangeListener(this.updateData.bind(this))
         let l = this.props.route.path.replace("/","").replace("/","").replace(":id","")
         if(this.props.location.hash !== ""){
@@ -257,15 +268,15 @@ export default class PostContenido extends React.Component {
             Aep.addChangeListener(this.loadContent.bind(this))
             break;
         }
-        if(document.body.clientWidth > 768){
-            let self = this
-            setTimeout(function(){
-                let autor = PerfilStore.getPerfilName(self.state.autor);
-                if(autor){
-                    self.setState({ Wautor: <AutorRelation changeFilter={self.changeFilter.bind(self)} loadContent={self.loadContent.bind(self)} autor={autor} fecha={self.state.fecha} tags={self.state.tags}/> })
-                }
-            },1000)
-        }
+        // if(document.body.clientWidth > 768){
+        //     let self = this
+        //     setTimeout(function(){
+        //         let autor = PerfilStore.getPerfilName(self.state.autor);
+        //         if(autor){
+        //             self.setState({ Wautor: <AutorRelation changeFilter={self.changeFilter.bind(self)} loadContent={self.loadContent.bind(self)} autor={autor} fecha={self.state.fecha} tags={self.state.tags}/> })
+        //         }
+        //     },1000)
+        // }
         FunctExtra.showFilters()
     }
     showMore(){
@@ -278,6 +289,7 @@ export default class PostContenido extends React.Component {
     }
 
     render () {
+        console.log("render Cintenido");
         let divStyle = {
             height: window.innerHeight - 50
         };
@@ -291,6 +303,17 @@ export default class PostContenido extends React.Component {
             figure = <ImgPost background={background} />
         }
         if(this.state.text){
+            let Wautor = ''
+            // if(document.body.clientWidth > 768){
+            //     let autor = PerfilStore.getPerfilName(this.state.autor);
+            //     if(autor){
+            //          Wautor =  <AutorRelation changeFilter={this.changeFilter.bind(this)} loadContent={this.loadContent.bind(this)} autor={autor} fecha={this.state.fecha} tags={this.state.tags}/>
+            //     }
+            // }
+            let resumenHtml = ''
+            if(this.state.resumen != "" && this.state.resumen != undefined){
+                resumenHtml = <div style={this.state.font_parrafos} className="c-resumen">{this.state.resumen}</div>
+            }
             return (
                 <section className="showContent Post"  style={divStyle}>
                     {figure}
@@ -304,10 +327,11 @@ export default class PostContenido extends React.Component {
                                 <div className={this.state.classContent}>
                                     {this.state.HtmlAgenda}
                                     <div className={this.state.classAep}>
+                                        {resumenHtml}
                                         <div style={this.state.font_parrafos} dangerouslySetInnerHTML={FunctExtra.createMarkup(this,this.state.text)}></div>
                                         <div><a target="_blank" href={this.state.referencias}>{this.state.referencias}</a></div>
                                     </div>
-                                    {this.state.Wautor}
+                                        {this.state.Wautor}
                                 </div>
                             </div>
                         </div>
@@ -341,6 +365,9 @@ export default class PostContenido extends React.Component {
 const HtmlAgenda = ({obj}) =>{
     return(
         <div className="flex column content-from">
+            <div className="">
+                <span>{obj['Descripcióndelaactividad']}</span>
+            </div>
             <div className="form-agenda">
                 <span>Organizadores del evento:</span>
                 <span>{obj['Organizadoresdelevento']}</span>

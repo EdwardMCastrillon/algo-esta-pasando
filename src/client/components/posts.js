@@ -106,24 +106,48 @@ export default class Post extends React.Component {
         if(img != ''){
             classFigure = "targetPost"
             back = {}
-            figure = <Imgfigure background={`https://tupale.co/milfs/images/secure/?file=600/${img}`} />
+            figure = <Imgfigure background={`https://tupale.co/milfs/images/secure/?file=300/${img}`} />
         }
-        return (
-            <div>
-                <Link to={url} onClick={this.closeSearch.bind(this)}>
-                    <figure className={classFigure} style={back}>
-                        {figure}
-                        <div style={this.state.background} className="tP_description">
-                            <i className="plus i-plus"></i>
-                            <span className="titulo" style={this.state.font_grid_titulos}>{name}</span>
-                            <span className="description" style={this.state.font_grid_resumen}>{resumen}</span>
-                        </div>
-                    </figure>
-                </Link>
-            </div>
-        )
+
+            return (
+                <div>
+                    <Link to={url} onClick={this.closeSearch.bind(this)}>
+                        <figure className={classFigure} style={back}>
+                            {figure}
+                            <div style={this.state.background} className="tP_description">
+                                <i className="plus i-plus"></i>
+                                <span className="titulo" style={this.state.font_grid_titulos}>{name}</span>
+                                <span className="description" style={this.state.font_grid_resumen}>{resumen}</span>
+                            </div>
+                        </figure>
+                    </Link>
+                </div>
+            )
+
+
     }
 }
 const Imgfigure = ({ background }) => (
     <img src={background}/>
 );
+/*
+
+
+if(this.props.refresh){
+    return (
+        <div>
+            <a href={url} >
+                <figure className={classFigure} style={back}>
+                    {figure}
+                    <div style={this.state.background} className="tP_description">
+                        <i className="plus i-plus"></i>
+                        <span className="titulo" style={this.state.font_grid_titulos}>{name}  {this.props.url}</span>
+                        <span className="description" style={this.state.font_grid_resumen}>{resumen}</span>
+                    </div>
+                </figure>
+            </a>
+        </div>
+    )
+}else{
+}
+*/

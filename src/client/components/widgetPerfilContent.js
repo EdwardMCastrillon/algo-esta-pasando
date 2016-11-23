@@ -20,15 +20,18 @@ export default class WidgetPerfilContent extends React.Component {
         }
     }
     componentDidMount(){
-        RelacionAutor.init(`${this.props.autor.Nombres} ${this.props.autor.Apellidos}`)
+        RelacionAutor.init(this.props.autor.nombreCompleto)
         RelacionAutor.addChangeListener(this.updateData.bind(this))
         document.querySelector(".Descripcion").style.width = "calc(100% - 324px - 20px)"
+    }
+    componentDidUpdate(){
+
     }
     componentWillUnmount() {
         RelacionAutor.removeChangeListener(this.updateData.bind(this))
     }
     updateData() {
-
+        console.log("updateData");
         this.setState({
             relacion:RelacionAutor.getRAutoresMax(5)
         })
@@ -89,8 +92,8 @@ export default class WidgetPerfilContent extends React.Component {
             let t = this.props.autor['CuentadeTwitter'];
             twitter = (t)?t.replace("https://twitter.com/","@"):'';
             twitter = (t)?t.replace("@",""):'';
-
             Linktwitter = `https://twitter.com/${twitter}`
+            twitter = `@${twitter}`
         }
         if(this.state.namefilter1){
             var  f = this.state.namefilter1.replace(/ /g,"");
@@ -118,7 +121,7 @@ export default class WidgetPerfilContent extends React.Component {
             fecha = new Date(this.props.fecha*1000);
             fecha = `${month[fecha.getMonth()]} ${fecha.getDate()} ${fecha.getFullYear()}`
         }
-
+        let countTags = 0
         return (
             <div className="wp">
                 {this.state.popup}
@@ -127,7 +130,7 @@ export default class WidgetPerfilContent extends React.Component {
                     <div className=" contentnameTwiter flex column  justify-center">
                         <span className="name">Por: {name}</span>
                         <a href={Linktwitter}  target="_blank">
-                            @{twitter}
+                            {twitter}
                         </a>
                         <span className="fecha">{fecha}</span>
                     </div>
@@ -139,14 +142,19 @@ export default class WidgetPerfilContent extends React.Component {
                     <div>
                         {
                             tags.map(item => {
+                                ++countTags
+                                let separar = ''
+                                if(countTags < tags.length){
+                                    separar = <span>, </span>
+                                }
                                 return(
-                                    <span className="itemTags" onClick={this.props.changeFilter.bind(this,item)}>{item}</span>
+                                    <span className="itemTags" onClick={this.props.changeFilter.bind(this,item)}>{item}{separar} </span>
                                 )
                             })
                         }
                     </div>
                 </div>
-                <div className="contentCompart ">
+                <div className="contentCompart">
                     <div className="flex">
                         <span className="compartir" onClick={this.compartir.bind(this)} style={iconComp}></span>
                         <span className="mapaC" onClick={this.mapa.bind(this,this.props.tags)} style={iconMap}></span>
@@ -156,29 +164,7 @@ export default class WidgetPerfilContent extends React.Component {
                 <div className="contentTags">
                     <span>Articulos relacionados</span>
                     <div onClick={this.props.loadContent()}>
-                        {
-                            this.state.relacion.map(item => {
-                                let url;
-                                switch (item.origen) {
-                                    case 'Agenda':
-                                    url="";
-                                    break;
-                                    case 'Recursos':
-                                    url="centro_de_recursos/";
-                                    break;
-                                    case 'Contenidos':
-                                    url="contenido/";
-                                    break;
-                                    case 'Comentarios':
-                                    url="comentarios/";
-                                    break;
 
-                                }
-                                return(
-                                    <Post key={ item.identificador } data={ item } url={url} tipo={1} />
-                                )
-                            })
-                        }
                     </div>
                 </div>
             </div>
@@ -191,3 +177,29 @@ const HTMLCompartir =({url}) =>(
     </div>
 )
 // <span onClick={this.props.changeFilter.bind(this,'Identidad')}>Identidad</span>
+/*
+
+{
+    this.state.relacion.map(item => {
+        let url;
+        switch (item.origen) {
+            case 'Agenda':
+            url="";
+            break;
+            case 'Recursos':
+            url="centro_de_recursos/";
+            break;
+            case 'Contenidos':
+            url="contenido/";
+            break;
+            case 'Comentarios':
+            url="comentarios/";
+            break;
+
+        }
+        return(
+            <Post key={ item.identificador } data={ item } url={url} tipo={1} />
+        )
+    })
+}
+*/

@@ -68,7 +68,86 @@ export default class Agenda extends React.Component {
     createMarkup(e,text){
         return {__html: text};
     }
+    closedPopup(){
+        this.setState({
+            popup: ''
+        })
+    }
+    openPopupView(data){
 
+        var style = {
+            background: ` rgb(234, 234, 233) url(https://tupale.co/milfs/images/secure/?file=300/${data.AgregaunaImagen}) top center`,
+            "backgroundSize":"contain",
+        };
+
+        if(document.querySelector(".activeList")){
+            if(document.querySelector(".activeList .popupConten")){
+                document.querySelector(".activeList .popupConten").classList.remove("open")
+            }
+            document.querySelector(".activeList").classList.remove("activeList")
+        }
+        if(document.querySelector(`#e${data.id}`)){
+            document.querySelector(`#e${data.id}`).classList.add("activeList")
+        }
+        const PositionMap = ({ data, position ,style}) => (
+            <div className="contendescripAgenda">
+                <div className="popupContenBack" onClick={this.closedPopup.bind(this)}></div>
+                <div className="popupConten open">
+                    <div className="popup-close-button" onClick={this.closedPopup.bind(this)}>×</div>
+                    <div className="popup-content-wrapper">
+                        <div className="popup-content">
+                            <div className ="img" style={style}></div>
+                            <div className="flex column content-from">
+                                <div className="">
+                                    <span>{data['Descripcióndelaactividad']}</span>
+                                </div>
+                                <div className="form-agenda">
+                                    <span>Organizadores del evento:</span>
+                                    <span>{data['Organizadoresdelevento']}</span>
+                                </div>
+
+                                <div className="form-agenda">
+                                    <span>Lugar del evento:</span>
+                                    <span>{data['Lugardelevento']}</span>
+                                </div>
+                                <div className="form-agenda">
+                                    <span>Fecha:</span>
+                                    <span>{data['Fecha']}</span>
+                                </div>
+                                <div className="form-agenda">
+                                    <span>Hora de inicio:</span>
+                                    <span>{data['Horadeinicio']} - {data['Horadefinalización']}</span>
+                                </div>
+                                <div className="form-agenda">
+                                    <span>Dirección:</span>
+                                    <span>{data['Dirección']}</span>
+                                </div>
+                                <div className="form-agenda">
+                                    <span>Correo Electrónico:</span>
+                                    <span>{data['CorreoElectrónico']}</span>
+                                </div>
+
+                                <div className="form-agenda">
+                                    <span>Teléfono:</span>
+                                    <span>{data['Teléfono']}</span>
+                                </div>
+                                <div className="form-agenda">
+                                    <span>Celular:</span>
+                                    <span>{data['Celular']}</span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+        let position = {
+            lat: data['Georreferencia(mapa)'].split(" ")[1],
+            lng: data['Georreferencia(mapa)'].split(" ")[0]
+        }
+        this.setState({ popup: <PositionMap data={data} position={position} style={style}></PositionMap> })
+    }
     render () {
         let divStyle = {
             height: window.innerHeight - 50
@@ -77,6 +156,7 @@ export default class Agenda extends React.Component {
             return(
                 <div className="P-B-ContentPost" style={divStyle}>
                     <section className="P-B-Post agenda" >
+                        {this.state.popup}
                         <h1>Próximos eventos</h1>
                         <div className="cs-select cs-skin-elastic" onClick={this.openSelect.bind()}>
                             <span className="cs-placeholder">{this.state.mes}</span>
@@ -105,7 +185,7 @@ export default class Agenda extends React.Component {
                                         item.dia = `${parseInt(item.Fecha.split("-")[2])}`;
                                     }
                                     return(
-                                        <TargetaAgenda data={item}></TargetaAgenda>
+                                        <TargetaAgenda data={item} openPopupView={this.openPopupView.bind(this)}></TargetaAgenda>
                                     )
                                 })
                             }

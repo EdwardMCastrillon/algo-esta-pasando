@@ -206,7 +206,7 @@ class Map extends Component {
                 icon = baseballIcon;
             }
             url = `${url}`
-
+            console.log(item);
 
 
             let img = `https://tupale.co/milfs/images/secure/?file=300/${item.image}`

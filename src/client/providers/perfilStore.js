@@ -1,3 +1,8 @@
+
+
+
+
+
 import request from 'superagent'
 // Importamos los endpoints de el servidor propio
 import apiEndpoints from '../utils/apiEndpoints'
@@ -30,11 +35,18 @@ const perfilStore = {
                     _posts[item.id].prev = r;
                 }
                 l = item.id;
+                _posts[item.id] = perfilStore.nombreCompleto(_posts[item.id])
             })
+
             perfilStore.notifyChange()
         })
     },
-
+    nombreCompleto(obj){
+        let nombre = obj.Nombres.trim()
+        let Apellido = obj.Apellidos.trim()
+        obj.nombreCompleto = `${nombre} ${Apellido}`
+        return obj
+    },
     notifyChange: function () {
         _changeListeners.forEach(function (listener) {
             listener()
@@ -52,9 +64,7 @@ const perfilStore = {
 
         if(name){
             for (const id in _posts){
-                let nombre = `${_posts[id].Nombres.replace(" ","")} ${_posts[id].Apellidos.replace("  "," ")}`
-                nombre = nombre
-                nombre = nombre.trim()
+                let nombre = _posts[id].nombreCompleto
                 name = name.replace("  ","")
                 name = name.trim()
                 if(nombre.toLowerCase() == name.toLowerCase()){
