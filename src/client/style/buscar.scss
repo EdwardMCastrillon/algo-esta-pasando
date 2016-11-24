@@ -3,15 +3,25 @@
     position: relative;
     z-index: 9;
     background: #fff;
-    width: 93%;
+    width: 90%;
     .item {
         font-size: 14px;
         margin: 0 17px;
         display: block;
         color: #4e4e4e;
+        min-width: 100px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
     }
     .item.Secciones{
         display: none;
+    }
+    a {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        min-width: 112px;
     }
 }
 .item.activeL {
@@ -42,7 +52,8 @@
     background: #fbfbfb;
     padding: 0px 0px 1px 0px;
     transition: all .5s;
-    padding-left: 35px;
+    // padding-left: 35px;
+    padding-right: 90px;
     .contentSelect{
         &:after {
             content: '\25BE';
@@ -52,10 +63,10 @@
     }
     >div{
         width: calc(20% - 15px);
-        max-width: 170px;
+        // max-width: 134px;
         margin: 0 9px;
         position: relative;
-        padding-right: 15px;
+        // padding-right: 15px;
 
         select{
             appearance: searchfield;

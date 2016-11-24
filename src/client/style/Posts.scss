@@ -251,7 +251,7 @@
             // font-family: 'MonopolSemiBold';
             color: rgb(91, 91, 91);
             font-size: 36px;
-            margin-top: .2em !important;
+            margin-top: 1em!important;
             text-align: center;
         }
         .Subtitulo {
@@ -449,6 +449,44 @@
             color: #53a0fd !important;
         }
     }
+    .widgetPerfilCont{
+        width: 100%;
+        position: relative;
+        border-bottom: 1px solid #dedede;
+        padding: 6px 12px;
+        padding-bottom: 12px;
+
+        .figure {
+            width: 50px;
+            height: 50px;
+            border-radius: 100%;
+            display: table;
+            position: relative;
+        }
+        .contentnameTwiter{
+            width: calc(100% - 70px - 16px)
+        }
+        .fecha{
+            font-size: 14px;
+        }
+        .name,a,.fecha{
+            color: #656565;
+            text-align: left;
+            display: block;
+            padding-left: 8px;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            width: calc(100% - 16px);
+        }
+        .linkTo{
+            position: absolute;
+            bottom: -24px;
+            right: 0px;
+            color: #53a0fd !important;
+            width: auto;
+        }
+    }
 }
 .noInmg{
     position: relative;
@@ -543,7 +581,7 @@
 }
 #mapUI{
     .leaflet-container {
-        height: 400px;
+        height: 1000px;
         width: calc(100% - 300px);
         margin: 0 auto;
     }
@@ -598,4 +636,9 @@
     background: #0162b0;
     color: #fff;
     padding: 19px;
+}
+
+
+.escritorAutor {
+    border-top: 1px solid #eaeaea;
 }

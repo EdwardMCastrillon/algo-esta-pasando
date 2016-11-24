@@ -16,10 +16,12 @@
         width: 100%;
         transition: 0.8s;
         left: 0;
+        overflow:auto;
     }
     .ClosedMenu {
         left: -100% !important;
-    }
+        overflow: inherit;
+        }
     .Page-body{
         margin-left: inherit;
         .Page-body-top{

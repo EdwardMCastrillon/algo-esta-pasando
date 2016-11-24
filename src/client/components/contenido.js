@@ -170,7 +170,7 @@ export default class PostContenido extends React.Component {
         //     Wautor = <AutorRelation changeFilter={this.changeFilter.bind(this)} loadContent={this.loadContent.bind(this)} autor={cp.Autor} fecha={cp.timestamp} tags={tags}/>
         // }
         let resumen = ''
-        if(cp["Resumen"]){
+        if(cp["Resumen"] && l != "aep" && l != "aep_"){
             resumen = cp["Resumen"];
         }
         this.setState({
@@ -311,7 +311,7 @@ export default class PostContenido extends React.Component {
             // }
             let resumenHtml = ''
             if(this.state.resumen != "" && this.state.resumen != undefined){
-                resumenHtml = <div style={this.state.font_parrafos} className="c-resumen">{this.state.resumen}</div>
+                resumenHtml = <div style={this.state.font_parrafos} className="c-resumen"  dangerouslySetInnerHTML={FunctExtra.createMarkup(this,this.state.resumen)}></div>
             }
             return (
                 <section className="showContent Post"  style={divStyle}>

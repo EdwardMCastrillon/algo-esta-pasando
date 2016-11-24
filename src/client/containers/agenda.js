@@ -99,7 +99,7 @@ export default class Agenda extends React.Component {
                             <div className ="img" style={style}></div>
                             <div className="flex column content-from">
                                 <div className="">
-                                    <span>{data['Descripcióndelaactividad']}</span>
+                                    <span className="TituloAgendaT">{data['Descripcióndelaactividad']}</span>
                                 </div>
                                 <div className="form-agenda">
                                     <span>Organizadores del evento:</span>

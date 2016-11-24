@@ -11,6 +11,9 @@ import request from 'superagent'
 import apiEndpoints from '../utils/apiEndpoints'
 import Post from '../components/posts'
 import FunctExtra from '../utils/functExtra'
+import PerfilStore from '../providers/perfilStore'
+import Edicion from '../constants/edicion'
+import CompartirRedes from '../components/compartir'
 
 const server = '/api'
 let config = {};
@@ -60,14 +63,19 @@ config.params = {
     attributionControl: true
 };
 config.tileLayer = {
-    uri: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
+    uri: 'http://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png',
     params: {
-        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+        attribution: 'Tiles courtesy of <a href="http://openstreetmap.se/" target="_blank">OpenStreetMap Sweden</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
         id: '',
         accessToken: ''
     }
 };
 
+// params: {
+//     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+//     id: '',
+//     accessToken: ''
+// }
 class Map extends Component {
     constructor(props) {
         super(props);
@@ -150,14 +158,20 @@ class Map extends Component {
     init(id) {
 
         if (this.state.map) return;
-
         // this function creates the Leaflet map object and is called after the Map component mounts
-
+        let edicionAct = Edicion.getEdicion()
         let map = L.map(id, config.params);
         L.control.zoom({ position: "bottomleft"}).addTo(map);
         L.control.scale({ position: "bottomleft"}).addTo(map);
 
         // a TileLayer is used as the "basemap"
+        if(edicionAct.tileLayer){
+            config.tileLayer.uri = edicionAct.tileLayer;
+        }
+        if(edicionAct.tileLayerParams){
+            config.tileLayer.params = edicionAct.tileLayerParams;
+        }
+
         const tileLayer = L.tileLayer(config.tileLayer.uri, config.tileLayer.params).addTo(map);
 
         // set our state to include the tile layer
@@ -206,7 +220,6 @@ class Map extends Component {
                 icon = baseballIcon;
             }
             url = `${url}`
-            console.log(item);
 
 
             let img = `https://tupale.co/milfs/images/secure/?file=300/${item.image}`
@@ -214,8 +227,40 @@ class Map extends Component {
                 background: `rgb(234, 234, 234) url(${img}) center center`,
                 'backgroundSize': 'cover'
             };
-            // background: rgb(234, 234, 234) url({img}) center center
-            m.push(L.marker([item.lat, item.lng],{icon:icon}).bindPopup(`<div> <a href="${url}"> <div class ="img" style="background: rgb(234, 234, 234) url(${img}) center center"> </div> <div class="content"> <div class="c_name">${item.name} </div> <div class="c_resumen">${item.text} </div> </div> </a> </div>`))
+            let htmlAutor = ''
+            if(item.autor && item.type != "Perfil" && item.type != "Editorial"){
+                let autor = PerfilStore.getPerfilName(item.autor)
+
+
+                let twitter = '';
+                let Linktwitter = '';
+                if(autor['CuentadeTwitter']){
+                    let t = autor['CuentadeTwitter'];
+                    twitter = (t)?t.replace("https://twitter.com/","@"):'';
+                    twitter = (t)?t.replace("@",""):'';
+                    Linktwitter = `https://twitter.com/${twitter}`
+                    twitter = `@${twitter}`
+                }
+                let fecha=''
+                // if(autor.fecha){
+                //     var month = [ "January" ,"February" ,"March" ,"April" ,"May" ,"June" ,"July" ,"August" ,"September" ,"October" ,"November" ,"December"];
+                //     fecha = new Date(this.props.fecha*1000);
+                //     fecha = `${month[fecha.getMonth()]} ${fecha.getDate()} ${fecha.getFullYear()}`
+                // }
+                var figure = {
+                    background: `rgb(234, 234, 234) url(https://tupale.co/milfs/images/secure/?file=300/${autor['AgregaunaImagen']}) center center`,
+                    'backgroundSize': 'cover'
+                };
+
+
+                htmlAutor = `<div class="escritorAutor widgetPerfilCont flex"> <div class="figure" style="background-size:cover;background: rgb(234, 234, 234) url(https://tupale.co/milfs/images/secure/?file=300/${autor['AgregaunaImagen']}) center center"></div> <div class=" contentnameTwiter flex column  justify-center"> <span class="name">Por: ${autor['nombreCompleto']}</span> <a href="${Linktwitter}"  target="_blank"> ${twitter} </a> <span class="fecha">${fecha}</span> </div> </div>`
+            }
+            let textDesc = item.text
+            if(item.text.length > 150){
+                textDesc = item.text.substring(0, 150)
+            }
+            let cr = <CompartirRedes></CompartirRedes>
+            m.push(L.marker([item.lat, item.lng],{icon:icon}).bindPopup(`<div> <a href="${url}"> <div class ="img" style="background: rgb(234, 234, 234) url(${img}) center center"> </div> <div class="content"> <div class="c_name">${item.name} </div> <div class="c_resumen">${textDesc}...</div> </div></a>${htmlAutor}</div>`))
         })
 
         return m;
@@ -226,7 +271,7 @@ class Map extends Component {
 
                 <div ref={(node) => this._mapNode = node} id="map" />
                 <div className="c_AutorRelations">
-                    <span className="title">Articulos relacionados</span>
+                    <span className="title">Contenidos recientes</span>
                     {
                         this.state.postUltimos.map(item => {
                             return(
