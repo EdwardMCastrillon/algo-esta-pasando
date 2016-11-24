@@ -275,6 +275,7 @@ export default class Extras {
                         case 3:
                           partial.type = 'Contenido'
                           partial.id = obj['id']
+                          partial.timestamp = obj.timestamp
                           if (obj['Resumen']) {
                               if (obj['Resumen'] == "Falta resumen" || obj['Resumen'] == "Falta Resumen") {
                                   let text = obj['Escribir/Párrafos/Texto'].substr(0, 200) + '...'
